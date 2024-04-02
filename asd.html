@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой креативный сайт</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            margin: 0 10px;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        section {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        article {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex: 0 0 calc(33.33% - 20px);
+        }
+        footer {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            clear: both;
+            position: relative;
+        }
+        .footer-content {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        @media (max-width: 768px) {
+            article {
+                flex: 0 0 calc(50% - 20px);
+            }
+        }
+        @media (max-width: 576px) {
+            article {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать на мой креативный сайт!</h1>
+    </header>
+    <nav>
+        <a href="#">Главная</a>
+        <a href="#">О нас</a>
+        <a href="#">Контакты</a>
+    </nav>
+    <section>
+        <article>
+            <h2>Статья 1</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis turpis vitae ligula malesuada, at varius metus pulvinar.</p>
+        </article>
+        <article>
+            <h2>Статья 2</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis turpis vitae ligula malesuada, at varius metus pulvinar.</p>
+        </article>
+        <article>
+            <h2>Статья 3</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis turpis vitae ligula malesuada, at varius metus pulvinar.</p>
+        </article>
+        <article>
+            <h2>Статья 4</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis turpis vitae ligula malesuada, at varius metus pulvinar.</p>
+        </article>
+        <!-- Дополнительные статьи и контент -->
+    </section>
+    <footer>
+        <div class="footer-content">
+            &copy; 2024 Мой креативный сайт
+        </div>
+    </footer>
+</body>
+</html>

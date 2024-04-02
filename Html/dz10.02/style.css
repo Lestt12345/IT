@@ -1,0 +1,99 @@
+body /* БОНУС))) */ {
+    display: flex;
+    justify-content: center;
+    min-width: 270px;
+}
+.cont {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 800px;
+    float: left;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* around чтобы более в центре казалось */
+}
+.t1 {
+    width: 500px;
+    font-size: 12px;
+    order: 1;
+}
+.t2 {
+    order: 3;
+    width: 500px;
+    font-size: 12px;
+}
+.c1 {
+    margin-top: 15px;
+    order: 2;
+    overflow: hidden;
+    border-radius: 10px;
+    width: 240px;
+    height: 220px;
+    background-color: #37516B;
+}
+.c2 {
+    margin-top: 15px;
+    order: 4;
+    overflow: hidden;
+    border-radius: 10px;
+    width: 240px;
+    height: 235px;
+    background-color: #37516B;
+}
+.p {
+    text-align: right;
+    font-size: 13px;
+    margin: 8px;
+    color: white;
+}
+img {
+    width: 240px;
+    height: 180px;
+}
+@media screen and (min-width: 800px) {
+    .cont {
+        width: 800px;
+    }
+    .t2 {
+        margin-top: -35px;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 800px) {
+    .cont {
+        width: 600px;
+    }
+    .t1 {
+        order: 1;
+        width: 600px;
+    }
+    .t2 {
+        order: 4;
+        width: 600px;
+    }
+    .c1 {
+        order: 2;
+    }
+    .c2 {
+        order: 3;
+    }
+}
+@media screen and (max-width: 600px) {
+    .cont {
+        width: 260px;
+    }
+    .t1 {
+        order: 1;
+        width: 240px;
+    }
+    .t2 {
+        order: 4;
+        width: 240px;
+    }
+    .c1 {
+        order: 2;
+        width: 240px;
+    }
+    .c2 {
+        order: 3;
+        width: 240px;
+    }
+}
