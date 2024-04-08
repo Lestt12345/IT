@@ -1,0 +1,89 @@
+body {
+    top: 0;
+    left: 0;
+    font-family: Garamond;
+}
+header {
+    padding: 1.2vw 3vw;
+    display: flex;
+    justify-content: space-between;
+}
+header div {
+    display: flex;
+    align-items: baseline;
+}
+header span:first-child {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0px 2.5vw 0px 0px;
+}
+header a {
+    font-size: 18px;
+    color: black;
+    text-decoration: none;
+}
+header a:hover {
+    color: black;
+    text-decoration: underline;
+}
+.nav {
+    margin: 0px 2.5vw 0px 0px;
+}
+.link {
+    margin: 0px 0px 0px 2vw;
+    min-width: none;
+}
+.hMenu {
+    position: absolute;
+    transform: translate(0px, -100px);
+}
+@media screen and (min-width: 601px) and (max-width: 850px) {
+    header div:last-child {
+        position: absolute;
+        transform: translate(0px, -100px);
+    }
+    header {
+        justify-content: center;
+    }
+    header span:first-child {
+        font-size: 19px;
+    }
+    header a {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 600px) {
+    header {
+        position: absolute;
+    }
+    header span:first-child {
+        font-size: 16px;
+    }
+    header div:first-child a {
+        position: absolute;
+        transform: translate(0px, -100px);
+    }
+    header div:last-child div:last-child a {
+        position: absolute;
+        transform: translate(0px, -100px);
+    }
+    .navA {
+        font-weight: bold;
+        font-size: 16px !important;
+        padding: 0px 0px 0px 0px;
+    }
+    .hMenu {
+        width: 100vw;
+        padding: 1.2vw 3vw;
+        position: none;
+        transform: translate(0px, 0px);
+    }
+    .sB {
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+    }
+    .sB button {
+        scale: 0.8;
+    }
+}
