@@ -1,12 +1,15 @@
 body {
     top: 0;
     left: 0;
-    font-family: Garamond;
 }
 header {
-    padding: 1.2vw 3vw;
+    width: 100vw;
+    position: fixed;
+    padding: 10px 5vw;
     display: flex;
     justify-content: space-between;
+    font-family: 'EB Garamond';
+    border-bottom: 1px solid rgb(230, 230, 230);
 }
 header div {
     display: flex;
@@ -35,8 +38,92 @@ header a:hover {
 }
 .hMenu {
     position: absolute;
-    transform: translate(0px, -200px);
+    transform: translate(0px, -500px);
+    padding: 0px;
 }
+
+/* HEADER */
+
+.story {
+    height: 500px;
+    display: flex;
+    margin: 0px;
+}
+.story:first-child {
+    height: 700px;
+}
+.s {
+    width: 50vw;
+    padding: 0px 6vw;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgb(180, 180, 180);
+}
+.sInfo {
+    font-size: 19px;
+}
+.sInfo2 {
+    font-size: 15px;
+}
+.st h1 {
+    padding: 0px 0px 25px 0px;
+    font-family: 'EB Garamond'
+}
+.sImg {
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.s2 {
+    width: 67.7vw;
+    padding: 0px 6vw;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgb(180, 180, 180);
+    order: 2;
+}
+.sImg2 {
+     width: 33.3vw;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     overflow: hidden;
+     order: 1;
+}
+.s3 {
+    width: 67.7vw;
+    padding: 0px 6vw;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgb(180, 180, 180);
+    order: 1;
+}
+.sImg3 {
+     width: 33.3vw;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     overflow: hidden;
+     order: 2;
+}
+.story img {
+    height: 100%;
+}
+.st p {
+    font-family: 'EB Garamond'
+}
+.st a {
+    font-weight: 500;
+}
+main {
+    padding-top: 50px;
+}
+
+/* story */
+
+
 @media screen and (min-width: 601px) and (max-width: 850px) {
     header div:last-child {
         position: absolute;
@@ -50,6 +137,44 @@ header a:hover {
     }
     header a {
         font-size: 16px;
+    }
+    /* HEADER */
+    .sInfo {
+        font-size: 17px;
+        margin-bottom: 10px;
+    }
+    .sInfo2 {
+        font-size: 14px;
+        margin-bottom: 0px;
+    }
+    .st h1 {
+        font-size: 25px;
+        padding: 0px 0px 15px 0px;
+        margin-bottom: 0px;
+    }
+    .st a {
+        font-size: 13px;
+    }
+    .story {
+        height: 300px;
+    }
+    .story:first-child {
+        height: 500px;
+    }
+    .s2 {
+        width: 48vw;
+    }
+    .sImg2 {
+        width: 49vw;
+    }
+    .s3 {
+        width: 49.1vw;
+    }
+    .sImg3 {
+        width: 49vw;
+    }
+    main {
+        padding-top: 49px;
     }
 }
 @media screen and (max-width: 600px) {
@@ -86,4 +211,5 @@ header a:hover {
     .sB button {
         scale: 0.8;
     }
+    /* HEADER */
 }
