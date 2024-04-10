@@ -15,7 +15,7 @@ header div {
     display: flex;
     align-items: baseline;
 }
-header span:first-child {
+header a:first-child {
     font-weight: bold;
     font-size: 20px;
     padding: 0px 2.5vw 0px 0px;
@@ -23,6 +23,9 @@ header span:first-child {
 header a {
     font-size: 18px;
     color: black;
+    text-decoration: none;
+}
+header a:first-child:hover {
     text-decoration: none;
 }
 header a:hover {
@@ -35,11 +38,13 @@ header a:hover {
 .link {
     margin: 0px 0px 0px 2vw;
     min-width: none;
+    padding: 0px !important;
 }
 .hMenu {
-    position: absolute;
+    position: fixed;
     transform: translate(0px, -500px);
     padding: 0px;
+    border-bottom: 1px solid rgb(230, 230, 230);
 }
 
 /* HEADER */
@@ -161,14 +166,19 @@ main {
     .story:first-child {
         height: 500px;
     }
+    .s {
+        border-top: none;
+    }
     .s2 {
         width: 48vw;
+        border-top: none;
     }
     .sImg2 {
         width: 49vw;
     }
     .s3 {
         width: 49.1vw;
+        border-top: none;
     }
     .sImg3 {
         width: 49vw;
@@ -199,7 +209,7 @@ main {
     }
     .hMenu {
         width: 100vw;
-        padding: 1.2vw 3vw;
+        padding: 10px 3vw;
         position: none;
         transform: translate(0px, 0px);
     }
@@ -207,9 +217,82 @@ main {
         width: 100vw;
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
     .sB button {
         scale: 0.8;
     }
+    .hMenu a {
+        padding: 0px;
+        margin: 0px; 
+    }
+    .hMenu {
+        padding: 0px;
+
+    }
     /* HEADER */
+    main {
+        padding-top: 0px;
+    }
+    .story {
+        width: 100vw;
+        height: auto;
+        padding-top: 50px;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .s {
+        width: 100vw;
+        height: auto;
+        order: 2;
+        border-top: none;
+        padding: 0px 10vw;
+    }
+    .s2 {
+        width: 100vw;
+        border-top: none;
+    }
+    .s3 {
+        width: 100vw;
+        border-top: none;
+        order: 2;
+    }
+    .sImg {
+        width: 100vw;
+        height: 70vw;
+        order: 1;
+        display: flex;flex-direction: row;
+        align-items: center;
+    }
+    .sImg img {
+        width: 100%;
+    }
+    .sImg2 {
+        width: 100vw;
+        height: 60vw;
+        order: 1;
+    }
+    .sImg2 img {
+        width: 100%;
+    }
+    .sImg3 {
+        width: 100vw;
+        height: 100vw;
+        order: 1;
+    }
+    .sImg3 img {
+        width: 100%;
+    }
+    .sInfo {
+        font-size: 16px;
+    }
+    .sInfo2 {
+        font-size: 16px;
+    }
+    .story h1 {
+        padding: 40px 0px 20px 0px;
+    } 
+    .story:first-child {
+        height: auto;
+    }
 }
