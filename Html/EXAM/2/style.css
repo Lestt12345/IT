@@ -1,6 +1,7 @@
 body {
     top: 0;
     left: 0;
+    overflow-x: hidden;
 }
 header {
     width: 100vw;
@@ -9,7 +10,7 @@ header {
     display: flex;
     justify-content: space-between;
     font-family: 'EB Garamond';
-    border-bottom: 1px solid rgb(230, 230, 230);
+    z-index: 1;
 }
 header div {
     display: flex;
@@ -44,7 +45,7 @@ header a:hover {
     position: fixed;
     transform: translate(0px, -500px);
     padding: 0px;
-    border-bottom: 1px solid rgb(230, 230, 230);
+    z-index: 1;
 }
 
 /* HEADER */
@@ -62,7 +63,7 @@ header a:hover {
     padding: 0px 6vw;
     display: flex;
     align-items: center;
-    border-top: 1px solid rgb(180, 180, 180);
+    border-top: 1px solid rgb(180, 180, 180, 0.4);
 }
 .sInfo {
     font-size: 19px;
@@ -86,7 +87,7 @@ header a:hover {
     padding: 0px 6vw;
     display: flex;
     align-items: center;
-    border-top: 1px solid rgb(180, 180, 180);
+    border-top: 1px solid rgb(180, 180, 180, 0.4);
     order: 2;
 }
 .sImg2 {
@@ -102,7 +103,8 @@ header a:hover {
     padding: 0px 6vw;
     display: flex;
     align-items: center;
-    border-top: 1px solid rgb(180, 180, 180);
+    border-top: 1px solid rgb(180, 180, 180, 0.4);
+    border-bottom: 1px solid rgba(180, 180, 180, 0.4);
     order: 1;
 }
 .sImg3 {
@@ -128,7 +130,177 @@ main {
 
 /* story */
 
-
+.cent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h2 {
+    padding: 50px;
+    font-family: 'EB Garamond';
+}
+.galleryLrg {
+    width: 100vw;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.galleryLrg h5 {
+    font-family: 'EB Garamond';
+    font-size: 1.5vw;
+}
+.galleryLrg p {
+    font-family: 'EB Garamond';
+    font-size: 1.2vw;
+    text-align: center;
+}
+.galleryLrg a {
+    font-family: 'EB Garamond';
+    font-size: 1.2vw;
+}
+.gallery h5 {
+    font-family: 'EB Garamond';
+    font-size: 3vw;
+}
+.gallery p {
+    font-family: 'EB Garamond';
+    font-size: 2vw;
+    text-align: center;
+}
+.gallery a {
+    font-family: 'EB Garamond';
+    font-size: 1.8vw;
+}
+.gallery2 h5 {
+    font-family: 'EB Garamond';
+    font-size: 5vw;
+}
+.gallery2 p {
+    font-family: 'EB Garamond';
+    font-size: 4vw;
+    margin-bottom: 0px;
+    text-align: center;
+}
+.gallery2 a {
+    font-family: 'EB Garamond';
+    font-size: 3vw;
+}
+.galleryItem {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    overflow: hidden;
+}
+.galleryItem img {
+    height: 18.8vw;
+}
+.gallery {
+    width: 0px;
+    height: 0px;
+    font-family: 'EB Garamond';
+}
+.gallery img {
+}
+.gallery2 {
+    width: 0px;
+    height: 0px;
+    font-family: 'EB Garamond';
+}
+.infoImg {
+    position: absolute;
+    width: 28.3vw;
+    height: 18.8vw;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.infoImg2 {
+    position: absolute;
+    width: 12.53vw;
+    height: 18.8vw;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.infoImg3 {
+    position: absolute;
+    width: 33.55vw;
+    height: 18.8vw;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.infoImg4 {
+    position: absolute;
+    width: 24.44vw;
+    height: 18.8vw;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.galleryItem:first-child:hover .infoImg {
+    z-index: 1;
+}
+.galleryItem:nth-child(2):hover .infoImg2 {
+    z-index: 1;
+}
+.galleryItem:nth-child(3):hover .infoImg3 {
+    z-index: 1;
+}
+.galleryItem:nth-child(4):hover .infoImg4 {
+    z-index: 1;
+}
+.img12:first-child:hover .infoImg {
+    z-index: 1;
+}
+.img12:nth-child(2):hover .infoImg2 {
+    z-index: 1;
+}
+.img12:nth-child(n-3):hover .infoImg3 {
+    z-index: 1;
+}
+.img12:last-child:hover .infoImg4 {
+    z-index: 1;
+}
+.img123:first-child:hover .infoImg {
+    z-index: 1;
+}
+.img123:nth-child(2):hover .infoImg2 {
+    z-index: 1;
+}
+.img123:nth-child(n-3):hover .infoImg3 {
+    z-index: 1;
+}
+.img123:last-child:hover .infoImg4 {
+    z-index: 1;
+}
+h5 {
+    padding-bottom: 2vw;
+}
 @media screen and (min-width: 601px) and (max-width: 850px) {
     header div:last-child {
         position: absolute;
@@ -167,24 +339,104 @@ main {
         height: 500px;
     }
     .s {
-        border-top: none;
+        /* border-top: none; */
     }
     .s2 {
         width: 48vw;
-        border-top: none;
+        /* border-top: none; */
     }
     .sImg2 {
         width: 49vw;
     }
     .s3 {
         width: 49.1vw;
-        border-top: none;
+        /* border-top: none; */
     }
     .sImg3 {
         width: 49vw;
     }
     main {
         padding-top: 49px;
+    }
+    /* story */
+    h2 {
+        padding: 30px;
+        margin: 0px !important;
+    }
+    .galleryLrg {
+        transform: translate(10000px, 0px);
+        position: absolute;
+    }
+    .galleryItem2 {
+        width: 100vw;
+        height: 30vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .img12 img {
+        height: 46vw;
+    }
+    .gallery {
+        width: 100vw;
+        height: 30vw;
+    }
+    .infoImg {
+        position: absolute;
+        width: 69.3vw;
+        height: 45vw;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .infoImg2 {
+        position: absolute;
+        width: 28.83vw;
+        height: 45vw;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .infoImg3 {
+        position: absolute;
+        width: 57.3vw;
+        height: 45vw;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .infoImg4 {
+        position: absolute;
+        width: 40.78vw;
+        height: 45vw;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
     }
 }
 @media screen and (max-width: 600px) {
@@ -294,5 +546,87 @@ main {
     } 
     .story:first-child {
         height: auto;
+    }
+    /* story */
+    .galleryItem3 {
+        width: 100vw;
+        height: 50vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .galleryLrg {
+        width: 0px;
+        height: 0px;
+        transform: translate(1000px, 0px);
+    }
+    .gallery {
+        width: 0px;
+        height: 0px;
+    }
+    .gallery2 {
+        width: 100vw;
+        height: 50vw;
+    }
+    h2 {
+        margin: 0px !important;
+        padding: 20px;
+    }
+    .infoImg {
+        position: absolute;
+        width: 100vw;
+        height: 65vw;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .infoImg2 {
+        position: absolute;
+        width: 100vw;
+        height: 150vw;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        transition: 0.1s;
+    }
+    .infoImg3 {
+        position: absolute;
+        width: 100vw;
+        height: 53vw;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .infoImg4 {
+        position: absolute;
+        width: 100vw;
+        height: 75vw;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
     }
 }
