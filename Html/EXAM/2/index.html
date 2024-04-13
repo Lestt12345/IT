@@ -317,31 +317,31 @@
                     </div>
                     <div>
                         <label for="email">Email:</label>
-                        <input type="text" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     <div>
                         <label for="phone">Phone:</label>
-                        <input type="phone" id="phone" name="phone" required>
+                        <input type="number" id="phone" name="phone" required>
                     </div>
                 </div>
                 <div class="contactMe">
                     <label for="contactMeVia">Contact me via:</label>
                     <div id="contactMeVia">
-                        <input type="radio" id="Email" name="contactMeVia" value="Email"/>
+                        <input type="radio" id="Email" name="contactMeVia" required/>
                         <label for="Email">Email</label>
                     </div>
                     <div>
-                        <input type="radio" id="Phone" name="contactMeVia" value="Phone"/>
+                        <input type="radio" id="Phone" name="contactMeVia" required/>
                         <label for="Phone">Phone</label>
                     </div>
                     <div>
-                        <input type="radio" id="Telegram" name="contactMeVia" value="Telegram"/>
+                        <input type="radio" id="Telegram" name="contactMeVia" required/>
                         <label for="Telegram">Telegram</label>
                     </div>
                 </div>
                 <div class="topic">
                     <label for="topic">Topic:</label>
-                    <select id="topic" name="topic">
+                    <select id="topic" name="topic" required>
                         <option value="postMyStory">Post my story</option>
                         <option value="giveAQuestion">Give a question</option>
                         <option value="review">Review</option>
@@ -349,9 +349,15 @@
                 </div>
                 <div class="msg">
                     <label for="msg">Message:</label>
-                    <textarea id="msg" name="msg"></textarea>
+                    <textarea id="msg" name="msg" required></textarea>
                 </div>
-                <div></div>
+                <div class="nR">
+                    <div>
+                        <input type="checkbox" id="iAmAHuman" name="iAmAHuman"/>
+                        <label for="iAmAHuman">I am a human</label>
+                    </div>
+                    <input class="smbB ps-4 pe-4" type="submit" id="smb" name="smb" value="SEND" required>
+                </div>
             </form>
         </div>
     </main>
