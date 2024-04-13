@@ -918,6 +918,9 @@ footer p {
     }
 }
 @media screen and (max-width: 600px) {
+    body {
+        overflow-x: hidden;
+    }
     header {
         position: absolute;
     }
