@@ -300,6 +300,118 @@ h2 {
 h5 {
     padding-bottom: 2vw;
 }
+.gallery .infoImg {
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.gallery .infoImg2 {
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.gallery .infoImg3 {
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.gallery .infoImg4 {
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.gallery2 .infoImg {
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.gallery2 .infoImg2 {
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.gallery2 .infoImg3 {
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
+.gallery2 .infoImg4 {
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10vw;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: 0.1s;
+}
 
 /* gallery */
 
@@ -573,8 +685,9 @@ footer p {
         padding: 30px;
         margin: 0px !important;
     }
-    .galleryLrg {
-        transform: translate(10000px, 0px);
+     .galleryLrg {
+        width: 0;
+        height: 0;
         position: absolute;
     }
     .galleryItem2 {
@@ -592,7 +705,7 @@ footer p {
         width: 100vw;
         height: 30vw;
     }
-    .infoImg {
+    .gallery .infoImg {
         position: absolute;
         width: 69.3vw;
         height: 45vw;
@@ -606,7 +719,7 @@ footer p {
         z-index: -1;
         transition: 0.1s;
     }
-    .infoImg2 {
+    .gallery .infoImg2 {
         position: absolute;
         width: 28.83vw;
         height: 45vw;
@@ -620,7 +733,7 @@ footer p {
         z-index: -1;
         transition: 0.1s;
     }
-    .infoImg3 {
+    .gallery .infoImg3 {
         position: absolute;
         width: 57.3vw;
         height: 45vw;
@@ -634,10 +747,122 @@ footer p {
         z-index: -1;
         transition: 0.1s;
     }
-    .infoImg4 {
+    .gallery .infoImg4 {
         position: absolute;
         width: 40.78vw;
         height: 45vw;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .galleryLrg .infoImg {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .galleryLrg .infoImg2 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 5vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .galleryLrg .infoImg3 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .galleryLrg .infoImg4 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .gallery2 .infoImg {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .gallery2 .infoImg2 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 5vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .gallery2 .infoImg3 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .gallery2 .infoImg4 {
+        position: absolute;
+        width: 0;
+        height: 0;
         color: white;
         display: flex;
         justify-content: center;
@@ -812,7 +1037,7 @@ footer p {
     .galleryLrg {
         width: 0px;
         height: 0px;
-        transform: translate(1000px, 0px);
+        position: absolute;
     }
     .gallery {
         width: 0px;
@@ -826,7 +1051,7 @@ footer p {
         margin: 0px !important;
         padding: 20px;
     }
-    .infoImg {
+    .gallery2 .infoImg {
         position: absolute;
         width: 100vw;
         height: 65vw;
@@ -840,7 +1065,7 @@ footer p {
         z-index: -1;
         transition: 0.1s;
     }
-    .infoImg2 {
+    .gallery2 .infoImg2 {
         position: absolute;
         width: 100vw;
         height: 150vw;
@@ -854,7 +1079,7 @@ footer p {
         z-index: -1;
         transition: 0.1s;
     }
-    .infoImg3 {
+    .gallery2 .infoImg3 {
         position: absolute;
         width: 100vw;
         height: 53vw;
@@ -868,7 +1093,7 @@ footer p {
         z-index: -1;
         transition: 0.1s;
     }
-    .infoImg4 {
+    .gallery2 .infoImg4 {
         position: absolute;
         width: 100vw;
         height: 75vw;
@@ -878,6 +1103,118 @@ footer p {
         align-items: center;
         flex-direction: column;
         padding: 20vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .gallery .infoImg {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .gallery .infoImg2 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 5vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .gallery .infoImg3 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .gallery .infoImg4 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .galleryLrg .infoImg {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .galleryLrg .infoImg2 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 5vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .galleryLrg .infoImg3 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        transition: 0.1s;
+    }
+    .galleryLrg .infoImg4 {
+        position: absolute;
+        width: 0;
+        height: 0;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10vw;
         background: rgba(0, 0, 0, 0.5);
         z-index: -1;
         transition: 0.1s;
