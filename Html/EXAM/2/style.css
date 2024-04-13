@@ -126,6 +126,7 @@ header a:hover {
 }
 main {
     padding-top: 50px;
+    margin-bottom: 10px;
 }
 
 /* story */
@@ -386,17 +387,21 @@ form {
     padding-right: 10px;
 }
 .contactMe div label {
-    padding: 32px 15px 28px 0px;
+    padding: 31px 15px 29px 0px;
 }
 .contactMe input {
+    height: 13px;
     margin: 0px 10px;
+}
+.contactMe div div {
+    align-items: center;
 }
 .contactMe input::after {
     content: "";
     border: 1px solid grey;
     position: absolute;
     width: 13px;
-    height: 13px;
+    height: 13px !important;
     border-radius: 50%;
 }
 .contactMe input::before {
@@ -407,6 +412,9 @@ form {
     height: 13px;
     border-radius: 50%;
     background: rgba(128, 128, 128, 0.4);
+}
+.contactMe div {
+    display: flex;
 }
 .contactMe {
     display: flex;
@@ -434,6 +442,8 @@ form {
     border: 2px solid rgba(180, 180, 180, 0.4);
     border-radius: 3px;
     margin-bottom: 10px;
+    outline: none;
+    padding: 10px 15px;
 }
 .msg label {
     padding-bottom: 5px;
@@ -474,6 +484,37 @@ form {
     color: rgb(135, 135, 135);
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+}
+.hr {
+    border-bottom: 2px solid rgba(180, 180, 180, 0.4);
+    width: 100vw;
+    margin: 50px 0px;
+}
+
+/* WTU */
+
+footer {
+    font-family: 'EB Garamond';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+footer div {
+    display: flex;
+}
+.linkBord {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid rgb(135, 135, 135);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.linkBord:hover {
+    background: rgb(100, 100, 100);
+}
+footer p {
+    padding-top: 20px;
+    font-size: 13px;
 }
 @media screen and (min-width: 601px) and (max-width: 850px) {
     header div:last-child {
@@ -641,6 +682,14 @@ form {
         text-align: center;
         grid-area: six;
         border-left: 1px solid grey;
+    }
+    /* features */
+    form {
+        width: 550px;
+    }
+    .contact input {
+        width: 180px;
+        font-size: 14px;
     }
 }
 @media screen and (max-width: 600px) {
@@ -881,5 +930,83 @@ form {
         text-align: center;
         grid-area: six;
         border-bottom: 1px solid grey;
+    }
+    /* features */
+    form {
+        width: 200px;
+    }
+    .contact input {
+        width: 180px;
+        font-size: 14px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+    .contact label {
+        font-size: 14px;
+    }
+    .contact {
+        flex-direction: column;
+    }
+    .contactMe {
+        flex-direction: column;
+    }
+    .contactMe label {
+        font-size: 13px;
+        padding: 10px 0px;
+    }
+    .contactMe div label {
+        font-size: 13px;
+        padding: 5px 0px;
+    }
+    .contactMe input {
+        width: 8px;
+        height: 8px;
+        margin: 0px 5px 0px 10px;
+    }
+    .contactMe input::after {
+        width: 8px;
+        height: 8px !important;
+    }
+    .contactMe input::before {
+        width: 8px;
+        height: 8px;
+    }
+    .topic label {
+        font-size: 13px;
+    }
+    .topic select {
+        font-size: 12px;
+    }
+    .msg label {
+        font-size: 13px;
+    }
+    .msg textarea {
+        font-size: 12px;
+        max-height: 150px;
+        min-height: 50px;
+        height: 100px;
+    }
+    .nR input::after {
+        width: 11px;
+        height: 11px;
+    }
+    .nR input::before {
+        width: 9px;
+        height: 9px;
+    }
+    .nR label {
+        font-size: 13px;
+    }
+    .nR input {
+        width: 9px;
+        height: 9px; 
+    }
+    .smbB {
+        font-size: 13px;
+        width: 80px !important;
+        height: 35px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
