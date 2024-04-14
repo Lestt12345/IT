@@ -1045,6 +1045,9 @@ footer p {
         height: auto;
     }
     /* story */
+    .s3 {
+        border: none;
+    }
     .galleryItem3 {
         width: 100vw;
         height: 50vw;
