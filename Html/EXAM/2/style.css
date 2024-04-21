@@ -1,3 +1,4 @@
+
 body {
     top: 0;
     left: 0;
@@ -10,7 +11,7 @@ header {
     display: flex;
     justify-content: space-between;
     font-family: 'EB Garamond';
-    z-index: 1;
+    z-index: 2  ;
 }
 header div {
     display: flex;
@@ -39,7 +40,10 @@ header a:hover {
 .link {
     margin: 0px 0px 0px 2vw;
     min-width: none;
-    padding: 0px !important;
+    padding: 0px
+}
+.link:first-child {
+    padding: 0px;
 }
 .hMenu {
     position: fixed;
@@ -140,6 +144,7 @@ h2 {
     padding: 50px;
     font-family: 'EB Garamond';
 }
+
 .galleryLrg {
     width: 100vw;
     display: flex;
@@ -156,7 +161,6 @@ h2 {
     text-align: center;
 }
 .galleryLrg a {
-    font-family: 'EB Garamond';
     font-size: 1.2vw;
 }
 .gallery h5 {
@@ -169,7 +173,6 @@ h2 {
     text-align: center;
 }
 .gallery a {
-    font-family: 'EB Garamond';
     font-size: 1.8vw;
 }
 .gallery2 h5 {
@@ -183,7 +186,6 @@ h2 {
     text-align: center;
 }
 .gallery2 a {
-    font-family: 'EB Garamond';
     font-size: 3vw;
 }
 .galleryItem {
@@ -261,166 +263,24 @@ h2 {
     z-index: -1;
     transition: 0.1s;
 }
-.galleryItem:first-child:hover .infoImg {
-    z-index: 1;
-}
-.galleryItem:nth-child(2):hover .infoImg2 {
-    z-index: 1;
-}
-.galleryItem:nth-child(3):hover .infoImg3 {
-    z-index: 1;
-}
-.galleryItem:nth-child(4):hover .infoImg4 {
-    z-index: 1;
-}
-.img12:first-child:hover .infoImg {
-    z-index: 1;
-}
-.img12:nth-child(2):hover .infoImg2 {
-    z-index: 1;
-}
-.img12:nth-child(n-3):hover .infoImg3 {
-    z-index: 1;
-}
-.img12:last-child:hover .infoImg4 {
-    z-index: 1;
-}
-.img123:first-child:hover .infoImg {
-    z-index: 1;
-}
-.img1234:hover .infoImg2 {
-    z-index: 1;
-}
-.img123:nth-child(n-3):hover .infoImg3 {
-    z-index: 1;
-}
-.img123:last-child:hover .infoImg4 {
+.galleryItem:first-child:hover .infoImg, .img123:last-child:hover .infoImg4, .img123:nth-child(n-3):hover .infoImg3, .img1234:hover .infoImg2, .img123:first-child:hover .infoImg, .img12:last-child:hover .infoImg4, .img12:nth-child(n-3):hover .infoImg3, .img12:nth-child(2):hover .infoImg2, .img12:first-child:hover .infoImg, .galleryItem:nth-child(4):hover .infoImg4, .galleryItem:nth-child(2):hover .infoImg2, .galleryItem:nth-child(3):hover .infoImg3 {
     z-index: 1;
 }
 h5 {
     padding-bottom: 2vw;
 }
-.gallery .infoImg {
+.gallery .infoImg2, .gallery2 .infoImg2 {
     position: absolute;
     width: 0;
     height: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 10vw;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-    transition: 0.1s;
     font-size: 0px;
 }
-.gallery .infoImg2 {
+.gallery .infoImg3, .gallery .infoImg4, .gallery .infoImg, .gallery2 .infoImg, .gallery2 .infoImg3, .gallery2 .infoImg4 {
     position: absolute;
     width: 0;
     height: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 5vw;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-    transition: 0.1s;
     font-size: 0px;
 }
-.gallery .infoImg3 {
-    position: absolute;
-    width: 0;
-    height: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 10vw;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-    transition: 0.1s;
-    font-size: 0px;
-}
-.gallery .infoImg4 {
-    position: absolute;
-    width: 0;
-    height: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 10vw;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-    transition: 0.1s;
-    font-size: 0px;
-}
-.gallery2 .infoImg {
-    position: absolute;
-    width: 0;
-    height: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 10vw;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-    transition: 0.1s;
-    font-size: 0px;
-}
-.gallery2 .infoImg2 {
-    position: absolute;
-    width: 0;
-    height: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 5vw;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-    transition: 0.1s;
-    font-size: 0px;
-}
-.gallery2 .infoImg3 {
-    position: absolute;
-    width: 0;
-    height: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 10vw;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-    transition: 0.1s;
-    font-size: 0px;
-}
-.gallery2 .infoImg4 {
-    position: absolute;
-    width: 0;
-    height: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 10vw;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-    transition: 0.1s;
-    font-size: 0px;
-}
-
 /* gallery */
 
 .h2next {
@@ -521,7 +381,7 @@ form {
     border: 1px solid grey;
     position: absolute;
     width: 13px;
-    height: 13px !important;
+    height: 13px;
     border-radius: 50%;
 }
 .contactMe input::before {
@@ -691,7 +551,7 @@ footer p {
     /* story */
     h2 {
         padding: 30px;
-        margin: 0px !important;
+        margin: 0px;
     }
      .galleryLrg {
         width: 0;
@@ -769,125 +629,14 @@ footer p {
         z-index: -1;
         transition: 0.1s;
     }
-    .galleryLrg .infoImg {
+    .galleryLrg .infoImg, .galleryLrg .infoImg2, .galleryLrg .infoImg3, .galleryLrg .infoImg4, .gallery2 .infoImg, .gallery2 .infoImg2, .gallery2 .infoImg3, .gallery2 .infoImg4 {
         position: absolute;
         width: 0;
         height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
         font-size: 0px;
     }
-    .galleryLrg .infoImg2 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 5vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .galleryLrg .infoImg3 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .galleryLrg .infoImg4 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .gallery2 .infoImg {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .gallery2 .infoImg2 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 5vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .gallery2 .infoImg3 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .gallery2 .infoImg4 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
+    .gallery a {
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     }
     /* gallery */
     .feat {
@@ -953,7 +702,7 @@ footer p {
     }
     .navA {
         font-weight: bold;
-        font-size: 16px !important;
+        font-size: 16px;
         padding: 0px 0px 0px 0px;
     }
     .hMenu {
@@ -1010,7 +759,8 @@ footer p {
         width: 100vw;
         height: 70vw;
         order: 1;
-        display: flex;flex-direction: row;
+        display: flex;
+        flex-direction: row;
         align-items: center;
     }
     .sImg img {
@@ -1070,7 +820,7 @@ footer p {
         height: 50vw;
     }
     h2 {
-        margin: 0px !important;
+        margin: 0px;
         padding: 20px;
     }
     .gallery2 .infoImg {
@@ -1129,125 +879,14 @@ footer p {
         z-index: -1;
         transition: 0.1s;
     }
-    .gallery .infoImg {
+    .gallery .infoImg, .gallery .infoImg2, .gallery .infoImg3, .gallery .infoImg4, .galleryLrg .infoImg, .galleryLrg .infoImg2, .galleryLrg .infoImg3, .galleryLrg .infoImg4 {
         position: absolute;
         width: 0;
         height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
         font-size: 0px;
     }
-    .gallery .infoImg2 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 5vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .gallery .infoImg3 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .gallery .infoImg4 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .galleryLrg .infoImg {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .galleryLrg .infoImg2 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 5vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .galleryLrg .infoImg3 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
-    }
-    .galleryLrg .infoImg4 {
-        position: absolute;
-        width: 0;
-        height: 0;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 10vw;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        transition: 0.1s;
-        font-size: 0px;
+    .gallery2 a {
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     }
     /* gallery */
     .feat {
@@ -1259,7 +898,7 @@ footer p {
                              'six';
     }
     .h2next {
-        margin-top: 8vw !important;
+        margin-top: 8vw;
     }
     .featItem {
         padding: 10vw;
@@ -1331,10 +970,12 @@ footer p {
         margin: 0px 5px 0px 10px;
     }
     .contactMe input::after {
+        content: "";
         width: 8px;
-        height: 8px !important;
+        height: 8px;
     }
     .contactMe input::before {
+        content: "";
         width: 8px;
         height: 8px;
     }
@@ -1354,10 +995,12 @@ footer p {
         height: 100px;
     }
     .nR input::after {
+        content: "";
         width: 11px;
         height: 11px;
     }
     .nR input::before {
+        content: "";
         width: 9px;
         height: 9px;
     }
@@ -1370,10 +1013,6 @@ footer p {
     }
     .smbB {
         font-size: 13px;
-        width: 80px !important;
-        height: 35px !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        padding: 5px 45px 22px 10px;
     }
 }
