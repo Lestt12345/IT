@@ -123,4 +123,4 @@
 //	t1.set_cargo_weight();
 //	t1.from_a_to_b();
 //	t1.display();
-//}s
+//}
