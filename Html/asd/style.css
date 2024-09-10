@@ -1,0 +1,35 @@
+.cyan {
+    color: rgb(10, 145, 175);;
+}
+.backgr {
+    background: rgb(78, 78, 78);
+}
+.listoff {
+    list-style-type: none;
+}
+.listw {
+list-style-image: url(winter_16.png);
+}
+.listspr {
+    list-style-image: url(spring_16.png);
+}
+.listsum {
+    list-style-image: url(summer_16.png);
+}
+.lista {
+    list-style-image: url(autumn_16.png);
+}
+.listrom {
+    list-style: upper-roman;
+    color: blue;
+}
+.listabc {
+    list-style: lower-latin;
+}
+::marker {
+    color: black;
+    font-weight: bold;
+}
+.listofff {
+    list-style-type: none;
+}

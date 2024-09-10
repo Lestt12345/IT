@@ -1,0 +1,52 @@
+p {
+    font-size: 20px;
+}
+h2 {
+    font-size: 30px;
+}
+.content {
+}
+.mW {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.616);
+}
+.window {
+    padding: 20px;
+    border-radius: 20px;
+    width: 400px;
+    height: 300px;
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tittle {
+    width: 370px;
+    display: flex;
+}
+.mWTittle {
+
+}
+.mWC {
+    width: 370px;
+}
+button {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border: none;
+    margin: 20px 0px 0px 170px;
+    scale: 1.2;
+}
+.hr {
+    border: 1px solid black;
+    width: 370px;
+}

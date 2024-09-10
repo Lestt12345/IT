@@ -1,0 +1,123 @@
+body {
+    background-color: rgb(212, 212, 212);
+    font-family: Arial, sans-serif;
+}
+/* 1 */
+.task1 {
+    margin-left: 30%;
+    width: 700px;
+    height: 700px;
+    position: relative;
+    background-color: white;
+    border: 1px solid black;
+    z-index: -1;
+}
+.space {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    background-color: white;
+    margin-left: 150px;    
+    margin-top: 150px;
+}
+.space::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-right: 15px solid #003cff;
+    border-left: 15px solid #003cff;
+    box-sizing: border-box;
+    transform: rotate(45deg);
+    z-index: 1;
+}
+
+.space::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-top: 15px solid #0037ff;
+    border-bottom: 15px solid #0037ff;
+    box-sizing: border-box;
+    transform: rotate(45deg);
+    z-index: -1;
+}
+.img1 {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    scale: 0.9;
+}
+/* 2 */
+.project {
+    position: relative;
+    overflow: hidden;
+    width: 450px;
+}
+.img {
+    width: 100%;
+    height: 100%;
+}
+.text-block {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    transform: translateY(55%);
+    background-color: white;
+    color: black;
+    text-align: left;
+    font-size: 15px;
+    transition: transform 0.5s, color 0s, background-color 0s, text-align 0s;
+}
+h2 {
+    width: 100%;
+    background-color: orange;
+    scale: 1.151;
+    font-size: 25px;
+    margin-right: 5px;
+    padding: 0px 15px;
+    transition: padding 0s;
+}
+.topInfo {
+    position: absolute;
+    font-size: 10px;
+    margin-top: -7px;
+    font-weight: bold;
+}
+.project:hover .text-block {
+    transform: translateY(0%);
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid orange;
+    font-weight: bold;
+    text-align: center;
+}
+.text-block:hover h2 {
+    padding: 0px 0px;
+}
+.text-block:hover .topInfo {
+    margin-left: 180px;
+}
+.cardTwo {
+    margin-left: 490px;
+    margin-top: -302px;
+}
+.cardThree {
+    margin-left: 980px;
+    margin-top: -303px;
+}
+.f22 {
+    font-size: 11px;
+}
+.f22PreInfo {
+    font-size: 14px;
+}

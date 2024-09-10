@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="body">
+        <div class="card">
+            <h2>CREDIT CARD DETAILS</h2>
+            <div class="content">  
+                <div class="longInput">
+                    <label for="i1">Card Number</label>
+                    <input type="number" placeholder="1234 5678 9012 3456" id="i1" name="i1">
+                </div>
+                <div class="longInput">
+                    <label for="i2">Name On Card</label>
+                    <input type="text" placeholder="Name Surname" id="i2" name="i2">
+                </div>
+                <div class="longInput sb">
+                    <div class="shortInput">
+                        <label for="i3">Expiry Date</label>
+                        <input type="number" placeholder="02" id="i3" name="i3">
+                    </div>
+                    <div class="shortInput">
+                        <label for="i4"><br></label>
+                        <input type="number" placeholder="2024" id="i4" name="i4">
+                    </div>
+                    <div class="shortInput">
+                        <label for="i5">CVV / CVN</label>
+                        <input placeholder="***" type="password" maxlength="3" id="i5" name="i5" onkeypress="return event.charCode > 47 && event.charCode < 58;" pattern="[0-9]{5}" required></input>
+                    </div>
+                </div>
+            </div>
+            <div class="img"><img src="moon_flag.png" alt="moon"></div>
+        </div>
+    </div>
+</body>
+</html>

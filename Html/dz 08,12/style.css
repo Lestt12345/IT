@@ -1,0 +1,46 @@
+.block {
+    background-color: rgb(255, 171, 185);
+    font-size: 30px;
+    margin-right: 70%;
+}
+.marg {
+    margin-top: 2.5%;
+    background-color: rgb(255, 120, 143);
+    padding: 2%;
+}
+.margi {
+    background-color: rgb(255, 120, 143);
+    padding: 2%;
+}
+.content {
+    background-color: rgb(161, 59, 76);
+    padding: 2% 4%;
+}
+.li {
+    padding: 3%;
+    color: white;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.task {
+    font-size: 50px;
+}
+.tasktwo {
+    font-size: 30px;
+    margin-right: 75%;
+}
+li {
+    list-style-position: inside;
+}
+.liblue {
+    background-color: rgb(93, 118, 199);
+    list-style-image: url(unchecked_16.png);
+}
+.licyan {
+    background-color: rgb(90, 182, 185);
+    list-style-image: url(unchecked_16.png);
+}
+.ligrey {
+    background-color: rgb(179, 179, 179);
+    list-style-image: url(checked_16.png);
+}

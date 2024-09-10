@@ -1,0 +1,145 @@
+.clock {
+    width: 200px;
+    height: 200px;
+    border: solid;
+    border-color: black;
+    border-width: 7px;
+    margin-left: 43%;
+    border-radius: 50%;
+}
+.imgc {
+    scale: 0.15;
+}
+.cent {
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    margin-top: 95px;
+    margin-left: 95px;
+    border: solid;
+    border-radius: 50%;
+}
+.min {
+    width: 85px;
+    border: solid;
+    border-color: black;
+    margin-top: -5px;
+    margin-left: 100px;
+    border-width: 2px;
+    border-radius: 30%;
+    animation: animClock 1.2s linear infinite;
+    transform-origin: 0% 0%;
+    rotate: -90deg;
+}
+.hour {
+    width: 43px;
+    border: solid;
+    border-color: black;
+    margin-top: -5px;
+    margin-left: 100px;
+    border-width: 2px;
+    border-radius: 30%;
+    animation: animClock 28.8s linear infinite;
+    transform-origin: 0% 0%;
+    rotate: -90deg;
+}
+@keyframes animClock {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.center {
+    margin-left: 30px;
+}
+/* __________________________________________________ */
+.content {
+    margin-left: 740px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.cont {
+    margin-top: -40px;
+    width: 300;
+    position: relative;
+}
+.left {
+    border-style: solid;
+    background-color: rgb(137, 0, 179);
+    border-color: rgb(68, 0, 131);
+    margin-left: 655px;
+    display: flex;
+    width: 100px;
+    height: 55px;
+    transition-property: transform;
+    transition-duration: 1s;
+    transition-timing-function: ease, linear;
+    transition-delay: 0s;
+    transform-origin: left center;
+    transition: transform 0.5s linear;
+}
+.right {
+    border-style: solid;
+    background-color: rgb(137, 0, 179);
+    border-color: rgb(68, 0, 131);
+    margin-left: 761px;
+    margin-top: -61px;
+    display: flex;
+    width: 100px;
+    height: 55px;
+    transition-property: transform;
+    transition-duration: 1s;
+    transition-timing-function: ease, linear;
+    transition-delay: 0s;
+    transform-origin: right center;
+    transition: transform 0.5s linear;
+}
+.cont:hover .right {
+    transform: perspective(1000px) rotateY(-60deg);
+}
+.cont:hover .left {
+    transform: perspective(1000px) rotateY(60deg);
+}
+/* ____________________________________ */
+.vcent {
+    overflow: hodden;
+    margin-left: 35%;
+    transition: filter;
+    transition-duration: 0.3s;
+    transition-timing-function: ease linear;
+}
+.hw {
+    text-align: center;
+    width: 300px;
+    height: 150px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+}
+.chw {
+   margin-top: 65px;
+}
+.imgthree {
+    overflow: hidden;
+    width: 300px;
+    height: 150px;
+    margin-left: 300px;
+}
+.imgthr {
+    transition: scale;
+    transition-duration: 1s;
+    transition-timing-function: ease linear;
+    overflow: hidden;
+    scale: 0.322;
+    margin-left: -313px;
+    margin-top: -157px;
+    transition: scale;
+    transition-duration: 1s;
+    transition-timing-function: ease linear;
+}
+.vcent:hover {
+    filter: brightness(50%);
+}
+.vcent:hover .imgthr {
+    scale: 0.360;
+}

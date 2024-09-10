@@ -1,0 +1,54 @@
+img {
+    scale: 0.15;
+}
+.menu {
+    list-style: none;
+    filter: contrast();
+    transition: margin-left;
+    transition-duration: 0.3s;
+    transition-timing-function: ease linear;
+}
+.m {
+    font-size: 20px;
+    color: white;
+    position: fixed;
+    background-color: grey;
+    transition: width;
+    transition-duration: 0.3s;
+    transition-timing-function: ease linear;
+    left: 0;
+    top: 0;
+    margin-top: 0px;
+    height: 100%;
+    width: 50px;
+    padding: 35px;
+}
+li {
+    padding: 55px;
+}
+.lorem {
+    font-size: 30px;
+    margin-left: 150px;
+}
+.menu {
+    visibility: hidden;
+    color: grey;
+    transition: visibility, color;
+    transition-duration: 0s, 0.3s;
+    transition-timing-function: ease linear;
+    transition-delay: 0.1s;
+}
+.m:hover .menu {
+    color: white;
+    visibility: visible;
+}
+.m:hover {
+    width: 200px;
+}
+img {
+    visibility: visible;
+    position: absolute;
+    margin-top: -245px;
+    margin-left: -330px;
+    scale: 0.2;
+}
