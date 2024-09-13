@@ -1,126 +1,97 @@
 //#include <iostream>
-//
+//#include <string>
 //using namespace std;
 //
-//class Car
-//{
-//	string color;
-//	string transmission;
-//	int HP;
-//	int wheel_count;
+//class Contact {
+//    string full_name;
+//    int home_phone;
+//    int work_phone;
+//    int mobile_phone;
+//    string add_info;
 //public:
-//	Car() {
-//		color = "undefined";
-//		transmission = "undefined";
-//		HP = 0;
-//		wheel_count = 0;
-//	}
-//	Car(string color, string transmission, int HP, int wheel_count) {
-//		this->color = color;
-//		this->transmission = transmission;
-//		this->HP = HP;
-//		this->wheel_count = wheel_count;
-//	}
-//	void ride() {
-//		cout << "Riding...\n";
-//	}
-//	void set_color() {
-//		cout << "set color: ";
-//		cin >> color;
-//	}
-//	void get_color() {
-//		cout << color;
-//	}
-//	void set_transmission() {
-//		cout << "set transmission: ";
-//		cin >> transmission;
-//	}
-//	void get_transmission() {
-//		cout << transmission;
-//	}
-//	void set_HP() {
-//		cout << "set HP: ";
-//		cin >> HP;
-//	}
-//	void get_HP() {
-//		cout << HP;
-//	}
-//	void set_wheel_count() {
-//		cout << "set wheel_count: ";
-//		cin >> wheel_count;
-//	}
-//	void get_wheel_count() {
-//		cout << wheel_count;
-//	}
-//	void display() {
-//		cout
-//			<< "color: " << color << endl
-//			<< "transmission: " << transmission << endl
-//			<< "HP: " << HP << endl
-//			<< "whell count: " << wheel_count << endl;
-//	}
-//	virtual void from_a_to_b() {}
+//    Contact() {
+//        full_name = "undefined";
+//        home_phone = 0;
+//        work_phone = 0;
+//        mobile_phone = 0;
+//        add_info = "undefined";
+//    }
+//    Contact(string full_name, int home_phone, int work_phone, int mobile_phone, string add_info) {
+//        this->full_name = full_name;
+//        this->home_phone = home_phone;
+//        this->work_phone = work_phone;
+//        this->mobile_phone = mobile_phone;
+//        this->add_info = add_info;
+//    }
+//    void display() {
+//        cout << "Full Name: " << full_name << endl
+//            << "Home Phone: " << home_phone << endl
+//            << "Work Phone: " << work_phone << endl
+//            << "Mobile Phone: " << mobile_phone << endl
+//            << "Additional Info: " << add_info << endl;
+//    }
 //};
 //
-//class Sedan : public Car
-//{
-//public:
-//	using Car::Car;
-//	Sedan() : Car("undefined", "undefined", 0, 4) {}
-//	Sedan(string color, string transmission, int HP) : Car(color, transmission, HP, 4) {}
-//	void from_a_to_b() override {
-//		string a, b;
-//		cout << "enter first place: ";
-//		cin >> a;
-//		cout << "enter second place: ";
-//		cin >> b;
-//		cout << "start from " << a << endl;
-//		ride();
-//		cout << "enter to " << b << endl;
+//Contact create_contact() {
+//    string full_name, add_info;
+//    int home_phone, work_phone, mobile_phone;
+//    cin.ignore();
+//    cout << "Enter full name: ";
+//    getline(cin, full_name);
+//    cout << "Enter home phone : ";
+//    cin >> home_phone;
+//    cout << "Enter work phone : ";
+//    cin >> work_phone;
+//    cout << "Enter mobile phone : ";
+//    cin >> mobile_phone;
+//    cout << "Enter additional info: ";
+//    cin.ignore();
+//    getline(cin, add_info);
+//    return Contact(full_name, home_phone, work_phone, mobile_phone, add_info);
+//}
 //
-//	}
-//};
-//
-//class Truck : public Car
-//{
-//	int cargo_weight;
-//public:
-//	using Car::Car;
-//	Truck() : Car("undefined", "undefined", 0, 6), cargo_weight(0) {}
-//	Truck(string color, string transmission, int HP) : Car(color, transmission, HP, 6), cargo_weight(0) {}
-//	void set_cargo_weight() {
-//		cout << "set cargo_weight: ";
-//		cin >> cargo_weight;
-//	}
-//	void get_cargo_weight() {
-//		cout << cargo_weight;
-//	}
-//	void from_a_to_b() override {
-//		string a, b;
-//		cout << "enter first place: ";
-//		cin >> a;
-//		cout << "enter second place: ";
-//		cin >> b;
-//		cout << "enter to the " << a << endl;
-//		cout << "take cargo (" << a << ")" << endl;
-//		cout << "start from " << a << endl;
-//		ride();
-//		cout << "enter to " << b << endl;
-//		cout << "unhook cargo" << endl;
-//	}
-//};
+//void phone_book_menu(Contact phone_book[], int& count) {
+//    int choice = -1;
+//    while (choice != 0) {
+//        cout << "\nPhone Book Menu:\n"
+//            << "1. Add new contact\n"
+//            << "2. Display all contacts\n"
+//            << "0. Exit\n"
+//            << "Choose an option: ";
+//        cin >> choice;
+//        switch (choice)
+//        {
+//        case 1:
+//            if (count < 100) {
+//                phone_book[count] = create_contact();
+//                count++;
+//            }
+//            else {
+//                cout << "Phone book is full\n";
+//            }
+//            break;
+//        case 2:
+//            if (count == 0) {
+//                cout << "Phone book is empty\n";
+//            }
+//            else {
+//                for (int i = 0; i < count; ++i) {
+//                    cout << "\nContact " << i + 1 << ":\n";
+//                    phone_book[i].display();
+//                }
+//            }
+//            break;
+//        case 0:
+//            cout << "bb\n\n";
+//            break;
+//        default:
+//            cout << "Error, invalid input\n";
+//        }
+//    }
+//}
 //
 //int main() {
-//	SetConsoleCP(1251);
-//	SetConsoleOutputCP(1251);
-//	cout << "Sedan:\n";
-//	Sedan s1("red", "manual", 130);
-//	s1.from_a_to_b();
-//	s1.display();
-//	cout << "\n\n";
-//	cout << "Truck:\n";
-//	Truck t1("black", "auto", 630);
-//	t1.set_cargo_weight();
-//	t1.from_a_to_b();
-//	t1.display();
+//    Contact phone_book[100];
+//    int count = 0;
+//    phone_book_menu(phone_book, count);
 //}
