@@ -1,97 +1,124 @@
 //#include <iostream>
+//#include <thread>
+//#include <chrono>
+//#include <fstream>
 //#include <string>
 //using namespace std;
 //
-//class Contact {
-//    string full_name;
-//    int home_phone;
-//    int work_phone;
-//    int mobile_phone;
-//    string add_info;
+//class Fraction {
+//    int numerator;
+//    int denominator;
+//    int gcd(int a, int b) const {
+//        while (b != 0) {
+//            int t = b;
+//            b = a % b;
+//            a = t;
+//        }
+//        return a;
+//    }
+//    int lcm(int a, int b) const {
+//        return (a / gcd(a, b)) * b;
+//    }
+//    void simplify() {
+//        int gcd_val = gcd(numerator, denominator);
+//        numerator /= gcd_val;
+//        denominator /= gcd_val;
+//        if (denominator < 0) {
+//            numerator = -numerator;
+//            denominator = -denominator;
+//        }
+//    }
 //public:
-//    Contact() {
-//        full_name = "undefined";
-//        home_phone = 0;
-//        work_phone = 0;
-//        mobile_phone = 0;
-//        add_info = "undefined";
+//    Fraction(int num = 0, int denom = 1) : numerator(num), denominator(denom) {
+//        if (denom == 0) {
+//            cout << "Error: Denominator cannot be zero!" << endl;
+//            numerator = 0;
+//            denominator = 1;
+//        }
+//        else {
+//            simplify();
+//        }
 //    }
-//    Contact(string full_name, int home_phone, int work_phone, int mobile_phone, string add_info) {
-//        this->full_name = full_name;
-//        this->home_phone = home_phone;
-//        this->work_phone = work_phone;
-//        this->mobile_phone = mobile_phone;
-//        this->add_info = add_info;
+//    Fraction operator+(const Fraction& other) const {
+//        int common_denom = lcm(denominator, other.denominator);
+//        int num = numerator * (common_denom / denominator) + other.numerator * (common_denom / other.denominator);
+//        return Fraction(num, common_denom);
 //    }
-//    void display() {
-//        cout << "Full Name: " << full_name << endl
-//            << "Home Phone: " << home_phone << endl
-//            << "Work Phone: " << work_phone << endl
-//            << "Mobile Phone: " << mobile_phone << endl
-//            << "Additional Info: " << add_info << endl;
+//    Fraction operator-(const Fraction& other) const {
+//        int common_denom = lcm(denominator, other.denominator);
+//        int num = numerator * (common_denom / denominator) - other.numerator * (common_denom / other.denominator);
+//        return Fraction(num, common_denom);
+//    }
+//    Fraction operator*(const Fraction& other) const {
+//        int num = numerator * other.numerator;
+//        int denom = denominator * other.denominator;
+//        return Fraction(num, denom);
+//    }
+//    Fraction operator/(const Fraction& other) const {
+//        if (other.numerator == 0) {
+//            cout << "Error: Cannot divide by zero!" << endl;
+//            return Fraction(0, 1);
+//        }
+//        int num = numerator * other.denominator;
+//        int denom = denominator * other.numerator;
+//        return Fraction(num, denom);
+//    }
+//    void print() const {
+//        cout << numerator << "/" << denominator;
+//    }
+//    void save_info_log(const string& filename) { // дроби не нужно сохранять, ведь мы их сами задаем в файле { случилось нечто!!! тоесть я впервые за 100 лет написал комент))) }
+//        ofstream save_file(filename, ios::app);
+//        if (save_file.is_open())
+//        {
+//            save_file << numerator << "/" << denominator << endl;
+//            save_file.close();
+//            cout << "Saved result to " << filename << endl;
+//        }
+//        else
+//        {
+//            cout << "error save\n";
+//        }
+//    }
+//    void open_info(const string& filename) {
+//        ifstream info_file(filename);
+//        if (info_file.is_open())
+//        {
+//            info_file >> numerator;
+//            info_file >> denominator;
+//            cout << "Opened from " << filename << "\n";
+//        }
+//        else
+//        {
+//            cout << "error open\n";
+//        }
 //    }
 //};
 //
-//Contact create_contact() {
-//    string full_name, add_info;
-//    int home_phone, work_phone, mobile_phone;
-//    cin.ignore();
-//    cout << "Enter full name: ";
-//    getline(cin, full_name);
-//    cout << "Enter home phone : ";
-//    cin >> home_phone;
-//    cout << "Enter work phone : ";
-//    cin >> work_phone;
-//    cout << "Enter mobile phone : ";
-//    cin >> mobile_phone;
-//    cout << "Enter additional info: ";
-//    cin.ignore();
-//    getline(cin, add_info);
-//    return Contact(full_name, home_phone, work_phone, mobile_phone, add_info);
-//}
-//
-//void phone_book_menu(Contact phone_book[], int& count) {
-//    int choice = -1;
-//    while (choice != 0) {
-//        cout << "\nPhone Book Menu:\n"
-//            << "1. Add new contact\n"
-//            << "2. Display all contacts\n"
-//            << "0. Exit\n"
-//            << "Choose an option: ";
-//        cin >> choice;
-//        switch (choice)
-//        {
-//        case 1:
-//            if (count < 100) {
-//                phone_book[count] = create_contact();
-//                count++;
-//            }
-//            else {
-//                cout << "Phone book is full\n";
-//            }
-//            break;
-//        case 2:
-//            if (count == 0) {
-//                cout << "Phone book is empty\n";
-//            }
-//            else {
-//                for (int i = 0; i < count; ++i) {
-//                    cout << "\nContact " << i + 1 << ":\n";
-//                    phone_book[i].display();
-//                }
-//            }
-//            break;
-//        case 0:
-//            cout << "bb\n\n";
-//            break;
-//        default:
-//            cout << "Error, invalid input\n";
-//        }
-//    }
-//}
-//
 //int main() {
-//    Contact phone_book[100];
-//    int count = 0;
-//    phone_book_menu(phone_book, count);
+//    Fraction f1(3, 4);
+//    Fraction f2(2, 5);
+//    thread load_thread1(&Fraction::open_info, &f1, "f1_data.txt");
+//    thread load_thread2(&Fraction::open_info, &f2, "f2_data.txt");
+//    load_thread1.join();
+//    load_thread2.join();
+//
+//    Fraction sum = f1 + f2;
+//    Fraction diff = f1 - f2;
+//    Fraction product = f1 * f2;
+//    Fraction quotient = f1 / f2;
+//    cout << "1: "; f1.print(); cout << "      2: "; f2.print(); cout << endl;
+//    cout << "Sum: "; sum.print(); cout << endl;
+//    sum.save_info_log("log.txt");
+//    cout << "Difference: "; diff.print(); cout << endl;
+//    diff.save_info_log("log.txt");
+//    cout << "Product: "; product.print(); cout << endl;
+//    product.save_info_log("log.txt");
+//    cout << "Quotient: "; quotient.print(); cout << endl;
+//    quotient.save_info_log("log.txt");
+//    ofstream save_file("log.txt", ios::app);
+//    if (save_file.is_open())
+//    {
+//        save_file << "___________________________\n\n";
+//        save_file.close();
+//    }
 //}

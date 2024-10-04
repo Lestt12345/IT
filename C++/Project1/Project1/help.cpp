@@ -5251,201 +5251,1030 @@ using namespace std;
 //    phone_book_menu(phone_book, count);
 //}
 
-class Character
-{
-	string name;
-	int lvl = 1;
-	int money = 10;
-	int damage = 1;
-	int health = 10;
-	int upgrade_damage_cost = 5;
-	int upgrade_health_cost = 2;
-	int travels = 0;
-	int damage_requirement = 5;
-	int health_requirement = 15;
+//class Character
+//{
+//	string name;
+//	int lvl = 1;
+//	int money = 10;
+//	int damage = 1;
+//	int health = 10;
+//	int upgrade_damage_cost = 5;
+//	int upgrade_health_cost = 2;
+//	int travels = 0;
+//	int damage_requirement = 5;
+//	int health_requirement = 15;
+//
+//	void victory() {
+//		for (int i = 0; i < 100; i++)
+//		{
+//			cout << endl;
+//		}
+//		cout << "E";
+//		Sleep(200);
+//		cout << "m";
+//		Sleep(200);
+//		cout << "m";
+//		Sleep(200);
+//		cout << ".";
+//		Sleep(200);
+//		cout << ".";
+//		Sleep(200);
+//		cout << ".";
+//		Sleep(3000);
+//		cout << " Y";
+//		Sleep(200);
+//		cout << "o";
+//		Sleep(200);
+//		cout << "u";
+//		Sleep(200);
+//		cout << " a";
+//		Sleep(200);
+//		cout << "r";
+//		Sleep(200);
+//		cout << "e";
+//		Sleep(200);
+//		cout << " w";
+//		Sleep(200);
+//		cout << "i";
+//		Sleep(200);
+//		cout << "n";
+//		Sleep(200);
+//		cout << "!";
+//		Sleep(2000);
+//		cout << "   G";
+//		Sleep(200);
+//		cout << "O";
+//		Sleep(200);
+//		cout << "O";
+//		Sleep(200);
+//		cout << "D";
+//		Sleep(200);
+//		cout << "B";
+//		Sleep(200);
+//		cout << "Y";
+//		Sleep(200);
+//		cout << "E";
+//		Sleep(200);
+//		cout << "!";
+//		Sleep(200);
+//		cout << "!";
+//		Sleep(200);
+//		cout << "!";
+//		Sleep(200);
+//		exit(1);
+//	}
+//
+//	int travel() {
+//		cout << "Travelling.";
+//		for (int i = 0; i < 3; i++)
+//		{
+//			Sleep(500);
+//			cout << ".";
+//			Sleep(500);
+//			cout << ".";
+//			Sleep(500);
+//			cout << "\b\b  \b\b";
+//		}
+//		cout << "\nReterning to home.";
+//		for (int i = 0; i < 3; i++)
+//		{
+//			Sleep(500);
+//			cout << ".";
+//			Sleep(500);
+//			cout << ".";
+//			Sleep(500);
+//			cout << "\b\b  \b\b";
+//		}
+//		cout << "\nNow at home!";
+//		Sleep(2000);
+//		travels++;
+//		cout << "\nTravel #" << travels << endl;
+//		Sleep(2000);
+//		int a = rand() % 11;
+//		while (a == 0)
+//		{
+//			a = rand() % 11;
+//		}
+//		return a * lvl;
+//	}
+//	void lvl_up() {
+//		if (damage >= damage_requirement && health >= health_requirement)
+//		{
+//			if (lvl == 5)
+//			{
+//				victory();
+//			}
+//			upgrade_damage_cost *= 2;
+//			upgrade_health_cost *= 2;
+//			damage_requirement += 3 * lvl;
+//			health_requirement = 5 * lvl;
+//			lvl++;
+//		}
+//		else
+//		{
+//			cout << "No enough requirements :(\n";
+//		}
+//	}
+//	void damage_up() {
+//		if (money >= upgrade_damage_cost)
+//		{
+//			damage += lvl;
+//			money -= upgrade_damage_cost;
+//		}
+//		else
+//		{
+//			cout << "No enough money :(\n";
+//		}
+//	}
+//	void health_up() {
+//		if (money >= upgrade_health_cost)
+//		{
+//			health += 2 * lvl ;
+//			money -= upgrade_health_cost;
+//		}
+//		else
+//		{
+//			cout << "No enough money :(\n";
+//		}
+//	}
+//public:
+//	Character(string name) : name(name) {}
+//	void menu() {
+//		int choice = -1;
+//		while (choice != 0)
+//		{
+//			cout << "\n\nMenu:\n"
+//				<< "Current level: " << lvl << endl
+//				<< "Money: " << money << endl
+//				<< "Current damage: " << damage << endl
+//				<< "Current health: " << health << endl
+//				<< endl
+//				<< "1 - Go to travel\n"
+//				<< "2 - Upgrade damage (cost: " << upgrade_damage_cost << ")\n"
+//				<< "3 - Upgrade health (cost: " << upgrade_health_cost << ")\n"
+//				<< "4 - Go to the next level (requirements: damage " << damage_requirement << ", health " << health_requirement << ")\n"
+//				<< "0 - Exit game\n"
+//				<< "Choose: ";
+//			cin >> choice;
+//			switch (choice)
+//			{
+//			case 1:
+//				money += travel();
+//				break;
+//			case 2:
+//				damage_up();
+//				break;
+//			case 3:
+//				health_up();
+//				break;
+//			case 4:
+//				lvl_up();
+//				break;
+//			case 0:
+//				exit(1);
+//				break;
+//			default:
+//				cout << "invalid input\n";
+//			}
+//		}
+//	}
+//};
+//
+//int main() {
+//	srand(time(NULL));
+//	string name;
+//	cout << "Choose name: ";
+//	cin >> name;
+//	cin.ignore();
+//	Character ch1(name);
+//	ch1.menu();
+//}
 
-	void victory() {
-		for (int i = 0; i < 100; i++)
-		{
-			cout << endl;
-		}
-		cout << "E";
-		Sleep(200);
-		cout << "m";
-		Sleep(200);
-		cout << "m";
-		Sleep(200);
-		cout << ".";
-		Sleep(200);
-		cout << ".";
-		Sleep(200);
-		cout << ".";
-		Sleep(3000);
-		cout << " Y";
-		Sleep(200);
-		cout << "o";
-		Sleep(200);
-		cout << "u";
-		Sleep(200);
-		cout << " a";
-		Sleep(200);
-		cout << "r";
-		Sleep(200);
-		cout << "e";
-		Sleep(200);
-		cout << " w";
-		Sleep(200);
-		cout << "i";
-		Sleep(200);
-		cout << "n";
-		Sleep(200);
-		cout << "!";
-		Sleep(2000);
-		cout << "   G";
-		Sleep(200);
-		cout << "O";
-		Sleep(200);
-		cout << "O";
-		Sleep(200);
-		cout << "D";
-		Sleep(200);
-		cout << "B";
-		Sleep(200);
-		cout << "Y";
-		Sleep(200);
-		cout << "E";
-		Sleep(200);
-		cout << "!";
-		Sleep(200);
-		cout << "!";
-		Sleep(200);
-		cout << "!";
-		Sleep(200);
-		exit(1);
-	}
+//class Lift {
+//    double* arr;
+//    int people_count = 0;
+//
+//    double total_wheigh() {
+//        double total_weigh = 0;
+//        for (int i = 0; i < people_count; i++)
+//        {
+//            total_weigh += arr[i];
+//        }
+//        return total_weigh;
+//    }
+//    void enter_people(double wheigh) {
+//        double* arr_tmp = new double[people_count + 1];
+//        for (int i = 0; i < people_count; i++)
+//        {
+//            arr_tmp[i] = arr[i];
+//        }
+//        arr_tmp[people_count] = wheigh;
+//        delete[] arr;
+//        arr = arr_tmp;
+//        people_count++;
+//    }
+//public:
+//    Lift() {
+//        arr = new double[1];
+//    }
+//    ~Lift() {
+//        delete[] arr;
+//    }
+//    void test() {
+//        if (total_wheigh() > 600 || people_count > 8)
+//        {
+//            cout << "lift not go";
+//        }
+//        else
+//        {
+//            cout << "lift go";
+//        }
+//    }
+//    void feel_lift() {
+//        double wheigh = -1;
+//        int i = 1;
+//        while(wheigh != 0)
+//        {
+//            cout << "wheigh " << i << " (0 - exit): ";
+//            cin >> wheigh;
+//            if (wheigh == 0)
+//            {
+//                break;
+//            }
+//            enter_people(wheigh);
+//            i++;
+//        }
+//    }
+//};
+//
+//int main() {
+//    Lift l1;
+//    l1.feel_lift();
+//    l1.test();
+//}
 
-	int travel() {
-		cout << "Travelling.";
-		for (int i = 0; i < 3; i++)
-		{
-			Sleep(500);
-			cout << ".";
-			Sleep(500);
-			cout << ".";
-			Sleep(500);
-			cout << "\b\b  \b\b";
-		}
-		cout << "\nReterning to home.";
-		for (int i = 0; i < 3; i++)
-		{
-			Sleep(500);
-			cout << ".";
-			Sleep(500);
-			cout << ".";
-			Sleep(500);
-			cout << "\b\b  \b\b";
-		}
-		cout << "\nNow at home!";
-		Sleep(2000);
-		travels++;
-		cout << "\nTravel #" << travels << endl;
-		Sleep(2000);
-		int a = rand() % 11;
-		while (a == 0)
-		{
-			a = rand() % 11;
-		}
-		return a * lvl;
-	}
-	void lvl_up() {
-		if (damage >= damage_requirement && health >= health_requirement)
-		{
-			if (lvl == 5)
-			{
-				victory();
-			}
-			upgrade_damage_cost *= 2;
-			upgrade_health_cost *= 2;
-			damage_requirement += 3 * lvl;
-			health_requirement = 5 * lvl;
-			lvl++;
-		}
-		else
-		{
-			cout << "No enough requirements :(\n";
-		}
-	}
-	void damage_up() {
-		if (money >= upgrade_damage_cost)
-		{
-			damage += lvl;
-			money -= upgrade_damage_cost;
-		}
-		else
-		{
-			cout << "No enough money :(\n";
-		}
-	}
-	void health_up() {
-		if (money >= upgrade_health_cost)
-		{
-			health += 2 * lvl ;
-			money -= upgrade_health_cost;
-		}
-		else
-		{
-			cout << "No enough money :(\n";
-		}
-	}
-public:
-	Character(string name) : name(name) {}
-	void menu() {
-		int choice = -1;
-		while (choice != 0)
-		{
-			cout << "\n\nMenu:\n"
-				<< "Current level: " << lvl << endl
-				<< "Money: " << money << endl
-				<< "Current damage: " << damage << endl
-				<< "Current health: " << health << endl
-				<< endl
-				<< "1 - Go to travel\n"
-				<< "2 - Upgrade damage (cost: " << upgrade_damage_cost << ")\n"
-				<< "3 - Upgrade health (cost: " << upgrade_health_cost << ")\n"
-				<< "4 - Go to the next level (requirements: damage " << damage_requirement << ", health " << health_requirement << ")\n"
-				<< "0 - Exit game\n"
-				<< "Choose: ";
-			cin >> choice;
-			switch (choice)
-			{
-			case 1:
-				money += travel();
-				break;
-			case 2:
-				damage_up();
-				break;
-			case 3:
-				health_up();
-				break;
-			case 4:
-				lvl_up();
-				break;
-			case 0:
-				exit(1);
-				break;
-			default:
-				cout << "invalid input\n";
-			}
-		}
-	}
-};
+//template < typename T>
+//class DynamicArray {
+//    T* arr;
+//    int size;
+//public:
+//    DynamicArray(int size) {
+//        this->size = size;
+//        arr = new T[this->size];
+//        cout << "New array size of: " << this->size << endl;
+//    }
+//    ~DynamicArray() {
+//        delete[] arr;
+//        cout << "Deleted array" << endl;
+//    }
+//    void test() {
+//        cout << "bkakdkasdkas" << endl;
+//    }
+//    void print_arr() {
+//        for (int i = 0; i < size; i++)
+//        {
+//            cout << arr[i] << "\t";
+//        }
+//        cout << endl;
+//    }
+//    void fill_arr() {
+//        for (int i = 0; i < size; i++)
+//        {
+//            cout << i + 1 << ": ";
+//            cin >> arr[i];
+//        }
+//    }
+//};
+//
+//int main() {
+//    DynamicArray<int> myArray(4);
+//    myArray.test();
+//    myArray.fill_arr();
+//    myArray.print_arr();
+//}
 
-int main() {
-	srand(time(NULL));
-	string name;
-	cout << "Choose name: ";
-	cin >> name;
-	cin.ignore();
-	Character ch1(name);
-	ch1.menu();
-}
+//class myClass {
+//	int value;
+//public:
+//	myClass(int value) : value(value) {}
+//	int getValue() const {
+//		return value;
+//	}
+//	void setValue(int value) {
+//		this->value = value;
+//	}
+//};
+//
+//int main() {
+//	const myClass c1(12);
+//	cout << c1.getValue();
+//	c1.setValue(15);
+//	cout << c1.getValue();
+//}
+
+//class Books {
+//    struct Book
+//    {
+//        string name;
+//        int year;
+//    };
+//    Book* arr;
+//    int books_count = 0;
+//    
+//    template <typename T>
+//    T feel_info(string t) {
+//        T value;
+//        cout << "Enter " << t << ": ";
+//        cin >> value;
+//        return value;
+//    }
+//    void add_book() {
+//        Book* arr_tmp = new Book[books_count + 1];
+//        for (int i = 0; i < books_count; i++)
+//        {
+//            arr_tmp[i] = arr[i];
+//        }
+//        arr_tmp[books_count].name = feel_info<string>("name");
+//        arr_tmp[books_count].year = feel_info<int>("year");
+//        delete[] arr;
+//        arr = arr_tmp;
+//        books_count++;
+//    }
+//    void feel_books() {
+//        int ch = -1;
+//        while (ch != 0)
+//        {
+//            cout << "\n1 - add book\n0 - exit\nchoose: ";
+//            cin >> ch;
+//            if (ch == 1)
+//            {
+//                add_book();
+//            }
+//        }
+//    }
+//    void print_books() {
+//        cout << endl;
+//        if (books_count == 0)
+//        {
+//            cout << "\nThere no books in your colection bb";
+//        }
+//        for (int i = 0; i < books_count; i++) // без брейк потому что если books_count = 0, то и цыкла не будет
+//        {
+//            cout << arr[i].name << " (" << arr[i].year << "y.)\n";
+//        }
+//    }
+//public:
+//    Books() {
+//        arr = new Book[1];
+//    }
+//    ~Books() {
+//        delete[] arr;
+//    }
+//    void test() {
+//        feel_books();
+//        print_books();
+//    }
+//};
+//
+//int main() {
+//    Books c1;
+//    c1.test();
+//}
+
+//class Complex
+//{
+//	double real;
+//	double imag;
+//public:
+//	Complex(double r = 0, double i = 0) : real(r), imag(i) {}
+//	Complex operator +(const Complex& other) {
+//		return Complex(real + other.real, imag + other.imag);
+//	}
+//	Complex operator -(const Complex& other) {
+//		return Complex(real - other.real, imag - other.imag);
+//	}
+//	Complex operator *(const Complex& other) {
+//		return Complex(real * other.real, imag * other.imag);
+//	}
+//	Complex operator /(const Complex& other) {
+//		if (other.real == 0 || other.imag == 0)
+//		{
+//			cout << "error\n";
+//			return Complex(0, 0);
+//		}
+//		else
+//		{
+//			return Complex(real / other.real, imag / other.imag);
+//		}
+//	}
+//	void print() {
+//		cout << real << " and " << imag;
+//	}
+//};
+//
+//int main() {
+//	Complex c1(5, 4);
+//	Complex c2(6, 0);
+//	c1.print();
+//	cout << " + ";
+//	c2.print();
+//	cout << " = ";
+//	Complex result = c1 + c2;
+//	result.print();
+//	cout << endl;
+//
+//	c1.print();
+//	cout << " - ";
+//	c2.print();
+//	cout << " = ";
+//	result = c1 - c2;
+//	result.print();
+//	cout << endl;
+//
+//	c1.print();
+//	cout << " * ";
+//	c2.print();
+//	cout << " = ";
+//	result = c1 * c2;
+//	result.print();
+//	cout << endl;
+//
+//	c1.print();
+//	cout << " / ";
+//	c2.print();
+//	cout << " = ";
+//	result = c1 / c2;
+//	result.print();
+//	cout << endl;
+//
+//	c2.print();
+//	cout << " / ";
+//	c1.print();
+//	cout << " = ";
+//	result = c2 / c1;
+//	result.print();
+//	cout << endl;
+//}
+
+//class Value {
+//    int number;
+//
+//public:
+//    Value(int n = 0) : number(n) {}
+//    void make_zero() {
+//        number = 0;
+//    }
+//    Value& operator ++() {
+//        number++;
+//        return *this;
+//    }
+//    Value operator ++(int) {
+//        Value temp = *this;
+//        number++;
+//        return temp;
+//    }
+//    Value& operator --() {
+//        number--;
+//        return *this;
+//    }
+//    Value operator --(int) {
+//        Value temp = *this;
+//        number--;
+//        return temp;
+//    }
+//    bool operator !() const {
+//        return number == 0;
+//    }
+//    void print() const {
+//        cout << number << endl;
+//    }
+//};
+//
+//int main() {
+//    Value n1(6);
+//    ++n1;
+//    n1.print();
+//    n1++;
+//    n1.print();
+//    --n1;
+//    n1.print();
+//    n1--;
+//    n1.print();
+//    if (!n1) {
+//        cout << "n1 is zero\n";
+//    }
+//    else {
+//    n1.make_zero();
+//    if (!n1) {//        cout << "n1 is not zero\n";
+//    }
+
+//        cout << "n1 is zero\n";
+//    }
+//    else { not zero\n";
+//    }
+//        cout << "n1 is
+//}
+
+//public:
+//class Weapon {
+//    string name;e(n) {}
+//    virtual void HitDamage
+//    Weapon(string n) : nam() = 0;
+//};
+//
+//class Bazooka : public Weapon {
+//public:) : Weapon(n) {}
+//    void HitDamage(
+//    Bazooka(string n) override {
+//        cout << name <<  ": BAM-BAM" << endl;
+//    }
+//};
+//
+//class Rifle : public Weapon {
+//public:
+//    Rifle(string n) : Weapon(n) {}
+//    void HitDamage() override {
+//        cout << name << ": ratatatatata" << endl;
+//    }
+//};
+//
+//class Pistol : public Weapon {
+//public:
+//    Pistol(string n) : Weapon(n) {}
+//    void HitDamage() override {
+//        cout << name << ": bim-bim-bim" << endl;
+//    }
+//};
+//
+//class Cold_weapon : public Weapon {
+//public:
+//    Cold_weapon(string n) : Weapon(n) {}
+//    void HitDamage() override {
+//        cout << name << ": *make damage*" << endl;
+//    }
+//};
+//
+//class Player {
+//public:
+//    void Shoot(Weapon* weapon) {
+//        weapon->HitDamage();
+//    }
+//};
+//
+//int main() {
+//    Player p1;
+//    int ch = -1;
+//    string name;
+//    Weapon* weapon_1st = nullptr;
+//    Weapon* weapon_2nd = nullptr;
+//    Weapon* weapon_3rt = nullptr;
+//    while (ch != 1 && ch != 2)
+//    {
+//        cout << "choose your 1st weapon:\n"
+//            << "1 - Bazooka\n"
+//            << "2 - Rifle\n"
+//            << "choose: ";
+//        cin >> ch;
+//        switch (ch)
+//        {
+//        case 1:
+//            cout << "name: ";
+//            cin >> name;
+//            weapon_1st = new Bazooka(name);
+//            break;
+//        case 2:
+//            cout << "name: ";
+//            cin >> name;
+//            weapon_1st = new Rifle(name);
+//            break;
+//        default:
+//            cout << "error\n";
+//        }
+//    }
+//    cout << "choose your pistol weapon\nname: ";
+//    cin >> name;
+//    weapon_2nd = new Pistol(name);
+//    cout << "choose your cold weapon\nname: ";
+//    cin >> name;
+//    weapon_3rt = new Cold_weapon(name);
+//    cout << endl;
+//    p1.Shoot(weapon_1st);
+//    p1.Shoot(weapon_2nd);
+//    p1.Shoot(weapon_3rt);
+//}
+
+//#define pi 3.14159265358979323846
+//class Square {
+//protected:
+//    double side;
+//public:
+//    Square(double s) : side(s) {}
+//
+//    double get_side() const {
+//        return side;
+//    }
+//
+//    double get_area() const {
+//        return side * side;
+//    }
+//};
+//
+//class Circle {
+//protected:
+//    double radius;
+//public:
+//    Circle(double r) : radius(r) {}
+//
+//    double get_radius() const {
+//        return radius;
+//    }
+//
+//    double getArea() const {
+//        return pi * radius * radius;
+//    }
+//};
+//
+//class CircleInSquare : public Square, public Circle {
+//public:
+//    CircleInSquare(double side) : Square(side), Circle(side / 2) {}
+//
+//    void print_details() const {
+//        cout << "Side of the square: " << get_side() << endl;
+//        cout << "Area of the square: " << get_area() << endl;
+//        cout << "Radius of the circle: " << get_radius() << endl;
+//        cout << "Area of the circle: " << get_area() << endl;
+//    }
+//};
+//
+////___________________________________________________________________
+//
+//class Wheels {
+//protected:
+//    double wheels_diameter;
+//public:
+//    void show_wheels() const {
+//        cout << "Wheels diameter: " << wheels_diameter << " cm" << endl;
+//    }
+//};
+//
+//class Engine {
+//protected:
+//    int horsepower;
+//public:
+//    void show_engine() const {
+//        cout << "Engine horsepower: " << horsepower << " hp" << endl;
+//    }
+//};
+//
+//class Doors {
+//protected:
+//    int num_doors;
+//public:
+//    void show_doors() const {
+//        cout << "Number of doors: " << num_doors << endl;
+//    }
+//};
+//
+//class Car : public Wheels, public Engine, public Doors {
+//public:
+//    void input_car_details() {
+//        cout << "Enter the wheels diameter (cm): ";
+//        cin >> wheels_diameter;
+//        cout << "Enter engine horsepower (hp): ";
+//        cin >> horsepower;
+//        cout << "Enter the number of doors: ";
+//        cin >> num_doors;
+//    }
+//
+//    void show_car_details() const {
+//        show_wheels();
+//        show_engine();
+//        show_doors();
+//    }
+//};
+//
+//int main() {
+//    double side;
+//    cout << "side: ";
+//    cin >> side;
+//
+//    CircleInSquare obj1(side);
+//    obj1.print_details();
+//
+//    cout << endl; //_________________________________
+//
+//    Car c1;
+//    c1.input_car_details();
+//    c1.show_car_details();
+//}
+
+//template <typename T>
+//class stack {
+//	T* arr;
+//	int current_size = 0;
+//public:
+//	stack() {
+//		arr = new T[1];
+//	}
+//	~stack() {
+//		delete[] arr;
+//	}
+//	void push(T value) {
+//		T* arr_tmp = new T[current_size + 1];
+//		for (int i = 0; i < current_size; i++) {
+//			arr_tmp[i] = arr[i];
+//		}
+//		arr_tmp[current_size] = value;
+//		delete[] arr;
+//		arr = arr_tmp;
+//		current_size++;
+//	}
+//	void pop() {
+//		if (current_size == 0) {
+//			return;
+//		}
+//		T* arr_tmp = new T[current_size - 1];
+//		for (int i = 0; i < current_size - 1; i++) {
+//			arr_tmp[i] = arr[i];
+//		}
+//		delete[] arr;
+//		arr = arr_tmp;
+//		current_size--;
+//	}
+//	T top() {
+//		if (current_size == 0)
+//		{
+//			cout << "empty";
+//		}
+//		else
+//		{
+//			return arr[current_size - 1];
+//		}
+//	}
+//	int size() { return current_size; }
+//	bool empty() { return current_size == 0; }
+//};
+//
+//int main() {
+//	stack<string> t1;
+//	string tovar;
+//	while (tovar != "q")
+//	{
+//		cout << "tovar: ";
+//		cin >> tovar;
+//		if (tovar != "q")
+//		{
+//			t1.push(tovar);
+//		}
+//	}
+//	int size = t1.size();
+//	cout << "\nyour tovars:";
+//	if (t1.empty() != 1)
+//	{
+//		for (int i = 0; i < size; i++)
+//		{
+//			cout << endl << t1.top();
+//			t1.pop();
+//		}
+//	}
+//	else
+//	{
+//		cout << " empty";
+//	}
+//}
+//
+//
+//#define MAX = 100;
+//int def_help = 0;
+//template <typename T>
+//class Stack {
+//	int top;
+//	T* arr[MAX];
+//
+//	// push, pop, top, empty, size
+//public:
+//	Stack() { top = -1; }
+//
+//	bool push(T x) {
+//		if (MAX + def_help > 2147483647)
+//		{
+//			cout << "ћЌќ√ј ’ќ„≈Ў\n";
+//		}
+//		if (top < MAX + def_help) {
+//			arr[++top] = x;
+//			return true;
+//		}
+//		else {
+//			def_help++;
+//			T* arr_tmp = new T[MAX + def_help];
+//			for (int i = 0; i < current_size; i++) {
+//				arr_tmp[i] = arr[i];
+//			}
+//			delete[] arr;
+//			arr = arr_tmp;
+//			push(x);
+//		}
+//	}
+//
+//	T pop() {
+//		if (top >= 0) {
+//			T x = arr[top--];
+//			return x;
+//		}
+//		else {
+//			cout << "stack is empty, can't pop" << endl;
+//			return 0;
+//		}
+//	}
+//
+//	int peak() {  // peak это те саме что top €к метод
+//		return arr[top];
+//	}
+//
+//	bool isEmpty() {
+//		return (top < 0);
+//	}
+//	int size() {return top + 1; }
+//};
+
+//#include <thread>
+//#include <chrono>
+//#include <fstream>
+//#include <string>
+//
+//class Student
+//{
+//    string name;
+//    double grade;
+//    int age;
+//public:
+//    Student(string n, double g, int a) : name(n), grade(g), age(a) {}
+//    void print_info() {
+//        cout << "name: " << name
+//            << "\ngrade: " << grade
+//            << "\nage: " << age << endl;
+//    }
+//    void save_info(const string& filename) {
+//        ofstream save_file(filename);
+//        if (save_file.is_open())
+//        {
+//            save_file << name << endl
+//                << grade << endl
+//                << age << endl;
+//            save_file.close();
+//            cout << "Saved to " << filename << endl;
+//        }
+//        else
+//        {
+//            cout << "error save\n";
+//        }
+//    }
+//    void open_info(const string& filename) {
+//        ifstream info_file(filename);
+//        if (info_file.is_open())
+//        {
+//            getline(info_file, name);
+//            info_file >> grade;
+//            info_file >> age;
+//            cout << "Opened from " << filename << endl;
+//        }
+//        else
+//        {
+//            cout << "error open\n";
+//        }
+//    }
+//};
+//
+//int main() {
+//    Student s1("Miroslav", 10, 16);
+//    Student s_tmp("", 0.0, 0);
+//    thread save_thread(&Student::save_info, &s1, "s1_info.txt");
+//    save_thread.join();
+//    thread load_thread(&Student::open_info, &s_tmp, "s1_data.txt");
+//    load_thread.join();
+//    s_tmp.print_info();
+//}
+
+//#include <thread>
+//#include <chrono>
+//#include <fstream>
+//#include <string>
+//using namespace std;
+//
+//class Fraction {
+//    int numerator;
+//    int denominator;
+//    int gcd(int a, int b) const {
+//        while (b != 0) {
+//            int t = b;
+//            b = a % b;
+//            a = t;
+//        }
+//        return a;
+//    }
+//    int lcm(int a, int b) const {
+//        return (a / gcd(a, b)) * b;
+//    }
+//    void simplify() {
+//        int gcd_val = gcd(numerator, denominator);
+//        numerator /= gcd_val;
+//        denominator /= gcd_val;
+//        if (denominator < 0) {
+//            numerator = -numerator;
+//            denominator = -denominator;
+//        }
+//    }
+//public:
+//    Fraction(int num = 0, int denom = 1) : numerator(num), denominator(denom) {
+//        if (denom == 0) {
+//            cout << "Error: Denominator cannot be zero!" << endl;
+//            numerator = 0;
+//            denominator = 1;
+//        }
+//        else {
+//            simplify();
+//        }
+//    }
+//    Fraction operator+(const Fraction& other) const {
+//        int common_denom = lcm(denominator, other.denominator);
+//        int num = numerator * (common_denom / denominator) + other.numerator * (common_denom / other.denominator);
+//        return Fraction(num, common_denom);
+//    }
+//    Fraction operator-(const Fraction& other) const {
+//        int common_denom = lcm(denominator, other.denominator);
+//        int num = numerator * (common_denom / denominator) - other.numerator * (common_denom / other.denominator);
+//        return Fraction(num, common_denom);
+//    }
+//    Fraction operator*(const Fraction& other) const {
+//        int num = numerator * other.numerator;
+//        int denom = denominator * other.denominator;
+//        return Fraction(num, denom);
+//    }
+//    Fraction operator/(const Fraction& other) const {
+//        if (other.numerator == 0) {
+//            cout << "Error: Cannot divide by zero!" << endl;
+//            return Fraction(0, 1);
+//        }
+//        int num = numerator * other.denominator;
+//        int denom = denominator * other.numerator;
+//        return Fraction(num, denom);
+//    }
+//    void print() const {
+//        cout << numerator << "/" << denominator;
+//    }
+//    void save_info_log(const string& filename) { // дроби не нужно сохран€ть, ведь мы их сами задаем в файле { случилось нечто!!! тоесть € впервые за 100 лет написал комент))) }
+//        ofstream save_file(filename, ios::app);
+//        if (save_file.is_open())
+//        {
+//            save_file << numerator << "/" << denominator << endl;
+//            save_file.close();
+//            cout << "Saved result to " << filename << endl;
+//        }
+//        else
+//        {
+//            cout << "error save\n";
+//        }
+//    }
+//    void open_info(const string& filename) {
+//        ifstream info_file(filename);
+//        if (info_file.is_open())
+//        {
+//            info_file >> numerator;
+//            info_file >> denominator;
+//            cout << "Opened from " << filename << "\n";
+//        }
+//        else
+//        {
+//            cout << "error open\n";
+//        }
+//    }
+//};
+//
+//int main() {
+//    Fraction f1(3, 4);
+//    Fraction f2(2, 5);
+//    thread load_thread1(&Fraction::open_info, &f1, "f1_data.txt");
+//    thread load_thread2(&Fraction::open_info, &f2, "f2_data.txt");
+//    load_thread1.join();
+//    load_thread2.join();
+//
+//    Fraction sum = f1 + f2;
+//    Fraction diff = f1 - f2;
+//    Fraction product = f1 * f2;
+//    Fraction quotient = f1 / f2;
+//    cout << "1: "; f1.print(); cout << "      2: "; f2.print(); cout << endl;
+//    cout << "Sum: "; sum.print(); cout << endl;
+//    sum.save_info_log("log.txt");
+//    cout << "Difference: "; diff.print(); cout << endl;
+//    diff.save_info_log("log.txt");
+//    cout << "Product: "; product.print(); cout << endl;
+//    product.save_info_log("log.txt");
+//    cout << "Quotient: "; quotient.print(); cout << endl;
+//    quotient.save_info_log("log.txt");
+//    ofstream save_file("log.txt", ios::app);
+//    if (save_file.is_open())
+//    {
+//        save_file << "___________________________\n\n";
+//        save_file.close();
+//    }
+//}
