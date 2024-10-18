@@ -6278,3 +6278,348 @@ using namespace std;
 //        save_file.close();
 //    }
 //}
+
+//class Car {
+//public:
+//    string brand;
+//    string number;
+//    string color;
+//    Car(string brand, string number, string color) : brand(brand), number(number), color(color) {}
+//};
+//
+//class Driver {
+//    double distance_from_client;
+//    Car car;
+//public:
+//    Driver(string brand, string number, string color) : car(brand, number, color) {
+//        update_distance();
+//    }
+//
+//    void show_car_info() {
+//        cout << car.brand
+//            << " with number " << car.number
+//            << " and color " << car.color
+//            << ". Distance from client: " << distance_from_client << " meters.\n";
+//    }
+//
+//    double get_Distance_from_client() {
+//        return distance_from_client;
+//    }
+//
+//    void update_distance() {
+//        distance_from_client = static_cast<double>(rand() % 501); // rand() вроде в инт? пэтому static_cast
+//    }
+//};
+//
+//class Client {
+//    double balance;
+//public:
+//    Client(double balance) : balance(balance) {}
+//
+//    void increase_balance(double amount) {
+//        balance += amount;
+//    }
+//
+//    bool can_afford_trip(double cost) const {
+//        return balance >= cost;
+//    }
+//
+//    void decrease_balance(double amount) {
+//        balance -= amount;
+//    }
+//    double get_balance() {
+//        return balance;
+//    }
+//};
+//
+//void simulate_trip() {
+//    cout << "Going.";
+//    for (int i = 0; i < 2; i++)
+//    {
+//        for (int j = 0; j < 3; j++) {
+//            cout << ".";
+//            Sleep(40);
+//        }
+//        cout << "\b\b  \b\b";
+//    }
+//    cout << "\b\b\b\b\b\b\b\b        \b\b\b\b\b\b\b\bDone\n";
+//}
+//
+//double calculate_trip_cost(double distance) {
+//    return (distance / 100.0) * 2.0;  // 100m = 2 UAH
+//}
+//
+//void find_nearest_driver(Driver drivers[], int num_drivers) {
+//    Driver nearest_driver = drivers[0];
+//    for (int i = 1; i < num_drivers; ++i) {
+//        if (drivers[i].get_Distance_from_client() < nearest_driver.get_Distance_from_client()) {
+//            nearest_driver = drivers[i];
+//        }
+//    }
+//    nearest_driver.show_car_info();
+//}
+//
+//int main() {
+//    srand(time(NULL));
+//    Driver drivers[5] = {
+//        Driver("Toyota", "AE1234BC", "Red"),
+//        Driver("BMW", "AE5678CD", "Blue"),
+//        Driver("Ford", "AE4321EF", "White"),
+//        Driver("Mercedes", "AE8765GH", "Black"),
+//        Driver("Honda", "AE1111JK", "Silver")
+//    };
+//    Client client(10.0);
+//    int choice;
+//    while (true) {
+//        cout << "1. Find driver\n";
+//        cout << "2. Increase balance\n";
+//        cout << "3. Exit\n";
+//        cout << "Choose an option: ";
+//        cin >> choice;
+//
+//        switch (choice) {
+//        case 1: {
+//            cout << "Nearest driver is ";
+//            find_nearest_driver(drivers, 5);
+//            int distance;
+//            cout << "How meny metters is your trip?: ";
+//            cin >> distance;
+//            double cost = calculate_trip_cost(distance);
+//            cout << "The trip will cost: " << cost << " UAH.\n";
+//            if (client.can_afford_trip(cost)) {
+//                cout << "You have enough money. Starting the trip...\n";
+//                simulate_trip();
+//                client.decrease_balance(cost);
+//                cout << "Trip completed. Remaining balance: " << client.get_balance() << " UAH.\n";
+//                for (int i = 0; i < 5; ++i) {
+//                    drivers[i].update_distance();
+//                }
+//            }
+//            else {
+//                cout << "You do not have enough money for the trip.\n";
+//            }
+//            break;
+//        }
+//        case 2: {
+//            double amount;
+//            cout << "Enter amount to add to your balance: ";
+//            cin >> amount;
+//            client.increase_balance(amount);
+//            cout << "New balance: " << client.get_balance() << " UAH.\n";
+//            break;
+//        }
+//        case 3:
+//            cout << "Exiting the application.\n";
+//            exit(1);
+//        default:
+//            cout << "Invalid option. Please try again.\n";
+//            break;
+//        }
+//    }
+//}
+
+//#include <iomanip>
+//int main() {
+//    double pi = 3.14159265358979323846;
+//
+//    cout << setprecision(5);  // Устанавливаем точность 5 знаков
+//    cout << "Pi with 5 digits: " << pi << endl;
+//
+//    cout << setprecision(20); // Устанавливаем точность 20 знаков
+//    cout << "Pi with 20 digits: " << pi << endl;
+//
+//    return 0;
+//}
+
+//int main() {
+//    double a = 0.3 - 0.2;
+//    double b = 0.1;
+//
+//    cout << setprecision(20);
+//
+//    cout << 0.3 << " - " << 0.2 << " = " << a << endl;
+//    cout << "0.1 = " << b << endl;
+//
+//    if (a == b) {
+//        cout << "true";
+//    }
+//    else {
+//        cout << "false";
+//    }
+//}
+
+//int main() {
+//	SetConsoleCP(1251);
+//	SetConsoleOutputCP(1251);
+//	if (0.3 - 0.2 == 0.1)
+//	{
+//		cout << "true";
+//	}
+//	else
+//	{
+//		cout << "false";
+//	}
+//}
+
+//#include <vector>
+//int main() {
+//	const int size = 5;
+//	int arr[size];
+//	arr[0] = 1;
+//
+//	vector <int>arr_v{ 1,2,3,4 };
+//	arr_v.push_back(10);
+//	cout << arr_v[4];
+//	cout << endl;
+//	arr_v.erase(arr_v.begin() + 3);
+//	cout << arr_v[3];
+//}
+
+//#include <vector>
+//int main() {
+//	vector<int>arr;
+//	vector<int>arr2;
+//	int size;
+//	int tmp;
+//	cout << "Enter size: ";
+//	cin >> size;
+//	for (int i = 0; i < size; i++)
+//	{
+//		cout << "Enter " << i + 1 << " element: ";
+//		cin >> tmp;
+//		arr.push_back(tmp);
+//	}
+//	for (int i = 0; i < arr.size(); i++)
+//	{
+//		cout << arr[i] << " ";
+//		//task2
+//		arr2.push_back(arr[arr.size() - 1 - i]);
+//		//task2 end
+//	}
+//	cout << endl;
+//	int min = arr[0], max = arr[0];
+//	for (int i = 0; i < arr.size(); i++)
+//	{
+//		if (arr[i] > max)
+//		{
+//			max = arr[i];
+//		}
+//		if (arr[i] < min)
+//		{
+//			min = arr[i];
+//		}
+//	}
+//	cout << "max: " << max << "\nmin: " << min;
+//	cout << "\n\n\n";
+//	//task2
+//	for (int i = 0; i < arr2.size(); i++)
+//	{
+//		cout << arr2[i] << " ";
+//	}
+//	//task2 end
+//}
+
+//int main() {
+//    srand(time(NULL));
+//    vector<int>arr;
+//    vector<int>arr2;
+//    int size = 10;
+//    for (int i = 0; i < size; i++)
+//    {
+//        if (rand() % 2 == 0)
+//        {
+//            arr.push_back(rand() % 11);
+//        }
+//        else
+//        {
+//            arr.push_back(rand() % 11 * -1);
+//        }
+//    }
+//    cout << "before: ";
+//    for (int i = 0; i < arr.size(); i++) {
+//        cout << arr[i] << " ";
+//    }
+//    cout << endl;
+//    for (int i = 0; i < arr.size(); i++) {
+//        if (arr[i] >= 0) {
+//            arr2.push_back(i);
+//        }
+//    }
+//    cout << "After removal: ";
+//    for (int i = 0; i < arr2.size(); i++) {
+//        cout << arr2[i] << " ";
+//    }
+//    cout << "\n\n" << arr.size() << "\t" << arr2.size();
+//}
+
+//#include <vector>
+//int main() {
+//    srand(time(NULL));
+//    vector<int>arr;
+//    int numb;
+//    bool found = false;
+//    int size = 10;
+//    for (int i = 0; i < size; i++)
+//    {
+//        if (rand() % 2 == 0)
+//        {
+//            arr.push_back(rand() % 11);
+//        }
+//        else
+//        {
+//            arr.push_back(rand() % 11 * -1);
+//        }
+//    }
+//    for (auto it = arr.begin(); it != arr.end(); it++)
+//    {
+//        cout << *it << " ";
+//    }
+//    cout << "\n\n";
+//    cout << "Number?: ";
+//    cin >> numb;
+//    for (auto it = arr.begin(); it != arr.end(); it++)
+//    {
+//        if (numb == *it)
+//        {
+//            cout << "ind: " << it - arr.begin() + 1 << endl;
+//            found = true;
+//        }
+//    }
+//    if (!found)
+//    {
+//        cout << "nema takogo";
+//    }
+//}
+//
+//int main() {
+//    srand(time(NULL));
+//    vector<int>arr;
+//    int numb;
+//    bool found = false;
+//    int size = 10;
+//    for (int i = 0; i < size; i++)
+//    {
+//        if (rand() % 2 == 0)
+//        {
+//            arr.push_back(rand() % 11);
+//        }
+//        else
+//        {
+//            arr.push_back(rand() % 11 * -1);
+//        }
+//    }
+//    for (int num : arr) cout << num << " ";
+//    for (auto it = arr.begin(); it != arr.end();)
+//    {
+//        if (*it % 2 != 0)
+//        {
+//            it = arr.erase(it);
+//        }
+//        else
+//        {
+//            it++;
+//        }
+//    }
+//    cout << "\n\n";
+//    for (int num : arr) cout << num << " ";
+//}
