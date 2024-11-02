@@ -6623,3 +6623,302 @@ using namespace std;
 //    cout << "\n\n";
 //    for (int num : arr) cout << num << " ";
 //}
+
+//#include <vector>
+//#include <string>
+//class trains
+//{
+//	struct train
+//	{
+//		int id;
+//		string out_time; // **:** / **.**
+//		string arrival_station;
+//	};
+//	train tmp;
+//	vector<train>t_arr;
+//public:
+//	void addT_toList() {
+//		cout << "enter train id: ";
+//		cin >> tmp.id;
+//		for (auto& t : t_arr)
+//		{
+//			if (t.id == tmp.id)
+//			{
+//				cout << "\ntrain with this ID already on station\n";
+//				return;
+//			}
+//		}
+//		cout << "enter train out time: ";
+//		cin >> tmp.out_time;
+//		cin.ignore();
+//		cout << "enter train arrival station: ";
+//		getline(cin, tmp.arrival_station);
+//		t_arr.push_back(tmp);
+//	}
+//	void print_ts() {
+//		if (t_arr.empty()) {
+//			cout << "\nno trains on station\n";
+//			return;
+//		}
+//		for (train t : t_arr)
+//		{
+//			cout << "\ntrain id: " << t.id
+//				<< "\ntrain out time: " << t.out_time
+//				<< "\ntrain arrival station: " << t.arrival_station << endl;
+//		}
+//	}
+//	void print_t() {
+//		if (t_arr.empty()) {
+//			cout << "\nno trains on station\n";
+//			return;
+//		}
+//		bool found = false;
+//		int id;
+//		cout << "train id: ";
+//		cin >> id;
+//		for (auto& t : t_arr)
+//		{
+//			if (t.id == id)
+//			{
+//				cout << "\nTrain ID: " << t.id
+//					<< "\nTrain Out Time: " << t.out_time
+//					<< "\nTrain Arrival Station: " << t.arrival_station << endl;
+//				found = true;
+//				break;
+//			}
+//		}
+//		if (!found)
+//		{
+//			cout << "\nnetu\n";
+//		}
+//	}
+//	void wait() {
+//		cout << "\nproshlo mnoga vremeni...\n";
+//		t_arr.clear();
+//	}
+//};
+//
+//void menu(trains& station) {
+//	int ch = -1;
+//	while (ch != 0)
+//	{
+//		cout << "\n\n--- train station ---\n"
+//			<< "1 - add train\n"
+//			<< "2 - show all trains\n"
+//			<< "3 - find train by ID\n"
+//			<< "4 - wait\n"
+//			<< "0 - exit\n"
+//			<< "choose: ";
+//		cin >> ch;
+//		switch (ch) {
+//		case 1:
+//			station.addT_toList();
+//			break;
+//		case 2:
+//			station.print_ts();
+//			break;
+//		case 3:
+//			station.print_t();
+//			break;
+//		case 4:
+//			station.wait();
+//			break;
+//		case 0:
+//			cout << "\nbb";
+//			break;
+//		default:
+//			cout << "\ninvalid choice\n";
+//		}
+//	}
+//}
+//
+//int main() {
+//	trains station;
+//	menu(station);
+//}
+//c
+//#include <map>
+//#include <string>
+//int main() {
+//	map<int, string>ticket_map;
+//	ticket_map[01] = "Miroslav";
+//	ticket_map[02] = "Oleg";
+//	ticket_map[03] = "Artem";
+//	for (auto& pair : ticket_map)
+//	{
+//		cout << "ID: " << pair.first << "\nname: " << pair.second << endl;
+//	}
+//	int search_id = 3;
+//	auto it = ticket_map.find(search_id);
+//	if (it != ticket_map.end())
+//	{
+//		cout << "found: " << it->first << endl;
+//	}
+//	else
+//	{
+//		cout << "error\n";
+//	}
+//	ticket_map.erase(2);
+//	cout << ticket_map.at(3) << endl;
+//}
+
+//int main() {
+//    map<string, int> students;
+//    students["dyadya1"] = 85;
+//    students["dyadya2"] = 90;
+//    students["dyadya3"] = 78;
+//    for (int i = 0; i < 3; ++i) {
+//        string name;
+//        int grade;
+//        cout << "name: ";
+//        cin >> name;
+//        cout << "grade: ";
+//        cin >> grade;
+//        students[name] = grade;
+//    }
+//    cout << endl;
+//    for (auto& pair : students)
+//    {
+//	    cout << "name: " << pair.second << "\ngrade: " << pair.first << endl;
+//    }
+//    string name;
+//    cout << "\nenter name: ";
+//    cin >> name;
+//    if (students.find(name) != students.end()) {
+//        cout << "name: " << name << "\ngrade: " << students[name] << endl;
+//    }
+//    else {
+//        cout << "not found.\n";
+//    }
+//    cout << "\nstudents menshe 7:\n";
+//    bool found = false;
+//    for (auto& pair : students) {
+//        if (pair.second < 7) {
+//            cout << "name: " << pair.first << "\ngrade: " << pair.second << endl;
+//            found = true;
+//        }
+//    }
+//    if (!found) {
+//        cout << "no students menshe 7";
+//    }
+//}
+
+//#include <map>
+//#include <fstream>
+//#include <string>
+//
+//class dict
+//{
+//	map<string, string>dictick;
+//public:
+//	void add_word(string key, string word) {
+//		dictick[key] = word;
+//	}
+//    void search_word(string key) {
+//        auto it = dictick.find(key);
+//        if (it != dictick.end()) {
+//            cout << "found - " << it->first << ": " << it->second << endl;
+//        }
+//        else {
+//            cout << "not found" << endl;
+//        }
+//    }
+//    void remove_word(string key) {
+//        if (dictick.erase(key)) {
+//            cout << "removed: " << key << endl;
+//        }
+//        else {
+//            cout << "not found" << endl;
+//        }
+//    }
+//    void edit_word(string key, string new_word) {
+//        auto it = dictick.find(key);
+//        if (it != dictick.end()) {
+//            it->second = new_word;
+//            cout << "word changed - " << it->first << ": " << it->second << endl;
+//        }
+//        else {
+//            cout << "not found" << endl;
+//        }
+//    }
+//    void save_to_file(const string& filename) {
+//        ofstream file(filename);
+//        for (auto pair : dictick) {
+//            file << pair.first << " " << pair.second << endl;
+//        }
+//        file.close();
+//        cout << "saved to file" << endl;
+//    }
+//    void load_from_file(const string& filename) {
+//        ifstream file(filename);
+//        string key, word;
+//        while (file >> key >> word) {
+//            dictick[key] = word;
+//        }
+//        file.close();
+//        cout << "loaded from file" << endl;
+//    }
+//};
+//
+//void menu(dict& d1) {
+//    int ch = -1;
+//    string key, word, filename;
+//    while (ch != 0) {
+//        cout << "\nmenu:\n"
+//            << "1. add word\n"
+//            << "2. search word\n"
+//            << "3. remove word\n"
+//            << "4. edit word\n"
+//            << "5. save to file\n"
+//            << "6. load from file\n"
+//            << "0. exit\n"
+//            << "choose: ";
+//        cin >> ch;
+//        switch (ch) {
+//        case 1:
+//            cout << "enter word: ";
+//            cin >> key;
+//            cout << "enter zmist: ";
+//            cin >> word;
+//            d1.add_word(key, word);
+//            break;
+//        case 2:
+//            cout << "enter word: ";
+//            cin >> key;
+//            d1.search_word(key);
+//            break;
+//        case 3:
+//            cout << "enter word: ";
+//            cin >> key;
+//            d1.remove_word(key);
+//            break;
+//        case 4:
+//            cout << "enter word: ";
+//            cin >> key;
+//            cout << "enter new zmist: ";
+//            cin >> word;
+//            d1.edit_word(key, word);
+//            break;
+//        case 5:
+//            cout << "enter filename: ";
+//            cin >> filename;
+//            d1.save_to_file(filename);
+//            break;
+//        case 6:
+//            cout << "enter filename: ";
+//            cin >> filename;
+//            d1.load_from_file(filename);
+//            break;
+//        case 0:
+//            cout << "exit";
+//            break;
+//        default:
+//            cout << "invalid choice";
+//        }
+//    }
+//}
+//
+//int main() {
+//    dict d1;
+//    menu(d1);
+//}

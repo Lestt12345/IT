@@ -1,5 +1,6 @@
 #include <iostream>
 #include <windows.h>
+#include <cmath>
 using namespace std;
 
 class Character
@@ -14,6 +15,10 @@ class Character
 	int travels = 0;
 	int damage_requirement = 5;
 	int health_requirement = 15;
+	int steel_count = 0;
+	int luckySharik_count = 0;
+	float lucky_aura = 1.0;
+	int luckyItem_count = 0;
 
 	void victory() {
 		for (int i = 0; i < 100; i++)
@@ -66,6 +71,8 @@ class Character
 		Sleep(200);
 		cout << "E";
 		Sleep(200);
+		cout << " " << name;
+		Sleep(200);
 		cout << "!";
 		Sleep(200);
 		cout << "!";
@@ -74,7 +81,6 @@ class Character
 		Sleep(200);
 		exit(1);
 	}
-
 	int travel() {
 		cout << "Travelling.";
 		for (int i = 0; i < 3; i++)
@@ -86,7 +92,8 @@ class Character
 			Sleep(500);
 			cout << "\b\b  \b\b";
 		}
-		cout << "\nReterning to home.";
+		system("cls");
+		cout << "Reterning to home.";
 		for (int i = 0; i < 3; i++)
 		{
 			Sleep(500);
@@ -96,7 +103,8 @@ class Character
 			Sleep(500);
 			cout << "\b\b  \b\b";
 		}
-		cout << "\nNow at home!";
+		system("cls");
+		cout << "Now at home!";
 		Sleep(2000);
 		travels++;
 		cout << "\nTravel #" << travels << endl;
@@ -106,7 +114,20 @@ class Character
 		{
 			a = rand() % 11;
 		}
-		return a * lvl;
+		int rand_item = rand() % 5;
+		if (rand_item == 2)
+		{
+			steel_count++;
+		}
+		else if (rand_item == 3)
+		{
+			steel_count++;
+		}
+		else if (rand_item == 4)
+		{
+			luckySharik_count++;
+		}
+		return round((a * lvl) * lucky_aura);
 	}
 	void lvl_up() {
 		if (damage >= damage_requirement && health >= health_requirement)
@@ -124,6 +145,31 @@ class Character
 		else
 		{
 			cout << "No enough requirements :(\n";
+		}
+	}
+	void craft_luckyItem() {
+		if (steel_count < 3 || luckySharik_count < 1)
+		{
+			cout << "No enough requirements :(\n";
+		}
+		else
+		{
+			steel_count -= 3;
+			luckySharik_count--;
+			luckyItem_count++;
+			cout << "craft successful\n";
+		}
+	}
+	void use_luckyItem() {
+		if (luckyItem_count < 1)
+		{
+			cout << "Where your forse of lucky? You haven`t :(\n";
+		}
+		else
+		{
+			luckyItem_count--;
+			cout << "You became more lucky\n";
+			lucky_aura += 0.2 + (lvl / 10.0);
 		}
 	}
 	void damage_up() {
@@ -157,32 +203,49 @@ public:
 			cout << "\n\nMenu:\n"
 				<< "Current level: " << lvl << endl
 				<< "Money: " << money << endl
+				<< "Lucky items: ||" << luckyItem_count << "||\n"
 				<< "Current damage: " << damage << endl
 				<< "Current health: " << health << endl
 				<< endl
-				<< "1 - Go to travel\n"
-				<< "2 - Upgrade damage (cost: " << upgrade_damage_cost << ")\n"
-				<< "3 - Upgrade health (cost: " << upgrade_health_cost << ")\n"
-				<< "4 - Go to the next level (requirements: damage " << damage_requirement << ", health " << health_requirement << ")\n"
+				<< "1 - Go to travel (@#" << lucky_aura << "#& LA)\n"
+				<< "2 - Craft lucky item (requirements: steel " << steel_count << "/4, lucky sharik " << luckySharik_count << "/1)\n"
+				<< "3 - Upgrade damage (cost: " << upgrade_damage_cost << ")\n"
+				<< "4 - Upgrade health (cost: " << upgrade_health_cost << ")\n"
+				<< "5 - Use lucky item ||@#?#&||\n"
+				<< "6 - Go to the next level (requirements: damage " << damage_requirement << ", health " << health_requirement << ")\n"
 				<< "0 - Exit game\n"
 				<< "Choose: ";
 			cin >> choice;
+			system("cls");
 			switch (choice)
 			{
 			case 1:
 				money += travel();
 				break;
 			case 2:
-				damage_up();
+				craft_luckyItem();
 				break;
 			case 3:
-				health_up();
+				damage_up();
 				break;
 			case 4:
+				health_up();
+				break;
+			case 5:
+				use_luckyItem();
+				break;
+			case 6:
 				lvl_up();
 				break;
 			case 0:
 				exit(1);
+				break;
+			case 404:
+				victory();
+				break;
+			case 808:
+				luckySharik_count = 10;
+				steel_count = 40;
 				break;
 			default:
 				cout << "invalid input\n";
@@ -197,6 +260,7 @@ int main() {
 	cout << "Choose name: ";
 	cin >> name;
 	cin.ignore();
+	system("cls");
 	Character ch1(name);
 	ch1.menu();
 }
