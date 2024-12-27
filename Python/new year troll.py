@@ -9,7 +9,7 @@ from threading import Thread
 root=tk.Tk()
 def tdr_os_troll_XD():
     time.sleep(1)
-    os.system("shutdown -s -t 00")
+    #os.system("shutdown -s -t 00")
 def trtd():
     threading.Thread(target=tdr_os_troll_XD, daemon=True).start()
 def tr():
@@ -63,7 +63,7 @@ def strt():
 def stsrt():
     button_stsrt.destroy()
     threading.Thread(target=strt, daemon=True).start()
-root.geometry("1600x900")
+root.geometry("1920x1080")
 root.minsize(50, 50)
 root.resizable(True, True)
 label_tr=tk.Label(root, text="С новым годом!\nПусть в этом году покемоны не выдадут вам промокодик)\nИ пусть весегда будет желание поставить 12 баллов)))", font="Arial 15", foreground="black", background="grey")
@@ -71,6 +71,6 @@ button_tr=tk.Button(root, text="перевод", command=tsf)
 button_bonus=tk.Button(root, text="bonus", command=trtd)
 button_stsrt=tk.Button(root, text="start code", command=stsrt)
 button_stsrt.pack()
-root.iconbitmap("sd.ico")
+#root.iconbitmap("sd.ico")
 root.title("happy new year")
 root.mainloop()
