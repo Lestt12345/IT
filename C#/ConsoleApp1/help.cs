@@ -2200,3 +2200,16 @@ public class Game
 //        }
 //    }
 //}
+
+//if (p.val != q.val)
+//{
+//    return false;
+//}
+//if (IsSameTree(p.left, q.left) && IsSameTree(p.right, q.right))
+//{
+//    return true;
+//}
+//else
+//{
+//    return false;
+//}
