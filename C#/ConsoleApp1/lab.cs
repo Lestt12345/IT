@@ -1,4 +1,9 @@
-﻿//class Program
+﻿
+/*
+    LAB
+*/
+
+//class Program
 //{
 //    static void Main(string[] args)
 //    {
@@ -130,6 +135,121 @@
 //        foreach (Student student in oxford18)
 //        {
 //            Console.WriteLine("\t" + student.first_name + " " + student.last_name + "\n");
+//        }
+//    }
+//}
+
+/*
+    DZ
+*/
+
+//class Company
+//{
+//    public string name { get; }
+//    public DateTime date { get; }
+//    public string profile { get; }
+//    public string director_name { get; }
+//    public int emp_count { get; }
+//    public string address { get; }
+
+//    public Company(string name, DateTime date, string profile, string director_name, int emp_count, string address)
+//    {
+//        this.name = name;
+//        this.date = date;
+//        this.profile = profile;
+//        this.director_name = director_name;
+//        this.emp_count = emp_count;
+//        this.address = address;
+//    }
+//}
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        Company[] companies = {
+//            new Company("FoodTech Solutions", new DateTime(2019, 5, 1), "Marketing", "John White", 120, "London"),
+//            new Company("White IT", new DateTime(2023, 1, 15), "IT", "Michael Black", 250, "New York"),
+//            new Company("Global Foods", new DateTime(2020, 8, 25), "Food Production", "Sarah Green", 80, "London"),
+//            new Company("Digital Market Co", new DateTime(2018, 11, 3), "Marketing", "Alice Brown", 300, "Paris"),
+//            new Company("EcoWhite Tech", new DateTime(2021, 3, 12), "IT", "George White", 95, "Berlin")
+//        };
+
+//        var all = companies.Select(company => company);
+//        Console.WriteLine("\nall:\n");
+//        foreach (var c in all)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
+//        }
+
+//        var food = companies.Where(company => company.name.Contains("Food"));
+//        Console.WriteLine("\nfood:\n");
+//        foreach (var c in food)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
+//        }
+
+//        var marketing = companies.Where(company => company.profile == "Marketing");
+//        Console.WriteLine("\nmarketing:\n");
+//        foreach (var c in marketing)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
+//        }
+
+//        var marketing_it = companies.Where(company => company.profile == "Marketing" || company.profile == "IT");
+//        Console.WriteLine("\nmarketing_it:\n");
+//        foreach (var c in marketing_it)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
+//        }
+
+//        var more100 = companies.Where(company => company.emp_count > 100);
+//        Console.WriteLine("\nmore100:\n");
+//        foreach (var c in more100)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
+//        }
+
+//        var _100_300 = companies.Where(company => company.emp_count > 100 && company.emp_count < 300);
+//        Console.WriteLine("\n_100_300:\n");
+//        foreach (var c in _100_300)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
+//        }
+
+//        var london = companies.Where(company => company.address == "London");
+//        Console.WriteLine("\nlondon:\n");
+//        foreach (var c in london)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
+//        }
+
+//        var dir_white = companies.Where(company => company.director_name.Split(' ')[1] == "White");
+//        Console.WriteLine("\ndir_white:\n");
+//        foreach (var c in dir_white)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
+//        }
+
+//        var older_2years = companies.Where(company => (DateTime.Now - company.date).TotalDays > 2 * 365);
+//        Console.WriteLine("\nolder_2years:\n");
+//        foreach (var c in older_2years)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
+//        }
+
+//        var ago_123days = companies.Where(company => (DateTime.Now - company.date).TotalDays == 123);
+//        Console.WriteLine("\nago_123days:\n");
+//        foreach (var c in ago_123days)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
+//        }
+
+//        var blackDir_whiteName = companies.Where(company => company.director_name.Split(' ')[1] == "Black" && company.name.Contains("White"));
+//        Console.WriteLine("\nblackDir_whiteName:\n");
+//        foreach (var c in blackDir_whiteName)
+//        {
+//            Console.WriteLine("\t" + c.name + "\n");
 //        }
 //    }
 //}
