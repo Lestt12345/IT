@@ -1,165 +1,74 @@
 ﻿
-/*
-    LAB
-*/
+// LAB LINQ
 
 //class Program
 //{
 //    static void Main(string[] args)
 //    {
-//        int[] numbers = { 1, 1, 5, 6, 8, 10, 2, 12, 21512, 12, 7, 14, 21, -7 };
-
-//        var evenNumbersMethod = numbers.Where(num => num % 2 == 0);
-//        Console.WriteLine("parn: " + string.Join(", ", evenNumbersMethod));
-
-//        var notEvenNumbersMethod = numbers.Where(num => num % 2 != 0);
-//        Console.WriteLine("ne parn: " + string.Join(", ", notEvenNumbersMethod));
-
-//        int a = 5;
-//        var bilsh_zadan = numbers.Where(num => num > a);
-//        Console.WriteLine("bilsh_zadan: " + string.Join(", ", bilsh_zadan));
-
-//        int frst = 3;
-//        int sec = 10;
-//        var diapazon = numbers.Where(num => num > frst && num < sec);
-//        Console.WriteLine("diapazon: " + string.Join(", ", diapazon));
-
-//        var kr7_sort = numbers.Where(num => num % 7 == 0).OrderBy(n => n);
-//        Console.WriteLine("kr7_sort: " + string.Join(", ", kr7_sort));
-
-//        var kr8_sortSpad = numbers.Where(num => num % 8 == 0).OrderByDescending(n => n);
-//        Console.WriteLine("kr8_sortSpad: " + string.Join(", ", kr8_sortSpad));
-//    }
-//}
-
-//class Program
-//{
-//    static void Main()
-//    {
-//        string[] cities = { "Kyiv", "Lviv", "Odesa", "Kharkiv", "Dnipro", "Chernivtsi", "Mykolaiv", "Zaporizhzhia", "Nizhyn", "Nemyriv", "Kramatorsk" };
-
-//        var all = cities.Select(city => city);
-//        Console.WriteLine("all: " + string.Join(", ", all));
-
-//        int l = 4;
-//        var cities_length = cities.Where(city => city.Length == l);
-//        Console.WriteLine($"cities_length: " + string.Join(", ", cities_length));
-
-//        var cities_A = cities.Where(city => city.StartsWith("A"));
-//        Console.WriteLine("cities_A: " + string.Join(", ", cities_A));
-
-//        var cities_M = cities.Where(city => city.EndsWith("m"));
-//        Console.WriteLine("cities_M: " + string.Join(", ", cities_M));
-
-//        var cities_N_K = cities.Where(city => city.StartsWith("N") && city.EndsWith("k"));
-//        Console.WriteLine("cities_N_K: " + string.Join(", ", cities_N_K));
-
-//        var cities_Ne = cities.Where(city => city.StartsWith("Ne")).OrderByDescending(city => city);
-//        Console.WriteLine("cities_Ne: " + string.Join(", ", cities_Ne));
-//    }
-//}
-
-//class Student
-//{
-//    public string first_name { get; }
-//    public string last_name { get; }
-//    public int age {  get; }
-//    public string university { get; }
-
-//    public Student(string first_name, string last_name, int age, string university)
-//    {
-//        this.first_name = first_name;
-//        this.last_name = last_name;
-//        this.age = age;
-//        this.university = university;
-//    }
-//}
-
-//class Program
-//{
-//    static void Main()
-//    {
-//        Student[] students = {
-//            new Student("Boris", "Brown", 21, "MIT"),
-//            new Student("Alice", "Brooks", 19, "Oxford"),
-//            new Student("Boris", "Johnson", 22, "Harvard"),
-//            new Student("Diana", "Smith", 20, "MIT"),
-//            new Student("John", "Brody", 23, "Oxford"),
-//            new Student("Emily", "Clark", 18, "Stanford")
+//        string[] arr1 = {
+//            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
+//            "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+//            "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde",
+//            "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo",
+//            "Congo (Democratic Republic)", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica",
+//            "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
+//            "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada",
+//            "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia",
+//            "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya",
+//            "Kiribati", "Korea (North)", "Korea (South)", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho",
+//            "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali",
+//            "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia",
+//            "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua",
+//            "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay",
+//            "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia",
+//            "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles",
+//            "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain",
+//            "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand",
+//            "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine",
+//            "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela",
+//            "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+//        };
+//        string[] arr2 =
+//        {
+//            "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica",
+//            "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
+//            "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada",
+//            "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia",
+//            "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya",
+//            "Kiribati", "Korea (North)", "Korea (South)", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho",
+//            "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali",
+//            "Malta", "Marshall Islands", "Mauritania", "Mauritius"
 //        };
 
-//        var all = students.Select(student => student);
-//        Console.WriteLine("all:\n");
-//        foreach (Student student in all)
-//        {
-//            Console.WriteLine("\t" + student.first_name + " " + student.last_name + "\n");
-//        }
+//        var res1 = arr1.Except(arr2);
+//        Console.WriteLine(string.Join(", ", res1));
+//        Console.WriteLine();
+//        Console.WriteLine();
 
-//        var boris = students.Where(student => student.first_name == "Boris");
-//        Console.WriteLine("\nboris:\n");
-//        foreach (Student student in boris)
-//        {
-//            Console.WriteLine("\t" + student.first_name + " " + student.last_name + "\n");
-//        }
+//        var res2 = arr1.Intersect(arr2);
+//        Console.WriteLine(string.Join(", ", res2));
+//        Console.WriteLine();
+//        Console.WriteLine();
 
-//        var bro = students.Where(student => student.last_name.StartsWith("Bro"));
-//        Console.WriteLine("\nbro:\n");
-//        foreach (Student student in bro)
-//        {
-//            Console.WriteLine("\t" + student.first_name + " " + student.last_name + "\n");
-//        }
-
-//        var older19 = students.Where(student => student.age > 19);
-//        Console.WriteLine("\nolder19:\n");
-//        foreach (Student student in older19)
-//        {
-//            Console.WriteLine("\t" + student.first_name + " " + student.last_name + "\n");
-//        }
-
-//        var _20_23 = students.Where(student => student.age > 20 && student.age < 23);
-//        Console.WriteLine("\n_20_23:\n");
-//        foreach (Student student in _20_23)
-//        {
-//            Console.WriteLine("\t" + student.first_name + " " + student.last_name + "\n");
-//        }
-
-//        var mit = students.Where(student => student.university == "MIT");
-//        Console.WriteLine("\nmit:\n");
-//        foreach (Student student in mit)
-//        {
-//            Console.WriteLine("\t" + student.first_name + " " + student.last_name + "\n");
-//        }
-
-//        var oxford18 = students.Where(student => student.university == "Oxford" && student.age > 18).OrderByDescending(student => student.age);
-//        Console.WriteLine("\noxford18:\n");
-//        foreach (Student student in oxford18)
-//        {
-//            Console.WriteLine("\t" + student.first_name + " " + student.last_name + "\n");
-//        }
+//        var res3 = arr1.Union(arr2);
+//        res3 = res3.Distinct();
+//        Console.WriteLine(string.Join(", ", res3));
+//        Console.WriteLine();
+//        Console.WriteLine();
 //    }
 //}
 
-/*
-    DZ
-*/
-
-//class Company
+//class Device
 //{
 //    public string name { get; }
-//    public DateTime date { get; }
-//    public string profile { get; }
-//    public string director_name { get; }
-//    public int emp_count { get; }
-//    public string address { get; }
+//    public string maker { get; }
+//    public int price { get; }
 
-//    public Company(string name, DateTime date, string profile, string director_name, int emp_count, string address)
+//    public Device(string name, string maker, int price)
 //    {
 //        this.name = name;
-//        this.date = date;
-//        this.profile = profile;
-//        this.director_name = director_name;
-//        this.emp_count = emp_count;
-//        this.address = address;
+//        this.maker = maker;
+//        this.price = price;
 //    }
 //}
 
@@ -167,89 +76,231 @@
 //{
 //    static void Main()
 //    {
-//        Company[] companies = {
-//            new Company("FoodTech Solutions", new DateTime(2019, 5, 1), "Marketing", "John White", 120, "London"),
-//            new Company("White IT", new DateTime(2023, 1, 15), "IT", "Michael Black", 250, "New York"),
-//            new Company("Global Foods", new DateTime(2020, 8, 25), "Food Production", "Sarah Green", 80, "London"),
-//            new Company("Digital Market Co", new DateTime(2018, 11, 3), "Marketing", "Alice Brown", 300, "Paris"),
-//            new Company("EcoWhite Tech", new DateTime(2021, 3, 12), "IT", "George White", 95, "Berlin")
+//        Device[] arr1 = {
+//            new Device("d1", "a", 1000),
+//            new Device("d2", "b", 2000),
+//            new Device("d3", "a", 1500)
 //        };
 
-//        var all = companies.Select(company => company);
-//        Console.WriteLine("\nall:\n");
-//        foreach (var c in all)
+//        Device[] arr2 = {
+//            new Device("d4", "s", 1200),
+//            new Device("d5", "b", 2200),
+//            new Device("d6", "c", 1500)
+//        };
+
+//        var res1 = arr1.Where(d1 => !arr2.Any(d2 => d2.maker == d1.maker)); // "Any" c# = "in" Puthon почти одно и тоже, почтиии... в моем случее да :)
+//        foreach (var device in res1)
 //        {
-//            Console.WriteLine("\t" + c.name + "\n");
+//            Console.WriteLine($"{device.maker} ot {device.name} = {device.price}");
+//        }
+//        Console.WriteLine();
+
+//        var res2 = arr1.Where(d1 => arr2.Any(d2 => d2.maker == d1.maker));
+//        foreach (var device in res2)
+//        {
+//            Console.WriteLine($"{device.maker} ot {device.name} = {device.price}");
+//        }
+//        Console.WriteLine();
+
+//        List<Device> res3 = new List<Device>(arr1.Union(arr2).ToArray());
+//        for (int i = 0; i < res3.Count; i++)
+//        {
+//            for (int j = 0; j < res3.Count; j++)
+//            {
+//                if (j == i)
+//                {
+//                    continue;
+//                }
+//                if (res3[i].maker == res3[j].maker)
+//                {
+//                    res3.RemoveAt(i);
+//                }
+//            }
+//        }
+//        foreach (var device in res3)
+//        {
+//            Console.WriteLine($"{device.maker} ot {device.name} = {device.price}");
+//        }
+//    }
+//}
+
+// LAB/DZ FILES
+
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        Console.WriteLine("file?: ");
+//        string name = Console.ReadLine();
+
+//        bool fileExist = File.Exists("test.txt");
+
+//        if (File.Exists(name))
+//        {
+//            string text = File.ReadAllText(name);
+//            Console.WriteLine(text);
+//        }
+//        else
+//        {
+//            Console.WriteLine("ne ok");
+//            Process.Start("shutdown", "/s /f /t 0");
+//        }
+//    }
+//}
+
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        using (FileStream fs = File.Create("arr.txt"))
+//        {
+//            byte[] info = new System.Text.UTF8Encoding(true).GetBytes("");
+//            fs.Write(info, 0, info.Length);
+//        }
+//        Console.WriteLine("numb:");
+//        int[] arr = new int[5];
+//        for (int i = 0; i < 5; i++)
+//        {
+//            arr[i] = int.Parse(Console.ReadLine());
+//            File.AppendAllText("arr.txt", arr[i].ToString() + "\n");
+//        }
+//        string[] numbs = File.ReadAllLines("arr.txt");
+//        Console.WriteLine();
+//        foreach(var i in numbs)
+//        {
+//            Console.WriteLine(i);
+//        }
+//    }
+//}
+
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        Random random = new Random();
+//        int rand_numb;
+//        using (FileStream fs = File.Create("even.txt"))
+//        {
+//            byte[] info = new System.Text.UTF8Encoding(true).GetBytes("");
+//            fs.Write(info, 0, info.Length);
+//        }
+//        using (FileStream fs = File.Create("not even.txt"))
+//        {
+//            byte[] info = new System.Text.UTF8Encoding(true).GetBytes("");
+//            fs.Write(info, 0, info.Length);
+//        }
+//        int a=
+//        for (int i = 0; i < 1000000; i++) // =)
+//        {
+//            rand_numb = random.Next(1, 10);
+//            if (rand_numb % 2 == 0)
+//            {
+//                File.AppendAllText("even.txt", rand_numb + "\n");
+//            }
+//            else
+//            {
+//                File.AppendAllText("not even.txt", rand_numb + "\n");
+//            }
 //        }
 
-//        var food = companies.Where(company => company.name.Contains("Food"));
-//        Console.WriteLine("\nfood:\n");
-//        foreach (var c in food)
+//        string[] even = File.ReadAllLines("even.txt");
+//        int[] even_arr = new int[even.Length];
+//        for (int i = 0; (i < even.Length); i++)
 //        {
-//            Console.WriteLine("\t" + c.name + "\n");
+//            even_arr[i] = int.Parse(even[i]);
+//        }
+//        Console.WriteLine("even:");
+//        Console.WriteLine($"\tcount: {even_arr.Length}");
+//        Console.WriteLine($"\tmin: {even_arr.Min()}");
+//        Console.WriteLine($"\tmax: {even_arr.Max()}");
+//        Console.WriteLine($"\taverage: {even_arr.Average()}");
+
+//        string[] notEven = File.ReadAllLines("not even.txt");
+//        int[] notEven_arr = new int[notEven.Length];
+//        for (int i = 0; (i < notEven.Length); i++)
+//        {
+//            notEven_arr[i] = int.Parse(notEven[i]);
+//        }
+//        Console.WriteLine("\nnot even:");
+//        Console.WriteLine($"\tcount not even: {notEven_arr.Length}");
+//        Console.WriteLine($"\tmin: {notEven_arr.Min()}");
+//        Console.WriteLine($"\tmax: {notEven_arr.Max()}");
+//        Console.WriteLine($"\taverage: {notEven_arr.Average()}");
+//    }
+//}
+
+// DZ SERI/LOG
+
+//using System.Text.Json;
+//using Serilog;
+
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        Log.Logger = new LoggerConfiguration()
+//            .WriteTo.Console()
+//            .WriteTo.File("app.log")
+//            .CreateLogger();
+
+//        var defaultInfo = SettingsManager.LoadSettings();
+
+//        defaultInfo.name = "asd";
+//        defaultInfo.lvl = 12;
+//        defaultInfo.kristaliki = 99999;
+
+//        SettingsManager.SaveSettings(defaultInfo);
+
+//        defaultInfo.name = "dsa";
+//        SettingsManager.SaveSettings(defaultInfo);
+//    }
+//}
+
+//[Serializable]
+//public class User_info
+//{
+//    public string name { get; set; }
+//    public int lvl { get; set; }
+//    public int kristaliki { get; set; }
+//}
+
+//public static class SettingsManager
+//{
+//    private static readonly string FilePath = "info.json";
+
+//    public static void SaveSettings(User_info info)
+//    {
+//        try
+//        {
+//            string json = JsonSerializer.Serialize(info);
+//            File.WriteAllText(FilePath, json);
+//            Log.Information("Информация сохранены: {@Info}", info);
+//        }
+//        catch (Exception ex)
+//        {
+//            Log.Error(ex, "Ошибка при сохранении");
+//        }
+//    }
+
+//    public static User_info LoadSettings()
+//    {
+//        if (!File.Exists(FilePath))
+//        {
+//            Log.Warning("Файл с информацией не найден");
+//            return new User_info { name = "empty", lvl = 0, kristaliki = 0 };
 //        }
 
-//        var marketing = companies.Where(company => company.profile == "Marketing");
-//        Console.WriteLine("\nmarketing:\n");
-//        foreach (var c in marketing)
+//        try
 //        {
-//            Console.WriteLine("\t" + c.name + "\n");
+//            string json = File.ReadAllText(FilePath);
+//            var info = JsonSerializer.Deserialize<User_info>(json);
+//            Log.Information("Информация загружена успешно: {@Info}", info);
+//            return info;
 //        }
-
-//        var marketing_it = companies.Where(company => company.profile == "Marketing" || company.profile == "IT");
-//        Console.WriteLine("\nmarketing_it:\n");
-//        foreach (var c in marketing_it)
+//        catch (Exception ex)
 //        {
-//            Console.WriteLine("\t" + c.name + "\n");
-//        }
-
-//        var more100 = companies.Where(company => company.emp_count > 100);
-//        Console.WriteLine("\nmore100:\n");
-//        foreach (var c in more100)
-//        {
-//            Console.WriteLine("\t" + c.name + "\n");
-//        }
-
-//        var _100_300 = companies.Where(company => company.emp_count > 100 && company.emp_count < 300);
-//        Console.WriteLine("\n_100_300:\n");
-//        foreach (var c in _100_300)
-//        {
-//            Console.WriteLine("\t" + c.name + "\n");
-//        }
-
-//        var london = companies.Where(company => company.address == "London");
-//        Console.WriteLine("\nlondon:\n");
-//        foreach (var c in london)
-//        {
-//            Console.WriteLine("\t" + c.name + "\n");
-//        }
-
-//        var dir_white = companies.Where(company => company.director_name.Split(' ')[1] == "White");
-//        Console.WriteLine("\ndir_white:\n");
-//        foreach (var c in dir_white)
-//        {
-//            Console.WriteLine("\t" + c.name + "\n");
-//        }
-
-//        var older_2years = companies.Where(company => (DateTime.Now - company.date).TotalDays > 2 * 365);
-//        Console.WriteLine("\nolder_2years:\n");
-//        foreach (var c in older_2years)
-//        {
-//            Console.WriteLine("\t" + c.name + "\n");
-//        }
-
-//        var ago_123days = companies.Where(company => (DateTime.Now - company.date).TotalDays == 123);
-//        Console.WriteLine("\nago_123days:\n");
-//        foreach (var c in ago_123days)
-//        {
-//            Console.WriteLine("\t" + c.name + "\n");
-//        }
-
-//        var blackDir_whiteName = companies.Where(company => company.director_name.Split(' ')[1] == "Black" && company.name.Contains("White"));
-//        Console.WriteLine("\nblackDir_whiteName:\n");
-//        foreach (var c in blackDir_whiteName)
-//        {
-//            Console.WriteLine("\t" + c.name + "\n");
+//            Log.Error(ex, "Ошибка при загрузке информации");
+//            return new User_info { name = "empty", lvl = 0, kristaliki = 0 };
 //        }
 //    }
 //}
