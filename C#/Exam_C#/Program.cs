@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.IO;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Serilog;
 
@@ -23,6 +24,10 @@ using Serilog;
 true = empty
 false = not empty
 */
+/* vagon type
+0 - compartment type
+1 - platzkart type
+ */
 
 class Vagon_compartmentType
 {
@@ -73,6 +78,50 @@ class Vagon_compartmentType
             Console.Write("] [");
             if (compartments[i][3] == true) Console.Write("O");
             else Console.Write("X");
+            Console.Write("] |");
+        }
+        Console.WriteLine(">-");
+
+        Console.WriteLine("  | ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~ | ~~~~~~~ | ~~~~~~~ |");
+
+        Console.WriteLine("  |____-_________-_________-_________-_________-_________-_________-_________-_________-_________-_________-____|");
+    }
+
+    public void info_indOrX()
+    {
+        int ind = 0;
+        Console.WriteLine("Compartment type");
+
+        Console.WriteLine("   ____-_________-_________-_________-_________-_________-_________-_________-_________-_________-_________-____");
+
+        Console.Write("  | [~]+[~] |");
+        for (int i = 0; i < 10; i++)
+        {
+            Console.Write(" [");
+            if (compartments[i][0] == true) Console.Write("O");
+            else Console.Write("X");
+            ind++;
+            Console.Write("]+[");
+            if (compartments[i][1] == true) Console.Write("O");
+            else Console.Write("X");
+            ind++;
+            Console.Write("] |");
+        }
+        Console.WriteLine();
+
+        Console.WriteLine("  | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |");
+
+        Console.Write("-<| [~] [~] |");
+        for (int i = 0; i < 10; i++)
+        {
+            Console.Write(" [");
+            if (compartments[i][2] == true) Console.Write("O");
+            else Console.Write("X");
+            ind++;
+            Console.Write("] [");
+            if (compartments[i][3] == true) Console.Write("O");
+            else Console.Write("X");
+            ind++;
             Console.Write("] |");
         }
         Console.WriteLine(">-");
@@ -158,6 +207,64 @@ class Vagon_platzkartType
 
         Console.WriteLine("  |________________________-_________-_________-_________-_________-_________-_________-_________-_________-____|");
     }
+
+    public void info_indOrX()
+    {
+        int ind = 0;
+
+        Console.WriteLine("Platzkart type");
+
+        Console.WriteLine("   ____-_________-_________-_________-_________-_________-_________-_________-_________-_________-_________-____");
+
+        Console.Write("  | [~]+[~] | [~]+[~] |");
+        for (int i = 0; i < 9; i++)
+        {
+            Console.Write(" [");
+            if (platzkarts_top[i][0] == true) Console.Write(ind);
+            else Console.Write("X");
+            ind++;
+            Console.Write("]+[");
+            if (platzkarts_top[i][1] == true) Console.Write(ind);
+            else Console.Write("X");
+            ind++;
+            Console.Write("] |");
+        }
+        Console.WriteLine();
+
+        Console.Write("  | [~] [~] | [~] [~] |");
+        for (int i = 0; i < 9; i++)
+        {
+            Console.Write(" [");
+            if (platzkarts_top[i][2] == true) Console.Write("O");
+            else Console.Write("X");
+            ind++;
+            Console.Write("]+[");
+            if (platzkarts_top[i][3] == true) Console.Write("O");
+            else Console.Write("X");
+            ind++;
+            Console.Write("] |");
+        }
+        Console.WriteLine("");
+
+        Console.WriteLine("-<| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |>-");
+
+        Console.Write("  | ~~~~~~~~~~~~~~~~~~~");
+        for (int i = 0; i < 9; i++)
+        {
+            Console.Write(" [");
+            if (platzkarts_bottom[i][0] == true) Console.Write("O");
+            else Console.Write("X");
+            ind++;
+            Console.Write("]+[");
+            if (platzkarts_bottom[i][1] == true) Console.Write("O");
+            else Console.Write("X");
+            ind++;
+            Console.Write("] |");
+        }
+        Console.WriteLine();
+
+        Console.WriteLine("  |________________________-_________-_________-_________-_________-_________-_________-_________-_________-____|");
+    }
 }
 
 class Train_composition
@@ -201,18 +308,27 @@ class Train_composition
             vagons_compartmentType = trainComposition_data.vagons_compartmentType;
             vagons_platzkartType = trainComposition_data.vagons_platzkartType;
             if (String.IsNullOrWhiteSpace(route_name)) throw new Exception();
-            Log.Information("operation 'Deserialize' success");
+            Log.Information("operation 'Deserialize train' success");
         }
         catch (Exception ex)
         {
-            Log.Error("operation 'Deserialize' failed");
+            Log.Error("operation 'Deserialize train' failed");
         }
     }
 
-    public void trainComposition_serialize(string path)
+    public void trainComposition_serialize()
     {
         try
         {
+            string path = $"routs\\{route_name}.json";
+            if (!File.Exists(path))
+            {
+                using (FileStream fs = File.Create(path))
+                {
+                    byte[] info = new System.Text.UTF8Encoding(true).GetBytes("");
+                    fs.Write(info, 0, info.Length);
+                }
+            }
             Train_composition trainComposition_data = new Train_composition(route_name, vagons_compartmentType, vagons_platzkartType);
             File.WriteAllText(path, JsonSerializer.Serialize(trainComposition_data));
             Train_composition _trainComposition_data = JsonSerializer.Deserialize<Train_composition>(File.ReadAllText(path));
@@ -225,7 +341,7 @@ class Train_composition
         }
     }
 
-    public void trainComposition_info()
+    public void trainComposition_compartmentType_info()
     {
         try
         {
@@ -237,6 +353,19 @@ class Train_composition
                 it.info_emptyOrNot();
                 Console.WriteLine();
             }
+            Log.Information("Train composition compartment type displayed");
+        }
+        catch (Exception ex)
+        {
+            Log.Error("Error displaying compartment type info");
+        }
+    }
+
+    public void trainComposition_platzkartType_info()
+    {
+        try
+        {
+            int i = 0;
             foreach (var it in vagons_platzkartType)
             {
                 i++;
@@ -244,11 +373,54 @@ class Train_composition
                 it.info_emptyOrNot();
                 Console.WriteLine();
             }
-            Log.Information("Train composition successfully displayed");
+            Log.Information("Train composition compartment type displayed");
         }
         catch (Exception ex)
         {
             Log.Error("Error displaying compartment info");
+        }
+    }
+}
+
+class Ticket
+{
+    private string route_name;
+    private int vagon_type;
+    private int vagon_ind;
+    private int seat_ind;
+    private bool not_used;
+
+    public Ticket(string route_name, int vagon_type, int vagon_ind, int seat_ind, bool not_used)
+    {
+        this.route_name = route_name;
+        this.vagon_type = vagon_type;
+        this.vagon_ind = vagon_ind;
+        this.seat_ind = seat_ind;
+        this.not_used = not_used;
+    }
+
+    public void make_ticket()
+    {
+        try
+        {
+            string path = $"tickets\\{route_name}.json";
+            if (!File.Exists(path))
+            {
+                using (FileStream fs = File.Create(path))
+                {
+                    byte[] info = new System.Text.UTF8Encoding(true).GetBytes("");
+                    fs.Write(info, 0, info.Length);
+                }
+            }
+            Ticket ticket_data = new Ticket(route_name, vagon_type, vagon_ind, seat_ind, not_used);
+            File.WriteAllText(path, JsonSerializer.Serialize(ticket_data));
+            Ticket _ticket_data = JsonSerializer.Deserialize<Ticket>(File.ReadAllText(path));
+            if (JsonSerializer.Serialize(ticket_data) != JsonSerializer.Serialize(_ticket_data)) throw new Exception();
+            Log.Information($"Ticket successfully serialized to '{path}'");
+        }
+        catch (Exception ex)
+        {
+            Log.Error("Error in 'make_ticket' method");
         }
     }
 }
@@ -263,6 +435,6 @@ class Program
         Log.Information("_________________LOGGING WORK SUCCESSFULLY_________________");
 
         Train_composition tc2 = new Train_composition("asd.json");
-        tc2.trainComposition_info();
+        //tc2.trainComposition_info();
     }
 }
