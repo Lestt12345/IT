@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using Serilog;
 
 /* cupe type
@@ -25,9 +26,12 @@ false = not empty
 
 class Vagon_compartmentType
 {
-    private bool[][] compartments = new bool[10][];
+    [JsonInclude]
+    public bool[][] compartments = new bool[10][];
 
-    public Vagon_compartmentType()
+    public Vagon_compartmentType() { }
+
+    public Vagon_compartmentType(int a)
     {
         for (int i = 0; i < 10; i++)
         {
@@ -81,12 +85,15 @@ class Vagon_compartmentType
 
 class Vagon_platzkartType
 {
-    private bool[][] platzkarts_top = new bool[9][];
-    private bool[][] platzkarts_bottom = new bool[9][];
+    [JsonInclude]
+    public bool[][] platzkarts_top = new bool[9][];
+    [JsonInclude]
+    public bool[][] platzkarts_bottom = new bool[9][];
 
-    public Vagon_platzkartType()
+    public Vagon_platzkartType() { }
+
+    public Vagon_platzkartType(int a)
     {
-
         for (int i = 0; i < 9; i++)
         {
             platzkarts_top[i] = new bool[4];
@@ -97,7 +104,7 @@ class Vagon_platzkartType
             }
             for (int j = 0; j < 2; j++)
             {
-                platzkarts_bottom[i][j] = true;
+                platzkarts_bottom[i][j] = false;
             }
         }
     }
@@ -155,22 +162,93 @@ class Vagon_platzkartType
 
 class Train_composition
 {
+    [JsonInclude]
     public string route_name;
-    public List<Vagon_compartmentType> vagons_compartmentType { get; set; }
-    public List<Vagon_platzkartType> vagons_platzkartType { get; set; }
+    [JsonInclude]
+    public List<Vagon_compartmentType> vagons_compartmentType { get; set; } = new List<Vagon_compartmentType>();
+    [JsonInclude]
+    public List<Vagon_platzkartType> vagons_platzkartType { get; set; } = new List<Vagon_platzkartType>();
 
-    public Train_composition(string json)
+    public Train_composition()
+    {
+        route_name = "none";
+        vagons_compartmentType.Add(new Vagon_compartmentType(1));
+        vagons_compartmentType.Add(new Vagon_compartmentType(1));
+        vagons_compartmentType.Add(new Vagon_compartmentType(1));
+        vagons_platzkartType.Add(new Vagon_platzkartType(1));
+        vagons_platzkartType.Add(new Vagon_platzkartType(1));
+    }
+
+    public Train_composition(string route_name, List<Vagon_compartmentType> vagons_compartmentType, List<Vagon_platzkartType> vagons_platzkartType)
+    {
+        this.route_name = route_name;
+        this.vagons_compartmentType = vagons_compartmentType;
+        this.vagons_platzkartType = vagons_platzkartType;
+    }
+
+    public Train_composition(string path)
     {
         try
         {
+            if (!File.Exists(path))
+            {
+                Log.Error($"File not found: {path}");
+                throw new FileNotFoundException($"The file at {path} was not found.");
+            }
+            string json = File.ReadAllText(path);
             var trainComposition_data = JsonSerializer.Deserialize<Train_composition>(json);
             route_name = trainComposition_data.route_name;
             vagons_compartmentType = trainComposition_data.vagons_compartmentType;
             vagons_platzkartType = trainComposition_data.vagons_platzkartType;
+            if (String.IsNullOrWhiteSpace(route_name)) throw new Exception();
+            Log.Information("operation 'Deserialize' success");
         }
         catch (Exception ex)
         {
             Log.Error("operation 'Deserialize' failed");
+        }
+    }
+
+    public void trainComposition_serialize(string path)
+    {
+        try
+        {
+            Train_composition trainComposition_data = new Train_composition(route_name, vagons_compartmentType, vagons_platzkartType);
+            File.WriteAllText(path, JsonSerializer.Serialize(trainComposition_data));
+            Train_composition _trainComposition_data = JsonSerializer.Deserialize<Train_composition>(File.ReadAllText(path));
+            if (JsonSerializer.Serialize(trainComposition_data) != JsonSerializer.Serialize(_trainComposition_data)) throw new Exception();
+            Log.Information($"Train composition successfully serialized to '{path}'");
+        }
+        catch(Exception ex)
+        {
+            Log.Error("Error in 'trainComposition_serialize' method");
+        }
+    }
+
+    public void trainComposition_info()
+    {
+        try
+        {
+            int i = 0;
+            foreach (var it in vagons_compartmentType)
+            {
+                i++;
+                Console.Write(i + "# ");
+                it.info_emptyOrNot();
+                Console.WriteLine();
+            }
+            foreach (var it in vagons_platzkartType)
+            {
+                i++;
+                Console.Write(i + "# ");
+                it.info_emptyOrNot();
+                Console.WriteLine();
+            }
+            Log.Information("Train composition successfully displayed");
+        }
+        catch (Exception ex)
+        {
+            Log.Error("Error displaying compartment info");
         }
     }
 }
@@ -182,12 +260,9 @@ class Program
         Log.Logger = new LoggerConfiguration()
             .WriteTo.File("Log file.log")
             .CreateLogger();
-        Log.Information("Logging work successfully");
-        Vagon_compartmentType v1 = new Vagon_compartmentType();
-        v1.info_emptyOrNot();
-        Console.WriteLine();
-        Vagon_platzkartType v2 = new Vagon_platzkartType();
-        v2.info_emptyOrNot();
-        Train_composition tc1 = new Train_composition("asd.json");
+        Log.Information("_________________LOGGING WORK SUCCESSFULLY_________________");
+
+        Train_composition tc2 = new Train_composition("asd.json");
+        tc2.trainComposition_info();
     }
 }
