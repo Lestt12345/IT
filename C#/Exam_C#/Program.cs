@@ -10,6 +10,7 @@ using Serilog;
 -<| [~] [~] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] |>-
   | ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~ | ~~~~~~~ | ~~~~~~~ |
   |____-_________-_________-_________-_________-_________-_________-_________-_________-_________-_________-____|
+  capacity = 40 seats
 */
 /* plackart type
    ____-_________-_________-_________-_________-_________-_________-_________-_________-_________-_________-____
@@ -18,6 +19,7 @@ using Serilog;
 -<| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |>-
   | ~~~~~~~~~~~~~~~~~~~ [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] |
   |________________________-_________-_________-_________-_________-_________-_________-_________-_________-____|
+  capacity = 54 seats
 */
 
 /* empty or not
@@ -427,6 +429,218 @@ class Ticket
 
 class Program
 {
+    static void Menu(ref Train_composition sostav)
+    {
+        int stage = 1;
+        string route_name;
+        int vagon_type = -1;
+        int vagon_ind = -1;
+        int seat_ind = -1;
+        bool not_used;
+
+        int ch;
+        while (true)
+        {
+            Console.Clear();
+            switch (stage)
+            {
+                case 1:
+                    Console.WriteLine("Select a route:");
+                    var routes = Directory.GetFiles("routs", "*.txt");
+                    for (int i = 0; i < routes.Length; i++)
+                    {
+                        Console.WriteLine($"{i + 1} - {Path.GetFileNameWithoutExtension(routes[i])}");
+                    }
+                    Console.WriteLine("0 - Exit");
+                    Console.Write("Choose: ");
+                    ch = int.Parse(Console.ReadLine()); // vpadlu convert (dolgo)
+
+                    if (ch == 0) return;
+                    if (ch < 1 || ch > routes.Length)
+                    {
+                        Console.WriteLine("Invalid choice, press any button to continue...");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    route_name = Path.GetFileNameWithoutExtension(routes[ch - 1]);
+                    stage++;
+
+                    break;
+
+                case 2:
+                    Console.WriteLine("Select a vagon type:");
+                    Console.WriteLine($"1 - Compartment ({sostav.vagons_compartmentType.Count})");
+                    Console.WriteLine($"2 - Platzkart ({sostav.vagons_platzkartType.Count})");
+                    Console.WriteLine("0 - Back");
+                    Console.Write("Choose (0 - back): ");
+                    ch = int.Parse(Console.ReadLine());
+
+                    if (ch == 0)
+                    {
+                        stage--;
+                        continue;
+                    }
+                    if (ch < 1 || ch > 2)
+                    {
+                        Console.WriteLine("Invalid choice, press any button to continue...");
+                        Console.ReadKey();
+                        continue;
+                    }
+                    if ((ch == 1 && sostav.vagons_compartmentType.Count == 0) || (ch == 2 && sostav.vagons_platzkartType.Count == 0))
+                    {
+                        Console.WriteLine("No vagons of this type, press any button to continue...");
+                        Console.ReadKey();
+                        continue;
+                    }
+
+                    vagon_type = ch - 1;
+                    stage++;
+
+                    break;
+
+                case 3:
+                    if (vagon_type == 0)
+                    {
+                        sostav.trainComposition_compartmentType_info();
+                        Console.Write("\nChoose (0 - back): #");
+                        ch = int.Parse(Console.ReadLine());
+
+                        if (ch == 0)
+                        {
+                            stage--;
+                            continue;
+                        }
+                        if (ch < 1 || ch > sostav.vagons_compartmentType.Count)
+                        {
+                            Console.WriteLine("Invalid choice, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        vagon_ind = ch - 1;
+                    }
+                    else if (vagon_type == 1)
+                    {
+                        sostav.trainComposition_platzkartType_info();
+                        Console.Write("\nChoose (0 - back): #");
+                        ch = int.Parse(Console.ReadLine());
+
+                        if (ch == 0)
+                        {
+                            stage--;
+                            continue;
+                        }
+                        if (ch < 1 || ch > sostav.vagons_platzkartType.Count)
+                        {
+                            Console.WriteLine("Invalid choice, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+
+                        vagon_ind = ch - 1;
+                    }
+
+                    break;
+
+                case 4:
+                    if (vagon_type == 0)
+                    {
+                        sostav.vagons_compartmentType[vagon_ind].info_indOrX();
+                        Console.Write("\nChoose (0 - back): ");
+                        ch = int.Parse(Console.ReadLine());
+
+                        if (ch == 0)
+                        {
+                            stage--;
+                            continue;
+                        }
+                        if (ch < 1 || ch > 40)
+                        {
+                            Console.WriteLine("Invalid index, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        seat_ind = ch - 1;
+                        int compartment = 1;
+                        while (ch > 4)
+                        {
+                            if (ch < 4)
+                            {
+                                ch -= 4;
+                                compartment++;
+                            }
+                        }
+                        if (sostav.vagons_compartmentType[vagon_ind].compartments[compartment - 1][ch - 1] == false)
+                        {
+                            Console.WriteLine("Seat is not empty, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+                    }
+                    else if (vagon_type == 1)
+                    {
+                        sostav.vagons_platzkartType[vagon_ind].info_indOrX();
+                        Console.Write("\nChoose (0 - back): ");
+                        ch = int.Parse(Console.ReadLine());
+
+                        if (ch == 0)
+                        {
+                            stage--;
+                            continue;
+                        }
+                        if (ch < 1 || ch > 54)
+                        {
+                            Console.WriteLine("Invalid index, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        seat_ind = ch - 1;
+                        int platzkart = 1;
+                        if (ch > 36)
+                        {
+                            ch -= 36;
+                            while (ch > 2)
+                            {
+                                ch -= 2;
+                                platzkart++;
+                            }
+                            if (sostav.vagons_platzkartType[vagon_ind].platzkarts_bottom[platzkart - 1][ch - 1] == false)
+                            {
+                                Console.WriteLine("Seat is not empty, press any button to continue...");
+                                Console.ReadKey();
+                                continue;
+                            }
+                            else
+                            {
+                                sostav.vagons_platzkartType[vagon_ind].platzkarts_bottom[platzkart - 1][ch - 1] = true;
+                                Ticket ticket = new Ticket()
+                            }
+                        }
+                        else if (ch <= 36)
+                        {
+                            while (ch > 4)
+                            {
+                                ch -= 4;
+                                platzkart++;
+                            }
+                            if (sostav.vagons_platzkartType[vagon_ind].platzkarts_top[platzkart - 1][ch - 1] == false)
+                            {
+                                Console.WriteLine("Seat is not empty, press any button to continue...");
+                                Console.ReadKey();
+                                continue;
+                            }
+                            else
+                            {
+                                sostav.vagons_platzkartType[vagon_ind].platzkarts_bottom[platzkart - 1][ch - 1] = true;
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
     static void Main(string[] args)
     {
         Log.Logger = new LoggerConfiguration()
