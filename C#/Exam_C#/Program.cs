@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Serilog;
@@ -323,10 +324,10 @@ class Train_composition
             route_name = trainComposition_data.route_name;
             vagons_compartmentType = trainComposition_data.vagons_compartmentType;
             vagons_platzkartType = trainComposition_data.vagons_platzkartType;
-            if (String.IsNullOrWhiteSpace(route_name)) throw new Exception();
+            if (String.IsNullOrWhiteSpace(route_name) || vagons_compartmentType == null || vagons_platzkartType == null) throw new Exception();
             Log.Information("operation 'Deserialize train' success");
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Log.Error("operation 'Deserialize train' failed");
         }
@@ -351,7 +352,7 @@ class Train_composition
             if (JsonSerializer.Serialize(trainComposition_data) != JsonSerializer.Serialize(_trainComposition_data)) throw new Exception();
             Log.Information($"Train composition successfully serialized to '{path}'");
         }
-        catch(Exception ex)
+        catch(Exception)
         {
             Log.Error("Error in 'trainComposition_serialize' method");
         }
@@ -371,7 +372,7 @@ class Train_composition
             }
             Log.Information("Train composition compartment type displayed");
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Log.Error("Error displaying compartment type info");
         }
@@ -391,7 +392,7 @@ class Train_composition
             }
             Log.Information("Train composition compartment type displayed");
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Log.Error("Error displaying compartment info");
         }
@@ -404,22 +405,47 @@ class Ticket
     private int vagon_type;
     private int vagon_ind;
     private int seat_ind;
-    private bool not_used;
 
-    public Ticket(string route_name, int vagon_type, int vagon_ind, int seat_ind, bool not_used)
+    public Ticket(string route_name, int vagon_type, int vagon_ind, int seat_ind)
     {
         this.route_name = route_name;
         this.vagon_type = vagon_type;
         this.vagon_ind = vagon_ind;
         this.seat_ind = seat_ind;
-        this.not_used = not_used;
     }
 
-    public void make_ticket()
+    public int make_ticket(string route)
     {
+        int id = 0;
+        string dir = "tickets";
+        if (!Directory.Exists(dir))
+        {
+            Directory.CreateDirectory(dir);
+        }
+
+        Random random = new Random();
+        List<int> used_ids = new List<int>();
+        foreach (string file in Directory.GetFiles(dir))
+        {
+            string file_name = Path.GetFileNameWithoutExtension(file);
+            string[] parts = file_name.Split(' ');
+            if (parts[0] == route)
+            {
+                used_ids.Add(int.Parse(parts[1]));
+            }
+        }
+
+        while (true)
+        {
+            id++;
+            if (!used_ids.Contains(id))
+            {
+                break;
+            }
+        }
+        string path = $"{dir}\\{route} {id}_.json";
         try
         {
-            string path = $"tickets\\{route_name}.json";
             if (!File.Exists(path))
             {
                 using (FileStream fs = File.Create(path))
@@ -428,15 +454,16 @@ class Ticket
                     fs.Write(info, 0, info.Length);
                 }
             }
-            Ticket ticket_data = new Ticket(route_name, vagon_type, vagon_ind, seat_ind, not_used);
-            File.WriteAllText(path, JsonSerializer.Serialize(ticket_data));
+            File.WriteAllText(path, JsonSerializer.Serialize(this));
             Ticket _ticket_data = JsonSerializer.Deserialize<Ticket>(File.ReadAllText(path));
-            if (JsonSerializer.Serialize(ticket_data) != JsonSerializer.Serialize(_ticket_data)) throw new Exception();
+            if (JsonSerializer.Serialize(this) != JsonSerializer.Serialize(_ticket_data)) throw new Exception();
             Log.Information($"Ticket successfully serialized to '{path}'");
+            return id;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             Log.Error("Error in 'make_ticket' method");
+            return 0;
         }
     }
 }
@@ -462,15 +489,19 @@ class Program
         //for pay
         long number = -1;
         int cvc = -1;
-
+        //for break error loop
+        int err_loop = 0;
+        //sostav
+        Train_composition train_composition1 = null;
 
         int ch;
-        while (payed == false)
+        while (!payed)
         {
             Console.Clear();
             switch (stage)
             {
                 case 1:
+                    err_loop = 0;
                     Console.WriteLine("Select a route:");
                     var routes = Directory.GetFiles("routs", "*.txt");
                     for (int i = 0; i < routes.Length; i++)
@@ -485,12 +516,12 @@ class Program
                     }
                     catch (Exception)
                     {
+                        Log.Error("Invalid symbol in route selection");
                         Console.WriteLine("Invalid (you) symbol, press any button to continue...");
                         Console.ReadKey();
                         continue;
                     }
                     
-
                     if (ch == 0) return;
                     if (ch < 1 || ch > routes.Length)
                     {
@@ -500,12 +531,14 @@ class Program
                     }
 
                     route_name = Path.GetFileNameWithoutExtension(routes[ch - 1]);
-                    Train_composition train_composition1 = new Train_composition("tickets\\" + route_name + ".txt");
+                    train_composition1 = new Train_composition("tickets\\" + route_name + ".txt");
+                    Log.Information("Route selected: " + route_name);
                     stage++;
 
                     break;
 
                 case 2:
+                    err_loop = 0;
                     Console.WriteLine("Select a vagon type:");
                     Console.WriteLine($"1 - Compartment ({train_composition1.vagons_compartmentType.Count})");
                     Console.WriteLine($"2 - Platzkart ({train_composition1.vagons_platzkartType.Count})");
@@ -517,6 +550,7 @@ class Program
                     }
                     catch (Exception)
                     {
+                        Log.Error("Invalid symbol in vagon type selection");
                         Console.WriteLine("Invalid (you) symbol, press any button to continue...");
                         Console.ReadKey();
                         continue;
@@ -541,11 +575,13 @@ class Program
                     }
 
                     vagon_type = ch - 1;
+                    Log.Information("Vagon type selected");
                     stage++;
 
                     break;
 
                 case 3:
+                    err_loop = 0;
                     if (vagon_type == 0)
                     {
                         train_composition1.trainComposition_compartmentType_info();
@@ -556,6 +592,7 @@ class Program
                         }
                         catch (Exception)
                         {
+                            Log.Error("Invalid symbol in compartment selection");
                             Console.WriteLine("Invalid (you) symbol, press any button to continue...");
                             Console.ReadKey();
                             continue;
@@ -574,6 +611,7 @@ class Program
                         }
 
                         vagon_ind = ch - 1;
+                        Log.Information("Compartment vagon selected: " + vagon_ind);
                     }
                     else if (vagon_type == 1)
                     {
@@ -585,6 +623,7 @@ class Program
                         }
                         catch (Exception)
                         {
+                            Log.Error("Invalid symbol in platzkart selection");
                             Console.WriteLine("Invalid (you) symbol, press any button to continue...");
                             Console.ReadKey();
                             continue;
@@ -603,11 +642,13 @@ class Program
                         }
 
                         vagon_ind = ch - 1;
+                        Log.Information($"Platzkart vagon selected: " + vagon_ind);
                     }
 
                     break;
 
                 case 4:
+                    err_loop = 0;
                     if (vagon_type == 0)
                     {
                         train_composition1.vagons_compartmentType[vagon_ind].info_indOrX();
@@ -618,6 +659,7 @@ class Program
                         }
                         catch (Exception)
                         {
+                            Log.Error("Invalid symbol in compartment seat selection");
                             Console.WriteLine("Invalid (you) symbol, press any button to continue...");
                             Console.ReadKey();
                             continue;
@@ -635,6 +677,7 @@ class Program
                             continue;
                         }
                         seat_ind = ch - 1;
+                        Log.Information($"Seat selected in compartment: " + seat_ind);
                         int compartment = 1;
                         while (ch > 4)
                         {
@@ -661,6 +704,7 @@ class Program
                         }
                         catch (Exception)
                         {
+                            Log.Error("Invalid symbol in platzkart seat selection");
                             Console.WriteLine("Invalid (you) symbol, press any button to continue...");
                             Console.ReadKey();
                             continue;
@@ -695,22 +739,61 @@ class Program
                             }
                             else
                             {
-                                Console.Write("Card number: ");
-                                number = int.Parse(Console.ReadLine());
+                                try
+                                {
+
+                                    Console.Write("Card number: ");
+                                    number = int.Parse(Console.ReadLine());
+                                }
+                                catch (Exception)
+                                {
+                                    Log.Error("Invalid symbol in card number");
+                                    Console.WriteLine("Invalid symbol in card number, press any button to continue...");
+                                    Console.ReadKey();
+                                    continue;
+                                }
+                                try
+                                {
+                                    Console.Write("CVC: ");
+                                    cvc = int.Parse(Console.ReadLine());
+                                }
+                                catch (Exception)
+                                {
+                                    Log.Error("Invalid symbol in CVC");
+                                    Console.WriteLine("Invalid symbol in CVC, press any button to continue...");
+                                    Console.ReadKey();
+                                    continue;
+                                }
                                 foreach (var it in Cards)
                                 {
                                     if (number == it.number)
                                     {
                                         if (cvc == it.cvc)
                                         {
-                                            Ticket ticket = new Ticket(route_name, vagon_type, vagon_ind, seat_ind, true);
+                                            Ticket ticket = new Ticket(route_name, vagon_type, vagon_ind, seat_ind);
+                                            if (ticket == null)
+                                            {
+                                                Log.Error("Ticket is null");
+                                                Console.WriteLine("Ops, some thing wrong, press any button to continue...");
+                                                Console.ReadKey();
+                                                continue;
+                                            }
+                                            int id = ticket.make_ticket(route_name);
+                                            if (id == 0)
+                                            {
+                                                Console.WriteLine("Ops, some thing wrong, press any button to continue...");
+                                                Console.ReadKey();
+                                                continue;
+                                            }
                                             train_composition1.vagons_platzkartType[vagon_ind].platzkarts_bottom[platzkart - 1][ch - 1] = false;
                                             payed = true;
+                                            Console.WriteLine("Sueccessful, your ID is: " + id);
                                         }
                                     }
                                 }
                                 if (payed == false)
                                 {
+                                    Log.Warning($"Incorrect number or cvc");
                                     Console.WriteLine("Incorrect number or cvc, press any button to continue...");
                                     Console.ReadKey();
                                     continue;
@@ -732,21 +815,55 @@ class Program
                             }
                             else
                             {
-                                Console.Write("Card number: ");
-                                number = int.Parse(Console.ReadLine());
+                                try
+                                {
+
+                                    Console.Write("Card number: ");
+                                    number = int.Parse(Console.ReadLine());
+                                }
+                                catch (Exception)
+                                {
+
+                                    Log.Error("Invalid symbol in card number");
+                                }
+                                try
+                                {
+                                    Console.Write("CVC: ");
+                                    cvc = int.Parse(Console.ReadLine());
+                                }
+                                catch (Exception)
+                                {
+
+                                    Log.Error("Invalid symbol in CVC");
+                                }
                                 foreach (var it in Cards)
                                 {
                                     if (number == it.number)
                                     {
                                         if (cvc == it.cvc)
                                         {
-                                            Ticket ticket = new Ticket(route_name, vagon_type, vagon_ind, seat_ind, true);
-                                            train_composition1.vagons_platzkartType[vagon_ind].platzkarts_top[platzkart - 1][ch - 1] = false;
+                                            Ticket ticket = new Ticket(route_name, vagon_type, vagon_ind, seat_ind);
+                                            if (ticket == null)
+                                            {
+                                                Log.Error("Ticket is null");
+                                                Console.WriteLine("Ops, some thing wrong, press any button to continue...");
+                                                Console.ReadKey();
+                                                continue;
+                                            }
+                                            int id = ticket.make_ticket(route_name);
+                                            if (id == 0)
+                                            {
+                                                Console.WriteLine("Ops, some thing wrong, press any button to continue...");
+                                                Console.ReadKey();
+                                                continue;
+                                            }
+                                            train_composition1.vagons_platzkartType[vagon_ind].platzkarts_bottom[platzkart - 1][ch - 1] = false;
                                             payed = true;
+                                            Console.WriteLine("Sueccessful, your ID is: " + id);
                                         }
                                     }
                                 }
-                                if (payed == false)
+                                if (!payed)
                                 {
                                     Console.WriteLine("Incorrect number or cvc, press any button to continue...");
                                     Console.ReadKey();
@@ -755,6 +872,14 @@ class Program
                             }
                         }
                     }
+                    break;
+                default:
+                    if (err_loop >= 5)
+                    {
+                        Console.WriteLine("Еhe program stopped incorrectly :(");
+                        return;
+                    }
+                    err_loop++;
                     break;
             }
         }
