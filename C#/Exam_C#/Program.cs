@@ -501,6 +501,7 @@ class Program
             switch (stage)
             {
                 case 1:
+                    Log.Information("Switched to case 4");
                     err_loop = 0;
                     Console.WriteLine("Select a route:");
                     var routes = Directory.GetFiles("routs", "*.txt");
@@ -538,6 +539,7 @@ class Program
                     break;
 
                 case 2:
+                    Log.Information("Switched to case 4");
                     err_loop = 0;
                     Console.WriteLine("Select a vagon type:");
                     Console.WriteLine($"1 - Compartment ({train_composition1.vagons_compartmentType.Count})");
@@ -581,6 +583,7 @@ class Program
                     break;
 
                 case 3:
+                    Log.Information("Switched to case 4");
                     err_loop = 0;
                     if (vagon_type == 0)
                     {
@@ -648,6 +651,7 @@ class Program
                     break;
 
                 case 4:
+                    Log.Information("Switched to case 4");
                     err_loop = 0;
                     if (vagon_type == 0)
                     {
@@ -788,12 +792,13 @@ class Program
                                             train_composition1.vagons_platzkartType[vagon_ind].platzkarts_bottom[platzkart - 1][ch - 1] = false;
                                             payed = true;
                                             Console.WriteLine("Sueccessful, your ID is: " + id);
+                                            Log.Information("Sueccessful maked ticked with id: {id}", id);
                                         }
                                     }
                                 }
                                 if (payed == false)
                                 {
-                                    Log.Warning($"Incorrect number or cvc");
+                                    Log.Error("Incorrect number or cvc");
                                     Console.WriteLine("Incorrect number or cvc, press any button to continue...");
                                     Console.ReadKey();
                                     continue;
@@ -860,11 +865,13 @@ class Program
                                             train_composition1.vagons_platzkartType[vagon_ind].platzkarts_bottom[platzkart - 1][ch - 1] = false;
                                             payed = true;
                                             Console.WriteLine("Sueccessful, your ID is: " + id);
+                                            Log.Information("Sueccessful maked ticked with id: {id}", id);
                                         }
                                     }
                                 }
                                 if (!payed)
                                 {
+                                    Log.Error("Incorrect number or cvc");
                                     Console.WriteLine("Incorrect number or cvc, press any button to continue...");
                                     Console.ReadKey();
                                     continue;
@@ -874,12 +881,14 @@ class Program
                     }
                     break;
                 default:
+                    err_loop++;
+                    Log.Warning("Switched to default {err_loop} times", err_loop);
                     if (err_loop >= 5)
                     {
-                        Console.WriteLine("Еhe program stopped incorrectly :(");
+                        Console.WriteLine("The program stopped incorrectly :(");
+                        Log.Error("Program stopped: many enters to incorrect case");
                         return;
                     }
-                    err_loop++;
                     break;
             }
         }
