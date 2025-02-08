@@ -3121,3 +3121,77 @@ public class Game
 //        Log.Information("program ended");
 //    }
 //}
+
+using Serilog;
+class Program
+{
+    public class Projector
+    {
+        public void TurnOn()
+        {
+            Log.Debug("projector on");
+        }
+
+        public void TurnOff()
+        {
+            Log.Information("projector off");
+        }
+    }
+
+    public class SoundSystem
+    {
+        public void SetVolume(int volume)
+        {
+            Log.Information("volume set to {volume}", volume);
+        }
+
+        public void Mute()
+        {
+            Log.Information("muted");
+        }
+    }
+
+    public class StreamingService
+    {
+        public void PlayMovie(string title)
+        {
+            Log.Debug("playing movie: {title}", title);
+        }
+
+        public void StopMovie()
+        {
+            Log.Information("movie stopped");
+        }
+    }
+
+    public class SmartHome
+    {
+        public Projector projector;
+        public SoundSystem soundSystem;
+        public StreamingService streamingService;
+
+        public SmartHome()
+        {
+            projector = new Projector();
+            soundSystem = new SoundSystem();
+            streamingService = new StreamingService();
+        }
+    }
+    static void Main(string[] args)
+    {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.Console()
+            .CreateLogger();
+
+        SmartHome smartHome = new SmartHome();
+        smartHome.projector.TurnOff();
+        smartHome.projector.TurnOn();
+        smartHome.soundSystem.Mute();
+        Console.Write("volume: ");
+        smartHome.soundSystem.SetVolume(int.Parse(Console.ReadLine()));
+        Console.Write("movie: ");
+        smartHome.streamingService.PlayMovie(Console.ReadLine());
+        smartHome.streamingService.StopMovie();
+    }
+}
