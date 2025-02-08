@@ -457,8 +457,10 @@ class Program
             int compartmentOrPlatzkart_ind;
             [JsonInclude]
             public int seat_ind;
+            [JsonInclude]
+            bool is_fake;
 
-            public Ticket(string route_name, int vagon_ind, int vagon_type, bool is_compartment, int compartmentOrPlatzkart_ind, int seat_ind)
+            public Ticket(string route_name, int vagon_ind, int vagon_type, bool is_compartment, int compartmentOrPlatzkart_ind, int seat_ind, bool is_fake)
             {
                 this.route_name = route_name;
                 this.vagon_ind = vagon_ind;
@@ -466,6 +468,7 @@ class Program
                 this.is_compartment = is_compartment;
                 this.compartmentOrPlatzkart_ind = compartmentOrPlatzkart_ind;
                 this.seat_ind = seat_ind;
+                this.is_fake = is_fake;
             }
 
             public int make_ticket(string route)
@@ -542,12 +545,12 @@ class Program
                 .CreateLogger();
             Log.Information("_________________LOGGING WORK SUCCESSFULLY_________________");
 
-            Menu();
+            Menu(true);
 
             Log.Information("Program ends");
         }
 
-        static void Menu()
+        static void Menu(bool fake)
         {
             //for ticket
             int stage = 1;
@@ -581,8 +584,7 @@ class Program
                         {
                             Console.WriteLine($"{i + 1} - {Path.GetFileNameWithoutExtension(routes[i])}");
                         }
-                        Console.WriteLine("0 - Exit");
-                        Console.Write("Choose: ");
+                        Console.Write("\nChoose (0 - back): ");
                         try
                         {
                             ch = int.Parse(Console.ReadLine());
@@ -608,7 +610,7 @@ class Program
                         if (train_composition1 == null)
                         {
                             Log.Error("Train composition is null");
-                            Console.WriteLine("Ops, some thing wrong, press any button to continue...");
+                            Console.WriteLine("Oops... Some thing wrong, press any button to continue...");
                             Console.ReadKey();
                             continue;
                         }
@@ -623,8 +625,7 @@ class Program
                         Console.WriteLine("Select a vagon type:");
                         Console.WriteLine($"1 - Compartment ({train_composition1.vagons_compartmentType.Count})");
                         Console.WriteLine($"2 - Platzkart ({train_composition1.vagons_platzkartType.Count})");
-                        Console.WriteLine("0 - Back");
-                        Console.Write("Choose (0 - back): ");
+                        Console.Write("\nChoose (0 - back): ");
                         try
                         {
                             ch = int.Parse(Console.ReadLine());
@@ -667,7 +668,7 @@ class Program
                         if (vagon_type == 0)
                         {
                             train_composition1.trainComposition_compartmentType_info();
-                            Console.Write("\nChoose (0 - back): #");
+                            Console.Write("Choose (0 - back): #");
                             try
                             {
                                 ch = int.Parse(Console.ReadLine());
@@ -699,7 +700,7 @@ class Program
                         else if (vagon_type == 1)
                         {
                             train_composition1.trainComposition_platzkartType_info();
-                            Console.Write("\nChoose (0 - back): #");
+                            Console.Write("Choose (0 - back): #");
                             try
                             {
                                 ch = int.Parse(Console.ReadLine());
@@ -884,82 +885,91 @@ class Program
 
                     case 6:
                         Log.Information("Switched to case 6");
-                        try
+                        if (!fake)
                         {
-                            Console.Write("Card number (0 - back): ");
-                            number = long.Parse(Console.ReadLine());
-                        }
-                        catch (Exception)
-                        {
-                            Log.Error("Invalid symbol in card number");
-                            Console.WriteLine("Invalid symbol in card number, press any button to continue...");
-                            Console.ReadKey();
-                            continue;
-                        }
-                        if (number == 0)
-                        {
-                            stage--;
-                            continue;
-                        }
-                        try
-                        {
-                            Console.Write("CVC: ");
-                            cvc = int.Parse(Console.ReadLine());
-                        }
-                        catch (Exception)
-                        {
-                            Log.Error("Invalid symbol in CVC");
-                            Console.WriteLine("Invalid symbol in CVC, press any button to continue...");
-                            Console.ReadKey();
-                            continue;
-                        }
-                        foreach (var it in Cards)
-                        {
-                            if (number == it.number)
+                            try
                             {
-                                if (cvc == it.cvc)
+                                Console.Write("Card number (0 - back): ");
+                                number = long.Parse(Console.ReadLine());
+                            }
+                            catch (Exception)
+                            {
+                                Log.Error("Invalid symbol in card number");
+                                Console.WriteLine("Invalid symbol in card number, press any button to continue...");
+                                Console.ReadKey();
+                                continue;
+                            }
+                            if (number == 0)
+                            {
+                                stage--;
+                                continue;
+                            }
+                            try
+                            {
+                                Console.Write("CVC: ");
+                                cvc = int.Parse(Console.ReadLine());
+                            }
+                            catch (Exception)
+                            {
+                                Log.Error("Invalid symbol in CVC");
+                                Console.WriteLine("Invalid symbol in CVC, press any button to continue...");
+                                Console.ReadKey();
+                                continue;
+                            }
+                            foreach (var it in Cards)
+                            {
+                                if (number == it.number)
                                 {
-                                    Ticket ticket = new Ticket(route_name, vagon_ind, vagon_type, vagon_type == 0, vagon_type == 0 ? compartment_ind : platzkart_ind, seat_ind);
-                                    if (ticket == null)
-                                    {
-                                        Log.Error("Ticket is null");
-                                        Console.WriteLine("Ops, some thing wrong, press any button to continue...");
-                                        Console.ReadKey();
-                                        continue;
-                                    }
-                                    int id = ticket.make_ticket(route_name);
-                                    if (id == 0)
-                                    {
-                                        Console.WriteLine("Ops, some thing wrong, press any button to continue...");
-                                        Console.ReadKey();
-                                        continue;
-                                    }
-                                    if (vagon_type == 0)
-                                    {
-                                        train_composition1.vagons_compartmentType[vagon_ind - 1].compartments[compartment_ind - 1][seat_ind - 1] = false;
-                                    }
-                                    else if (vagon_type == 1 && platzkart_ind <= 9)
-                                    {
-                                        train_composition1.vagons_platzkartType[vagon_ind - 1].platzkarts_top[platzkart_ind - 1][seat_ind - 1] = false;
-                                    }
-                                    else if (vagon_type == 1 && platzkart_ind >= 10)
-                                    {
-                                        train_composition1.vagons_platzkartType[vagon_ind - 1].platzkarts_bottom[platzkart_ind - 9 - 1][seat_ind - 1] = false;
-                                    }
-                                    payed = true;
-                                    train_composition1.route_name = route_name;
-                                    train_composition1.trainComposition_serialize();
-                                    Console.WriteLine("Sueccessful, your ID is: " + id);
-                                    Log.Information("Sueccessful maked ticked with id: {id}", id);
+                                    if (cvc == it.cvc) payed = true;
                                 }
                             }
+                            if (payed == false)
+                            {
+                                Log.Error("Incorrect number or cvc");
+                                Console.WriteLine("Incorrect number or cvc, press any button to continue...");
+                                Console.ReadKey();
+                                continue;
+                            }
                         }
-                        if (payed == false)
+                        Ticket ticket = new Ticket(route_name, vagon_ind, vagon_type, vagon_type == 0, vagon_type == 0 ? compartment_ind : platzkart_ind, seat_ind, fake ? true : false);
+                        if (ticket == null)
                         {
-                            Log.Error("Incorrect number or cvc");
-                            Console.WriteLine("Incorrect number or cvc, press any button to continue...");
+                            Log.Error("Ticket is null");
+                            Console.WriteLine("Oops... Some thing wrong, press any button to continue...");
                             Console.ReadKey();
                             continue;
+                        }
+                        int id = ticket.make_ticket(route_name);
+                        if (id == 0)
+                        {
+                            Console.WriteLine("Oops... Some thing wrong, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        if (vagon_type == 0)
+                        {
+                            train_composition1.vagons_compartmentType[vagon_ind - 1].compartments[compartment_ind - 1][seat_ind - 1] = false;
+                        }
+                        else if (vagon_type == 1 && platzkart_ind <= 9)
+                        {
+                            train_composition1.vagons_platzkartType[vagon_ind - 1].platzkarts_top[platzkart_ind - 1][seat_ind - 1] = false;
+                        }
+                        else if (vagon_type == 1 && platzkart_ind >= 10)
+                        {
+                            train_composition1.vagons_platzkartType[vagon_ind - 1].platzkarts_bottom[platzkart_ind - 9 - 1][seat_ind - 1] = false;
+                        }
+                        train_composition1.route_name = route_name;
+                        train_composition1.trainComposition_serialize();
+                        if (!fake)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Sueccessful, your ID is: " + id);
+                            Log.Information("Sueccessful maked ticked with id: {id}", id);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Sueccessful, your fake ID is: " + id);
+                            Log.Information("Sueccessful maked ticked with fake id: {id}", id);
                         }
                         return;
 
