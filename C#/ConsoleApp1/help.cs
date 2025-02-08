@@ -3123,58 +3123,32 @@ public class Game
 //}
 
 using Serilog;
+using System.Globalization;
 class Program
 {
-    public class Projector
+    public class Text_editor
     {
-        public void TurnOn()
+        public string text;
+
+        public Text_editor(string text)
         {
-            Log.Debug("projector on");
+            this.text = text;
         }
 
-        public void TurnOff()
+        public void to_upper()
         {
-            Log.Information("projector off");
-        }
-    }
-
-    public class SoundSystem
-    {
-        public void SetVolume(int volume)
-        {
-            Log.Information("volume set to {volume}", volume);
+            text = text.ToUpper();
         }
 
-        public void Mute()
+        public void to_lower()
         {
-            Log.Information("muted");
-        }
-    }
-
-    public class StreamingService
-    {
-        public void PlayMovie(string title)
-        {
-            Log.Debug("playing movie: {title}", title);
+            text = text.ToLower();
         }
 
-        public void StopMovie()
+        public void to_title()
         {
-            Log.Information("movie stopped");
-        }
-    }
-
-    public class SmartHome
-    {
-        public Projector projector;
-        public SoundSystem soundSystem;
-        public StreamingService streamingService;
-
-        public SmartHome()
-        {
-            projector = new Projector();
-            soundSystem = new SoundSystem();
-            streamingService = new StreamingService();
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+            text = textInfo.ToTitleCase(text.ToLower());
         }
     }
     static void Main(string[] args)
@@ -3184,14 +3158,14 @@ class Program
             .WriteTo.Console()
             .CreateLogger();
 
-        SmartHome smartHome = new SmartHome();
-        smartHome.projector.TurnOff();
-        smartHome.projector.TurnOn();
-        smartHome.soundSystem.Mute();
-        Console.Write("volume: ");
-        smartHome.soundSystem.SetVolume(int.Parse(Console.ReadLine()));
-        Console.Write("movie: ");
-        smartHome.streamingService.PlayMovie(Console.ReadLine());
-        smartHome.streamingService.StopMovie();
+        Log.Debug("inputing text");
+        Console.Write("text: ");
+        Text_editor text_editor = new Text_editor(Console.ReadLine());
+        text_editor.to_upper();
+        Log.Information("to upper: {text_editor.text}", text_editor.text);
+        text_editor.to_lower();
+        Log.Information("to lower: {text_editor.text}", text_editor.text);
+        text_editor.to_title();
+        Log.Information("to title: {text_editor.text}", text_editor.text);
     }
 }

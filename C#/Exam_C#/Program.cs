@@ -132,7 +132,7 @@ class Program
         public void info_compartment(int compartment)
         {
             Console.Write("[");
-            if (compartments[compartment][0] == true)
+            if (compartments[compartment - 1][0] == true)
             {
                 Console.Write("1");
             }
@@ -141,9 +141,29 @@ class Program
                 Console.Write("X");
             }
             Console.Write("]+[");
-            if (compartments[compartment][1] == true)
+            if (compartments[compartment - 1][1] == true)
             {
                 Console.Write("2");
+            }
+            else
+            {
+                Console.Write("X");
+            }
+            Console.WriteLine("]");
+
+            Console.Write("[");
+            if (compartments[compartment - 1][2] == true)
+            {
+                Console.Write("3");
+            }
+            else
+            {
+                Console.Write("X");
+            }
+            Console.Write("] [");
+            if (compartments[compartment - 1][3] == true)
+            {
+                Console.Write("4");
             }
             else
             {
@@ -242,70 +262,12 @@ class Program
                 Console.WriteLine("  |________________________-_________-_________-_________-_________-_________-_________-_________-_________-____|");
             }
 
-            public void info_indOrX()
-            {
-                int ind = 0;
-
-                Console.WriteLine("Platzkart type");
-
-                Console.WriteLine("   ____-_________-_________-_________-_________-_________-_________-_________-_________-_________-_________-____");
-
-                Console.Write("  | [~]+[~] | [~]+[~] |");
-                for (int i = 0; i < 9; i++)
-                {
-                    Console.Write(" [");
-                    if (platzkarts_top[i][0] == true) Console.Write(ind);
-                    else Console.Write("X");
-                    ind++;
-                    Console.Write("]+[");
-                    if (platzkarts_top[i][1] == true) Console.Write(ind);
-                    else Console.Write("X");
-                    ind++;
-                    Console.Write("] |");
-                }
-                Console.WriteLine();
-
-                Console.Write("  | [~] [~] | [~] [~] |");
-                for (int i = 0; i < 9; i++)
-                {
-                    Console.Write(" [");
-                    if (platzkarts_top[i][2] == true) Console.Write("O");
-                    else Console.Write("X");
-                    ind++;
-                    Console.Write("]+[");
-                    if (platzkarts_top[i][3] == true) Console.Write("O");
-                    else Console.Write("X");
-                    ind++;
-                    Console.Write("] |");
-                }
-                Console.WriteLine("");
-
-                Console.WriteLine("-<| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |>-");
-
-                Console.Write("  | ~~~~~~~~~~~~~~~~~~~");
-                for (int i = 0; i < 9; i++)
-                {
-                    Console.Write(" [");
-                    if (platzkarts_bottom[i][0] == true) Console.Write("O");
-                    else Console.Write("X");
-                    ind++;
-                    Console.Write("]+[");
-                    if (platzkarts_bottom[i][1] == true) Console.Write("O");
-                    else Console.Write("X");
-                    ind++;
-                    Console.Write("] |");
-                }
-                Console.WriteLine();
-
-                Console.WriteLine("  |________________________-_________-_________-_________-_________-_________-_________-_________-_________-____|");
-            }
-
             public void info_platzkart(int platzkart)
             {
                 if (platzkart <= 9)
                 {
                     Console.Write("[");
-                    if (platzkarts_top[platzkart][0] == true)
+                    if (platzkarts_top[platzkart - 1][0] == true)
                     {
                         Console.Write("1");
                     }
@@ -314,7 +276,7 @@ class Program
                         Console.Write("X");
                     }
                     Console.Write("]+[");
-                    if (platzkarts_top[platzkart][1] == true)
+                    if (platzkarts_top[platzkart - 1][1] == true)
                     {
                         Console.Write("2");
                     }
@@ -325,7 +287,7 @@ class Program
                     Console.WriteLine("]");
 
                     Console.Write("[");
-                    if (platzkarts_top[platzkart][2] == true)
+                    if (platzkarts_top[platzkart - 1][2] == true)
                     {
                         Console.Write("3");
                     }
@@ -334,7 +296,7 @@ class Program
                         Console.Write("X");
                     }
                     Console.Write("] [");
-                    if (platzkarts_top[platzkart][3] == true)
+                    if (platzkarts_top[platzkart - 1][3] == true)
                     {
                         Console.Write("4");
                     }
@@ -347,7 +309,7 @@ class Program
                 else
                 {
                     Console.Write("[");
-                    if (platzkarts_bottom[platzkart][0] == true)
+                    if (platzkarts_bottom[platzkart - 9 - 1][0] == true)
                     {
                         Console.Write("1");
                     }
@@ -356,7 +318,7 @@ class Program
                         Console.Write("X");
                     }
                     Console.Write("]+[");
-                    if (platzkarts_bottom[platzkart][1] == true)
+                    if (platzkarts_bottom[platzkart - 9 - 1][1] == true)
                     {
                         Console.Write("2");
                     }
@@ -432,7 +394,7 @@ class Program
                     File.WriteAllText(path, JsonSerializer.Serialize(trainComposition_data));
                     Train_composition _trainComposition_data = JsonSerializer.Deserialize<Train_composition>(File.ReadAllText(path));
                     if (JsonSerializer.Serialize(trainComposition_data) != JsonSerializer.Serialize(_trainComposition_data)) throw new Exception();
-                    Log.Information($"Train composition successfully serialized to '{path}'");
+                    Log.Information("Train composition successfully serialized to '{path}'", path);
                 }
                 catch (Exception)
                 {
@@ -510,31 +472,38 @@ class Program
             {
                 int id = 0;
                 string directory = "tickets";
-                if (!Directory.Exists(directory))
+                try
                 {
-                    Directory.CreateDirectory(directory);
-                }
-
-                List<int> used_ids = new List<int>();
-                foreach (string file in Directory.GetFiles(directory))
-                {
-                    string file_name = Path.GetFileNameWithoutExtension(file);
-                    string[] parts = file_name.Split(' ');
-                    if (parts[0] == route)
+                    if (!Directory.Exists(directory))
                     {
-                        used_ids.Add(int.Parse(parts[1]));
+                        Directory.CreateDirectory(directory);
                     }
-                }
-
-                while (true)
-                {
-                    id++;
-                    if (!used_ids.Contains(id))
+                    List<int> used_ids = new List<int>();
+                    foreach (string file in Directory.GetFiles(directory))
                     {
-                        break;
+                        string file_name = Path.GetFileNameWithoutExtension(file);
+                        string[] parts = file_name.Split(' ');
+                        if (parts[0] == route)
+                        {
+                            used_ids.Add(int.Parse(parts[1]));
+                        }
                     }
+                    while (true)
+                    {
+                        id++;
+                        if (!used_ids.Contains(id))
+                        {
+                            break;
+                        }
+                    }
+                    Log.Information("Ticket ids successfully finded");
                 }
-                string path = $"{directory}\\{route} {id}_.json";
+                catch (Exception)
+                {
+                    Log.Error("Error in ticket ids finder");
+                }
+                
+                string path = $"{directory}\\{route} {id}.json";
                 try
                 {
                     if (!File.Exists(path))
@@ -548,7 +517,7 @@ class Program
                     File.WriteAllText(path, JsonSerializer.Serialize(this));
                     Ticket _ticket_data = JsonSerializer.Deserialize<Ticket>(File.ReadAllText(path));
                     if (JsonSerializer.Serialize(this) != JsonSerializer.Serialize(_ticket_data)) throw new Exception();
-                    Log.Information($"Ticket successfully serialized to '{path}'");
+                    Log.Information("Ticket successfully serialized to '{path}'", path);
                     return id;
                 }
                 catch (Exception)
@@ -723,7 +692,7 @@ class Program
                                 continue;
                             }
 
-                            vagon_ind = ch - 1;
+                            vagon_ind = ch;
                             Log.Information("Compartment vagon selected: " + vagon_ind);
                             stage++;
                         }
@@ -753,7 +722,7 @@ class Program
                                 Console.ReadKey();
                                 continue;
                             }
-                            vagon_ind = ch - 1;
+                            vagon_ind = ch;
                             Log.Information($"Platzkart vagon selected: " + vagon_ind);
                             stage++;
                         }
@@ -764,8 +733,8 @@ class Program
                         err_loop = 0;
                         if (vagon_type == 0)
                         {
-                            train_composition1.vagons_compartmentType[vagon_ind].info_emptyOrNot(true);
-                            Console.Write("\nChoose compartment (0 - back): ");
+                            train_composition1.vagons_compartmentType[vagon_ind - 1].info_emptyOrNot(true);
+                            Console.Write("\nChoose compartment (0 - back): #");
                             try
                             {
                                 ch = int.Parse(Console.ReadLine());
@@ -794,8 +763,8 @@ class Program
                         }
                         else if (vagon_type == 1)
                         {
-                            train_composition1.vagons_platzkartType[vagon_ind].info_emptyOrNot(true);
-                            Console.Write("\nChoose platzkart (0 - back): ");
+                            train_composition1.vagons_platzkartType[vagon_ind - 1].info_emptyOrNot(true);
+                            Console.Write("\nChoose platzkart (0 - back): #");
                             try
                             {
                                 ch = int.Parse(Console.ReadLine());
@@ -829,8 +798,8 @@ class Program
                         err_loop = 0;
                         if (vagon_type == 0)
                         {
-                            train_composition1.vagons_compartmentType[vagon_ind].info_compartment(compartment_ind);
-                            Console.Write("\nChoose seat (0 - back): ");
+                            train_composition1.vagons_compartmentType[vagon_ind - 1].info_compartment(compartment_ind);
+                            Console.Write("\nChoose seat (0 - back): #");
                             try
                             {
                                 ch = int.Parse(Console.ReadLine());
@@ -854,7 +823,7 @@ class Program
                                 Console.ReadKey();
                                 continue;
                             }
-                            if (train_composition1.vagons_compartmentType[vagon_ind].compartments[compartment_ind - 1][seat_ind - 1] == false)
+                            if (train_composition1.vagons_compartmentType[vagon_ind - 1].compartments[compartment_ind - 1][ch - 1] == false)
                             {
                                 Console.WriteLine("Seat is not empty, press any button to continue...");
                                 Console.ReadKey();
@@ -865,15 +834,15 @@ class Program
                         }
                         else if (vagon_type == 1)
                         {
-                            train_composition1.vagons_platzkartType[vagon_ind].info_indOrX();
-                            Console.Write("\nChoose platzkart (0 - back): ");
+                            train_composition1.vagons_platzkartType[vagon_ind - 1].info_platzkart(platzkart_ind);
+                            Console.Write("\nChoose seat (0 - back): #");
                             try
                             {
                                 ch = int.Parse(Console.ReadLine());
                             }
                             catch (Exception)
                             {
-                                Log.Error("Invalid symbol in platzkart selection");
+                                Log.Error("Invalid symbol in platzkart seat selection");
                                 Console.WriteLine("Invalid symbol, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
@@ -891,7 +860,7 @@ class Program
                             }
                             if (platzkart_ind <= 9)
                             {
-                                if (train_composition1.vagons_platzkartType[vagon_ind].platzkarts_top[platzkart_ind - 1][seat_ind - 1] == false)
+                                if (train_composition1.vagons_platzkartType[vagon_ind - 1].platzkarts_top[platzkart_ind - 1][ch - 1] == false)
                                 {
                                     Console.WriteLine("Seat is not empty, press any button to continue...");
                                     Console.ReadKey();
@@ -900,7 +869,7 @@ class Program
                             }
                             else
                             {
-                                if (train_composition1.vagons_platzkartType[vagon_ind].platzkarts_top[platzkart_ind - 9 - 1][seat_ind - 1] == false)
+                                if (train_composition1.vagons_platzkartType[vagon_ind - 1].platzkarts_bottom[platzkart_ind - 9 - 1][ch - 1] == false)
                                 {
                                     Console.WriteLine("Seat is not empty, press any button to continue...");
                                     Console.ReadKey();
@@ -917,15 +886,19 @@ class Program
                         Log.Information("Switched to case 6");
                         try
                         {
-
-                            Console.Write("Card number: ");
-                            number = int.Parse(Console.ReadLine());
+                            Console.Write("Card number (0 - back): ");
+                            number = long.Parse(Console.ReadLine());
                         }
                         catch (Exception)
                         {
                             Log.Error("Invalid symbol in card number");
                             Console.WriteLine("Invalid symbol in card number, press any button to continue...");
                             Console.ReadKey();
+                            continue;
+                        }
+                        if (number == 0)
+                        {
+                            stage--;
                             continue;
                         }
                         try
@@ -963,17 +936,19 @@ class Program
                                     }
                                     if (vagon_type == 0)
                                     {
-                                        train_composition1.vagons_compartmentType[vagon_ind].compartments[compartment_ind - 1][seat_ind - 1] = false;
+                                        train_composition1.vagons_compartmentType[vagon_ind - 1].compartments[compartment_ind - 1][seat_ind - 1] = false;
                                     }
                                     else if (vagon_type == 1 && platzkart_ind <= 9)
                                     {
-                                        train_composition1.vagons_platzkartType[vagon_ind].platzkarts_top[platzkart_ind - 1][seat_ind - 1] = false;
+                                        train_composition1.vagons_platzkartType[vagon_ind - 1].platzkarts_top[platzkart_ind - 1][seat_ind - 1] = false;
                                     }
                                     else if (vagon_type == 1 && platzkart_ind >= 10)
                                     {
-                                        train_composition1.vagons_platzkartType[vagon_ind].platzkarts_bottom[platzkart_ind - 9 - 1][seat_ind - 1] = false;
+                                        train_composition1.vagons_platzkartType[vagon_ind - 1].platzkarts_bottom[platzkart_ind - 9 - 1][seat_ind - 1] = false;
                                     }
                                     payed = true;
+                                    train_composition1.route_name = route_name;
+                                    train_composition1.trainComposition_serialize();
                                     Console.WriteLine("Sueccessful, your ID is: " + id);
                                     Log.Information("Sueccessful maked ticked with id: {id}", id);
                                 }
