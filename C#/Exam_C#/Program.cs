@@ -545,15 +545,37 @@ class Program
                 .CreateLogger();
             Log.Information("_________________LOGGING WORK SUCCESSFULLY_________________");
 
-            Menu(true);
+            Make_ticket(true);
 
             Log.Information("Program ends");
         }
 
-        static void Menu(bool fake)
+        static void Menu()
         {
-            //for ticket
             int stage = 1;
+            while (true)
+            {
+                switch (stage)
+                {
+                    case 1:
+
+                        break;
+
+                    case 2:
+
+                        break;
+
+                    default:
+
+                        break;
+                }
+            }
+        }
+
+        static void Make_ticket(bool fake)
+        {
+            int stage = 1;
+            //for ticket
             string route_name = "";
             int vagon_type = -1;
             int vagon_ind = -1;
