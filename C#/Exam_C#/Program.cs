@@ -800,7 +800,7 @@ class Program
                                 }
                             }
                         }
-                        else if (ch <= 36)
+                        else if (ch <= 36) //
                         {
                             while (ch > 4)
                             {

@@ -2799,3 +2799,325 @@ public class Game
 //    }
 //}
 
+//using System;
+//using Serilog;
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        Log.Logger = new LoggerConfiguration()
+//            .MinimumLevel.Debug()
+//            .WriteTo.Console()
+//            .WriteTo.File("operation.log")
+//            .CreateLogger();
+//        Log.Information("program start");
+
+//        Console.WriteLine();
+
+//        try
+//        {
+//            double x = 15.2;
+//            double y = 0;
+
+//            double result_add = add(x, y);
+//            Log.Information("{x} + {y} = {result_add}", x, y, result_add);
+
+//            Console.WriteLine();
+
+//            double result_minus = minus(x, y);
+//            Log.Information("{x} - {y} = {result_minus}", x, y, result_minus);
+
+//            Console.WriteLine();
+
+//            double result_dilit = dilit(x, y);
+//            if (y != 0)
+//            {
+//                Log.Warning("{x} / {y} = {result_dilit}", x, y, result_dilit);
+//            }
+
+//            Console.WriteLine();
+
+//            double result_mnosh = mnosh(x, y);
+//            Log.Information("{x} * {y} = {result_mnosh}", x, y, result_mnosh);
+//        }
+//        catch (Exception ex)
+//        {
+//            Log.Error(ex, " - err");
+//        }
+//        finally
+//        {
+//            Console.WriteLine();
+
+//            Log.Information("program end");
+//        }
+//    }
+
+//    static double add(double a, double b)
+//    {
+//        Log.Debug("operation {a} + {b}", a, b);
+//        return a + b;
+//    }
+
+//    static double minus(double a, double b)
+//    {
+//        Log.Debug("operation {a} - {b}", a, b);
+//        return a - b;
+//    }
+
+//    static double dilit(double a, double b)
+//    {
+//        try
+//        {
+//            Log.Debug("operation {a} / {b}", a, b);
+//            if (b == 0)
+//            {
+//                throw new Exception("second numb is zero");
+//            }
+//            return a / b;
+//        }
+//        catch (Exception ex)
+//        {
+//            Log.Error(ex, " - err");
+//            return 0;
+//        }
+
+//    }
+
+//    static double mnosh(double a, double b)
+//    {
+//        Log.Debug("operation {a} * {b}", a, b);
+//        return a * b;
+//    }
+//}
+
+//using Serilog;
+//using System.Text.Json;
+//class Program
+//{
+//    class Zakaz
+//    {
+//        public List<Item> items { get; }
+
+//        public Zakaz(List<Item> items)
+//        {
+//            this.items = items;
+//        }
+
+//        public double cost()
+//        {
+//            double cost = 0;
+//            foreach (var item in items)
+//            {
+//                cost += item.cost * item.count;
+//            }
+//            return cost;
+//        }
+
+//        public bool pay()
+//        {
+//            bool sueccess = true;
+//            foreach (var item in items)
+//            {
+//                if (item.pay())
+//                {
+//                    Log.Information("payed");
+//                }
+//                else
+//                {
+//                    Log.Error("not payed");
+//                    sueccess = false;
+//                }
+//            }
+//            return sueccess;
+//        }
+//    }
+
+//    class Item
+//    {
+//        private string name;
+//        public int count { get; }
+//        public double cost { get; }
+
+//        public Item(string name, int count, double cost)
+//        {
+//            this.name = name;
+//            this.count = count;
+//            this.cost = cost;
+//        }
+
+//        public bool pay()
+//        {
+//            if (String.IsNullOrEmpty(name))
+//            {
+//                Log.Error("Incorrect item name");
+//                return false;
+//            }
+//            Log.Debug("paying x{count} {name}, cost of 1 is {cost}", count, name, cost);
+//            if (count < 0)
+//            {
+//                Log.Error("Incorrect item count");
+//                return false;
+//            }
+//            if (cost <= 0)
+//            {
+//                Log.Error("Incorrect item cost");
+//                return false;
+//            }
+//            return true;
+//        }
+//    }
+
+//    class Customer
+//    {
+//        private string name;
+//        private double money;
+
+//        public Customer(string name, double money)
+//        {
+//            this.name = name;
+//            this.money = money;
+//        }
+
+//        public void pay(Zakaz zakaz)
+//        {
+//            if (zakaz.cost() > money)
+//            {
+//                Log.Error("money not enough");
+//                return;
+//            }
+//            else
+//            {
+//                Log.Information("money enough");
+//            }
+
+//            if (zakaz.pay())
+//            {
+//                money -= zakaz.cost();
+//                Log.Information("zakaz payed");
+//                try
+//                {
+//                    File.WriteAllText("zakaz.json", JsonSerializer.Serialize(zakaz));
+//                    Log.Information("serialized");
+//                }
+//                catch (Exception)
+//                {
+//                    Log.Information("not serialized");
+//                }
+//            }
+//            else
+//            {
+//                Log.Information("zakaz not payed");
+//            }
+//        }
+//    }
+
+//    static void Main(string[] args)
+//    {
+//        Log.Logger = new LoggerConfiguration()
+//            .MinimumLevel.Debug()
+//            .WriteTo.Console()
+//            .WriteTo.File("operation.log")
+//            .CreateLogger();
+//        Log.Information("program start");
+
+//        List<Item> items = new List<Item>();
+//        items.Add(new Item("Bread", 2, 20));
+//        items.Add(new Item("Milk", 2, 30));
+//        items.Add(new Item("Cheese", 1, 40));
+
+//        List<Item> items2 = new List<Item>();
+//        items2.Add(new Item("Fishing Rod", 1, 10));
+//        items2.Add(new Item("Fishing Line", 2, 15));
+//        items2.Add(new Item("Hooks", 3, 20));
+//        items2.Add(new Item("Bait", 2, 10));
+//        items2.Add(new Item("Fishing Net", 2, 15));
+
+//        Customer customer = new Customer("Vasya", 150.0);
+//        customer.pay(new Zakaz(items));
+//        customer.pay(new Zakaz(items2));
+
+//        Log.Information("program end");
+//    }
+//}
+
+//using Serilog;
+//using System.Text.Json;
+//class Program
+//{
+//    class User
+//    {
+//        private string name;
+//        private string pass;
+//        public List<string> tovars;
+
+//        public User(string name, string pass)
+//        {
+//            this.name = name;
+//            this.pass = pass;
+//            tovars = new List<string>();
+//        }
+
+//        public bool authenticate(string name, string pass)
+//        {
+//            if (name == this.name && pass == this.pass)
+//            {
+//                Log.Information("{name} authenticated", name);
+//                return true;
+//            }
+//            else
+//            {
+//                Log.Error("{name} not authenticated", name);
+//                return false;
+//            }
+//        }
+
+//        public void pay()
+//        {
+//            Random random = new Random();
+//            int a = random.Next(3);
+//            if (a > 0)
+//            {
+//                Log.Information("{name} payed zakaz", name);
+//                File.WriteAllText("tovars.json", JsonSerializer.Serialize(tovars));
+//                Log.Information("serialized");
+//            }
+//            else
+//            {
+//                Log.Error("{name} not payed zakaz", name);
+//            }
+//        }
+//    }
+
+//    static void Main(string[] args)
+//    {
+//        Log.Logger = new LoggerConfiguration()
+//            .MinimumLevel.Debug()
+//            .WriteTo.Console()
+//            .WriteTo.File("operation.log")
+//            .CreateLogger();
+//        Log.Information("program started");
+
+//        User user = new User("user", "123");
+//        Console.Write("name: ");
+//        string name = Console.ReadLine();
+//        Console.Write("pass: ");
+//        string pass = Console.ReadLine();
+//        if (!user.authenticate(name, pass))
+//        {
+//            return;
+//        }
+
+//        List<string> catalog = new List<string> { "egg", "piva", "melon", "water", "pepsi" };
+//        Log.Debug("searching products");
+//        Random random = new Random();
+//        int count = random.Next(1, 6);
+//        for (int i = 0; i < count; i++)
+//        {
+//            user.tovars.Add(catalog[random.Next(5)]);
+//        }
+//        Log.Information("finded tovars added to koshik ({count})", count);
+
+//        user.pay();
+//        Log.Information("program ended");
+//    }
+//}
