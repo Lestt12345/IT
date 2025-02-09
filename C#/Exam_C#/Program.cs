@@ -545,35 +545,131 @@ class Program
                 .CreateLogger();
             Log.Information("_________________LOGGING WORK SUCCESSFULLY_________________");
 
-            Make_ticket(true);
+            Menu();
 
             Log.Information("Program ends");
         }
 
         static void Menu()
         {
+            Log.Debug("Menu function is running");
             int stage = 1;
+            int case2_stage = 1;
+            int err_loop = 0;
+            int err_loop_case2 = 0;
+
+            int ch = -1;
             while (true)
             {
+                Console.Clear();
                 switch (stage)
                 {
                     case 1:
-
+                        err_loop = 0;
+                        Log.Information("Switched to case 1 in \"Menu\"");
+                        Console.WriteLine("Menu:\n1 - Get ticket\n2 - Enter to the train\n");
+                        Console.Write("Choose (0 - exit): ");
+                        try
+                        {
+                            ch = int.Parse(Console.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            Log.Warning("Invalid symbol in menu case 1");
+                            Console.WriteLine("\nInvalid symbol, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        if (ch == 0) return;
+                        if (ch < 1 || ch > 2)
+                        {
+                            Log.Warning("Invalid choice in menu case 1");
+                            Console.WriteLine("\nInvalid choice, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        stage = ch + 1;
                         break;
 
                     case 2:
+                        err_loop = 0;
+                        Log.Information("Switched to case 2 in \"Menu\"");
+                        Console.WriteLine("Menu:\n1 - buy ticket\n2 - make fake ticket");
+                        Console.Write("Choose (0 - back): ");
+                        try
+                        {
+                            ch = int.Parse(Console.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            Log.Warning("Invalid symbol in menu case 2");
+                            Console.WriteLine("\nInvalid symbol, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        if (ch == 0)
+                        {
+                            stage--;
+                            continue;
+                        }
+                        if (ch < 1 || ch > 2)
+                        {
+                            Log.Warning("Invalid choice in menu case 2");
+                            Console.WriteLine("\nInvalid choice, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        Get_ticket(Convert.ToBoolean(ch - 1));
+                        stage = 1;
+                        break;
+                    case 3:
+                        err_loop = 0;
+                        Log.Information("Switched to case 3 in \"Menu\"");
+                        Console.WriteLine("Menu:\n1 - use ticket\n2 - try enter to the train without ticket :)");
+                        Console.Write("Choose (0 - back): ");
+                        try
+                        {
+                            ch = int.Parse(Console.ReadLine());
+                        }
+                        catch (Exception)
+                        {
+                            Log.Warning("Invalid symbol in menu");
+                            Console.WriteLine("\nInvalid symbol, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
+                        if (ch == 0)
+                        {
+                            stage--;
+                            continue;
+                        }
+                        if (ch < 1 || ch > 2)
+                        {
+                            Log.Warning("Invalid choice in menu case 3");
+                            Console.WriteLine("\nInvalid choice, press any button to continue...");
+                            Console.ReadKey();
+                            continue;
+                        }
 
                         break;
 
                     default:
-
+                        err_loop++;
+                        Log.Warning("Switched to default in \"Menu\" {err_loop} times", err_loop);
+                        if (err_loop >= 5)
+                        {
+                            Console.WriteLine("The program stopped incorrectly :(");
+                            Log.Error("Program stopped: many enters to incorrect case in \"Menu\"");
+                            return;
+                        }
                         break;
                 }
             }
         }
 
-        static void Make_ticket(bool fake)
+        static void Get_ticket(bool fake)
         {
+            Log.Debug("Get_ticket function is running");
             int stage = 1;
             //for ticket
             string route_name = "";
@@ -598,7 +694,7 @@ class Program
                 switch (stage)
                 {
                     case 1:
-                        Log.Information("Switched to case 1");
+                        Log.Information("Switched to case 1 in \"Get_ticket\"");
                         err_loop = 0;
                         Console.WriteLine("Select a route:");
                         var routes = Directory.GetFiles("routs", "*.json");
@@ -613,36 +709,34 @@ class Program
                         }
                         catch (Exception)
                         {
-                            Log.Error("Invalid symbol in route selection");
-                            Console.WriteLine("Invalid symbol, press any button to continue...");
+                            Log.Warning("Invalid symbol in route selection");
+                            Console.WriteLine("\nInvalid symbol, press any button to continue...");
                             Console.ReadKey();
                             continue;
                         }
-
                         if (ch == 0) return;
                         if (ch < 1 || ch > routes.Length)
                         {
-                            Console.WriteLine("Invalid choice, press any button to continue...");
+                            Log.Warning("Invalid choice in get_ticket case 1");
+                            Console.WriteLine("\nInvalid choice, press any button to continue...");
                             Console.ReadKey();
                             continue;
                         }
-
                         route_name = Path.GetFileNameWithoutExtension(routes[ch - 1]);
                         train_composition1 = new Train_composition($"routs\\{route_name}.json");
                         if (train_composition1 == null)
                         {
                             Log.Error("Train composition is null");
-                            Console.WriteLine("Oops... Some thing wrong, press any button to continue...");
+                            Console.WriteLine("\nOops... Some thing wrong, press any button to continue...");
                             Console.ReadKey();
                             continue;
                         }
                         Log.Information("Route selected: " + route_name);
                         stage++;
-
                         break;
 
                     case 2:
-                        Log.Information("Switched to case 2");
+                        Log.Information("Switched to case 2 in \"Get_ticket\"");
                         err_loop = 0;
                         Console.WriteLine("Select a vagon type:");
                         Console.WriteLine($"1 - Compartment ({train_composition1.vagons_compartmentType.Count})");
@@ -654,12 +748,11 @@ class Program
                         }
                         catch (Exception)
                         {
-                            Log.Error("Invalid symbol in vagon type selection");
-                            Console.WriteLine("Invalid symbol, press any button to continue...");
+                            Log.Warning("Invalid symbol in vagon type selection");
+                            Console.WriteLine("\nInvalid symbol, press any button to continue...");
                             Console.ReadKey();
                             continue;
                         }
-
                         if (ch == 0)
                         {
                             stage--;
@@ -667,25 +760,24 @@ class Program
                         }
                         if (ch < 1 || ch > 2)
                         {
-                            Console.WriteLine("Invalid choice, press any button to continue...");
+                            Log.Warning("Invalid choice in get_ticket case 2");
+                            Console.WriteLine("\nInvalid choice, press any button to continue...");
                             Console.ReadKey();
                             continue;
                         }
                         if ((ch == 1 && train_composition1.vagons_compartmentType.Count == 0) || (ch == 2 && train_composition1.vagons_platzkartType.Count == 0))
                         {
-                            Console.WriteLine("No vagons of this type, press any button to continue...");
+                            Console.WriteLine("\nNo vagons of this type, press any button to continue...");
                             Console.ReadKey();
                             continue;
                         }
-
                         vagon_type = ch - 1;
                         Log.Information("Vagon type selected");
                         stage++;
-
                         break;
 
                     case 3:
-                        Log.Information("Switched to case 3");
+                        Log.Information("Switched to case 3 in \"Get_ticket\"");
                         err_loop = 0;
                         if (vagon_type == 0)
                         {
@@ -697,8 +789,8 @@ class Program
                             }
                             catch (Exception)
                             {
-                                Log.Error("Invalid symbol in compartment selection");
-                                Console.WriteLine("Invalid symbol, press any button to continue...");
+                                Log.Warning("Invalid symbol in compartment selection");
+                                Console.WriteLine("\nInvalid symbol, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -710,7 +802,8 @@ class Program
                             }
                             if (ch < 1 || ch > train_composition1.vagons_compartmentType.Count)
                             {
-                                Console.WriteLine("Invalid choice, press any button to continue...");
+                                Log.Warning("Invalid choice in get_ticket case 3");
+                                Console.WriteLine("\nInvalid choice, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -729,8 +822,8 @@ class Program
                             }
                             catch (Exception)
                             {
-                                Log.Error("Invalid symbol in platzkart selection");
-                                Console.WriteLine("Invalid symbol, press any button to continue...");
+                                Log.Warning("Invalid symbol in platzkart selection");
+                                Console.WriteLine("\nInvalid symbol, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -741,7 +834,8 @@ class Program
                             }
                             if (ch < 1 || ch > train_composition1.vagons_platzkartType.Count)
                             {
-                                Console.WriteLine("Invalid choice, press any button to continue...");
+                                Log.Warning("Invalid choice in get_ticket case 3");
+                                Console.WriteLine("\nInvalid choice, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -752,7 +846,7 @@ class Program
                         break;
 
                     case 4:
-                        Log.Information("Switched to case 4");
+                        Log.Information("Switched to case 4 in \"Get_ticket\"");
                         err_loop = 0;
                         if (vagon_type == 0)
                         {
@@ -764,8 +858,8 @@ class Program
                             }
                             catch (Exception)
                             {
-                                Log.Error("Invalid symbol in compartment selection");
-                                Console.WriteLine("Invalid symbol, press any button to continue...");
+                                Log.Warning("Invalid symbol in compartment selection");
+                                Console.WriteLine("\nInvalid symbol, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -776,8 +870,8 @@ class Program
                             }
                             if (ch < 1 || ch > 10)
                             {
-                                Log.Error("Invalid index in compartment selection");
-                                Console.WriteLine("Invalid index, press any button to continue...");
+                                Log.Warning("Invalid index in compartment selection");
+                                Console.WriteLine("\nInvalid index, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -794,8 +888,8 @@ class Program
                             }
                             catch (Exception)
                             {
-                                Log.Error("Invalid symbol in platzkart selection");
-                                Console.WriteLine("Invalid symbol, press any button to continue...");
+                                Log.Warning("Invalid symbol in platzkart selection");
+                                Console.WriteLine("\nInvalid symbol, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -806,7 +900,8 @@ class Program
                             }
                             if (ch < 1 || ch > 18)
                             {
-                                Console.WriteLine("Invalid index, press any button to continue...");
+                                Log.Warning("Invalid choice in get_ticket case 4");
+                                Console.WriteLine("\nInvalid index, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -817,7 +912,7 @@ class Program
                         break;
 
                     case 5:
-                        Log.Information("Switched to case 5");
+                        Log.Information("Switched to case 5 in \"Get_ticket\"");
                         err_loop = 0;
                         if (vagon_type == 0)
                         {
@@ -829,8 +924,8 @@ class Program
                             }
                             catch (Exception)
                             {
-                                Log.Error("Invalid symbol in compartment seat selection");
-                                Console.WriteLine("Invalid symbol, press any button to continue...");
+                                Log.Warning("Invalid symbol in compartment seat selection");
+                                Console.WriteLine("\nInvalid symbol, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -841,14 +936,15 @@ class Program
                             }
                             if (ch < 1 || ch > 4)
                             {
-                                Log.Error("Invalid index in compartment seat selection");
-                                Console.WriteLine("Invalid index, press any button to continue...");
+                                Log.Warning("Invalid choice in get_ticket case 5");
+                                Console.WriteLine("\nInvalid index, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
                             if (train_composition1.vagons_compartmentType[vagon_ind - 1].compartments[compartment_ind - 1][ch - 1] == false)
                             {
-                                Console.WriteLine("Seat is not empty, press any button to continue...");
+                                Log.Warning("Try choose not empty seat");
+                                Console.WriteLine("\nSeat is not empty, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -865,8 +961,8 @@ class Program
                             }
                             catch (Exception)
                             {
-                                Log.Error("Invalid symbol in platzkart seat selection");
-                                Console.WriteLine("Invalid symbol, press any button to continue...");
+                                Log.Warning("Invalid symbol in get_ticket case 1");
+                                Console.WriteLine("\nInvalid symbol, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -877,7 +973,8 @@ class Program
                             }
                             if (ch < 1 || ch > 4 && platzkart_ind <= 9 || ch > 2 && platzkart_ind >= 10)
                             {
-                                Console.WriteLine("Invalid index, press any button to continue...");
+                                Log.Warning("Invalid choice in get_ticket case 5");
+                                Console.WriteLine("\nInvalid index, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -885,7 +982,7 @@ class Program
                             {
                                 if (train_composition1.vagons_platzkartType[vagon_ind - 1].platzkarts_top[platzkart_ind - 1][ch - 1] == false)
                                 {
-                                    Console.WriteLine("Seat is not empty, press any button to continue...");
+                                    Console.WriteLine("\nSeat is not empty, press any button to continue...");
                                     Console.ReadKey();
                                     continue;
                                 }
@@ -894,7 +991,8 @@ class Program
                             {
                                 if (train_composition1.vagons_platzkartType[vagon_ind - 1].platzkarts_bottom[platzkart_ind - 9 - 1][ch - 1] == false)
                                 {
-                                    Console.WriteLine("Seat is not empty, press any button to continue...");
+                                    Log.Warning("Try choose not empty seat");
+                                    Console.WriteLine("\nSeat is not empty, press any button to continue...");
                                     Console.ReadKey();
                                     continue;
                                 }
@@ -906,7 +1004,7 @@ class Program
                         break;
 
                     case 6:
-                        Log.Information("Switched to case 6");
+                        Log.Information("Switched to case 6 in \"Get_ticket\"");
                         if (!fake)
                         {
                             try
@@ -916,8 +1014,8 @@ class Program
                             }
                             catch (Exception)
                             {
-                                Log.Error("Invalid symbol in card number");
-                                Console.WriteLine("Invalid symbol in card number, press any button to continue...");
+                                Log.Warning("Invalid symbol in get_ticket case 6");
+                                Console.WriteLine("\nInvalid symbol in card number, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -933,8 +1031,8 @@ class Program
                             }
                             catch (Exception)
                             {
-                                Log.Error("Invalid symbol in CVC");
-                                Console.WriteLine("Invalid symbol in CVC, press any button to continue...");
+                                Log.Warning("Invalid symbol in get_ticket case 6");
+                                Console.WriteLine("\nInvalid symbol in CVC, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
@@ -947,24 +1045,33 @@ class Program
                             }
                             if (payed == false)
                             {
-                                Log.Error("Incorrect number or cvc");
-                                Console.WriteLine("Incorrect number or cvc, press any button to continue...");
+                                Log.Warning("Incorrect number or cvc");
+                                Console.WriteLine("\nIncorrect number or cvc, press any button to continue...");
                                 Console.ReadKey();
                                 continue;
                             }
                         }
-                        Ticket ticket = new Ticket(route_name, vagon_ind, vagon_type, vagon_type == 0, vagon_type == 0 ? compartment_ind : platzkart_ind, seat_ind, fake ? true : false);
+                        Ticket ticket = new Ticket
+                            (
+                            route_name,
+                            vagon_ind,
+                            vagon_type,
+                            vagon_type == 0,
+                            vagon_type == 0 ? compartment_ind : platzkart_ind,
+                            seat_ind,
+                            fake ? true : false
+                            );
                         if (ticket == null)
                         {
                             Log.Error("Ticket is null");
-                            Console.WriteLine("Oops... Some thing wrong, press any button to continue...");
+                            Console.WriteLine("\nOops... Some thing wrong, press any button to continue...");
                             Console.ReadKey();
                             continue;
                         }
                         int id = ticket.make_ticket(route_name);
                         if (id == 0)
                         {
-                            Console.WriteLine("Oops... Some thing wrong, press any button to continue...");
+                            Console.WriteLine("\nOops... Some thing wrong, press any button to continue...");
                             Console.ReadKey();
                             continue;
                         }
@@ -997,11 +1104,11 @@ class Program
 
                     default:
                         err_loop++;
-                        Log.Warning("Switched to default {err_loop} times", err_loop);
+                        Log.Warning("Switched to default in \"Get_ticket\" {err_loop} times", err_loop);
                         if (err_loop >= 5)
                         {
                             Console.WriteLine("The program stopped incorrectly :(");
-                            Log.Error("Program stopped: many enters to incorrect case");
+                            Log.Error("Program stopped: many enters to incorrect case in \"Get_ticket\"");
                             return;
                         }
                         break;
