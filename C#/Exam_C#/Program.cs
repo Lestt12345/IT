@@ -650,7 +650,18 @@ class Program
                             Console.ReadKey();
                             continue;
                         }
-
+                        Random random = new Random();
+                        if (ch == 1)
+                        {
+                            
+                        }
+                        if (ch == 2 && random.Next(3) == 2)
+                        {
+                            Log.Information("Enter to the train without ticket");
+                            Console.WriteLine("You in the train, press any button to return to the menu...");
+                            Console.ReadKey();
+                            stage = 1;
+                        }
                         break;
 
                     default:
@@ -700,7 +711,7 @@ class Program
                         var routes = Directory.GetFiles("routs", "*.json");
                         for (int i = 0; i < routes.Length; i++)
                         {
-                            Console.WriteLine($"{i + 1} - {Path.GetFileNameWithoutExtension(routes[i])}");
+                            Console.WriteLine(i + 1 + "-" + Path.GetFileNameWithoutExtension(routes[i]));
                         }
                         Console.Write("\nChoose (0 - back): ");
                         try
