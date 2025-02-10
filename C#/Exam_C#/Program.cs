@@ -609,7 +609,7 @@ class Program
                         }
                         if (ch == 0)
                         {
-                            stage--;
+                            stage = 1;
                             continue;
                         }
                         if (ch < 1 || ch > 2)
@@ -640,7 +640,7 @@ class Program
                         }
                         if (ch == 0)
                         {
-                            stage--;
+                            stage = 1;
                             continue;
                         }
                         if (ch < 1 || ch > 2)
@@ -653,7 +653,35 @@ class Program
                         Random random = new Random();
                         if (ch == 1)
                         {
-                            
+                            var tickets = Directory.GetFiles("tickets", "*.json");
+                            for (int i = 0; i < tickets.Length; i++)
+                            {
+                                Console.WriteLine(i + 1 + "-" + Path.GetFileNameWithoutExtension(tickets[i]));
+                            }
+                            Console.Write("\nChoose (0 - back): ");
+                            try
+                            {
+                                ch = int.Parse(Console.ReadLine());
+                            }
+                            catch (Exception)
+                            {
+                                Log.Warning("Invalid symbol in ticket selection");
+                                Console.WriteLine("\nInvalid symbol, press any button to continue...");
+                                Console.ReadKey();
+                                continue;
+                            }
+                            if (ch == 0)
+                            {
+                                stage = 1;
+                                continue;
+                            }
+                            if (ch < 1 || ch > tickets.Length)
+                            {
+                                Log.Warning("Invalid choice in menu case 3");
+                                Console.WriteLine("\nInvalid choice, press any button to continue...");
+                                Console.ReadKey();
+                                continue;
+                            }
                         }
                         if (ch == 2 && random.Next(3) == 2)
                         {
