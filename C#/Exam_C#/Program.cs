@@ -448,17 +448,17 @@ class Program
             [JsonInclude]
             public string route_name;
             [JsonInclude]
-            public int vagon_ind;
+            public int? vagon_ind;
             [JsonInclude]
-            public int vagon_type;
+            public int? vagon_type;
             [JsonInclude]
-            bool is_compartment;
+            bool? is_compartment;
             [JsonInclude]
-            int compartmentOrPlatzkart_ind;
+            int? compartmentOrPlatzkart_ind;
             [JsonInclude]
-            public int seat_ind;
+            public int? seat_ind;
             [JsonInclude]
-            bool is_fake;
+            public bool? is_fake;
 
             public Ticket(string route_name, int vagon_ind, int vagon_type, bool is_compartment, int compartmentOrPlatzkart_ind, int seat_ind, bool is_fake)
             {
@@ -469,6 +469,39 @@ class Program
                 this.compartmentOrPlatzkart_ind = compartmentOrPlatzkart_ind;
                 this.seat_ind = seat_ind;
                 this.is_fake = is_fake;
+            }
+
+            public Ticket(string path)
+            {
+                try
+                {
+                    if (!File.Exists(path))
+                    {
+                        Log.Error($"File not found: {path}");
+                        throw new FileNotFoundException($"The file at {path} was not found.");
+                    }
+                    string json = File.ReadAllText(path);
+                    var ticket_data = JsonSerializer.Deserialize<Ticket>(json);
+                    route_name = ticket_data.route_name;
+                    vagon_ind = ticket_data.vagon_ind;
+                    vagon_type = ticket_data.vagon_type;
+                    is_compartment = ticket_data.is_compartment;
+                    compartmentOrPlatzkart_ind = ticket_data.compartmentOrPlatzkart_ind;
+                    seat_ind = ticket_data.seat_ind;
+                    is_fake = ticket_data.is_fake;
+                    if (String.IsNullOrWhiteSpace(route_name) ||
+                        !vagon_ind.HasValue ||
+                        !vagon_type.HasValue ||
+                        !is_compartment.HasValue ||
+                        !compartmentOrPlatzkart_ind.HasValue ||
+                        !seat_ind.HasValue ||
+                        !is_fake.HasValue) throw new Exception();
+                    Log.Information("operation 'Deserialize ticket' success");
+                }
+                catch (Exception)
+                {
+                    Log.Error("operation 'Deserialize ticket' failed");
+                }
             }
 
             public int make_ticket(string route)
@@ -654,32 +687,64 @@ class Program
                         if (ch == 1)
                         {
                             var tickets = Directory.GetFiles("tickets", "*.json");
-                            for (int i = 0; i < tickets.Length; i++)
+                            while (true)
                             {
-                                Console.WriteLine(i + 1 + "-" + Path.GetFileNameWithoutExtension(tickets[i]));
-                            }
-                            Console.Write("\nChoose (0 - back): ");
-                            try
-                            {
-                                ch = int.Parse(Console.ReadLine());
-                            }
-                            catch (Exception)
-                            {
-                                Log.Warning("Invalid symbol in ticket selection");
-                                Console.WriteLine("\nInvalid symbol, press any button to continue...");
+                                for (int i = 0; i < tickets.Length; i++)
+                                {
+                                    Console.WriteLine(i + 1 + " - " + Path.GetFileNameWithoutExtension(tickets[i]));
+                                }
+                                Console.Write("\nChoose (0 - back): ");
+                                try
+                                {
+                                    ch = int.Parse(Console.ReadLine());
+                                }
+                                catch (Exception)
+                                {
+                                    Log.Warning("Invalid symbol in ticket selection");
+                                    Console.WriteLine("\nInvalid symbol, press any button to continue...");
+                                    Console.ReadKey();
+                                    continue;
+                                }
+                                if (ch == 0)
+                                {
+                                    stage = 1;
+                                    continue;
+                                }
+                                if (ch < 1 || ch > tickets.Length)
+                                {
+                                    Log.Warning("Invalid choice in menu case 3");
+                                    Console.WriteLine("\nInvalid choice, press any button to continue...");
+                                    Console.ReadKey();
+                                    continue;
+                                }
+                                Ticket ticket = new Ticket("tickets\\" + tickets[ch - 1]);
+                                if (ticket == null)
+                                {
+                                    Log.Error("Ticket is null");
+                                    Console.WriteLine("\nOops... Some thing wrong, press any button to continue...");
+                                    Console.ReadKey();
+                                    continue;
+                                }
+                                if (ticket.is_fake == true && random.Next(2) == 1)
+                                {
+                                    Log.Information("Enter to the train with fake ticket");
+                                    Console.WriteLine("You in the train, press any button to return to the menu...");
+                                    Console.ReadKey();
+                                    stage = 1;
+                                    continue;
+                                }
+                                else if (ticket.is_fake == true && random.Next(2) != 1)
+                                {
+                                    Log.Information("Not enter to the train without ticket");
+                                    Console.WriteLine("You unlucky, press any button to return to the menu...");
+                                    Console.ReadKey();
+                                    stage = 1;
+                                    continue;
+                                }
+                                Log.Information("Enter to the train with real ticket");
+                                Console.WriteLine("You in the train, press any button to return to the menu...");
                                 Console.ReadKey();
-                                continue;
-                            }
-                            if (ch == 0)
-                            {
                                 stage = 1;
-                                continue;
-                            }
-                            if (ch < 1 || ch > tickets.Length)
-                            {
-                                Log.Warning("Invalid choice in menu case 3");
-                                Console.WriteLine("\nInvalid choice, press any button to continue...");
-                                Console.ReadKey();
                                 continue;
                             }
                         }
@@ -689,6 +754,15 @@ class Program
                             Console.WriteLine("You in the train, press any button to return to the menu...");
                             Console.ReadKey();
                             stage = 1;
+                            continue;
+                        }
+                        else
+                        {
+                            Log.Information("Not enter to the train without ticket");
+                            Console.WriteLine("You unlucky, press any button to return to the menu...");
+                            Console.ReadKey();
+                            stage = 1;
+                            continue;
                         }
                         break;
 
