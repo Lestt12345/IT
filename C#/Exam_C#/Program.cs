@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Serilog;
 
@@ -371,9 +372,10 @@ class Program
                     if (String.IsNullOrWhiteSpace(route_name) || vagons_compartmentType == null || vagons_platzkartType == null) throw new Exception();
                     Log.Information("operation 'Deserialize train' success");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Log.Error("operation 'Deserialize train' failed");
+                    Log.Error(ex, "operation 'Deserialize train' failed");
+                    route_name = " ";
                 }
             }
 
@@ -396,9 +398,9 @@ class Program
                     if (JsonSerializer.Serialize(trainComposition_data) != JsonSerializer.Serialize(_trainComposition_data)) throw new Exception();
                     Log.Information("Train composition successfully serialized to '{path}'", path);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Log.Error("Error in 'trainComposition_serialize' method");
+                    Log.Error(ex, "Error in 'trainComposition_serialize' method");
                 }
             }
 
@@ -416,9 +418,9 @@ class Program
                     }
                     Log.Information("Train composition compartment type displayed");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Log.Error("Error displaying compartment type info");
+                    Log.Error(ex, "Error displaying compartment type info");
                 }
             }
 
@@ -436,9 +438,9 @@ class Program
                     }
                     Log.Information("Train composition compartment type displayed");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Log.Error("Error displaying compartment info");
+                    Log.Error(ex, "Error displaying compartment info");
                 }
             }
         }
@@ -459,6 +461,8 @@ class Program
             public int? seat_ind;
             [JsonInclude]
             public bool? is_fake;
+
+            public Ticket() { }
 
             public Ticket(string route_name, int vagon_ind, int vagon_type, bool is_compartment, int compartmentOrPlatzkart_ind, int seat_ind, bool is_fake)
             {
@@ -489,7 +493,7 @@ class Program
                     compartmentOrPlatzkart_ind = ticket_data.compartmentOrPlatzkart_ind;
                     seat_ind = ticket_data.seat_ind;
                     is_fake = ticket_data.is_fake;
-                    if (String.IsNullOrWhiteSpace(route_name) ||
+                    if (String.IsNullOrEmpty(route_name) ||
                         !vagon_ind.HasValue ||
                         !vagon_type.HasValue ||
                         !is_compartment.HasValue ||
@@ -498,9 +502,16 @@ class Program
                         !is_fake.HasValue) throw new Exception();
                     Log.Information("operation 'Deserialize ticket' success");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Log.Error("operation 'Deserialize ticket' failed");
+                    Log.Error(ex, "operation 'Deserialize ticket' failed");
+                    route_name = string.Empty;
+                    vagon_ind = null;
+                    vagon_type = null;
+                    is_compartment = null;
+                    compartmentOrPlatzkart_ind = null;
+                    seat_ind = null;
+                    is_fake = null;
                 }
             }
 
@@ -534,9 +545,9 @@ class Program
                     }
                     Log.Information("Ticket ids successfully finded");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Log.Error("Error in ticket ids finder");
+                    Log.Error(ex, "Error in ticket ids finder");
                 }
                 
                 string path = $"{directory}\\{route} {id}.json";
@@ -556,9 +567,9 @@ class Program
                     Log.Information("Ticket successfully serialized to '{path}'", path);
                     return id;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Log.Error("Error in 'make_ticket' method");
+                    Log.Error(ex, "Error in 'make_ticket' method");
                     return 0;
                 }
             }
@@ -574,6 +585,7 @@ class Program
         static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
                 .WriteTo.File("Log file.log")
                 .CreateLogger();
             Log.Information("_________________LOGGING WORK SUCCESSFULLY_________________");
@@ -686,9 +698,11 @@ class Program
                         Random random = new Random();
                         if (ch == 1)
                         {
+                            int ch_;
                             var tickets = Directory.GetFiles("tickets", "*.json");
                             while (true)
                             {
+                                Console.Clear();
                                 for (int i = 0; i < tickets.Length; i++)
                                 {
                                     Console.WriteLine(i + 1 + " - " + Path.GetFileNameWithoutExtension(tickets[i]));
@@ -696,7 +710,7 @@ class Program
                                 Console.Write("\nChoose (0 - back): ");
                                 try
                                 {
-                                    ch = int.Parse(Console.ReadLine());
+                                    ch_ = int.Parse(Console.ReadLine());
                                 }
                                 catch (Exception)
                                 {
@@ -705,47 +719,47 @@ class Program
                                     Console.ReadKey();
                                     continue;
                                 }
-                                if (ch == 0)
+                                if (ch_ == 0)
                                 {
-                                    stage = 1;
-                                    continue;
+                                    break;
                                 }
-                                if (ch < 1 || ch > tickets.Length)
+                                if (ch_ < 1 || ch_ > tickets.Length)
                                 {
                                     Log.Warning("Invalid choice in menu case 3");
                                     Console.WriteLine("\nInvalid choice, press any button to continue...");
                                     Console.ReadKey();
                                     continue;
                                 }
-                                Ticket ticket = new Ticket("tickets\\" + tickets[ch - 1]);
-                                if (ticket == null)
+                                Ticket ticket = new Ticket(tickets[ch_ - 1]);
+                                if (ticket == null || String.IsNullOrEmpty(ticket.route_name))
                                 {
                                     Log.Error("Ticket is null");
                                     Console.WriteLine("\nOops... Some thing wrong, press any button to continue...");
                                     Console.ReadKey();
                                     continue;
                                 }
-                                if (ticket.is_fake == true && random.Next(2) == 1)
+                                string ticket_file_name = Path.GetFileNameWithoutExtension(tickets[ch_ - 1]);
+                                if (ticket.is_fake == true && random.Next(2) == 0)
                                 {
-                                    Log.Information("Enter to the train with fake ticket");
+                                    Log.Information("Enter to the train with fake ticket '{ticket_file_name}'", ticket_file_name);
                                     Console.WriteLine("You in the train, press any button to return to the menu...");
                                     Console.ReadKey();
                                     stage = 1;
-                                    continue;
+                                    break;
                                 }
-                                else if (ticket.is_fake == true && random.Next(2) != 1)
+                                else if (ticket.is_fake == true && random.Next(2) != 0)
                                 {
-                                    Log.Information("Not enter to the train without ticket");
+                                    Log.Information("Not enter to the train with fake ticket '{ticket_file_name}'", ticket_file_name);
                                     Console.WriteLine("You unlucky, press any button to return to the menu...");
                                     Console.ReadKey();
                                     stage = 1;
-                                    continue;
+                                    break;
                                 }
-                                Log.Information("Enter to the train with real ticket");
+                                Log.Information("Enter to the train with real ticket '{ticket_file_name}'", ticket_file_name);
                                 Console.WriteLine("You in the train, press any button to return to the menu...");
                                 Console.ReadKey();
                                 stage = 1;
-                                continue;
+                                break;
                             }
                         }
                         if (ch == 2 && random.Next(3) == 2)
@@ -756,7 +770,7 @@ class Program
                             stage = 1;
                             continue;
                         }
-                        else
+                        else if(ch == 2 && random.Next(3) != 2)
                         {
                             Log.Information("Not enter to the train without ticket");
                             Console.WriteLine("You unlucky, press any button to return to the menu...");
