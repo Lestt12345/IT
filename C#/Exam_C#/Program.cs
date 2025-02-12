@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Serilog;
@@ -699,6 +700,14 @@ class Program
                         if (ch == 1)
                         {
                             int ch_;
+                            if (!Directory.EnumerateFileSystemEntries("tickets").Any())
+                            {
+                                Log.Warning("No tickets in 'tickets'");
+                                Console.WriteLine("There no tickets, press any button to continue...");
+                                Console.ReadKey();
+                                stage = 1;
+                                continue;
+                            }
                             var tickets = Directory.GetFiles("tickets", "*.json");
                             while (true)
                             {
@@ -728,6 +737,24 @@ class Program
                                     Log.Warning("Invalid choice in menu case 3");
                                     Console.WriteLine("\nInvalid choice, press any button to continue...");
                                     Console.ReadKey();
+                                    continue;
+                                }
+                                var routes = Directory.GetFiles("routs", "*.json");
+                                string ticket_name = Path.GetFileNameWithoutExtension(tickets[ch_ - 1]).Split(' ')[0];
+                                bool route_exists = false;
+                                foreach (var route in routes)
+                                {
+                                    if (Path.GetFileNameWithoutExtension(route) == ticket_name)
+                                    {
+                                        route_exists = true;
+                                        break;
+                                    }
+                                }
+                                if (!route_exists)
+                                {
+                                    Console.WriteLine("Ticket is expired, do you want delete ticket?\npress 'y' if you want");
+                                    ConsoleKeyInfo key = Console.ReadKey();
+                                    if (key.KeyChar == 'y' || key.KeyChar == 'Y') File.Delete(tickets[ch_ - 1]);
                                     continue;
                                 }
                                 Ticket ticket = new Ticket(tickets[ch_ - 1]);
