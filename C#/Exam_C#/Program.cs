@@ -829,6 +829,14 @@ class Program
     static void Get_ticket(bool fake)
     {
         Log.Debug("Get_ticket function is running");
+        if (!Directory.EnumerateFileSystemEntries("routs").Any())
+        {
+            Console.Clear();
+            Log.Warning("No routs in 'routs'");
+            Console.WriteLine("There no routs, press any button to continue...");
+            Console.ReadKey();
+            return;
+        }
         int stage = 1;
         //for ticket
         string route_name = "";
