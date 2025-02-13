@@ -9,14 +9,14 @@ using Serilog;
   capacity = 40 seats
 
    ____-____#01__-____#02__-____#03__-____#04__-____#05__-____#06__-____#07__-____#08__-____#09__-____#10__-____
-  | [~]+[~] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] |
+  | [~] [~] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] |
   | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
--<| [~] [~] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] |>-
+-<| [~] [~] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] |>-
   | ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~   ~~~~~~~ | ~~~~~~~ | ~~~~~~~ |
   |____-_________-_________-_________-_________-_________-_________-_________-_________-_________-_________-____|
 
   cupe example:
-               [1]+[2]
+               [1] [2]
                [3] [4]
 
 */
@@ -25,19 +25,18 @@ using Serilog;
   capacity = 54 seats
 
    ____-_________-____#01__-____#02__-____#03__-____#04__-____#05__-____#06__-____#07__-____#08__-____#09__-____
-  | [~]+[~] | [~]+[~] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] |
-  | [~] [~] | [~] [~] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] | [2] [3] |
+  | [~] [~] | [~] [~] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] |
+  | [~] [~] | [~] [~] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] | [3] [4] |
 -<| ~~~~~~~~~~~~~~~~~~#10~~~~~~~#11~~~~~~~#12~~~~~~~#13~~~~~~~#14~~~~~~~#15~~~~~~~#16~~~~~~~#17~~~~~~~#18~~~~~~ |>-
-  | ~~~~~~~~~~~~~~~~~~~ [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] | [0]+[1] |
+  | ~~~~~~~~~~~~~~~~~~~ [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] | [1] [2] |
   |________________________-_________-_________-_________-_________-_________-_________-_________-_________-____|
 
   plackart top example:
-                           [1]+[2]
+                           [1] [2]
                            [3] [4]
   plackart bottom example:
-                           [1]+[2]
+                           [1] [2]
 */
-
 /* empty or not
 true = empty
 false = not empty
@@ -98,13 +97,13 @@ class Program
                 Console.WriteLine("   ____-_________-_________-_________-_________-_________-_________-_________-_________-_________-_________-____");
             }
 
-            Console.Write("  | [~]+[~] |");
+            Console.Write("  | [~] [~] |");
             for (int i = 0; i < 10; i++)
             {
                 Console.Write(" [");
                 if (compartments[i][0] == true) Console.Write("O");
                 else Console.Write("X");
-                Console.Write("]+[");
+                Console.Write("] [");
                 if (compartments[i][1] == true) Console.Write("O");
                 else Console.Write("X");
                 Console.Write("] |");
@@ -142,7 +141,7 @@ class Program
             {
                 Console.Write("X");
             }
-            Console.Write("]+[");
+            Console.Write("] [");
             if (compartments[compartment - 1][1] == true)
             {
                 Console.Write("2");
@@ -214,13 +213,13 @@ class Program
                 Console.WriteLine("   ____-_________-_________-_________-_________-_________-_________-_________-_________-_________-_________-____");
             }
 
-            Console.Write("  | [~]+[~] | [~]+[~] |");
+            Console.Write("  | [~] [~] | [~] [~] |");
             for (int i = 0; i < 9; i++)
             {
                 Console.Write(" [");
                 if (platzkarts_top[i][0] == true) Console.Write("O");
                 else Console.Write("X");
-                Console.Write("]+[");
+                Console.Write("] [");
                 if (platzkarts_top[i][1] == true) Console.Write("O");
                 else Console.Write("X");
                 Console.Write("] |");
@@ -233,7 +232,7 @@ class Program
                 Console.Write(" [");
                 if (platzkarts_top[i][2] == true) Console.Write("O");
                 else Console.Write("X");
-                Console.Write("]+[");
+                Console.Write("] [");
                 if (platzkarts_top[i][3] == true) Console.Write("O");
                 else Console.Write("X");
                 Console.Write("] |");
@@ -255,7 +254,7 @@ class Program
                 Console.Write(" [");
                 if (platzkarts_bottom[i][0] == true) Console.Write("O");
                 else Console.Write("X");
-                Console.Write("]+[");
+                Console.Write("] [");
                 if (platzkarts_bottom[i][1] == true) Console.Write("O");
                 else Console.Write("X");
                 Console.Write("] |");
@@ -278,7 +277,7 @@ class Program
                 {
                     Console.Write("X");
                 }
-                Console.Write("]+[");
+                Console.Write("] [");
                 if (platzkarts_top[platzkart - 1][1] == true)
                 {
                     Console.Write("2");
@@ -320,7 +319,7 @@ class Program
                 {
                     Console.Write("X");
                 }
-                Console.Write("]+[");
+                Console.Write("] [");
                 if (platzkarts_bottom[platzkart - 9 - 1][1] == true)
                 {
                     Console.Write("2");
@@ -669,6 +668,7 @@ class Program
                     Get_ticket(Convert.ToBoolean(ch - 1));
                     stage = 1;
                     break;
+
                 case 3:
                     err_loop = 0;
                     Log.Information("Switched to case 3 in \"Menu\"");
