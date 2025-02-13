@@ -703,6 +703,7 @@ class Program
                         int ch_;
                         if (!Directory.EnumerateFileSystemEntries("tickets").Any())
                         {
+                            Console.Clear();
                             Log.Warning("No tickets in 'tickets'");
                             Console.WriteLine("There no tickets, press any button to continue...");
                             Console.ReadKey();
@@ -771,6 +772,7 @@ class Program
                             {
                                 Log.Information("Enter to the train with fake ticket '{ticket_file_name}'", ticket_file_name);
                                 Console.WriteLine("You in the train, press any button to return to the menu...");
+                                File.Delete(tickets[ch_ - 1]);
                                 Console.ReadKey();
                                 stage = 1;
                                 break;
@@ -779,12 +781,14 @@ class Program
                             {
                                 Log.Information("Not enter to the train with fake ticket '{ticket_file_name}'", ticket_file_name);
                                 Console.WriteLine("You unlucky, press any button to return to the menu...");
+                                File.Delete(tickets[ch_ - 1]);
                                 Console.ReadKey();
                                 stage = 1;
                                 break;
                             }
                             Log.Information("Enter to the train with real ticket '{ticket_file_name}'", ticket_file_name);
                             Console.WriteLine("You in the train, press any button to return to the menu...");
+                            File.Delete(tickets[ch_ - 1]);
                             Console.ReadKey();
                             stage = 1;
                             break;
