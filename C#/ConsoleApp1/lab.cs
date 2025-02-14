@@ -547,3 +547,128 @@
 //        Log.Information("program end");
 //    }
 //}
+
+// DZ BEFORE EXAM 14.02
+
+//using Serilog;
+//class Video
+//{
+//    public string title;
+//    public int views;
+
+//    public Video(string title)
+//    {
+//        this.title = title;
+//        views = 0;
+//    }
+//}
+
+//interface i_subscriber
+//{
+//    void update(string video_title);
+//}
+
+//class subscriber : i_subscriber
+//{
+//    private string name;
+
+//    public subscriber(string name)
+//    {
+//        this.name = name;
+//    }
+
+//    public void update(string video_title)
+//    {
+//        Log.Information("{name} received a notification: {video_title}", name, video_title);
+//    }
+
+//    public void watch_video(ref youtube_channel channel, string title)
+//    {
+//        for (int i = 0; i < channel.videos.Count; i++)
+//        {
+//            if (channel.videos[i].title == title)
+//            {
+//                channel.videos[i].views++;
+//                Log.Information("{name} watched video: {title}. Total views: {views}", name, title, channel.videos[i].views);
+//                break;
+//            }
+//        }
+//    }
+//}
+
+//class youtube_channel
+//{
+//    private List<i_subscriber> subscribers = new List<i_subscriber>();
+//    public List<Video> videos = new List<Video>();
+//    private string channel_name;
+
+//    public youtube_channel(string name)
+//    {
+//        channel_name = name;
+//    }
+
+//    public void add_sub(i_subscriber subscriber)
+//    {
+//        subscribers.Add(subscriber);
+//        Log.Information("new subscriber");
+//    }
+
+//    public void remove_sub(i_subscriber subscriber)
+//    {
+//        subscribers.Remove(subscriber);
+//        Log.Warning("minus subscriber");
+//    }
+
+//    public void notify_subscribers(string title)
+//    {
+//        foreach (var subscriber in subscribers)
+//        {
+//            subscriber.update(title);
+//        }
+//    }
+
+//    public void upload_video(string title)
+//    {
+//        videos.Add(new Video(title));
+//        Log.Information("new video on {channel_name}: {title}", channel_name, title);
+//        notify_subscribers(title);
+//    }
+
+//    public void remove_video(string title)
+//    {
+//        foreach(var it in videos)
+//        {
+//            if (it.title == title)
+//            {
+//                videos.Remove(it);
+//                break;
+//            }
+//        }
+//        Log.Information("removed video on {channel_name}: {title}", channel_name, title);
+//    }
+//}
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        Log.Logger = new LoggerConfiguration()
+//            .WriteTo.Console()
+//            .CreateLogger();
+
+//        youtube_channel channel = new youtube_channel("kodiki with ERRORS");
+//        subscriber sub1 = new subscriber("dyadya1");
+//        subscriber sub2 = new subscriber("dyadya2");
+
+//        channel.add_sub(sub1);
+//        channel.add_sub(sub2);
+
+//        channel.upload_video("no errors");
+//        sub1.watch_video(ref channel, "no errors");
+//        sub2.watch_video(ref channel, "no errors");
+
+//        channel.remove_sub(sub1);
+//        channel.upload_video("i married on error");
+//        sub2.watch_video(ref channel, "i married on error");
+//    }
+//}
