@@ -3122,50 +3122,173 @@ public class Game
 //    }
 //}
 
-using Serilog;
-using System.Globalization;
-class Program
-{
-    public class Text_editor
-    {
-        public string text;
+//using Serilog;
+//using System.Globalization;
+//class Program
+//{
+//    public class Text_editor
+//    {
+//        public string text;
 
-        public Text_editor(string text)
-        {
-            this.text = text;
-        }
+//        public Text_editor(string text)
+//        {
+//            this.text = text;
+//        }
 
-        public void to_upper()
-        {
-            text = text.ToUpper();
-        }
+//        public void to_upper()
+//        {
+//            text = text.ToUpper();
+//        }
 
-        public void to_lower()
-        {
-            text = text.ToLower();
-        }
+//        public void to_lower()
+//        {
+//            text = text.ToLower();
+//        }
 
-        public void to_title()
-        {
-            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
-            text = textInfo.ToTitleCase(text.ToLower());
-        }
-    }
-    static void Main(string[] args)
-    {
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .WriteTo.Console()
-            .CreateLogger();
+//        public void to_title()
+//        {
+//            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+//            text = textInfo.ToTitleCase(text.ToLower());
+//        }
+//    }
+//    static void Main(string[] args)
+//    {
+//        Log.Logger = new LoggerConfiguration()
+//            .MinimumLevel.Debug()
+//            .WriteTo.Console()
+//            .CreateLogger();
 
-        Log.Debug("inputing text");
-        Console.Write("text: ");
-        Text_editor text_editor = new Text_editor(Console.ReadLine());
-        text_editor.to_upper();
-        Log.Information("to upper: {text_editor.text}", text_editor.text);
-        text_editor.to_lower();
-        Log.Information("to lower: {text_editor.text}", text_editor.text);
-        text_editor.to_title();
-        Log.Information("to title: {text_editor.text}", text_editor.text);
-    }
-}
+//        Log.Debug("inputing text");
+//        Console.Write("text: ");
+//        Text_editor text_editor = new Text_editor(Console.ReadLine());
+//        text_editor.to_upper();
+//        Log.Information("to upper: {text_editor.text}", text_editor.text);
+//        text_editor.to_lower();
+//        Log.Information("to lower: {text_editor.text}", text_editor.text);
+//        text_editor.to_title();
+//        Log.Information("to title: {text_editor.text}", text_editor.text);
+//    }
+//}
+
+//using Serilog;
+//class Video
+//{
+//    public string title;
+//    public int views;
+
+//    public Video(string title)
+//    {
+//        this.title = title;
+//        views = 0;
+//    }
+//}
+
+//interface i_subscriber
+//{
+//    void update(string video_title);
+//}
+
+//class subscriber : i_subscriber
+//{
+//    private string name;
+
+//    public subscriber(string name)
+//    {
+//        this.name = name;
+//    }
+
+//    public void update(string video_title)
+//    {
+//        Log.Information("{name} received a notification: {video_title}", name, video_title);
+//    }
+
+//    public void watch_video(ref youtube_channel channel, string title)
+//    {
+//        for (int i = 0; i < channel.videos.Count; i++)
+//        {
+//            if (channel.videos[i].title == title)
+//            {
+//                channel.videos[i].views++;
+//                Log.Information("{name} watched video: {title}. Total views: {views}", name, title, channel.videos[i].views);
+//                break;
+//            }
+//        }
+//    }
+//}
+
+//class youtube_channel
+//{
+//    private List<i_subscriber> subscribers = new List<i_subscriber>();
+//    public List<Video> videos = new List<Video>();
+//    private string channel_name;
+
+//    public youtube_channel(string name)
+//    {
+//        channel_name = name;
+//    }
+
+//    public void add_sub(i_subscriber subscriber)
+//    {
+//        subscribers.Add(subscriber);
+//        Log.Information("new subscriber");
+//    }
+
+//    public void remove_sub(i_subscriber subscriber)
+//    {
+//        subscribers.Remove(subscriber);
+//        Log.Warning("minus subscriber");
+//    }
+
+//    public void notify_subscribers(string title)
+//    {
+//        foreach (var subscriber in subscribers)
+//        {
+//            subscriber.update(title);
+//        }
+//    }
+
+//    public void upload_video(string title)
+//    {
+//        videos.Add(new Video(title));
+//        Log.Information("new video on {channel_name}: {title}", channel_name, title);
+//        notify_subscribers(title);
+//    }
+
+//    public void remove_video(string title)
+//    {
+//        foreach(var it in videos)
+//        {
+//            if (it.title == title)
+//            {
+//                videos.Remove(it);
+//                break;
+//            }
+//        }
+//        Log.Information("removed video on {channel_name}: {title}", channel_name, title);
+//    }
+//}
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        Log.Logger = new LoggerConfiguration()
+//            .WriteTo.Console()
+//            .CreateLogger();
+
+//        youtube_channel channel = new youtube_channel("kodiki with ERRORS");
+//        subscriber sub1 = new subscriber("dyadya1");
+//        subscriber sub2 = new subscriber("dyadya2");
+
+//        channel.add_sub(sub1);
+//        channel.add_sub(sub2);
+
+//        channel.upload_video("no errors");
+//        sub1.watch_video(ref channel, "no errors");
+//        sub2.watch_video(ref channel, "no errors");
+
+//        channel.remove_sub(sub1);
+//        channel.upload_video("i married on error");
+//        sub2.watch_video(ref channel, "i married on error");
+//    }
+//}
