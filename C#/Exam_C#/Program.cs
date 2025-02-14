@@ -50,8 +50,8 @@ class Program
 {
     class Bank_card
     {
-        public long number;
-        public int cvc;
+        public long number { get; private set; }
+        public int cvc { get; private set; }
 
         public Bank_card(long number, int cvc)
         {
@@ -370,7 +370,7 @@ class Program
                 route_name = trainComposition_data.route_name;
                 vagons_compartmentType = trainComposition_data.vagons_compartmentType;
                 vagons_platzkartType = trainComposition_data.vagons_platzkartType;
-                if (String.IsNullOrWhiteSpace(route_name) || vagons_compartmentType == null || vagons_platzkartType == null) throw new Exception();
+                if (trainComposition_data == null || String.IsNullOrWhiteSpace(route_name) || vagons_compartmentType == null || vagons_platzkartType == null) throw new Exception();
                 Log.Information("operation 'Deserialize train' success");
             }
             catch (Exception ex)
@@ -855,7 +855,7 @@ class Program
         Train_composition train_composition1 = null;
 
         int ch;
-        while (!payed)
+        while (true)
         {
             Console.Clear();
             switch (stage)
