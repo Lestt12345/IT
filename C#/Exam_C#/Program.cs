@@ -530,7 +530,7 @@ class Program
                 foreach (string file in Directory.GetFiles(directory))
                 {
                     string file_name = Path.GetFileNameWithoutExtension(file);
-                    string[] parts = file_name.Split(' ');
+                    string[] parts = file_name.Split('_');
                     if (parts[0] == route)
                     {
                         used_ids.Add(int.Parse(parts[1]));
@@ -551,7 +551,7 @@ class Program
                 Log.Error(ex, "Error in ticket ids finder");
             }
 
-            string path = $"{directory}\\{route} {id}.json";
+            string path = $"{directory}\\{route}_{id}.json";
             try
             {
                 if (!File.Exists(path))
@@ -742,7 +742,7 @@ class Program
                                 continue;
                             }
                             var routes = Directory.GetFiles("routs", "*.json");
-                            string ticket_name = Path.GetFileNameWithoutExtension(tickets[ch_ - 1]).Split(' ')[0];
+                            string ticket_name = Path.GetFileNameWithoutExtension(tickets[ch_ - 1]).Split('_')[0];
                             bool route_exists = false;
                             foreach (var route in routes)
                             {
@@ -767,7 +767,7 @@ class Program
                                 Console.ReadKey();
                                 continue;
                             }
-                            string ticket_file_name = Path.GetFileNameWithoutExtension(tickets[ch_ - 1]);
+                            string ticket_file_name = Path.GetFileNameWithoutExtension(tickets[ch_ - 1]).Split('_')[0];
                             if (ticket.is_fake == true && random.Next(2) == 0)
                             {
                                 Log.Information("Enter to the train with fake ticket '{ticket_file_name}'", ticket_file_name);
