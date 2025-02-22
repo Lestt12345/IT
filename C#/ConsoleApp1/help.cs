@@ -3256,7 +3256,7 @@ public class Game
 
 //    public void remove_video(string title)
 //    {
-//        foreach(var it in videos)
+//        foreach (var it in videos)
 //        {
 //            if (it.title == title)
 //            {
@@ -3292,3 +3292,22 @@ public class Game
 //        sub2.watch_video(ref channel, "i married on error");
 //    }
 //}
+
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        int a;
+//        int b;
+//        Console.Write("ihor: ");
+//        a = int.Parse(Console.ReadLine());
+//        Console.Write("sanya: ");
+//        b = int.Parse(Console.ReadLine());
+//        Console.WriteLine(a + b);
+//    }
+//}
+
+if (true)
+{
+    
+}
