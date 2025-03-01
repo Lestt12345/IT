@@ -1,45 +1,45 @@
-﻿using Microsoft.Data.SqlClient;
+﻿//using Microsoft.Data.SqlClient;
 
-const string ConnectionString = "Server=localhost; Database=asd; Integrated Security=True; TrustServerCertificate=True";
-using (SqlConnection connection = new SqlConnection(ConnectionString))
-{
-    connection.Open();
+//const string ConnectionString = "Server=localhost; Database=asd; Integrated Security=True; TrustServerCertificate=True";
+//using (SqlConnection connection = new SqlConnection(ConnectionString))
+//{
+//    connection.Open();
 
-    string query1 = @"
-                        create table Dishes
-                        (
-                            ID int primary key identity(1, 1),
-                            DishName NVARCHAR(50),
-                            Cook NVARCHAR(50),
-                            Client NVARCHAR(50)
-                        );
-                    ";
-    string query2 = @"
-                        INSERT INTO Dishes (DishName, Cook, Client) VALUES ('Pasta', 'John', 'Alice');
-                        INSERT INTO Dishes (DishName, Cook, Client) VALUES ('Pizza', 'Emma', 'Bob');
-                        INSERT INTO Dishes (DishName, Cook, Client) VALUES ('Salad', 'Mike', 'Chris');
-                    ";
+//    string query1 = @"
+//                        create table Dishes
+//                        (
+//                            ID int primary key identity(1, 1),
+//                            DishName NVARCHAR(50),
+//                            Cook NVARCHAR(50),
+//                            Client NVARCHAR(50)
+//                        );
+//                    ";
+//    string query2 = @"
+//                        INSERT INTO Dishes (DishName, Cook, Client) VALUES ('Pasta', 'John', 'Alice');
+//                        INSERT INTO Dishes (DishName, Cook, Client) VALUES ('Pizza', 'Emma', 'Bob');
+//                        INSERT INTO Dishes (DishName, Cook, Client) VALUES ('Salad', 'Mike', 'Chris');
+//                    ";
 
-    // 1/2
-    //using (SqlCommand command = new SqlCommand(query2, connection)) // query1/query2
-    //{
-    //    command.ExecuteNonQuery();
-    //}
+//    // 1/2
+//    //using (SqlCommand command = new SqlCommand(query2, connection)) // query1/query2
+//    //{
+//    //    command.ExecuteNonQuery();
+//    //}
 
-    //3
-    //GetDishes(connection);
-}
+//    //3
+//    //GetDishes(connection);
+//}
 
-void GetDishes(SqlConnection connection)
-{
-    string query = @"SELECT * FROM Dishes";
-    using (SqlCommand command = new SqlCommand(query, connection))
-    using (SqlDataReader reader = command.ExecuteReader())
-    {
-        while (reader.Read())
-        {
-            Console.WriteLine
-                ($"ID: {reader.GetInt32(0)}, DishName: {reader.GetString(1)}, Cook: {reader.GetString(2)}, Client: {reader.GetString(3)}");
-        }
-    }
-}
+//void GetDishes(SqlConnection connection)
+//{
+//    string query = @"SELECT * FROM Dishes";
+//    using (SqlCommand command = new SqlCommand(query, connection))
+//    using (SqlDataReader reader = command.ExecuteReader())
+//    {
+//        while (reader.Read())
+//        {
+//            Console.WriteLine
+//                ($"ID: {reader.GetInt32(0)}, DishName: {reader.GetString(1)}, Cook: {reader.GetString(2)}, Client: {reader.GetString(3)}");
+//        }
+//    }
+//}
