@@ -6,7 +6,7 @@ using (SqlConnection connection = new SqlConnection(ConnectionString))
     connection.Open();
 
     string query1 = @"
-                        create table Apples
+                        create table Dishes
                         (
                             ID int primary key identity(1, 1),
                             DishName NVARCHAR(50),
@@ -20,12 +20,14 @@ using (SqlConnection connection = new SqlConnection(ConnectionString))
                         INSERT INTO Dishes (DishName, Cook, Client) VALUES ('Salad', 'Mike', 'Chris');
                     ";
 
-    using (SqlCommand command = new SqlCommand(query1, connection))
-    {
-        command.ExecuteNonQuery();
-    }
+    // 1/2
+    //using (SqlCommand command = new SqlCommand(query2, connection)) // query1/query2
+    //{
+    //    command.ExecuteNonQuery();
+    //}
 
-    GetDishes(connection);
+    //3
+    //GetDishes(connection);
 }
 
 void GetDishes(SqlConnection connection)
