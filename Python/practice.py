@@ -77,7 +77,7 @@
 
 # /
 
-loop_count = int(input("count of loops: "))
-word = input("word: ")
-for i in range(loop_count):
-    print(word)
+# loop_count = int(input("count of loops: "))
+# word = input("word: ")
+# for i in range(loop_count):
+#     print(word)
