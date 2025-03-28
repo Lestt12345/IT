@@ -1,0 +1,47 @@
+.marg-l {
+    margin-left: 3px;
+}
+
+.frstD {
+    margin-right: -44px;
+    margin-top: -18px;
+}
+
+button {
+    outline: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none; /* Убирает подчеркивание */
+    color: inherit; /* Наследует цвет текста от родителя */
+}
+
+a:hover {
+    text-decoration: none;
+    color: blue;
+}
+
+nav a {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.bord {
+    border: 1px solid black;
+    font-size: 18px;
+    font-weight: 400;
+}

@@ -640,145 +640,78 @@
 //    Console.ReadKey();
 //}
 
-//using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-//public class User
-//{
-//    public int Id { get; set; }
-//    public string Login { get; set; }
-//    public string Email { get; set; }
-//    public Profile Profile { get; set; }
-//}
+class User
+{
+    [Key]
+    public int Id { get; set; }
+    public Profile Profile { get; set; }
+    public string Nickname { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
 
-//public class Profile
-//{
-//    public int Id { get; set; }
-//    public int UserId { get; set; }
-//    public string Name { get; set; }
-//    public string Surname { get; set; }
-//    public User User { get; set; }
-//    public List<Post> Posts { get; set; } = new List<Post>();
-//    public List<Group> Groups { get; set; } = new List<Group>();
-//}
+}
 
-//public class Post
-//{
-//    public int Id { get; set; }
-//    public string Title { get; set; }
-//    public string Content { get; set; }
+class Profile
+{
+    [Key]
+    [ForeignKey("User")]
+    public int Id { get; set; }
+    public User User { get; set; }
+    public string VisibleName { get; set; }
+    public string Avatar { get; set; }
+    public string Bio { get; set; }
 
-//    public int ProfileID { get; set; }
-//    public Profile Profile { get; set; }
-//}
+    public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
+    public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
+}
 
-//public class Group
-//{
-//    public int Id { get; set; }
-//    public string Name { get; set; }
-//    public List<Profile> Profiles = new List<Profile>();
-//}
+class Post
+{
+    [Key]
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+    public string Image { get; set; }
+    public Profile Profile { get; set; }
 
-//public class AppDbContext : DbContext
-//{
-//    public DbSet<User> Users { get; set; }
-//    public DbSet<Profile> Profiles { get; set; }
-//    public DbSet<Post> Posts { get; set; }
-//    public DbSet<Group> Groups { get; set; }
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//    {
-//        optionsBuilder.UseSqlServer("Server=.; Database=NewCSHARP1; Trusted_Connection=True; TrustServerCertificate=True");
-//    }
+    [ForeignKey("Profile")]
+    public int ProfileId { get; set; }
 
-//    protected override void OnModelCreating(ModelBuilder modelBuilder)
-//    {
-//        modelBuilder.Entity<User>()
-//            .HasOne(user => user.Profile)
-//            .WithOne(profile => profile.User)
-//            .HasForeignKey<Profile>(profile => profile.UserId);
+}
 
-//        modelBuilder.Entity<Post>()
-//            .HasOne(post => post.Profile)
-//            .WithMany(profile => profile.Posts)
-//            .HasForeignKey(post => post.ProfileID);
+class Group
+{
+    [Key]
+    public int ID { get; set; }
+    public string Name { get; set; }
 
-//        modelBuilder.Entity<Profile>()
-//                .HasMany(profile => profile.Groups)
-//                .WithMany(groups => groups.Profiles)
-//                .UsingEntity<Dictionary<string, object>>(
-//                    "GroupsProfiles",
-//                    j => j.HasOne<Group>().WithMany().HasForeignKey("GroupId"),
-//                    j => j.HasOne<Profile>().WithMany().HasForeignKey("ProfileID")
-//                );
-//    }
-//}
+    public virtual ICollection<Profile> Profiles { get; set; } = new List<Profile>();
+}
 
-//class EntityFrameworkTest
-//{
-//    public static void Main()
-//    {
-//        using (var context = new AppDbContext())
-//        {
-//            //User user = new User { Name = "Олег", Email = "olegmavrodi@mail.com" };
-//            //User userArtur = new User { Name = "Артур", Email = "admin@nekos.live" };
-//            //context.Users.Add(user);
-//            //context.Users.Add(userArtur);
+class AppDbContext : DbContext
+{
+    public DbSet<User> Users { get; set; }
+    public DbSet<Profile> Profiles { get; set; }
 
-//            //context.SaveChanges();
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("Server=.;Database=Fluent; Trusted_Connection=True; TrustServerCertificate=True");
+    }
+}
 
-//            //Console.WriteLine("Створено 2 користувача!");
+class Program
+{
+    public static void Main()
+    {
+        using (var context = new AppDbContext())
+        {
 
-//            //var users = context.Users.ToList();
-//            //foreach (var user_read  in users)
-//            //{
-//            //    Console.WriteLine($"ID: {user_read.Id}, Name: {user_read.Name}, Email: {user_read.Email}");
-//            //}
 
-//            //var user = context.Users.FirstOrDefault(user => user.Id == 1);
-//            //if (user == null)
-//            //{
-//            //    Console.WriteLine("Користувача не знайдено!");
-//            //} else
-//            //{
-//            //    user.Email = "iiiii0000@gmail.com";
-//            //    context.SaveChanges();
-//            //    Console.WriteLine($"ID: {user.Id}, Name: {user.Name}, Email: {user.Email}");
-//            //}
 
-//            //var user = context.Users.FirstOrDefault(user => user.Id == 2);
-//            //if (user == null)
-//            //{
-//            //    Console.WriteLine("Користувача не знайдено!");
-//            //} else
-//            //{
-//            //    context.Users.Remove(user);
-//            //    context.SaveChanges();
-//            //    Console.WriteLine("Артура немає");
-//            //}
-
-//            //User user = new User
-//            //{
-//            //    Login = "ytka",
-//            //    Email = "krya@ytka.nos",
-//            //    Profile = new Profile { Name = "Олег", Surname = "Уткаснос" }
-//            //};
-//            //context.Users.Add(user);
-//            //context.SaveChanges();
-
-//            //var oleg = context.Profiles.FirstOrDefault(oleg => oleg.Name == "Олег");
-//            //if (oleg != null)
-//            //{
-//            //    oleg.Posts.Add(new Post { Title = "Post about bread", Content = "UTKA EE" });
-//            //    context.SaveChanges();
-//            //}
-
-//            var oleg = context.Profiles.FirstOrDefault(oleg => oleg.Name == "Олег");
-//            var group = context.Groups.FirstOrDefault(group => group.Id == 1);
-
-//            if (oleg != null && group != null)
-//            {
-//                oleg.Groups.Add(group);
-//                context.SaveChanges();
-//            }
-//        }
-//    }
-//}
+        }
+    }
+}
