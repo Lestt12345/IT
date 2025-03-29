@@ -1,7 +1,6 @@
 'use client'
 
 import './styles/Header_.css'
-import Login_Register_ from './Login_Register_.jsx'
 
 import { useState } from 'react'
 import {
@@ -100,7 +99,7 @@ export default function Header_() {
           </a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="{Login_Register_()}" className="text-xl/6 font-semibold text-gray-900">
+          <a href="/auth" className="text-xl/6 font-semibold text-gray-900">
             Авторизироваться <span aria-hidden="true">&rarr;</span>
           </a>
         </div>

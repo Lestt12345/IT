@@ -3307,7 +3307,36 @@ public class Game
 //    }
 //}
 
-if (true)
+class Program
 {
-    
+    static void Main(string[] args)
+    {
+        List<string> list1 = new List<string>() { "C#", "C++", "Java", "PHP", "JavaScript" };
+
+        Console.WriteLine("Main started");
+
+        Thread thread = new Thread(Method1);
+        thread.Start(list1);
+
+        Console.WriteLine("Thread started");
+
+        thread.Join();
+
+        Console.ReadLine();
+    }
+
+    static void Method1(object o)
+    {
+        List<string> strings = o as List<string>;
+        foreach (string s in strings)
+        {
+            Console.WriteLine(s);
+            Thread.Sleep(500);
+        }
+    }
+}
+
+class Bank
+{
+
 }

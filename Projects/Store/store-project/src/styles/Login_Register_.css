@@ -1,0 +1,17 @@
+.MediaWidth {
+    width: 500px;
+}
+
+.wh {
+    width: 100vw;
+    height: 100vh;
+}
+
+.hov {
+    margin: 5px 0px;
+}
+
+.hov:hover {
+    transition: 0.2s;
+    background-color: rgb(200, 200, 200);
+}
