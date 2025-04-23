@@ -1,90 +1,337 @@
-﻿//class Program
+﻿//using System.Data.SqlTypes;
+
+//class Program
 //{
-//    class Philosopher
+//    //1
+//    /*
+//    static void Main(string[] args)
 //    {
-//        public int eat_count = 0;
-//        public bool is_hungry = true;
-//        private readonly int rightFork_index;
-//        private readonly int leftFork_index;
-
-//        public Philosopher(int leftFork_index, int rightFork_index)
+//        double average;
+//        int[] arr = new int[new Random().Next(1, 100)];
+//        Random random = new Random();
+//        for (int i = 0; i < arr.Length; i++)
 //        {
-//            this.rightFork_index = rightFork_index;
-//            this.leftFork_index = leftFork_index;
+//            arr[i] = random.Next(100);
 //        }
-
-//        public void Eat(ref bool[] forks, int philosopher_index)
+//        int? arr_parts_count = null;
+//        for (int i = 3; i < 11; i++)
 //        {
-//            lock (forks)
+//            if (arr.Length % i == 0) // 3 - 10
 //            {
-//                if (forks[leftFork_index] || forks[rightFork_index])
-//                {
-//                    Console.WriteLine($"Philosopher {philosopher_index + 1} couldn't eat — forks are busy.");
-//                    return;
-//                }
-//                else
-//                {
-//                    forks[leftFork_index] = true;
-//                    forks[rightFork_index] = true;
-//                }
+//                arr_parts_count = i;
+//                break;
 //            }
-
-//            Console.WriteLine($"Philosopher {philosopher_index + 1} started eating.");
-//            Thread.Sleep(new Random().Next(3000, 5000));
-//            Console.WriteLine($"Philosopher {philosopher_index + 1} finished eating {++eat_count} times.");
-//            lock (forks)
-//            {
-//                forks[leftFork_index] = false;
-//                forks[rightFork_index] = false;
-//            }
-//            Thread thinkin_thread = new Thread(Start_thinking);
-//            thinkin_thread.Start();
-
 //        }
-
-//        public void Start_thinking()
+//        if (!arr_parts_count.HasValue)
 //        {
-//            Console.WriteLine("Philosopher starts thinking.");
-//            Thread.Sleep(new Random().Next(8000, 12000));
-//            is_hungry = true;
+//            average = arr.Average();
 //        }
-//    }
-
-//    static void Main()
-//    {
-//        bool[] forks = { false, false, false, false, false };
-
-//        Philosopher[] philosophers = {
-//            new Philosopher(0, 1),
-//            new Philosopher(1, 2),
-//            new Philosopher(2, 3),
-//            new Philosopher(3, 4),
-//            new Philosopher(4, 0)
-//        };
-
-//        Thread[] threads = new Thread[5];
-//        for (int i = 0; i < 5; i++)
+//        else
 //        {
-//            int index = i;
-
-//            threads[i] = new Thread(() =>
+//            int part_size = arr.Length / arr_parts_count.Value;
+//            int start = 0;
+//            int end = part_size;
+//            double[] averages = new double[arr_parts_count.Value];
+//            ManualResetEvent[] reset_events = new ManualResetEvent[arr_parts_count.Value];
+//            for (int i = 0; i < arr_parts_count.Value; i++)
 //            {
-//                while (philosophers[index].eat_count < 3)
-//                {
-//                    if (philosophers[index].is_hungry)
+//                reset_events[i] = new ManualResetEvent(false);
+//                int index = i;
+//                int part_start = start;
+//                int part_end = end;
+//                ThreadPool.QueueUserWorkItem(state => {
+//                    int[] arr_part = new int[part_size];
+//                    for (int j = part_start; j < part_end; j++)
 //                    {
-//                        philosophers[index].Eat(ref forks, index);
+//                        arr_part[j - part_start] = arr[j];
 //                    }
-//                    Thread.Sleep(3000); // общая задержка для консоли
-//                }
-//            });
-//            threads[i].Start();
+//                    averages[index] = arr_part.Average();
+//                    reset_events[index].Set();
+//                });
+//                start += part_size;
+//                end += part_size;
+//            }
+//            WaitHandle.WaitAll(reset_events);
+//            average = averages.Average();
 //        }
-//        foreach (var thread in threads)
+//        foreach (int num in arr)
 //        {
-//            thread.Join();
+//            Console.Write(num + " ");
 //        }
-
-//        Console.WriteLine("All philosophers have finished their meals.");
+//        Console.WriteLine("\n");
+//        Console.WriteLine($"Average: {Math.Round(average, 1)}");
 //    }
+//    */
+
+//    //2
+//    /*
+//    static void Main(string[] args)
+//    {
+//        int max;
+//        int[] arr = new int[new Random().Next(1, 100)];
+//        Random random = new Random();
+//        for (int i = 0; i < arr.Length; i++)
+//        {
+//            arr[i] = random.Next(100);
+//        }
+//        int? arr_parts_count = null;
+//        for (int i = 3; i < 11; i++)
+//        {
+//            if (arr.Length % i == 0) // 3 - 10
+//            {
+//                arr_parts_count = i;
+//                break;
+//            }
+//        }
+//        if (!arr_parts_count.HasValue)
+//        {
+//            max = arr.Max();
+//        }
+//        else
+//        {
+//            int part_size = arr.Length / arr_parts_count.Value;
+//            int start = 0;
+//            int end = part_size;
+//            int[] maxs = new int[arr_parts_count.Value];
+//            ManualResetEvent[] reset_events = new ManualResetEvent[arr_parts_count.Value];
+//            for (int i = 0; i < arr_parts_count.Value; i++)
+//            {
+//                reset_events[i] = new ManualResetEvent(false);
+//                int index = i;
+//                int part_start = start;
+//                int part_end = end;
+//                ThreadPool.QueueUserWorkItem(state =>
+//                {
+//                    int[] arr_part = new int[part_size];
+//                    for (int j = part_start; j < part_end; j++)
+//                    {
+//                        arr_part[j - part_start] = arr[j];
+//                    }
+//                    maxs[index] = arr_part.Max();
+//                    reset_events[index].Set();
+//                });
+//                start += part_size;
+//                end += part_size;
+//            }
+//            WaitHandle.WaitAll(reset_events);
+//            max = maxs.Max();
+//        }
+//        foreach (int num in arr)
+//        {
+//            Console.Write(num + " ");
+//        }
+//        Console.WriteLine("\n");
+//        Console.WriteLine($"Max: {max}");
+//    }
+//    */
+
+//    //3
+//    /*
+//    static void Main(string[] args)
+//    {
+//        string[] arr = {
+//            "apple", "banana", "cat", "dog", "elephant", "fox", "grape", "house", "ice", "jungle",
+//            "kite", "lion", "mountain", "notebook", "orange", "parrot", "queen", "rose", "sun", "tree"
+//        }; // gpt дал словарь
+//        Console.WriteLine("Normal:");
+//        foreach (string str in arr)
+//        {
+//            Console.Write(str + " ");
+//        }
+//        int? arr_parts_count = null;
+//        for (int i = 3; i < 11; i++)
+//        {
+//            if (arr.Length % i == 0) // 3 - 10
+//            {
+//                arr_parts_count = i;
+//                break;
+//            }
+//        }
+//        if (!arr_parts_count.HasValue)
+//        {
+//            for (int i = 0; i < arr.Length; i++)
+//            {
+//                arr[i] = new string(arr[i].Reverse().ToArray());
+//            }
+//        }
+//        else
+//        {
+//            int part_size = arr.Length / arr_parts_count.Value;
+//            int start = 0;
+//            int end = part_size;
+//            string[][] arr_parts = new string[arr_parts_count.Value][];
+//            for (int i = 0; i < arr_parts_count.Value; i++)
+//            {
+//                arr_parts[i] = new string[part_size];
+//            }
+//            ManualResetEvent[] reset_events = new ManualResetEvent[arr_parts_count.Value];
+//            for (int i = 0; i < arr_parts_count.Value; i++)
+//            {
+//                reset_events[i] = new ManualResetEvent(false);
+//                int index = i;
+//                int part_start = start;
+//                int part_end = end;
+//                ThreadPool.QueueUserWorkItem(state =>
+//                {
+//                    string[] arr_part = new string[part_size];
+//                    for (int j = part_start; j < part_end; j++)
+//                    {
+//                        arr_part[j - part_start] = arr[j];
+//                    }
+//                    for (int j = 0; j < arr_part.Length; j++)
+//                    {
+//                        arr_part[j] = new string(arr_part[j].Reverse().ToArray());
+//                    }
+//                    arr_parts[index] = arr_part;
+//                    reset_events[index].Set();
+//                });
+//                start += part_size;
+//                end += part_size;
+//            }
+//            WaitHandle.WaitAll(reset_events);
+//            int current_index = 0;
+//            for (int i = 0; i < arr_parts_count.Value; i++)
+//            {
+//                for (int j = 0; j < part_size; j++)
+//                {
+//                    arr[current_index] = arr_parts[i][j];
+//                    current_index++;
+//                }
+//            }
+//        }
+//        Console.WriteLine("\n\nReversed:");
+//        foreach (string str in arr)
+//        {
+//            Console.Write(str + " ");
+//        }
+//    }
+//    */
+
+//    //4
+//    /*
+//    static void Main(string[] args)
+//    {
+//        string[] arr = {
+//            "apple", "banana", "cat", "dog", "elephant", "fox", "grape", "house", "ice", "jungle",
+//            "kite", "lion", "mountain", "notebook", "orange", "parrot", "queen", "rose", "sun", "tree"
+//        }; // gpt дал словарь
+//        Console.Write("Word: ");
+//        string subword = Console.ReadLine();
+//        List<string> finded_subwords = new List<string>();
+//        int? arr_parts_count = null;
+//        for (int i = 3; i < 11; i++)
+//        {
+//            if (arr.Length % i == 0) // 3 - 10
+//            {
+//                arr_parts_count = i;
+//                break;
+//            }
+//        }
+//        if (!arr_parts_count.HasValue)
+//        {
+//            for (int i = 0; i < arr.Length; i++)
+//            {
+//                finded_subwords.AddRange(arr.Where(s => s.Contains(subword, StringComparison.OrdinalIgnoreCase)).ToArray());
+//            }
+//        }
+//        else
+//        {
+//            object lock_obj = new object();
+//            int part_size = arr.Length / arr_parts_count.Value;
+//            int start = 0;
+//            int end = part_size;
+//            ManualResetEvent[] reset_events = new ManualResetEvent[arr_parts_count.Value];
+//            for (int i = 0; i < arr_parts_count.Value; i++)
+//            {
+//                reset_events[i] = new ManualResetEvent(false);
+//                int index = i;
+//                int part_start = start;
+//                int part_end = end;
+//                ThreadPool.QueueUserWorkItem(state =>
+//                {
+//                    string[] arr_part = new string[part_size];
+//                    for (int j = part_start; j < part_end; j++)
+//                    {
+//                        arr_part[j - part_start] = arr[j];
+//                    }
+//                    lock (lock_obj)
+//                    {
+//                        finded_subwords.AddRange(arr_part.Where(s => s.Contains(subword, StringComparison.OrdinalIgnoreCase)).ToArray());
+//                    }
+//                    reset_events[index].Set();
+//                });
+//                start += part_size;
+//                end += part_size;
+//            }
+//            WaitHandle.WaitAll(reset_events);
+//        }
+//        Console.WriteLine("\n");
+//        Console.WriteLine("Words with finded subword:");
+//        foreach (string str in finded_subwords)
+//        {
+//            Console.Write(str + " ");
+//        }
+//    }
+//    */
+
+//    //5
+//    /*
+//    static void Main(string[] args)
+//    {
+//        string[] arr = {
+//            "apple", "banana", "cat", "dog", "elephant", "fox", "grape", "house", "ice", "jungle",
+//            "kite", "lion", "mountain", "notebook", "orange", "parrot", "queen", "rose", "sun", "tree"
+//        }; // gpt дал словарь
+//        Console.WriteLine("Normal:");
+//        foreach (string str in arr)
+//        {
+//            Console.Write(str + " ");
+//        }
+//        string concatenated_str;
+//        int? arr_parts_count = null;
+//        for (int i = 3; i < 11; i++)
+//        {
+//            if (arr.Length % i == 0) // 3 - 10
+//            {
+//                arr_parts_count = i;
+//                break;
+//            }
+//        }
+//        if (!arr_parts_count.HasValue)
+//        {
+//            concatenated_str = string.Join(" ", arr);
+//        }
+//        else
+//        {
+//            int part_size = arr.Length / arr_parts_count.Value;
+//            int start = 0;
+//            int end = part_size;
+//            string[] arr_parts = new string[arr_parts_count.Value];
+//            ManualResetEvent[] reset_events = new ManualResetEvent[arr_parts_count.Value];
+//            for (int i = 0; i < arr_parts_count.Value; i++)
+//            {
+//                reset_events[i] = new ManualResetEvent(false);
+//                int index = i;
+//                int part_start = start;
+//                int part_end = end;
+//                ThreadPool.QueueUserWorkItem(state =>
+//                {
+//                    string[] arr_part = new string[part_size];
+//                    for (int j = part_start; j < part_end; j++)
+//                    {
+//                        arr_part[j - part_start] = arr[j];
+//                    }
+//                    arr_parts[index] = string.Join(" ", arr_part);
+//                    reset_events[index].Set();
+//                });
+//                start += part_size;
+//                end += part_size;
+//            }
+//            WaitHandle.WaitAll(reset_events);
+//            concatenated_str = string.Join(" ", arr_parts);
+//        }
+//        Console.WriteLine("\n\nConverted:");
+//        Console.WriteLine(concatenated_str);
+//    }
+//    */
 //}

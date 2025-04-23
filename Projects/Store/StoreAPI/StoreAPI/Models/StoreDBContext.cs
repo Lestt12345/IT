@@ -1,23 +1,51 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace StoreAPI.Models
 {
     public class User
     {
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string PasswordHash { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public bool IsAdmin { get; set; }
 
-        // Навігаційні властивості
+        [Required]
+        [MaxLength(50)]
+        public string Username { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        public string PasswordHash { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public bool IsAdmin { get; set; } = false;
+
+        // Навигационные свойства
         public Cart Cart { get; set; }
         public List<Order> Orders { get; set; } = new List<Order>();
+
+        // Методы для работы с паролем
+        public void SetPassword(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentException("Password cannot be empty.");
+            }
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
+        }
+
+        public bool VerifyPassword(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentException("Password cannot be empty.");
+            }
+            return BCrypt.Net.BCrypt.Verify(password, PasswordHash);
+        }
     }
 
     public class Product
@@ -28,7 +56,6 @@ namespace StoreAPI.Models
         public decimal Price { get; set; }
         public int QuantityInStock { get; set; }
 
-        // Категорія як навігаційна властивість
         public int CategoryId { get; set; }
         public Category Category { get; set; }
     }
@@ -66,7 +93,6 @@ namespace StoreAPI.Models
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
 
-        // Додано зв'язок із замовленими товарами
         public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 
@@ -94,12 +120,10 @@ namespace StoreAPI.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Встановлення унікальності Email для User
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
-            // Визначення зв'язків між таблицями
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Cart)
                 .WithOne(c => c.User)
@@ -135,6 +159,15 @@ namespace StoreAPI.Models
                 .WithMany()
                 .HasForeignKey(oi => oi.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Добавляем точность и масштаб для decimal свойств
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasPrecision(18, 2); // 18 - общая точность, 2 - количество цифр после запятой
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.TotalPrice)
+                .HasPrecision(18, 2); // Точно так же для TotalPrice
         }
     }
 }
