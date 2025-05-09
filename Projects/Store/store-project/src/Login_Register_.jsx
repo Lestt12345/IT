@@ -26,6 +26,7 @@ function Login_Register_() {
   const handleLogin = async () => {
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value.trim();
+    const rememberMe = document.getElementById('flexCheckDefault').checked;
 
     if (!email || !password) {
       alert('Пожалуйста, заполните оба поля');
@@ -43,9 +44,16 @@ function Login_Register_() {
         const error = await response.json();
         throw new Error(error.message || 'Не удалось войти');
       }
-
       const data = await response.json();
-      alert('Вход выполнен успешно!');
+      if (rememberMe) {
+        localStorage.setItem('auth_token', data.token); // Используем токен, возвращаемый API
+      } else {
+        sessionStorage.setItem('auth_token', data.token);
+      }
+      sessionStorage.setItem('is_authenticated', 'true'); // Устанавливаем статус авторизации
+      setIsAuthenticated(true);
+      const lastVisitedPath = sessionStorage.getItem('last_visited_path') || '/'; // Получаем сохранённый путь
+      window.location.href = lastVisitedPath; // Перенаправляем пользователя
       console.log('Пользователь вошёл:', data);
     } catch (error) {
       console.error(error);

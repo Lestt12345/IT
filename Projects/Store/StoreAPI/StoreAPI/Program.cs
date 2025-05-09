@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using StoreAPI.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +12,7 @@ builder.Services.AddDbContext<StoreDBContext>(options =>
 // Додаємо контролери (якщо використовуєш Web API)
 builder.Services.AddControllers();
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
+// Додаємо CORS
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -23,19 +23,41 @@ builder.Services.AddCors(options =>
     });
 });
 
+// Конфігурація аутентифікації з JWT
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer(options =>
+    {
+        var key = Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]);
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+            ValidAudience = builder.Configuration["JwtSettings:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(key)
+        };
+    });
+
 var app = builder.Build();
 
+// Використання CORS
 app.UseCors();
+
+// Підключаємо аутентифікацію
+app.UseAuthentication();
+
+// Підключаємо авторизацію
 app.UseAuthorization();
 
 // Використання контролерів
 app.MapControllers();
 
-// Configure the HTTP request pipeline.
+// Налаштування обробки помилок
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -44,8 +66,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
-
+// Запуск програми
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,337 +1,361 @@
-﻿//using System.Data.SqlTypes;
-
-//class Program
+﻿//class Program
 //{
 //    //1
 //    /*
-//    static void Main(string[] args)
+//    class BankAccount
 //    {
-//        double average;
-//        int[] arr = new int[new Random().Next(1, 100)];
-//        Random random = new Random();
-//        for (int i = 0; i < arr.Length; i++)
+//        private double balance;
+//        private readonly object lock_obj = new object();
+
+//        public BankAccount(double balance)
 //        {
-//            arr[i] = random.Next(100);
+//            this.balance = balance;
 //        }
-//        int? arr_parts_count = null;
-//        for (int i = 3; i < 11; i++)
+
+//        public void deposit(double amount)
 //        {
-//            if (arr.Length % i == 0) // 3 - 10
+//            lock (lock_obj)
 //            {
-//                arr_parts_count = i;
-//                break;
+//                balance += amount;
 //            }
 //        }
-//        if (!arr_parts_count.HasValue)
+
+//        public void withdraw(double amount)
 //        {
-//            average = arr.Average();
-//        }
-//        else
-//        {
-//            int part_size = arr.Length / arr_parts_count.Value;
-//            int start = 0;
-//            int end = part_size;
-//            double[] averages = new double[arr_parts_count.Value];
-//            ManualResetEvent[] reset_events = new ManualResetEvent[arr_parts_count.Value];
-//            for (int i = 0; i < arr_parts_count.Value; i++)
+//            lock (lock_obj)
 //            {
-//                reset_events[i] = new ManualResetEvent(false);
-//                int index = i;
-//                int part_start = start;
-//                int part_end = end;
-//                ThreadPool.QueueUserWorkItem(state => {
-//                    int[] arr_part = new int[part_size];
-//                    for (int j = part_start; j < part_end; j++)
-//                    {
-//                        arr_part[j - part_start] = arr[j];
-//                    }
-//                    averages[index] = arr_part.Average();
-//                    reset_events[index].Set();
-//                });
-//                start += part_size;
-//                end += part_size;
+//                if (balance >= amount)
+//                {
+//                    balance -= amount;
+//                }
+//                else
+//                {
+//                    Console.WriteLine("not enough money");
+//                }
 //            }
-//            WaitHandle.WaitAll(reset_events);
-//            average = averages.Average();
 //        }
-//        foreach (int num in arr)
+
+//        public double get_balance()
 //        {
-//            Console.Write(num + " ");
+//            lock (lock_obj)
+//            {
+//                return balance;
+//            }
 //        }
-//        Console.WriteLine("\n");
-//        Console.WriteLine($"Average: {Math.Round(average, 1)}");
+//    }
+
+//    static void Main()
+//    {
+//        BankAccount account = new BankAccount(1000);
+
+//        Thread depositThread1 = new Thread(() => account.deposit(500));
+//        Thread depositThread2 = new Thread(() => account.deposit(300));
+//        Thread withdrawThread1 = new Thread(() => account.withdraw(200));
+//        Thread withdrawThread2 = new Thread(() => account.withdraw(700));
+
+//        depositThread1.Start();
+//        depositThread2.Start();
+//        withdrawThread1.Start();
+//        withdrawThread2.Start();
+
+//        depositThread1.Join();
+//        depositThread2.Join();
+//        withdrawThread1.Join();
+//        withdrawThread2.Join();
+
+//        Console.WriteLine(account.get_balance());
 //    }
 //    */
 
 //    //2
 //    /*
-//    static void Main(string[] args)
+//    static void Main()
 //    {
-//        int max;
-//        int[] arr = new int[new Random().Next(1, 100)];
-//        Random random = new Random();
-//        for (int i = 0; i < arr.Length; i++)
+//        Counter counter = new Counter();
+//        Thread[] threads = new Thread[5];
+
+//        for (int i = 0; i < 5; i++)
 //        {
-//            arr[i] = random.Next(100);
+//            threads[i] = new Thread(counter.perform_task);
 //        }
-//        int? arr_parts_count = null;
-//        for (int i = 3; i < 11; i++)
+//        foreach (Thread thread in threads)
 //        {
-//            if (arr.Length % i == 0) // 3 - 10
+//            thread.Start();
+//        }
+//        foreach (Thread thread in threads)
+//        {
+//            thread.Join();
+//        }
+
+//        Console.WriteLine(counter.count);
+//    }
+
+//    class Counter
+//    {
+//        public int count = 0;
+
+//        public void perform_task()
+//        {
+//            for (int i = 0; i < 1000000; i++)
 //            {
-//                arr_parts_count = i;
-//                break;
+//                Interlocked.Increment(ref count);
 //            }
 //        }
-//        if (!arr_parts_count.HasValue)
-//        {
-//            max = arr.Max();
-//        }
-//        else
-//        {
-//            int part_size = arr.Length / arr_parts_count.Value;
-//            int start = 0;
-//            int end = part_size;
-//            int[] maxs = new int[arr_parts_count.Value];
-//            ManualResetEvent[] reset_events = new ManualResetEvent[arr_parts_count.Value];
-//            for (int i = 0; i < arr_parts_count.Value; i++)
-//            {
-//                reset_events[i] = new ManualResetEvent(false);
-//                int index = i;
-//                int part_start = start;
-//                int part_end = end;
-//                ThreadPool.QueueUserWorkItem(state =>
-//                {
-//                    int[] arr_part = new int[part_size];
-//                    for (int j = part_start; j < part_end; j++)
-//                    {
-//                        arr_part[j - part_start] = arr[j];
-//                    }
-//                    maxs[index] = arr_part.Max();
-//                    reset_events[index].Set();
-//                });
-//                start += part_size;
-//                end += part_size;
-//            }
-//            WaitHandle.WaitAll(reset_events);
-//            max = maxs.Max();
-//        }
-//        foreach (int num in arr)
-//        {
-//            Console.Write(num + " ");
-//        }
-//        Console.WriteLine("\n");
-//        Console.WriteLine($"Max: {max}");
 //    }
 //    */
 
 //    //3
 //    /*
-//    static void Main(string[] args)
+//    class TaskQueue
 //    {
-//        string[] arr = {
-//            "apple", "banana", "cat", "dog", "elephant", "fox", "grape", "house", "ice", "jungle",
-//            "kite", "lion", "mountain", "notebook", "orange", "parrot", "queen", "rose", "sun", "tree"
-//        }; // gpt дал словарь
-//        Console.WriteLine("Normal:");
-//        foreach (string str in arr)
+//        private readonly Semaphore semaphore;
+//        private readonly ConcurrentQueue<Action> task_queue = new ConcurrentQueue<Action>();
+//        private int processed_tasks = 0;
+//        private int running_tasks = 0;
+
+//        public TaskQueue(int max_concurrent_tasks)
 //        {
-//            Console.Write(str + " ");
+//            semaphore = new Semaphore(max_concurrent_tasks, max_concurrent_tasks);
 //        }
-//        int? arr_parts_count = null;
-//        for (int i = 3; i < 11; i++)
+
+//        public void enqueue(Action task)
 //        {
-//            if (arr.Length % i == 0) // 3 - 10
-//            {
-//                arr_parts_count = i;
-//                break;
-//            }
+//            task_queue.Enqueue(task);
 //        }
-//        if (!arr_parts_count.HasValue)
+
+//        public void process_tasks()
 //        {
-//            for (int i = 0; i < arr.Length; i++)
+//            while (task_queue.TryDequeue(out var task))
 //            {
-//                arr[i] = new string(arr[i].Reverse().ToArray());
-//            }
-//        }
-//        else
-//        {
-//            int part_size = arr.Length / arr_parts_count.Value;
-//            int start = 0;
-//            int end = part_size;
-//            string[][] arr_parts = new string[arr_parts_count.Value][];
-//            for (int i = 0; i < arr_parts_count.Value; i++)
-//            {
-//                arr_parts[i] = new string[part_size];
-//            }
-//            ManualResetEvent[] reset_events = new ManualResetEvent[arr_parts_count.Value];
-//            for (int i = 0; i < arr_parts_count.Value; i++)
-//            {
-//                reset_events[i] = new ManualResetEvent(false);
-//                int index = i;
-//                int part_start = start;
-//                int part_end = end;
-//                ThreadPool.QueueUserWorkItem(state =>
+//                Interlocked.Increment(ref running_tasks);
+
+//                ThreadPool.QueueUserWorkItem(_ =>
 //                {
-//                    string[] arr_part = new string[part_size];
-//                    for (int j = part_start; j < part_end; j++)
+//                    semaphore.WaitOne();
+//                    try
 //                    {
-//                        arr_part[j - part_start] = arr[j];
+//                        task();
+//                        Interlocked.Increment(ref processed_tasks);
 //                    }
-//                    for (int j = 0; j < arr_part.Length; j++)
+//                    finally
 //                    {
-//                        arr_part[j] = new string(arr_part[j].Reverse().ToArray());
+//                        Interlocked.Decrement(ref running_tasks);
+//                        semaphore.Release();
 //                    }
-//                    arr_parts[index] = arr_part;
-//                    reset_events[index].Set();
 //                });
-//                start += part_size;
-//                end += part_size;
 //            }
-//            WaitHandle.WaitAll(reset_events);
-//            int current_index = 0;
-//            for (int i = 0; i < arr_parts_count.Value; i++)
+
+//            while (Interlocked.CompareExchange(ref running_tasks, 0, 0) > 0)
 //            {
-//                for (int j = 0; j < part_size; j++)
-//                {
-//                    arr[current_index] = arr_parts[i][j];
-//                    current_index++;
-//                }
+//                Thread.Sleep(100);
 //            }
 //        }
-//        Console.WriteLine("\n\nReversed:");
-//        foreach (string str in arr)
+
+//        public int get_processed_task_count()
 //        {
-//            Console.Write(str + " ");
+//            return processed_tasks;
 //        }
+//    }
+
+//    static void Main()
+//    {
+//        TaskQueue task_queue = new TaskQueue(3);
+
+//        for (int i = 1; i <= 10; i++)
+//        {
+//            int task_number = i;
+//            task_queue.enqueue(() =>
+//            {
+//                Console.WriteLine($"Task {task_number} started");
+//                Thread.Sleep(1000);
+//                Console.WriteLine($"Task {task_number} completed");
+//            });
+//        }
+
+//        task_queue.process_tasks();
+
+
+//        Console.WriteLine($"Total tasks processed: {task_queue.get_processed_task_count()}");
 //    }
 //    */
 
 //    //4
 //    /*
-//    static void Main(string[] args)
+//    class FileWriter
 //    {
-//        string[] arr = {
-//            "apple", "banana", "cat", "dog", "elephant", "fox", "grape", "house", "ice", "jungle",
-//            "kite", "lion", "mountain", "notebook", "orange", "parrot", "queen", "rose", "sun", "tree"
-//        }; // gpt дал словарь
-//        Console.Write("Word: ");
-//        string subword = Console.ReadLine();
-//        List<string> finded_subwords = new List<string>();
-//        int? arr_parts_count = null;
-//        for (int i = 3; i < 11; i++)
+//        private readonly string file_path;
+//        private readonly Mutex mutex = new Mutex();
+
+//        public FileWriter(string file_path)
 //        {
-//            if (arr.Length % i == 0) // 3 - 10
-//            {
-//                arr_parts_count = i;
-//                break;
-//            }
+//            this.file_path = file_path;
 //        }
-//        if (!arr_parts_count.HasValue)
+
+//        public void write(string message)
 //        {
-//            for (int i = 0; i < arr.Length; i++)
+//            mutex.WaitOne();
+//            try
 //            {
-//                finded_subwords.AddRange(arr.Where(s => s.Contains(subword, StringComparison.OrdinalIgnoreCase)).ToArray());
-//            }
-//        }
-//        else
-//        {
-//            object lock_obj = new object();
-//            int part_size = arr.Length / arr_parts_count.Value;
-//            int start = 0;
-//            int end = part_size;
-//            ManualResetEvent[] reset_events = new ManualResetEvent[arr_parts_count.Value];
-//            for (int i = 0; i < arr_parts_count.Value; i++)
-//            {
-//                reset_events[i] = new ManualResetEvent(false);
-//                int index = i;
-//                int part_start = start;
-//                int part_end = end;
-//                ThreadPool.QueueUserWorkItem(state =>
+//                using (StreamWriter writer = new StreamWriter(file_path, true))
 //                {
-//                    string[] arr_part = new string[part_size];
-//                    for (int j = part_start; j < part_end; j++)
-//                    {
-//                        arr_part[j - part_start] = arr[j];
-//                    }
-//                    lock (lock_obj)
-//                    {
-//                        finded_subwords.AddRange(arr_part.Where(s => s.Contains(subword, StringComparison.OrdinalIgnoreCase)).ToArray());
-//                    }
-//                    reset_events[index].Set();
-//                });
-//                start += part_size;
-//                end += part_size;
+//                    writer.WriteLine(message);
+//                }
 //            }
-//            WaitHandle.WaitAll(reset_events);
+//            finally
+//            {
+//                mutex.ReleaseMutex();
+//            }
 //        }
-//        Console.WriteLine("\n");
-//        Console.WriteLine("Words with finded subword:");
-//        foreach (string str in finded_subwords)
+//    }
+
+//    static void Main()
+//    {
+//        FileWriter file_writer = new FileWriter("file213213213.txt");
+//        Thread[] threads = new Thread[5];
+//        for (int i = 0; i < 5; i++)
 //        {
-//            Console.Write(str + " ");
+//            int index = i + 1;
+//            threads[i] = new Thread(() =>
+//            {
+//                file_writer.write($"Thread {index} writes");
+//            });
+//        }
+
+//        foreach (Thread thread in threads)
+//        {
+//            thread.Start();
+//        }
+
+//        foreach (Thread thread in threads)
+//        {
+//            thread.Join();
 //        }
 //    }
 //    */
 
 //    //5
 //    /*
-//    static void Main(string[] args)
+//    class ArrayOperations
 //    {
-//        string[] arr = {
-//            "apple", "banana", "cat", "dog", "elephant", "fox", "grape", "house", "ice", "jungle",
-//            "kite", "lion", "mountain", "notebook", "orange", "parrot", "queen", "rose", "sun", "tree"
-//        }; // gpt дал словарь
-//        Console.WriteLine("Normal:");
-//        foreach (string str in arr)
+//        private int[] numbers;
+//        private readonly object lock_obj = new object();
+
+//        public ArrayOperations(int length)
 //        {
-//            Console.Write(str + " ");
-//        }
-//        string concatenated_str;
-//        int? arr_parts_count = null;
-//        for (int i = 3; i < 11; i++)
-//        {
-//            if (arr.Length % i == 0) // 3 - 10
+//            Random random = new Random();
+//            numbers = new int[length];
+//            for (int i = 0; i < length; i++)
 //            {
-//                arr_parts_count = i;
-//                break;
+//                numbers[i] = random.Next(1, 100);
 //            }
 //        }
-//        if (!arr_parts_count.HasValue)
+
+//        public void add(int value)
 //        {
-//            concatenated_str = string.Join(" ", arr);
-//        }
-//        else
-//        {
-//            int part_size = arr.Length / arr_parts_count.Value;
-//            int start = 0;
-//            int end = part_size;
-//            string[] arr_parts = new string[arr_parts_count.Value];
-//            ManualResetEvent[] reset_events = new ManualResetEvent[arr_parts_count.Value];
-//            for (int i = 0; i < arr_parts_count.Value; i++)
+//            Monitor.Enter(lock_obj);
+//            try
 //            {
-//                reset_events[i] = new ManualResetEvent(false);
-//                int index = i;
-//                int part_start = start;
-//                int part_end = end;
-//                ThreadPool.QueueUserWorkItem(state =>
+//                for (int i = 0; i < numbers.Length; i++)
 //                {
-//                    string[] arr_part = new string[part_size];
-//                    for (int j = part_start; j < part_end; j++)
-//                    {
-//                        arr_part[j - part_start] = arr[j];
-//                    }
-//                    arr_parts[index] = string.Join(" ", arr_part);
-//                    reset_events[index].Set();
-//                });
-//                start += part_size;
-//                end += part_size;
+//                    numbers[i] += value;
+//                }
 //            }
-//            WaitHandle.WaitAll(reset_events);
-//            concatenated_str = string.Join(" ", arr_parts);
+//            finally
+//            {
+//                Monitor.Exit(lock_obj);
+//            }
 //        }
-//        Console.WriteLine("\n\nConverted:");
-//        Console.WriteLine(concatenated_str);
+
+//        public void subtract(int value)
+//        {
+//            Monitor.Enter(lock_obj);
+//            try
+//            {
+//                for (int i = 0; i < numbers.Length; i++)
+//                {
+//                    numbers[i] -= value;
+//                }
+//            }
+//            finally
+//            {
+//                Monitor.Exit(lock_obj);
+//            }
+//        }
+
+//        public void multiply(int value)
+//        {
+//            Monitor.Enter(lock_obj);
+//            try
+//            {
+//                for (int i = 0; i < numbers.Length; i++)
+//                {
+//                    numbers[i] *= value;
+//                }
+//            }
+//            finally
+//            {
+//                Monitor.Exit(lock_obj);
+//            }
+//        }
+
+//        public void divide(int value)
+//        {
+//            Monitor.Enter(lock_obj);
+//            try
+//            {
+//                for (int i = 0; i < numbers.Length; i++)
+//                {
+//                    if (value != 0)
+//                    {
+//                        numbers[i] /= value;
+//                    }
+//                    else
+//                    {
+//                        Console.WriteLine("cannot divide by zero");
+//                    }
+//                }
+//            }
+//            finally
+//            {
+//                Monitor.Exit(lock_obj);
+//            }
+//        }
+
+//        public void print_array()
+//        {
+//            Monitor.Enter(lock_obj);
+//            try
+//            {
+//                Console.WriteLine(string.Join(", ", numbers));
+//            }
+//            finally
+//            {
+//                Monitor.Exit(lock_obj);
+//            }
+//        }
+//    }
+
+//    static void Main()
+//    {
+//        ArrayOperations array_operations = new ArrayOperations(10);
+
+//        Thread[] threads =
+//        {
+//            new Thread(() => array_operations.add(5)),
+//            new Thread(() => array_operations.subtract(3)),
+//            new Thread(() => array_operations.multiply(3)),
+//            new Thread(() => array_operations.divide(2))
+//        };
+//        foreach (Thread thread in threads)
+//        {
+//            thread.Start();
+//        }
+//        foreach (Thread thread in threads)
+//        {
+//            thread.Join();
+//        }
+
+//        array_operations.print_array();
 //    }
 //    */
 //}

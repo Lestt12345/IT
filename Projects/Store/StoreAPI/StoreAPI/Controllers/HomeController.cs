@@ -1,31 +1,23 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using StoreAPI.Models;
 
-namespace StoreAPI.Controllers;
-
-public class HomeController : Controller
+namespace StoreAPI.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    [Route("api/[controller]")]
+    [ApiController]
+    public class HomeController : ControllerBase
     {
-        _logger = logger;
-    }
+        private readonly ILogger<HomeController> _logger;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        [HttpGet("error")]
+        public IActionResult Error()
+        {
+            return BadRequest(new { message = "Ошибка в API" });
+        }
     }
 }

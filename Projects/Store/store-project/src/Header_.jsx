@@ -1,7 +1,8 @@
 'use client'
 
 import './styles/Header_.css'
-
+import { useLocation } from 'react-router-dom'  // Импортируем useLocation
+import React, { useEffect } from 'react';
 import { useState } from 'react'
 import {
   Dialog,
@@ -30,8 +31,20 @@ const products = [
 ]
 
 export default function Header_() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const location = useLocation();
 
+  useEffect(() => {
+    // Проверяем статус авторизации
+    const authStatus = sessionStorage.getItem('is_authenticated');
+    setIsAuthenticated(authStatus === 'true');
+  }, []);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('is_authenticated'); // Удаляем данные о сессии
+    setIsAuthenticated(false);
+  };
   return (
     <header className="bg-teal-200">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
@@ -98,11 +111,40 @@ export default function Header_() {
             О нас
           </a>
         </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="/auth" className="text-xl/6 font-semibold text-gray-900">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
+        {isAuthenticated ? (
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-semibold text-gray-900">
+              {userName}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="flex items-center justify-center text-red-600 hover:text-red-800"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-11V4m0 4v4"
+                />
+              </svg>
+            </button>
+          </div>
+        ) : (
+          <a href="/auth"
+            className="text-xl font-semibold text-gray-900 cursor-pointer"
+          >
             Авторизироваться <span aria-hidden="true">&rarr;</span>
           </a>
-        </div>
+        )}
+      </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
       <div className="fixed inset-0 z-10" />
