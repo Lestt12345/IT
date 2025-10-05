@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="numberInput">Seats count:</label>
+        <input type="number" id="numberInput" name="numberInput" required>
+        <br>
+        <input type="submit" value="Check">
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const numberInput = document.querySelector("#numberInput");
+            if (numberInput.value < 11 && numberInput.value > 0) {
+                numberInput.style.boxShadow = "none";
+            } else {
+                numberInput.style.boxShadow = "red 0px 0px 5px";
+            }
+        });
+    </script>
+</body>
+</html>

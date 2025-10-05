@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <table id="table">
+      <thead>
+        <tr>
+          <th> First Name </th>
+          <th> Last Name </th>
+          <th> Age </th>
+          <th> Company </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John</td>
+          <td>Doe</td>
+          <td>25</td>
+          <td>Company1</td>
+        </tr>
+        <tr>
+          <td>Mike</td>
+          <td>Smith</td>
+          <td>30</td>
+          <td>Company2</td>
+        </tr>
+        <tr>
+          <td>Emma</td>
+          <td>Jackson</td>
+          <td>22</td>
+          <td>Company3</td>
+        </tr>
+        <tr>
+          <td>Olivia</td>
+          <td>Williams</td>
+          <td>28</td>
+          <td>Company4</td>
+        </tr>
+        <tr>
+          <td>Oliver</td>
+          <td>Brown</td>
+          <td>35</td>
+          <td>Company5</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      const table = document.getElementById('table');
+      const headers = table.querySelectorAll('th');
+      const tableBody = table.querySelector('tbody');
+      const rows = tableBody.querySelectorAll('tr');
+
+      headers.forEach(header => {
+        header.addEventListener('click', () => {
+          const tableData = [];
+          rows.forEach(row => {
+            const rowData = [];
+            row.querySelectorAll('td').forEach(cell => {
+              rowData.push(cell.textContent);
+            });
+            tableData.push(rowData);
+          });
+
+          tableData.sort((a, b) => {
+            const isNumber = !isNaN(a[header.cellIndex]) && !isNaN(b[header.cellIndex]);
+            const aValue = isNumber ? Number(a[header.cellIndex]) : a[header.cellIndex].toLowerCase();
+            const bValue = isNumber ? Number(b[header.cellIndex]) : b[header.cellIndex].toLowerCase();
+            return aValue > bValue ? 1 : -1;
+          });
+
+          tableBody.innerHTML = '';
+          tableData.forEach(rowData => {
+            const row = document.createElement('tr');
+            rowData.forEach(cellData => {
+              const cell = document.createElement('td');
+              cell.textContent = cellData;
+              row.appendChild(cell);
+            });
+            tableBody.appendChild(row);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+

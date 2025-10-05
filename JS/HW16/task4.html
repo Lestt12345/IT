@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="email">Email:</label></label>
+        <input type="email" id="email">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password">
+        <br>
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+        const password = document.querySelector("#password");
+        const re = /[!@#$%^&*]/;
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (re.test(password.value)) {
+                password.style.boxShadow = "none";
+            } else {
+                password.style.boxShadow = "0 0 5px red";
+            }
+        });
+    </script>
+</body>
+</html>

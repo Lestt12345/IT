@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="counter">
+        <span id="counter">0</span>
+      </div>
+      <div class="buttons">
+        <span id="addToCounter">△</span>
+        <span id="subtractFromCounter">▽</span>
+      </div>
+    </div>
+    <script>
+      const counter = document.getElementById("counter");
+      const addToCounter = document.getElementById("addToCounter");
+      const subtractFromCounter = document.getElementById("subtractFromCounter");
+      let count = 0;
+      addToCounter.addEventListener("click", () => {
+        count++;
+        counter.innerText = count;
+      });
+      subtractFromCounter.addEventListener("click", () => {
+        count--;
+        counter.innerText = count;
+      });
+    </script>
+  </body>
+</html>

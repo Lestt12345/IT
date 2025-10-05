@@ -1,0 +1,73 @@
+body {
+  font-family: Tahoma, sans-serif;
+    background-color: #FBF2EB;
+  display: flex;
+  width: 104px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 70px;
+}
+
+.button-container {
+  display: flex;
+  gap: 30px;
+}
+
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.button-with-margin {
+  margin-top: 60px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: purple;
+  color: white;
+  padding: 18px 15px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  left: 50%;
+  display: none;
+}
+
+.tooltip[data-position="top"] {
+  bottom: calc(100% + 10px);
+  top: auto;
+}
+
+
+.tooltip[data-position="bottom"] {
+  top: calc(100% + 10px);
+  bottom: auto;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+}
+
+.tooltip[data-position="top"]::after {
+  top: 100%;
+  border-top-color: purple;
+  border-bottom-color: transparent;
+}
+
+.tooltip[data-position="bottom"]::after {
+  bottom: 100%;
+  border-bottom-color: purple;
+  border-top-color: transparent;
+}

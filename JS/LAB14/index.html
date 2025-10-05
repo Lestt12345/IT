@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form>
+        <h3>Registration</h3>
+        <div class="label">
+            <label for="email">Email:</label>
+            <p id="emailError">Wrong email address</p>
+        </div>
+        <input type="email" id="email" required>
+        <div class="label">
+            <label for="password">Password:</label>
+            <p id="passwordError">Wrong password</p>
+        </div>
+        <input type="password" id="password" required>
+        <div class="label">
+            <label for="repeat">Repeat:</label>
+            <p id="repeatError">Password must match</p>
+        </div>
+        <input type="password" id="repeat" required>
+        <input type="submit" value="Sign Up">
+    </form>
+
+    <script>
+        if (document.cookie.match(/email/) && document.cookie.match(/password/)) location.href = "userInfo.html";
+            
+        emailError = document.querySelector("#emailError");
+        passwordError = document.querySelector("#passwordError");
+        repeatError = document.querySelector("#repeatError");
+        emailError.style.display = "none";
+        passwordError.style.display = "none";
+        repeatError.style.display = "none";
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.querySelector("#email").value;
+            const password = document.querySelector("#password").value;
+            const repeat = document.querySelector("#repeat").value;
+            const re = /^[\w\d_]{3,}@[\w\d_]+$/;
+            if (re.test(email)) emailError.style.display = "none";
+            else emailError.style.display = "block";
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
+            if (passwordRegex.test(password)) passwordError.style.display = "none";
+            else passwordError.style.display = "block";
+            if (password === repeat) repeatError.style.display = "none";
+            else repeatError.style.display = "block";
+            if (emailError.style.display === "none" && passwordError.style.display === "none" && repeatError.style.display === "none") {
+                document.cookie = `email=${email};expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};path=/`;
+                document.cookie = `password=${password};expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};path=/`;
+            }
+            location.href = "userInfo.html";
+        });
+    </script>
+</body>
+</html>

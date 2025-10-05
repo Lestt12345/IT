@@ -1,0 +1,21 @@
+body {
+  background-color: #FBF2EB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+ol {
+  width: 40vw;
+  font-size: 20px;
+}
+
+li {
+  user-select: none;
+  margin: 0px;
+  padding: 5px;
+}

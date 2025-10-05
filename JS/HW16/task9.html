@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="code">Code:</label>
+        <input type="text" id="code" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+        const code = document.querySelector("#code");
+        const submitBtn = document.querySelector("input[type='submit']");
+        
+        function blockIfAttemptsExceeded() {
+            value = document.cookie.split("; ").find(cookie => cookie.startsWith("attempts="))?.split("=")[1];
+            attempts = value ? JSON.parse(value) : [];
+            if (attempts.length >= 3) {
+                submitBtn.disabled = true;
+            }
+        }
+
+        blockIfAttemptsExceeded();
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (!document.cookie.match(/attempts=/)) {
+                document.cookie = `attempts=[];expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};path=/`;
+            }
+            if (code.value === "DISCOUNT2025") {
+                alert("Discount applied!");
+                document.cookie = `attempts=[];expires=${new Date(Date.now() - 1).toUTCString()};path=/`;
+            }
+            else {
+                value = document.cookie.split("; ").find(cookie => cookie.startsWith("attempts="))?.split("=")[1];
+                attempts = value ? JSON.parse(value) : [];
+                attempts.push(code.value);
+                document.cookie = `attempts=${JSON.stringify(attempts)};expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};path=/`;
+                blockIfAttemptsExceeded();
+            }
+        });
+    </script>
+</body>
+</html>

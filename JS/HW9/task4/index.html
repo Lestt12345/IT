@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="lights-container">
+        <div class="light" id="light1"></div>
+        <div class="light" id="light2"></div>
+        <div class="light" id="light3"></div>
+      </div>
+      <button id="nextBtn">NEXT</button>
+    </div>
+    <script>
+      CurrentLight = 1;
+      light1.style.backgroundColor = "red";
+      nextBtn.addEventListener("mousedown", () => {
+        nextBtn.style.borderRight = "solid 2px #E1E1E1";
+        nextBtn.style.borderBottom = "solid 2px #E1E1E1";
+      })
+      nextBtn.addEventListener("mouseup", () => {
+        nextBtn.style.borderRight = "solid 2px #939393";
+        nextBtn.style.borderBottom = "solid 2px #939393";
+        CurrentLight++;
+        if (CurrentLight > 3) {
+          CurrentLight = 1;
+        }
+        switch (CurrentLight) {
+          case 1:
+            light1.style.backgroundColor = "red";
+            light2.style.backgroundColor = "grey";
+            light3.style.backgroundColor = "grey";
+            break;
+          case 2:
+            light1.style.backgroundColor = "grey";
+            light2.style.backgroundColor = "yellow";
+            light3.style.backgroundColor = "grey";
+            break;
+          case 3:
+            light1.style.backgroundColor = "grey";
+            light2.style.backgroundColor = "grey";
+            light3.style.backgroundColor = "green";
+            break;
+        }
+      })
+    </script>
+  </body>
+</html>

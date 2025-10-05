@@ -1,0 +1,17 @@
+body {
+    background-image: url(images.png);
+    background-size: 100vw 100vh;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    top: calc(50vh - 51px);
+    left: calc(50vw - 51px);
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    transition: top 0.5s ease, left 0.5s ease;
+}

@@ -1,0 +1,31 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FBF2E9;
+}
+
+.bar {
+    display: flex;
+    background-color: gray;
+    width: 500px;
+    height: 15px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.handle {
+    background-color: blue;
+    width: 21px;
+    height: 21px;
+    position: relative;
+    top: -3px;
+    left: 0;
+    cursor: pointer;
+}

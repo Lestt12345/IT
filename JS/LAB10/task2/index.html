@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="blockContainer" id="blockContainer"></div>
+      <button id="addButton" style="width: 50vw; margin: 20px 0px">Add color block</button>
+    </div>
+
+    <script>
+      const colorBlocksContainer = document.getElementById('blockContainer');
+      const addColorBlockBtn = document.getElementById('addButton');
+
+      addColorBlockBtn.addEventListener('click', () => {
+        const newBlock = document.createElement('div');
+        newBlock.className = 'block';
+        newBlock.style.backgroundColor = getRandomHexColor();
+        newBlock.addEventListener('click', () => newBlock.remove());
+        colorBlocksContainer.appendChild(newBlock);
+      });
+
+      function getRandomHexColor() {
+        return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+      }
+    </script>
+    <script>
+      
+    </script>
+  </body>
+</html>

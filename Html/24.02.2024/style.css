@@ -1,0 +1,39 @@
+.grid {
+    display: grid;
+    grid-template-columns: 70px 1fr 1fr 1fr;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+}
+.item {
+    padding: 10px;
+    background-color: #5A5A5A;
+}
+.item p {
+    margin: 0;
+}
+.item header {
+    margin: 10px 0px;
+}
+.tab {
+    padding: 0;
+    font-size: 12px;
+    /* text-align: center; */
+}
+.tab .active {
+    background-color: #5A5A5A;
+}
+.tab p {
+    background-color: #808080;
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid white;
+}
+img {
+    width: 100%;
+}
+.content {
+    font-size: 12px;
+}
+.tab p:hover {
+    background-color: #5A5A5A;
+}

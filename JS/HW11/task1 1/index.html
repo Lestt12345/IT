@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <form>
+      <label for="login">Your login:</label>
+      <input type="text" id="login" name="login" required>
+      <label for="password">Your password:</label>
+      <input type="password" id="password" name="password" required>
+      <div>
+        <label for="rememberMe">Remember me</label>
+        <input type="checkbox" id="rememberMe" name="rememberMe">
+      </div>
+      <input type="submit" value="Sign in">
+    </form>
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const login = document.querySelector("#login").value;
+        const password = document.querySelector("#password").value;
+        const rememberMe = document.querySelector("#rememberMe").checked;
+        const message = rememberMe
+          ? `Привіт, ${login}! Я тебе запам'ятав` : `Привіт, ${login}! Я тебе не запам'ятав`;
+        alert(message);
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
+

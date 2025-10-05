@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="resizable" id="box">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nesciunt minus quae pariatur delectus cumque, ad vero quia. Fuga, dolorem. Iusto totam libero deserunt temporibus corrupti harum, nulla molestiae explicabo.</p>
+      <div class="resize-handle" id="handle"></div>
+    </div>
+    <script>
+      let isResizing = false;
+
+      handle.addEventListener('mousedown', (e) => {
+        isResizing = true;
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        const newWidth = e.clientX - box.offsetLeft;
+        const newHeight = e.clientY - box.offsetTop;
+        box.style.width = `${newWidth}px`;
+        box.style.height = `${newHeight}px`;
+      });
+
+      document.addEventListener('mouseup', () => {
+        isResizing = false;
+      });
+    </script>
+  </body>
+</html>

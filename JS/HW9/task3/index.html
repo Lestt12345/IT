@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body id="body">
+    <img src="vector-isolated-realistic-soccer-ball-white.png" alt="" id="ball">
+    <script>
+      body.addEventListener("click", (e) => {
+        ball.style.top = `calc(${e.clientY}px - 51px)`;
+        ball.style.left = `calc(${e.clientX}px - 51px)`;
+      });
+    </script>
+  </body>
+</html>

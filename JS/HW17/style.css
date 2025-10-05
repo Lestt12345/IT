@@ -1,0 +1,66 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #FBF2E9;
+}
+
+form {
+    width: 600px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 2px gray;
+}
+
+label, h4 {
+    white-space: nowrap;
+}
+
+input {
+    width: 100%;
+    margin-left: 10px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 600px;
+    height: 300px;
+}
+
+.coloumn {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.coloumn div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border-bottom: solid 2px gray;
+}
+
+a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+img {
+    width: 100%;
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+}

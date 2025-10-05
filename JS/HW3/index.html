@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+  </head>
+  <body>
+    <script>
+      //WHILE
+      //1
+      /*function func1(length) {
+        if(length < 0 || length == 0) return
+        while(length != 0) {
+          document.write(`#`)
+          length--
+        }
+      }
+      func1(+prompt(`Enter count: `))*/
+      //2
+      /*function func2(number) {
+        if(number == 0) return
+        while(number != 0) {
+          document.write(`${number}<br>`)
+          if(number > 0) number--
+          else number++
+        }
+        document.write(`0`)
+      }
+      func2(+prompt(`Enter number: `))*/
+      //3
+      /*function func3(number, degree) {
+        document.write(`${number}^${degree} = ${number ** degree}`)
+      }
+      func3(+prompt(`Enter number: `), +prompt(`Enter degree: `))*/
+      //4
+      /*function func4(number1, number2) {
+        let dilnik = 1
+        while(dilnik <= number2 && dilnik <= number1) {
+          if(number1 % dilnik == 0 && number2 % dilnik == 0) {
+            document.write(`${dilnik}<br>`)
+          }
+          dilnik++
+        }
+      }
+      func4(+prompt(`Enter first number: `), +prompt(`Enter second number: `))*/
+      //5
+      /*function func5(factorial) {
+        let result = 1
+        for(let i = 1; i <= factorial; i++) {
+          result *= i
+        }
+        document.write(`${factorial}! = ${result}`)
+      }
+      func5(+prompt(`Enter number factorial: `))*/
+
+      //DO WHILE
+      //1
+      /*function func1() {
+        let result
+        do {
+          result = +prompt(`2 + 2 * 2 = ?`) == 6 ? true : false
+        } while(!result)
+      }
+      func1()*/
+      //2
+      /*function func2() {
+        let number = 1000
+        let count = 0
+        do {
+          number /= 2
+          count++
+        }
+        while(number >= 50)
+        document.write(`Number: ${number}<br>Count: ${count}`)
+      }
+      func2()*/
+
+      //FOR
+      //1
+      /*function func1(number) {
+        for(let i = 1; i < 101; i++) {
+          if(i % number == 0) document.write(`${i}<br>`)
+        }
+      }
+      func1(+prompt(`Enter number: `))*/
+      //2
+      /*function func2(min, max) {
+        for(let i = min; i < max + 1; i++) {
+          if(i % 4 == 0) document.write(`${i}<br>`)
+        }
+      }
+      func2(+prompt(`Enter min: `), +prompt(`Enter max: `))*/
+      //3
+      /*function func3(number) {
+        if(number != 0 && number % number == 0 && number % 1 == 0) {
+          document.write(`${number} is prime`)
+        }
+        else {
+          document.write(`${number} is not prime`)
+        }
+      }
+      func3(+prompt(`Enter number: `))*/
+      </script>
+  </body>
+</html>
+ 

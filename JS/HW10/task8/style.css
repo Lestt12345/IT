@@ -1,0 +1,22 @@
+body {
+    background-color: #FBF2EB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    min-height: calc(100vh - 20px);
+    margin: 0;
+    padding: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+    width: 600px;
+}
+
+p:last-child {
+    font: 1.5em sans-serif;
+    margin: 5px;
+}

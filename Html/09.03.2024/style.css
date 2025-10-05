@@ -1,0 +1,96 @@
+body {
+    background: #e45d44;
+    margin: 0;
+    padding: 0;
+}
+.body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.logWind {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: #E6E4E4;
+    width: 400px;
+    height: 450px;
+    padding: 50px;
+    box-shadow: 0px 0px 30px 0px rgb(44, 44, 44);
+}
+input {
+    border: none; /* всегда */
+    outline: none; /* когда активно */
+    width: 300px;
+    height: 50px;
+    margin: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+input:nth-child(3) {
+    background: #32A75A;
+    color: white;
+    border-bottom: 4px solid #09752E;
+}
+a {
+    color: #e45d44;
+    text-decoration: none;
+}
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+h2 {
+    color: white;
+    padding: 20px;
+    font-weight: normal;
+}
+.anotherWay {
+    width: 400px;
+    font-size: 25px;
+    margin: 0px;
+    padding: 0px;
+}
+.fb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 50px;
+    background: #3B579E;
+    float: left;
+    margin: 0px;
+    padding: 10px 20px;
+    border: none;
+    box-shadow: 0px 0px 1   0px 0px rgb(44, 44, 44);
+}
+.t {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    width: 180px;
+    height: 50px;
+    float: right;
+    margin: 0px;
+    padding: 10px 20px;
+    border: none;
+    box-shadow: 0px 0px 10px 0px rgb(44, 44, 44);
+}
+.anotherWay p {
+    margin: 0px;
+    padding: 0px 10px;
+    color: white;
+}
+.anotherWay img {
+    width: 25px;
+    height: 25px;
+}

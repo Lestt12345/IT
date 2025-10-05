@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="handleLeft" id="handleLeft">←</div>
+      <img src="" alt="" id="image">
+      <div class="handleRight" id="handleRight">→</div>
+    </div>
+    <script>
+      const images = [
+        "img/img1.jpg",
+        "img/img2.jpg",
+        "img/img3.jpg",
+        "img/img4.jpg",
+        "img/img5.jpg",
+      ];
+
+      const image = document.getElementById("image");
+      const handleLeft = document.getElementById("handleLeft");
+      const handleRight = document.getElementById("handleRight");
+
+      let currentImageIndex = 0;
+
+      image.src = images[currentImageIndex];
+
+      handleLeft.style.display = "none";
+
+      handleLeft.addEventListener("click", () => {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        image.src = images[currentImageIndex];
+        if (currentImageIndex === 0) {
+          handleLeft.style.display = "none";
+        }
+        handleRight.style.display = "block";
+      });
+
+      handleRight.addEventListener("click", () => {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        image.src = images[currentImageIndex];
+        if (currentImageIndex === images.length - 1) {
+          handleRight.style.display = "none";
+        }
+        handleLeft.style.display = "block";
+      });
+    </script>
+  </body>
+</html>

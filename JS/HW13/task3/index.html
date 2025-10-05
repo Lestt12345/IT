@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="formDiv">
+        <form>
+            <div class="styles">
+                <input type="checkbox" id="bold">
+                <label for="bold">Bold</label>
+                <input type="checkbox" id="underline">
+                <label for="underline">Underline</label>
+                <input type="checkbox" id="italics">
+                <label for="italic">Italics</label>
+                <input type="radio" id="left" name="align" value="left">
+                <label for="left">Left</label>
+                <input type="radio" id="right" name="align" value="right">
+                <label for="right">Right</label>
+                <input type="radio" id="center" name="align" value="justify">
+                <label for="center">justify</label>
+            </div>
+            <textarea id="text"></textarea>
+            <input type="submit" value="Show text">
+        </form>
+    </div>
+    <script>
+        const form = document.querySelector("form");
+        const formDiv = document.querySelector(".formDiv");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const text = document.querySelector("#text").value;
+            const bold = document.querySelector("#bold").checked;
+            const underline = document.querySelector("#underline").checked;
+            const italics = document.querySelector("#italics").checked;
+            const align = document.querySelector('input[name="align"]:checked')?.value;
+            const message = document.createElement("div");
+            message.classList.add("message");
+            message.innerHTML = text;
+            message.style.fontWeight = bold ? "bold" : "normal";
+            message.style.textDecoration = underline ? "underline" : "none";
+            message.style.fontStyle = italics ? "italic" : "normal";
+            if (align) message.style.textAlign = align;
+            document.body.appendChild(message);
+            formDiv.style.display = "none";
+        });
+    </script>
+</body>
+</html>
+

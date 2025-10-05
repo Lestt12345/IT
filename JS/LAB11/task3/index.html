@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <form>
+      <div class="container">
+        <div class="labelInput">
+          <label for="firstName">First name:</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="labelInput">
+          <label for="lastName">Last name:</label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+      </div>
+      <div class="container">
+        <div class="labelInput">
+          <label for="birthDate">Birthday:</label>
+          <input type="date" id="birthDate" name="birthDate" required>
+        </div>
+        <div style="display: flex; gap: 5px; margin-top: 20px">
+          <label for="gender">Gender:</label>
+          <input type="radio" id="male" name="gender" value="male" required>
+          <label for="male">Male</label>
+          <input type="radio" id="female" name="gender" value="female">
+          <label for="female">Female</label>
+        </div>
+      </div>
+      <div class="container">
+        <div class="labelInput">
+          <label for="country">Country:</label>
+          <select id="country" name="country" required>
+            <option value="">Select country</option>
+            <option value="ua">Ukraine</option>
+          </select>
+        </div>
+        <div class="labelInput">
+          <label for="city">City:</label>
+          <select id="city" name="city" required>
+            <option value="">Select city</option>
+            <option value="kyiv">Kyiv</option>
+            <option value="lviv">Lviv</option>
+            <option value="kriviyRih">Kriviy Rih</option>
+            <option value="dnipro">Dnipro</option>
+          </select>
+        </div>
+      </div>
+      <div style="display: flex; gap: 5px; margin-top: 10px">
+        <label>Skills:</label>
+        <input type="checkbox" id="html" name="html">
+        <label for="html">HTML</label>
+        <input type="checkbox" id="css" name="css">
+        <label for="css">CSS</label>
+        <input type="checkbox" id="js" name="js">
+        <label for="js">JS</label>
+        <input type="checkbox" id="php" name="php">
+        <label for="php">PHP</label>
+        <input type="checkbox" id="c++" name="c++">
+        <label for="c++">C++</label>
+        <input type="checkbox" name="java" id="java">
+        <label for="java">Java</label>
+        <input type="checkbox" name="c#" id="c#">
+        <label for="c#">C#</label>
+      </div>
+      <input type="submit" value="Save">
+    </form>
+    <table id="resultTable">
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Birthday</th>
+        <th>Gender</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Skills</th>
+      </tr>
+    </table>
+    <script>
+      const form = document.querySelector("form");
+      const resultTable = document.querySelector("#resultTable");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const firstName = document.querySelector("#firstName").value;
+        const lastName = document.querySelector("#lastName").value;
+        const birthDate = document.querySelector("#birthDate").value;
+        const gender = document.querySelector('input[name="gender"]:checked').value;
+        const country = document.querySelector("#country").value;
+        const city = document.querySelector("#city").value;
+        const skills = [];
+        document.querySelectorAll('input[name="html"]:checked, input[name="css"]:checked, input[name="js"]:checked, input[name="php"]:checked, input[name="c++"]:checked, input[name="java"]:checked, input[name="c#"]:checked').forEach(skill => {
+          skills.push(skill.id);
+        });
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${firstName}</td>
+          <td>${lastName}</td>
+          <td>${birthDate}</td>
+          <td>${gender}</td>
+          <td>${country}</td>
+          <td>${city}</td>
+          <td>${skills.join(", ")}</td>
+        `;
+        resultTable.appendChild(row);
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
+
+

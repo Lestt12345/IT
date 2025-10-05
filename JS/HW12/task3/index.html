@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <form>
+      <label for="selectFavFruit">Який ваш улюблений фрукт?</label>
+      <select id="selectFavFruit">
+        <option value="">Оберіть фрукт</option>
+        <option value="apple">Яблуко</option>
+        <option value="banana">Банан</option>
+        <option value="orange">Апельсин</option>
+      </select>
+      <input type="submit" value="Проголосувати">
+    </form>
+    <table>
+      <tr>
+        <th>Фрукт</th>
+        <th>Процент голосів</th>
+      </tr>
+      <tr>
+        <td>Яблуко</td>
+        <td id="appleVotes">0%</td>
+      </tr>
+      <tr>
+        <td>Банан</td>
+        <td id="bananaVotes">0%</td>
+      </tr>
+      <tr>
+        <td>Апельсин</td>
+        <td id="orangeVotes">0%</td>
+      </tr>
+    </table>
+    <script>
+      form = document.querySelector("form");
+      selectFavFruit = document.querySelector("#selectFavFruit");
+      appleVotes = document.querySelector("#appleVotes");
+      bananaVotes = document.querySelector("#bananaVotes");
+      orangeVotes = document.querySelector("#orangeVotes");
+      appleVotesValue = 0;
+      bananaVotesValue = 0;
+      orangeVotesValue = 0;
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const selectedFruit = selectFavFruit.value;
+        if (!selectedFruit) return;
+        else if (selectedFruit === "apple") appleVotesValue++;
+        else if (selectedFruit === "banana") bananaVotesValue++;
+        else if (selectedFruit === "orange") orangeVotesValue++;
+        appleVotes.textContent = Math.round(appleVotesValue / (appleVotesValue + bananaVotesValue + orangeVotesValue) * 100) + "%";
+        bananaVotes.textContent = Math.round(bananaVotesValue / (appleVotesValue + bananaVotesValue + orangeVotesValue) * 100) + "%";
+        orangeVotes.textContent = Math.round(orangeVotesValue / (appleVotesValue + bananaVotesValue + orangeVotesValue) * 100) + "%";
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
+
+

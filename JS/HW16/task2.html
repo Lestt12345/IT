@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="Sign in">
+    </form>
+
+    <script>
+        const emailInput = document.querySelector("#email");
+        const passwordInput = document.querySelector("#password");
+        const email = "qwe@qwe";
+        const password = "qwe";
+        let mistakes = 0;
+        const form = document.querySelector("form");
+
+        async function checkCookie() {
+            while (true) {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                if (document.cookie.includes("block=true")) {
+                    emailInput.disabled = true;
+                    passwordInput.disabled = true;
+                } else {
+                    emailInput.disabled = false;
+                    passwordInput.disabled = false;
+                }
+            }
+        }
+
+        checkCookie();
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (emailInput.value === email && passwordInput.value === password) {
+                alert("You are logged in");
+                mistakes = 0;
+                form.reset();
+            } else {
+                mistakes++;
+                if (mistakes === 5) {
+                    form.reset();
+                    mistakes = 0;
+                    emailInput.disabled = true;
+                    passwordInput.disabled = true;
+                    document.cookie = `block=true; expires=${new Date(Date.now() + 10 * 60 * 1000).toUTCString()}; path=/`;
+                    alert("You are blocked for 10 minutes");
+                } else {
+                    alert("Wrong email or password, mistakes: " + mistakes);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

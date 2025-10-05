@@ -1,0 +1,109 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FBF2E9;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+input[type="date"], input[type="submit"], input[type="text"] {
+    padding: 10px;
+    font-size: 15px;
+    width: 300px;
+    border-radius: 3px;
+    border: solid 1px black;
+    margin-bottom: 10px;
+}
+
+select[id="country"] {
+    padding: 10px;
+    font-size: 15px;
+    width: 323px;
+    border-radius: 3px;
+    border: solid 1px black;
+    margin-bottom: 10px;
+}
+
+select[id="city"] {
+    padding: 10px;
+    font-size: 15px;
+    width: 322px;
+    border-radius: 3px;
+    border: solid 1px black;
+    margin-bottom: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.labelInput {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="submit"] {
+    padding: 10px;
+    font-size: 15px;
+    width: 100%;
+    margin: 20px 0px 0px 0px;
+    border-radius: 3px;
+    border: solid 1px black;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    margin: 0px 0px 3px 5px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgb(185, 185, 185);
+    background: rgb(240, 240, 240);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    background: rgb(210, 255, 206);
+}
+
+input[type="radio"] {
+    appearance: none;
+    margin: 0px 0px 3px 5px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgb(185, 185, 185);
+    background: rgb(240, 240, 240);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked {
+    background: rgb(210, 255, 206);
+}
+
+table {
+   border-collapse: collapse;
+   border: 2px solid gray;
+   letter-spacing: 1px;
+   font-family: sans-serif;
+   margin-top: 20px;
+}
+
+td, th {
+   border: 2px solid gray;
+   padding: 3px 5px;
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+  </head>
+  <body>
+    <script>
+      // 1
+      function printRectangle(rectangle) {
+        document.write(`Top left: (${rectangle.topLeft.x}, ${rectangle.topLeft.y}), Bottom right: (${rectangle.bottomRight.x}, ${rectangle.bottomRight.y})<br>`);
+      }
+      
+      // 2
+      function getRectangleWidth(rectangle) {
+        return Math.abs(rectangle.topLeft.x - rectangle.bottomRight.x);
+      }
+      
+      // 3
+      function getRectangleHeight(rectangle) {
+        return Math.abs(rectangle.topLeft.y - rectangle.bottomRight.y);
+      }
+      
+      // 4
+      function getRectangleArea(rectangle) {
+        return getRectangleWidth(rectangle) * getRectangleHeight(rectangle);
+      }
+      
+      // 5
+      function getRectanglePerimeter(rectangle) {
+        return 2 * (getRectangleWidth(rectangle) + getRectangleHeight(rectangle));
+      }
+      
+      // 6
+      function changeRectangleWidth(rectangle, change) {
+        rectangle.topLeft.x += change;
+      }
+      
+      // 7
+      function changeRectangleHeight(rectangle, change) {
+        rectangle.topLeft.y += change;
+      }
+      
+      // 8
+      function changeRectangleWidthAndHeight(rectangle, widthChange, heightChange) {
+        rectangle.topLeft.x += widthChange;
+        rectangle.topLeft.y += heightChange;
+      }
+      
+      // 9
+      function shiftRectangleX(rectangle, shift) {
+        rectangle.topLeft.x += shift;
+        rectangle.bottomRight.x += shift;
+      }
+      
+      // 10
+      function shiftRectangleY(rectangle, shift) {
+        rectangle.topLeft.y += shift;
+        rectangle.bottomRight.y += shift;
+      }
+      
+      // 11
+      function shiftRectangleXY(rectangle, shiftX, shiftY) {
+        rectangle.topLeft.x += shiftX;
+        rectangle.topLeft.y += shiftY;
+        rectangle.bottomRight.x += shiftX;
+        rectangle.bottomRight.y += shiftY;
+      }
+      
+      // 12
+      function isPointInRectangle(rectangle, point) {
+        return (point.x >= rectangle.topLeft.x && point.x <= rectangle.bottomRight.x) && (point.y >= rectangle.topLeft.y && point.y <= rectangle.bottomRight.y);
+      }
+      
+      var rectangle = new Object();
+      rectangle.topLeft = new Object();
+      rectangle.bottomRight = new Object();
+      rectangle.topLeft.x = 0;
+      rectangle.topLeft.y = 10;
+      rectangle.bottomRight.x = 5;
+      rectangle.bottomRight.y = 0; 
+      
+      var point = new Object();
+      point.x = 3;
+      point.y = 7;
+      
+      printRectangle(rectangle);
+      document.write(`<br>`);
+      
+      document.write(`getRectangleWidth(rectangle):<br>${getRectangleWidth(rectangle)}<br>`);
+      document.write(`<br>`);
+      
+      document.write(`getRectangleHeight(rectangle):<br>${getRectangleHeight(rectangle)}<br>`);
+      document.write(`<br>`);
+      
+      document.write(`getRectangleArea(rectangle):<br>${getRectangleArea(rectangle)}<br>`);
+      document.write(`<br>`);
+      
+      document.write(`getRectanglePerimeter(rectangle):<br>${getRectanglePerimeter(rectangle)}<br>`);
+      document.write(`<br>`);
+      
+      document.write(`changeRectangleWidth(rectangle, 2):<br>`);
+      changeRectangleWidth(rectangle, 2);
+      printRectangle(rectangle);
+      document.write(`<br>`);
+      
+      document.write(`changeRectangleHeight(rectangle, 3):<br>`);
+      changeRectangleHeight(rectangle, 3);
+      printRectangle(rectangle);
+      document.write(`<br>`);
+      
+      document.write(`changeRectangleWidthAndHeight(rectangle, 4, 5):<br>`);
+      changeRectangleWidthAndHeight(rectangle, 4, 5);
+      printRectangle(rectangle);
+      document.write(`<br>`);
+      
+      document.write(`shiftRectangleX(rectangle, 6):<br>`);
+      shiftRectangleX(rectangle, 6);
+      printRectangle(rectangle);
+      document.write(`<br>`);
+      
+      document.write(`shiftRectangleY(rectangle, 7):<br>`);
+      shiftRectangleY(rectangle, 7);
+      printRectangle(rectangle);
+      document.write(`<br>`);
+      
+      document.write(`shiftRectangleXY(rectangle, 8, 9):<br>`);
+      shiftRectangleXY(rectangle, 8, 9);
+      printRectangle(rectangle);
+      document.write(`<br>`);
+      
+      document.write(`isPointInRectangle(rectangle, point):<br>${isPointInRectangle(rectangle, point) ? 'yes' : 'no'}<br>`);
+    </script>
+  </body>
+</html>

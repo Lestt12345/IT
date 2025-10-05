@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Article</h1>
+    <p style="font-size: larger;">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, quia!
+    </p>
+    <hr>
+    <ul id="comments-list">
+    </ul>
+    <hr>
+    <br>
+    <h2>Leave you comment</h2>
+    <form id="comment-form">
+      <div><label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br><br></div>
+      <label for="text">Text:</label>
+      <textarea id="text" name="text" required></textarea><br><br>
+      <input type="submit" value="Add comment">
+    </form>
+    <script>
+      const commentsList = document.getElementById("comments-list");
+      const commentForm = document.getElementById("comment-form");
+
+      commentForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const text = document.getElementById("text").value;
+        const date = new Date().toLocaleDateString();
+        const newComment = document.createElement("li");
+        newComment.innerHTML = `<h2 style="margin: 0px;">${name}</h2><p style="font-size: smaller; margin: 0px;">${date}</p><p style="margin: 0px; font-size: larger;">${text}</p>`;
+        commentsList.appendChild(newComment);
+        commentForm.reset();
+      });
+
+    </script>
+  </body>
+</html>
+

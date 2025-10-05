@@ -1,0 +1,23 @@
+body {
+    background-color: #FBF2EB;
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    height: 100px;
+}
+
+li {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+ul {
+    padding: 0px;
+}

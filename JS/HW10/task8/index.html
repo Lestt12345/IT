@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <p>Press Ctrl+B for edit text.</p>
+      <p>Press Ctrl+M for save text.</p>
+      <hr>
+      <p id="text" contentEditable="false">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque assumenda consectetur qui, voluptatibus, eveniet distinctio officia autem optio nostrum nemo fuga atque iusto officiis saepe delectus impedit, cupiditate blanditiis dolores?</p>
+    </div>
+    <script>
+      text = document.getElementById("text");
+
+      document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key === "b") {
+          text.contentEditable = "true";
+          text.focus();
+          document.execCommand("styleWithCSS", false, false);
+          document.execCommand("bold", false, false);
+        } else if (e.ctrlKey && e.key === "m") {
+          text.contentEditable = "false";
+        }
+      });
+    </script>
+  </body>
+</html>

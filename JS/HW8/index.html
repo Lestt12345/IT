@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+  </head>
+  <body>
+    <script>
+      //1
+      /*class Product {
+        name = "";
+        count = 0;
+        isBought = false;
+        constructor(name, count) {
+          this.name = name;
+          this.count = count;
+        }
+      }
+      let buy_list = []
+      buy_list.push(new Product('Milk', 2))
+      buy_list.push(new Product('Bread', 3))
+      buy_list.push(new Product('Eggs', 4))
+      buy_list.push(new Product('Cheese', 5))
+      buy_list.push(new Product('Butter', 6))
+      buy_list.push(new Product('Juice', 7))
+      buy_list.push(new Product('Salt', 8))
+      buy_list.push(new Product('Pepper', 9))
+      buy_list.push(new Product('Sugar', 10))
+      buy_list.push(new Product('Flour', 11))
+
+      function printList(arr) {
+        document.write('Not bought products:<br>');
+        document.write('<ul>');
+        for (let i = 0; i < arr.length; i++) {
+          if (!arr[i].isBought) {
+            document.write(`<li>${arr[i].name}: ${arr[i].count}</li>`);
+          }
+        }
+        document.write('</ul>');
+        document.write('<br>');
+        document.write('Bought products:<br>');
+        document.write('<ul>');
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].isBought) {
+            document.write(`<li>${arr[i].name}: ${arr[i].count}</li>`);
+          }
+        }
+        document.write('</ul>');
+      }
+
+      function addProduct(arr, name, count) {
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].name === name) {
+            arr[i].count += count;
+            return;
+          }
+        }
+        arr.push(new Product(name, count));
+      }
+
+      function buyProduct(arr, name) {
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].name === name) {
+            arr[i].isBought = true;
+            return;
+          }
+        }
+      }
+
+      printList(buy_list)
+
+      addProduct(buy_list, 'Butter', 2)
+      document.write('Added "Butter": 2<br>')
+      buyProduct(buy_list, 'Salt')
+      document.write('Bought "Salt"<br><br>')
+      printList(buy_list)*/
+
+      //2
+      /*class Product {
+        name = "";
+        count = 0;
+        price_for_one = 0;
+        constructor(name, count, price_for_one) {
+          this.name = name;
+          this.count = count;
+          this.price_for_one = price_for_one;
+        }
+      }
+      let chek_list = []
+      chek_list.push(new Product('Milk', 2, 1.5))
+      chek_list.push(new Product('Bread', 3, 2.5))
+      chek_list.push(new Product('Eggs', 4, 3.5))
+      chek_list.push(new Product('Cheese', 5, 4.5))
+      chek_list.push(new Product('Butter', 6, 5.5))
+      chek_list.push(new Product('Juice', 7, 6.5))
+      chek_list.push(new Product('Salt', 8, 7.5))
+      chek_list.push(new Product('Pepper', 9, 8.5))
+      chek_list.push(new Product('Sugar', 10, 9.5))
+      chek_list.push(new Product('Flour', 11, 10.5))
+
+      function TotalCost(arr) {
+        let total_cost = 0;
+        for (let i = 0; i < arr.length; i++) {
+          total_cost += arr[i].count * arr[i].price_for_one;
+        }
+        return total_cost;
+      }
+
+      function printList(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          document.write(`x${arr[i].count} ${arr[i].name}: ${arr[i].count * arr[i].price_for_one}₴<br>`);
+        }
+        document.write(`<br>Total: ${TotalCost(arr)}₴`);
+      }
+
+      function TheMostExpesiveBuy(arr) {
+        let max_price = 0;
+        let max_name = "";
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].price_for_one*arr[i].count > max_price) {
+            max_price = arr[i].price_for_one*arr[i].count;
+            max_name = arr[i].name;
+          }
+        }
+        return max_name;
+      }
+
+      function AverageCostForOne(arr) {
+        return TotalCost(arr) / arr.length;
+      }
+
+      printList(chek_list)
+
+      document.write(`<br><br><br>The most expensive buy: ${TheMostExpesiveBuy(chek_list)}`)
+
+      document.write(`<br><br><br>Average cost for one: ${AverageCostForOne(chek_list)}`)*/
+
+      //3
+      /*class Css_style {
+        name = "";
+        value = "";
+        constructor(name, value) {
+          this.name = name;
+          this.value = value;
+        }
+      }
+      let style_list = []
+      style_list.push(new Css_style('background-color', 'black'))
+      style_list.push(new Css_style('color', 'red'))
+      style_list.push(new Css_style('font-size', '14px'))
+      style_list.push(new Css_style('font-family', 'Arial'))
+      style_list.push(new Css_style('text-align', 'center'))
+      style_list.push(new Css_style('width', '100vw'))
+      style_list.push(new Css_style('padding', '20px 0px'))
+
+      function printStyle(styles, text) {
+        let style_str = "";
+        for (let style of styles) {
+          style_str += `${style.name}: ${style.value}; `;
+        }
+        document.write(`<p style="${style_str}">${text}</p>`);
+      }
+
+      text = "Hello, world!<br>I'm a paragraph.<br>And this is another paragraph."
+
+      document.write(`Text: ${text}<br><br>`)
+      printStyle(style_list, text)*/
+
+      //4
+      /*class Audience {
+        name = "";
+        seat_count = 0;
+        faculty_name = "";
+        constructor(name, seat_count, faculty_name) {
+          this.name = name;
+          this.seat_count = seat_count;
+          this.faculty_name = faculty_name;
+        }
+      }
+
+      let audience_list = []
+      audience_list.push(new Audience('Audience 1', 10, 'Faculty 1'))
+      audience_list.push(new Audience('Audience 2', 20, 'Faculty 2'))
+      audience_list.push(new Audience('Audience 3', 11, 'Faculty 3'))
+      audience_list.push(new Audience('Audience 4', 12, 'Faculty 1'))
+      audience_list.push(new Audience('Audience 5', 13, 'Faculty 2'))
+      audience_list.push(new Audience('Audience 6', 14, 'Faculty 3'))
+      audience_list.push(new Audience('Audience 7', 15, 'Faculty 1'))
+      audience_list.push(new Audience('Audience 8', 16, 'Faculty 2'))
+      audience_list.push(new Audience('Audience 9', 17, 'Faculty 3'))
+      audience_list.push(new Audience('Audience 10', 18, 'Faculty 1'))
+      audience_list.push(new Audience('Audience 11', 15, 'Faculty 2'))
+
+
+      function printAudienceList(arr) {
+        let audiences = "<div style='display: flex; flex-wrap: wrap;'>";
+        for (let aud of arr) {
+          let audience = "";
+          audience += '<div style="border: 1px solid black; margin: 3px; padding: 10px;">';
+          audience += `${aud.name}<br>`;
+          audience += '<ul>';
+          audience += `<li>Seats: ${aud.seat_count}</li>`;
+          audience += `<li>Faculty: ${aud.faculty_name}</li>`;
+          audience += '</ul>';
+          audience += '</div>';
+          audiences += audience;
+        }
+        audiences += '</div>';
+        document.write(audiences);
+      }
+
+      function printAudienceListByFaculty(arr, faculty_name_) {
+        let audiences = "<div style='display: flex; flex-wrap: wrap;'>";
+        for (let aud of arr) {
+          if (aud.faculty_name !== faculty_name_) {
+            continue;
+          }
+          let audience = "";
+          audience += '<div style="border: 1px solid black; margin: 3px; padding: 10px;">';
+          audience += `${aud.name}<br>`;
+          audience += '<ul>';
+          audience += `<li>Seats: ${aud.seat_count}</li>`;
+          audience += `<li>Faculty: ${aud.faculty_name}</li>`;
+          audience += '</ul>';
+          audience += '</div>';
+          audiences += audience;
+        }
+        audiences += '</div>';
+        document.write(audiences);
+      }
+
+      function printAudienceListByGroup(arr, group) {
+        let audiences = "<div style='display: flex; flex-wrap: wrap;'>";
+        for (let aud of arr) {
+          if (aud.faculty_name !== group.faculty_name || aud.seat_count < group.students_count) {
+            continue;
+          }
+          let audience = "";
+          audience += '<div style="border: 1px solid black; margin: 3px; padding: 10px;">';
+          audience += `${aud.name}<br>`;
+          audience += '<ul>';
+          audience += `<li>Seats: ${aud.seat_count}</li>`;
+          audience += `<li>Faculty: ${aud.faculty_name}</li>`;
+          audience += '</ul>';
+          audience += '</div>';
+          audiences += audience;
+        }
+        audiences += '</div>';
+        document.write(audiences);
+      }
+
+      function SortBySeatsCount(arr) {
+        arr.sort(function (a, b) {
+          return a.seat_count - b.seat_count;
+        });
+      }
+
+      function SortByNameByAlphabet(arr) {
+        arr.sort(function (a, b) {
+          return a.name.localeCompare(b.name);
+        });
+      }
+
+      document.write(`printAudienceList(audience_list)`);
+      printAudienceList(audience_list)
+
+      document.write(`<br><br><br>`);
+
+      document.write(`printAudienceListByFaculty(audience_list, 'Faculty 3')`);
+      printAudienceListByFaculty(audience_list, 'Faculty 3')
+
+      document.write(`<br><br><br>`);
+
+      let group = {
+        faculty_name: 'Faculty 1',
+        students_count: 15
+      }
+
+      document.write(`printAudienceListByGroup(audience_list, group)`);
+      printAudienceListByGroup(audience_list, group)
+
+      document.write(`<br><br><br>`);
+
+      document.write(`SortBySeatsCount(audience_list)`);
+      SortBySeatsCount(audience_list)
+      printAudienceList(audience_list)
+
+      document.write(`<br><br><br>`);
+
+      document.write(`SortByNameByAlphabet(audience_list)`);
+      SortByNameByAlphabet(audience_list)
+      printAudienceList(audience_list)*/ // Думаю зручні стилі не завадять :)
+    </script>
+  </body>
+</html>

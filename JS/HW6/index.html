@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+  </head>
+  <body>
+    <script>
+      //1
+      /*var Car = new Object();
+      Car.make = "Honda";
+      Car.model = "Accord";
+      Car.year = 1998;
+      Car.averageSpeed = 60;
+      Car.PrintCar = function () {
+        document.write(`Make: ${Car.make}<br>`);
+        document.write(`Model: ${Car.model}<br>`);
+        document.write(`Year: ${Car.year}<br>`);
+        document.write(`Average speed: ${Car.averageSpeed}<br>`);
+      }
+      Car.TimeForTravel = function (distance) {
+        let totalTime_inHours = distance / Car.averageSpeed;
+        for (let i = 0; i < distance/Car.averageSpeed; i++) {
+          if (i % 4 == 0) {
+            totalTime_inHours += 1;
+          }
+        }
+        totalTime_inHours = totalTime_inHours.toFixed(1);
+        return totalTime_inHours;
+      }
+
+      Car.PrintCar();
+      document.write(`<br>`);
+      document.write(`Time for travel 1000km: ${Car.TimeForTravel(1000)}<br>`);*/
+
+      //2
+      /*var Fraction = new Object();
+      Fraction.numerator = 1;
+      Fraction.denominator = 2;
+
+      Fraction.add = function(other) {
+        var newNumerator = Fraction.numerator * other.denominator + other.numerator * Fraction.denominator;
+        var newDenominator = Fraction.denominator * other.denominator;
+        return { numerator: newNumerator, denominator: newDenominator };
+      }
+
+      Fraction.subtract = function(other) {
+        var newNumerator = Fraction.numerator * other.denominator - other.numerator * Fraction.denominator;
+        var newDenominator = Fraction.denominator * other.denominator;
+        return { numerator: newNumerator, denominator: newDenominator };
+      }
+
+      Fraction.multiply = function(other) {
+        var newNumerator = Fraction.numerator * other.numerator;
+        var newDenominator = Fraction.denominator * other.denominator;
+        return { numerator: newNumerator, denominator: newDenominator };
+      }
+
+      Fraction.divide = function(other) {
+        var newNumerator = Fraction.numerator * other.denominator;
+        var newDenominator = Fraction.denominator * other.numerator;
+        return { numerator: newNumerator, denominator: newDenominator };
+      }
+
+      var Fraction2 = { numerator: 1, denominator: 3 };
+      result = Fraction.add(Fraction2);
+      document.write(`${Fraction.numerator}/${Fraction.denominator} + ${Fraction2.numerator}/${Fraction2.denominator} = ${result.numerator}/${result.denominator}<br><br>`);
+      result = Fraction.subtract(Fraction2);
+      document.write(`${Fraction.numerator}/${Fraction.denominator} - ${Fraction2.numerator}/${Fraction2.denominator} = ${result.numerator}/${result.denominator}<br><br>`);
+      result = Fraction.multiply(Fraction2);
+      document.write(`${Fraction.numerator}/${Fraction.denominator} * ${Fraction2.numerator}/${Fraction2.denominator} = ${result.numerator}/${result.denominator}<br><br>`);
+      result = Fraction.divide(Fraction2);
+      document.write(`${Fraction.numerator}/${Fraction.denominator} / ${Fraction2.numerator}/${Fraction2.denominator} = ${result.numerator}/${result.denominator}<br><br>`);*/
+
+      //3
+      var Time = new Object();
+      Time.hours = 20;
+      Time.minutes = 30;
+      Time.seconds = 45;
+
+      Time.printTime = function () {
+        document.write(`${String(Time.hours).padStart(2, '0')}:${String(Time.minutes).padStart(2, '0')}:${String(Time.seconds).padStart(2, '0')}<br><br>`);
+      };
+
+      Time.addSeconds = function (seconds) {
+        Time.seconds += seconds;
+
+        if (Time.seconds >= 60) {
+          Time.minutes += Math.floor(Time.seconds / 60);
+          Time.seconds %= 60;
+        }
+
+        if (Time.minutes >= 60) {
+          Time.hours += Math.floor(Time.minutes / 60);
+          Time.minutes %= 60;
+        }
+
+        if (Time.hours >= 24) {
+          Time.hours %= 24;
+        }
+      };
+
+      Time.addMinutes = function (minutes) {
+        Time.minutes += minutes;
+
+        if (Time.minutes >= 60) {
+          Time.hours += Math.floor(Time.minutes / 60);
+          Time.minutes %= 60;
+        }
+
+        if (Time.hours >= 24) {
+          Time.hours %= 24;
+        }
+      };
+
+      Time.addHours = function (hours) {
+        Time.hours += hours;
+
+        if (Time.hours >= 24) {
+          Time.hours %= 24;
+        }
+      };
+
+      document.write(`Current time:<br>`);
+      Time.printTime();
+
+      document.write(`Added 30 seconds:<br>`);
+      Time.addSeconds(30);
+      Time.printTime();
+
+      document.write(`Added 20 minutes:<br>`);
+      Time.addMinutes(20);
+      Time.printTime();
+
+      document.write(`Added 2 hours:<br>`);
+      Time.addHours(2);
+      Time.printTime();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="tree">
+      <ul>
+        <li>
+          <span class="folder hover-bold">This PC</span>
+          <ul>
+            <li>
+              <span class="folder hover-bold">Local Disk (C:)</span>
+              <ul>
+                <li class="hover-bold">Program Files</li>
+                <li class="hover-bold">Users</li>
+                <li class="hover-bold">Windows</li>
+              </ul>
+            </li>
+            <li>
+              <span class="folder hover-bold">Local Disk (D:)</span>
+              <ul>
+                <li class="hover-bold">New Folder 1</li>
+                <li class="hover-bold">New Folder 2</li>
+                <li class="hover-bold">New Folder 3</li>
+              </ul>
+            </li>
+            <li>
+              <span class="folder hover-bold">Local Disk (E:)</span>
+              <ul>
+                
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script>
+      document.querySelectorAll(".folder").forEach(folder => {
+        folder.addEventListener("click", () => {
+          const sublist = folder.nextElementSibling;
+          if (sublist && sublist.tagName === "UL") {
+            sublist.style.display = sublist.style.display === "block" ? "none" : "block";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

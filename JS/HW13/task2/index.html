@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form>
+        <div id="question1">
+            <label for="q1"><b>1)</b> How many letters are there in the word “Hello”?</label>
+            <br>
+            <input type="radio" id="q1" name="q1" value="5">
+            <label for="q1">5</label>
+            <br>
+            <input type="radio" id="q1" name="q1" value="2">
+            <label for="q1">2</label>
+            <br>
+            <input type="submit" value="Next" id="next">
+        </div>
+        <div id="question2">
+            <label for="q2"><b>2)</b> How many letters are there in the word “World”?</label>
+            <br>
+            <input type="radio" id="q2" name="q2" value="4">
+            <label for="q2">4</label>
+            <br>
+            <input type="radio" id="q2" name="q2" value="5">
+            <label for="q2">5</label>
+            <br>
+            <input type="submit" value="Finish" id="finish">
+        </div>
+        <p id="result"></p>
+    </form>
+    <script>
+        const form = document.querySelector("form");
+        const question1 = document.querySelector("#question1");
+        const question2 = document.querySelector("#question2");
+        const result = document.querySelector("#result");
+        const next = document.querySelector("#next");
+        const finish = document.querySelector("#finish");
+
+        question1.style.display = "block";
+        question2.style.display = "none";
+        result.style.display = "none";
+
+        next.addEventListener("click", (e) => {
+            e.preventDefault();
+            question1.style.display = "none";
+            question2.style.display = "block";
+        })
+
+        finish.addEventListener("click", (e) => {
+            e.preventDefault();
+            let correct = 0;
+            const q1 = document.querySelector('input[name="q1"]:checked').value;
+            const q2 = document.querySelector('input[name="q2"]:checked').value;
+            if (q1 === "5") correct++;
+            if (q2 === "5") correct++;
+            result.innerHTML = `Result: <b>${correct}</b> correct answers to 2 questions.`;
+            result.style.display = "block";
+            question1.style.display = "none";
+            question2.style.display = "none";
+        })
+        
+    </script>
+</body>
+</html>

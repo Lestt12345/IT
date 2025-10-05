@@ -1,0 +1,14 @@
+.color {
+   width: 50px;
+   height: 50px;
+   border: solid 1px black;
+}
+
+.colorPalette {
+   padding: 5px;
+   width: 508px;
+   display: flex;
+   flex-wrap: wrap;
+   border: solid 1px black;
+   gap: 5px;
+}

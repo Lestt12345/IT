@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1><a href="index.html">LIBRARY</a></h1>
+    <nav>
+        <ul>
+            <li><h3>Books</h3></li>
+            <div></div>
+            <li><h3>Visitors</h3></li>
+            <div></div>
+            <li><h3>Cards</h3></li>
+            <div></div>
+            <li><h3>Statistics</h3></li>
+        </ul>
+    </nav>
+    <div class="container" id="books">
+        <div class="w100SpaceBetween">
+            <h3>ALL BOOKS:</h3>
+            <button id="addBookBtn">New book</button>
+        </div>
+        <hr>
+        <div class="w100SpaceBetween">
+            <form>
+                <label for="sortBooksBy">Sort by:</label>
+                <select id="sortBooksBy">
+                    <option value="name">Name</option>
+                    <option value="author">Author</option>
+                    <option value="countOnLibrary">Count on library</option>
+                </select>
+                <input type="submit" value="Sort">
+            </form>
+            <form>
+                <label for="searchBooks">Search:</label>
+                <input type="text" id="searchBooks">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>Year</th>
+                        <th>Name of publisher</th>
+                        <th>Count of pages</th>
+                        <th>Count on library</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container" id="visitors">
+        <div class="w100SpaceBetween">
+            <h3>ALL VISITORS:</h3>
+            <button id="addVisitorBtn">New visitor</button>
+        </div>
+        <hr>
+        <div class="w100SpaceBetween">
+            <form>
+                <label for="sortVisitorsBy">Sort by:</label>
+                <select id="sortVisitorsBy">
+                    <option value="id">ID</option>
+                    <option value="name">Name</option>
+                </select>
+                <input type="submit" value="Sort">
+            </form>
+            <form>
+                <label for="searchVisitors">Search:</label>
+                <input type="text" id="searchVisitors">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container" id="cards">
+        <div class="w100SpaceBetween">
+            <h3>ALL CARDS:</h3>
+            <button id="addCardBtn">New card</button>
+        </div>
+        <hr>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Visitor ID</th>
+                        <th>Book ID</th>
+                        <th>Issue date</th>
+                        <th>Return date</th>
+                        <th>Take back</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container" id="statistics">
+        <div class="w100SpaceBetween">
+            <h3>STATISTICS:</h3>
+        </div>
+        <hr>
+        <div class="w100SpaceAround">
+            <div class="topList">
+                <h2>Most popular books:</h2>
+                <ol>
+                </ol>
+            </div>
+            <div class="topList">
+                <h2>Most active visitors:</h2>
+                <ol>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    <!-- books -->
+    <div class="modal" id="addBookModal">
+        <div class="modalContext">
+            <div class="modalCloseBtn"><img src="img/close.png" alt=""></div>
+            <form>
+                <div>
+                    <label for="bookName">Book name:</label>
+                    <input type="text" id="bookName" name="bookName" required>
+                </div>
+                <div>
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                <div>
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" name="year" required>
+                </div>
+                <div>
+                    <label for="publisher">Publisher:</label>
+                    <input type="text" id="publisher" name="publisher" required>
+                </div>
+                <div>
+                    <label for="countOfPages">Count of pages:</label>
+                    <input type="number" id="countOfPages" name="countOfPages" required>
+                </div>
+                <div>
+                    <label for="countOnLibrary">Count on library:</label>
+                    <input type="number" id="countOnLibrary" name="countOnLibrary" required>
+                </div>
+                <button type="submit">Add book</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="editBookModal">
+        <div class="modalContext">
+            <div class="modalCloseBtn"><img src="img/close.png" alt=""></div>
+            <form>
+                <div>
+                    <label for="editBookIdLabel">ID:</label>
+                    <input type="number" id="editBookIdLabel" name="editBookIdLabel" required>
+                </div>
+                <div>
+                    <label for="bookName">Book name:</label>
+                    <input type="text" id="bookName" name="bookName" required>
+                </div>
+                <div>
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                <div>
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" name="year" required>
+                </div>
+                <div>
+                    <label for="publisher">Publisher:</label>
+                    <input type="text" id="publisher" name="publisher" required>
+                </div>
+                <div>
+                    <label for="countOfPages">Count of pages:</label>
+                    <input type="number" id="countOfPages" name="countOfPages" required>
+                </div>
+                <div>
+                    <label for="countOnLibrary">Count on library:</label>
+                    <input type="number" id="countOnLibrary" name="countOnLibrary" required>
+                </div>
+                <button type="submit">Edit book</button>
+            </form>
+        </div>
+    </div>
+    <!-- books -->
+
+    <!-- visitors -->
+    <div class="modal" id="addVisitorModal">
+        <div class="modalContext">
+            <div class="modalCloseBtn"><img src="img/close.png" alt=""></div>
+            <form>
+                <div>
+                    <label for="visitorName">Visitor name:</label>
+                    <input type="text" id="visitorName" name="visitorName" required>
+                </div>
+                <div>
+                    <label for="phone">Phone:</label>
+                    <input type="number" id="phone" name="phone" required>
+                </div>
+                <button type="submit">Add visitor</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="editVisitorModal">
+        <div class="modalContext">
+            <div class="modalCloseBtn"><img src="img/close.png" alt=""></div>
+            <form>
+                <div>
+                    <label for="editVisitorIdLabel">ID:</label>
+                    <input type="number" id="editVisitorIdLabel" name="editVisitorIdLabel" required>
+                </div>
+                <div>
+                    <label for="visitorName">Visitor name:</label>
+                    <input type="text" id="visitorName" name="visitorName" required>
+                </div>
+                <div>
+                    <label for="phone">Phone:</label>
+                    <input type="number" id="phone" name="phone" required>
+                </div>
+                <button type="submit">Edit visitor</button>
+            </form>
+        </div>
+    </div>
+    <!-- visitors -->
+    <!-- cards -->
+    <div class="modal" id="addCardModal">
+        <div class="modalContext">
+            <div class="modalCloseBtn"><img src="img/close.png" alt=""></div>
+            <form>
+                <div>
+                    <label for="visitorId">Visitor ID:</label>
+                    <input type="number" id="visitorId" name="visitorId" required>
+                </div>
+                <div>
+                    <label for="bookId">Book ID:</label>
+                    <input type="number" id="bookId" name="bookId" required>
+                </div>
+                <div>
+                    <label for="issueDate">Issue date:</label>
+                    <input type="date" id="issueDate" name="issueDate" required>
+                </div>
+                <div>
+                    <label for="returnDate">Return date:</label>
+                    <input type="date" id="returnDate" name="returnDate" required>
+                </div>
+                <button type="submit">Add card</button>
+            </form>
+        </div>
+    </div>
+    <!-- cards -->
+    <script src="script.js"></script>
+</body>
+</html>

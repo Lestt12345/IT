@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FBF2E9;
+    margin: 20px;
+}
+
+form {
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    width: 100%;
+    border: solid 2px gray;
+    border-radius: 3px;
+    padding: 5px 0px;
+    cursor: pointer;
+}
+
+.book {
+    width: 230px;
+    border: solid 2px gray;
+    border-radius: 3px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+img {
+    width: 230px;
+}
+
+p {
+    font-size: 12px;
+    margin: 0px;
+}
+
+h4 {
+    margin: 5px 0px;
+}
+
+h3 {
+    margin: 0px 0px 5px 0px;
+    text-align: right;
+}
+
+.buyForm {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px gray;
+    border-radius: 3px;
+}
+
+.buyForm div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buyForm input {
+    width: 60%;
+    height: 10px;
+    border: solid 2px gray;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.buyForm textarea {
+    width: 60%;
+    padding: 5px;
+    min-height: 60px;
+    max-height: 100px;
+    resize: vertical;
+    border: solid 2px gray;
+    border-radius: 3px;
+}
+
+.result p {
+    font-size: 16px;
+    border: solid 2px gray;
+    border-radius: 3px;
+    padding: 15px 10px;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="tooltip-wrapper">
+      <button>Button 1</button>
+      <div class="tooltip">Tool tip 1</div>
+    </div>
+    <div class="tooltip-wrapper">
+      <button>Button 2</button>
+      <div class="tooltip">Tool tip 2</div>
+    </div>
+    <script>
+      const wrappers = document.querySelectorAll(".tooltip-wrapper");
+
+      wrappers.forEach(wrapper => {
+        const button = wrapper.querySelector("button");
+        const tooltip = wrapper.querySelector(".tooltip");
+
+        button.addEventListener("mouseenter", () => {
+          tooltip.style.display = "block";
+          
+          const buttonRect = button.getBoundingClientRect();
+          const tooltipHeight = tooltip.offsetHeight;
+          
+          const spaceAbove = buttonRect.top; 
+          const spaceBelow = window.innerHeight - buttonRect.bottom;
+          
+          if (spaceAbove >= tooltipHeight + 15) {
+            tooltip.setAttribute("data-position", "top");
+          } else if (spaceBelow >= tooltipHeight + 15) {
+            tooltip.setAttribute("data-position", "bottom");
+          } else {
+            tooltip.setAttribute("data-position", "bottom"); 
+          }
+        });
+
+        button.addEventListener("mouseleave", () => {
+          tooltip.style.display = "none";
+        });
+
+        tooltip.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

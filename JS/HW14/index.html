@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form>
+        <div style="display: flex; align-items: center;">
+            <h3>Create new color</h3>
+        </div>
+        <div class="label">
+            <label for="color">Color:</label>
+            <p id="colorError">Color can only contain letters</p>
+        </div>
+        <input type="text" id="color" required>
+        <label for="type">Type:</label>
+        <select id="type">
+            <option value="rgb">RGB</option>
+            <option value="rgba">RGBA</option>
+            <option value="hex">HEX</option>
+        </select>
+        <div class="label">
+            <label for="code">Code:</label>
+            <p id="codeError"></p>
+        </div>
+        <input type="text" id="code" required>
+        <input type="submit" value="Save">
+    </form>
+    <div class="colors"></div>
+
+    <script>
+        const colorError = document.querySelector("#colorError");
+        const codeError = document.querySelector("#codeError");
+        const form = document.querySelector("form");
+        const color = document.querySelector("#color");
+        const type = document.querySelector("#type");
+        const code = document.querySelector("#code");
+        const colors = document.querySelector(".colors");
+        colorError.style.display = "none";
+
+        const allCookies = document.cookie.split("; ");
+        const colorCookie = allCookies.find(c => c.startsWith("color="));
+        if (colorCookie) {
+            const colorsForLoad = JSON.parse(colorCookie.split("=")[1]);
+            for (let color of colorsForLoad) {
+                addColorDiv(color);
+            }
+        }
+
+        function addColorDiv(color) {
+            const newColorDiv = document.createElement("div");
+            newColorDiv.classList.add("color");
+
+            if (color.type === "rgb") {
+                const rgb = color.code.split(",").map(c => parseInt(c.trim()));
+                newColorDiv.style.backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+                const darker = rgb.map(c => Math.max(0, c - 50));
+                newColorDiv.style.borderColor = `rgb(${darker[0]}, ${darker[1]}, ${darker[2]})`;
+            } 
+            else if (color.type === "rgba") {
+                const rgba = color.code.split(",").map(c => parseFloat(c.trim()));
+                newColorDiv.style.backgroundColor = `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${rgba[3]})`;
+                const darker = rgba.map((c, i) => i === 3 ? Math.max(0, c - 0.1) : Math.max(0, c - 50));
+                newColorDiv.style.borderColor = `rgba(${darker[0]}, ${darker[1]}, ${darker[2]}, ${darker[3]})`;
+            } 
+            else if (color.type === "hex") {
+                const hex = color.code.slice(1);
+                const hexFull = hex.length === 3 ? hex.split("").map(h => h+h).join("") : hex;
+                const rgb = [0, 1, 2].map(i => parseInt(hexFull.slice(i * 2, i * 2 + 2), 16));
+                newColorDiv.style.backgroundColor = `#${hexFull}`;
+                const darker = rgb.map(c => Math.max(0, c - 50));
+                newColorDiv.style.borderColor = `rgb(${darker[0]}, ${darker[1]}, ${darker[2]})`;
+            }
+
+            newColorDiv.innerHTML = `<p>${color.color}</p><p>${color.type}</p><h5>${color.code}</h5>`;
+            colors.appendChild(newColorDiv);
+        }
+
+
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const colorValue = color.value;
+            const colorRegex = /^[a-zA-Z]+$/;
+            if (!colorValue.match(colorRegex)) {
+                colorError.style.display = "block";
+                return;
+            }
+            colorError.style.display = "none";
+            const typeValue = type.value;
+            const codeValue = code.value;
+
+            if (typeValue === "rgb") {
+                const rgbRegex = /^\s*(?:[0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:[0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:[0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*$/;
+                if (!rgbRegex.test(codeValue)) {
+                    codeError.textContent = "RGB code must match the pattern\n[0-255, 0-255, 0-255]";
+                    return;
+                }
+            } 
+            else if (typeValue === "rgba") {
+                const rgbaRegex = /^\s*(?:[0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:[0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:[0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\s*,\s*(?:0|1|0?\.\d+)\s*$/;
+                if (!rgbaRegex.test(codeValue)) {
+                    codeError.textContent = "RGBA code must match the pattern\n[0-255, 0-255, 0-255, 0-1]";
+                    return;
+                }
+            } 
+            else if (typeValue === "hex") {
+                const hexRegex = /^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$/;
+                if (!hexRegex.test(codeValue)) {
+                    codeError.textContent = "HEX code must match the pattern\n#000000 or #000";
+                    return;
+                }
+            }
+
+            codeError.textContent = "";
+
+            const newColor = {
+                color: colorValue,
+                type: typeValue,
+                code: codeValue
+            };
+
+            addColorDiv(newColor);
+
+            const colorsArray = [...colors.children].map(c => ({
+                color: c.children[0].textContent,
+                type: c.children[1].textContent,
+                code: c.children[2].textContent
+            }));
+
+            document.cookie = `color=${JSON.stringify(colorsArray)};expires=${new Date(Date.now() + 3 * 60 * 60 * 1000).toUTCString()};path=/`;
+
+            form.reset();
+        });
+    </script>
+</body>
+</html>

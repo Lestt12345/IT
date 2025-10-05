@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form>
+        <h3>User info</h3>
+        <div class="panel">
+            <div class="panel1">
+                <div class="label">
+                    <label for="firstName">First name:</label>
+                    <p id="firstNameError">Invalid first name</p>
+                </div>
+                <input type="text" id="firstName" required>
+                <div class="label">
+                    <label for="yearOfBirth">Year of birth:</label>
+                    <p id="yearOfBirthError">Invalid year of birth</p>
+                </div>
+                <input type="number" id="yearOfBirth" required>
+                <div class="label">
+                    <label for="password">Phone number:</label>
+                    <p id="phoneNumberError">Invalid number</p>
+                </div>
+                <input type="number" id="phoneNumber" placeholder="+380">
+            </div>
+            <div class="panel1">
+                <div class="label">
+                    <label for="lastName">Last name:</label>
+                    <p id="lastNameError">Invalid last name</p>
+                </div>
+                <input type="text" id="lastName" required>
+                <div class="label">
+                    <label for="gender">Gender:</label>
+                </div>
+                <select name="gender" id="gender" required>
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                </select>
+                <div class="label">
+                    <label for="skype">Skype:</label>
+                    <p id="skypeError">Invalid skype</p>
+                </div>
+                <input type="text" id="skype" >
+            </div>
+        </div>
+        <input id="save" type="submit" value="Save">
+    </form>
+
+    <script>
+        const firstNameError = document.querySelector("#firstNameError");
+        const lastNameError = document.querySelector("#lastNameError");
+        const yearOfBirthError = document.querySelector("#yearOfBirthError");
+        const phoneNumberError = document.querySelector("#phoneNumberError");
+        const skypeError = document.querySelector("#skypeError");
+
+        firstNameError.style.display = "none";
+        lastNameError.style.display = "none";
+        yearOfBirthError.style.display = "none";
+        phoneNumberError.style.display = "none";
+        skypeError.style.display = "none";
+
+        if(!document.cookie) location.href = "index.html";
+
+        const cookieFirstNameMatch = document.cookie.match(/firstName=([^;]*)/);
+        if (cookieFirstNameMatch) document.querySelector("#firstName").value = cookieFirstNameMatch[1];
+
+        const cookieLastNameMatch = document.cookie.match(/lastName=([^;]*)/);
+        if (cookieLastNameMatch) document.querySelector("#lastName").value = cookieLastNameMatch[1];
+
+        const cookieYearOfBirthMatch = document.cookie.match(/yearOfBirth=([^;]*)/);
+        if (cookieYearOfBirthMatch) document.querySelector("#yearOfBirth").value = cookieYearOfBirthMatch[1];
+
+        const cookieGenderMatch = document.cookie.match(/gender=([^;]*)/);
+        if (cookieGenderMatch) document.querySelector("#gender").value = cookieGenderMatch[1];
+
+        const cookiePhoneNumberMatch = document.cookie.match(/phoneNumber=([^;]*)/);
+        if (cookiePhoneNumberMatch) document.querySelector("#phoneNumber").value = cookiePhoneNumberMatch[1];
+
+        const cookieSkypeMatch = document.cookie.match(/skype=([^;]*)/);
+        if (cookieSkypeMatch) document.querySelector("#skype").value = cookieSkypeMatch[1];
+
+        const form = document.querySelector("form"); 
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const firstName = document.querySelector("#firstName").value;
+            const lastName = document.querySelector("#lastName").value;
+            const yearOfBirth = document.querySelector("#yearOfBirth").value;
+            const gender = document.querySelector("#gender").value;
+            const phoneNumber = document.querySelector("#phoneNumber").value;
+            const skype = document.querySelector("#skype").value;
+            
+            const reFirstName = /^([a-zA-Z]{2,20}|[a-zA-Z\s]{2,20})$/;
+            if (reFirstName.test(firstName)) firstNameError.style.display = "none";
+            else firstNameError.style.display = "block";
+            const reLastName = /^([a-zA-Z]{2,20}|[a-zA-Z\s]{2,20})$/;
+            if (reLastName.test(lastName)) lastNameError.style.display = "none";
+            else lastNameError.style.display = "block";
+            const reYearOfBirth = /^(19|20)\d{2}$/;
+            if (reYearOfBirth.test(yearOfBirth)) yearOfBirthError.style.display = "none";
+            else yearOfBirthError.style.display = "block";
+            if (phoneNumber !== "") {
+                const rePhoneNumber = /^(\+\d{1,2}\s?)?1?\-?\s?\d{3}\s?\d{3}\s?\d{4}$/;
+                if (rePhoneNumber.test(phoneNumber)) phoneNumberError.style.display = "none";
+                else phoneNumberError.style.display = "block";
+            }
+            else phoneNumberError.style.display = "none";
+            if(skype !== "") {
+                const reSkype = /^([a-zA-Z0-9_\-\.]{8,20}|[a-zA-Z0-9_\-\.]{8,20})$/;
+                if (reSkype.test(skype)) skypeError.style.display = "none";
+                else skypeError.style.display = "block";
+            }
+            else skypeError.style.display = "none";
+
+            if (firstNameError.style.display === "none" && lastNameError.style.display === "none" && yearOfBirthError.style.display === "none" && phoneNumberError.style.display === "none" && skypeError.style.display === "none") {
+                const date = new Date(Date.now() + 60 * 60 * 1000);
+                document.cookie = `firstName=${firstName};expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};path=/`;
+                document.cookie = `lastName=${lastName};expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};path=/`;
+                document.cookie = `yearOfBirth=${yearOfBirth};expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};path=/`;
+                document.cookie = `gender=${gender};expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};path=/`;
+                if(phoneNumber !== "") document.cookie = `phoneNumber=${phoneNumber};expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};path=/`;
+                if(skype !== "") document.cookie = `skype=${skype};expires=${new Date(Date.now() + 60 * 60 * 1000).toUTCString()};path=/`;
+                alert("DONE");
+            }
+        });
+    </script>
+</body>
+</html>

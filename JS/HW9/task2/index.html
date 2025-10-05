@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <button class="open-modal" id="openModal">Open modal</button>
+    <div class='modal' id="modal">
+      <div class='modal-content'>
+        <h1>Hello from Modal Window!</h1>
+        <button id="closeModal">Close</button>
+      </div>
+    </div>
+    <script>
+      const Modal = document.getElementById("modal");
+      Modal.style.display = "none";
+      openModal.addEventListener("click", () => {
+        Modal.style.display = "flex";
+      });
+      closeModal.addEventListener("click", () => {
+        Modal.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

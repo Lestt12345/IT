@@ -1,0 +1,27 @@
+table {
+  font-size: 20px;
+  border-collapse: collapse;
+}
+td {
+  border: 0px solid;
+  width: 80px;
+  height: 30px;
+  text-align: center;
+}
+th {
+  background-color: aqua;
+  text-align: center;
+  width: 80px;
+  height: 30px;
+}
+tbody tr:nth-child(2n) {
+  background-color: rgb(209, 209, 209);
+}
+thead th {
+  position: sticky;
+  top: 0px;
+}
+tbody th {
+  position: sticky;
+  left: 0px;
+}

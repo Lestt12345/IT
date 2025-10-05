@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form>
+        <label for="searchLogin">Search login</label>
+        <input type="text" id="searchLogin" name="searchLogin">
+    </form>
+    <div class="container">
+        <div class="coloumn">
+            <img src="" alt="">
+            <div>
+                <h4>Name:</h4>
+                <span id="name"></span>
+            </div>
+            <div>
+                <h4>Login:</h4>
+                <span id="login"></span>
+            </div>
+        </div>
+        <div class="coloumn">
+            <div>
+                <h4>Url to github:</h4>
+                <a id="urlToGithub" target="_blank"></a>
+            </div>
+            <div>
+                <h4>Blog:</h4>
+                <a id="urlToblog" target="_blank"></a>
+            </div>
+            <div>
+                <h4>City:</h4>
+                <span id="city"></span>
+            </div>
+            <div>
+                <h4>Email:</h4>
+                <span id="email"></span>
+            </div>
+            <div>
+                <h4>Followers: <span id="followers"></span></h4>
+                <h4>Following: <span id="following"></span></h4>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.querySelector("form");
+        const avatar = document.querySelector("img");
+        const name = document.querySelector("#name");
+        const login = document.querySelector("#login");
+        const urlToGithub = document.querySelector("#urlToGithub");
+        const urlToblog = document.querySelector("#urlToblog");
+        const city = document.querySelector("#city");
+        const email = document.querySelector("#email");
+        const followers = document.querySelector("#followers");
+        const following = document.querySelector("#following");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const searchLogin = document.querySelector("#searchLogin").value;
+            fetch(`https://api.github.com/users/${searchLogin}`)
+                .then(response => response.json())
+                .then(data => {
+                    avatar.src = data.avatar_url;
+                    name.innerHTML = data.name;
+                    login.innerHTML = data.login;
+                    urlToGithub.innerHTML = data.html_url;
+                    urlToGithub.href = data.html_url;
+                    urlToblog.innerHTML = data.blog;
+                    urlToblog.href = data.blog;
+                    city.innerHTML = data.location;
+                    email.innerHTML = data.email;
+                    followers.innerHTML = data.followers;
+                    following.innerHTML = data.following;
+                });
+        });
+    </script>
+</body>
+</html>

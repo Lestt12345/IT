@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form>
+        <div class="book">
+            <div>
+                <img src="img/img1.png" alt="">
+                <h4>Learning JavaScript: JavaScript Essentials for Modern Application Development</h4>
+                <p>Ethan Brown</p>
+            </div>
+            <div>
+                <h3>16$</h3>
+                <button id="selectBook1">Select</button>
+            </div>
+        </div>
+        <div class="book">
+            <div>
+                <img src="img/img2.png" alt="">
+                <h4>You Don`t Know JS: Scope & Closures</h4>
+                <p>Kyle Simpson</p>
+            </div>
+            <div>
+                <h3>20$</h3>
+                <button id="selectBook2">Select</button>
+            </div>
+        </div>
+        <div class="book">
+            <div>
+                <img src="img/img3.png" alt="">
+                <h4>JavaScript and JQuery: Interactive Front-End Web Development</h4>
+                <p>John Duckett</p>
+            </div>
+            <div>
+                <h3>22$</h3>
+                <button id="selectBook3">Select</button>
+            </div>
+        </div>
+        <div class="buyForm">
+            <div>
+                <label for="book">Book: </label>
+                <input type="text" id="book" readonly required style="background-color: rgb(230, 230, 230);">
+            </div>
+            <div>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" min="1" required>
+            </div>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div style="align-items: normal;">
+                <label for="deliveryAddress">Delivery address:</label>
+                <textarea id="deliveryAddress" required></textarea>
+            </div>
+            <div>
+                <label for="deliveryDate">Delivery date:</label>
+                <input type="date" id="deliveryDate" required>
+            </div>
+            <div style="align-items: normal;">
+                <label for="comment">Comment:</label>
+                <textarea id="comment" required></textarea>
+            </div>
+            <button id="submit">Buy</button>
+        </div>
+    </form>
+    <br>
+    <div class="result" style="width: 500px;">
+        <h3 style="text-align: left;">Result:</h3>
+        <p></p>
+    </div>
+    <script>
+        const books = document.querySelectorAll(".book");
+        const buyForm = document.querySelector(".buyForm");
+        const book = document.querySelector("#book");
+        const quantity = document.querySelector("#quantity");
+        const name = document.querySelector("#name");
+        const deliveryAddress = document.querySelector("#deliveryAddress");
+        const deliveryDate = document.querySelector("#deliveryDate");
+        const comment = document.querySelector("#comment");
+        const result = document.querySelector(".result p");
+        const selectBook1 = document.querySelector("#selectBook1");
+        const selectBook2 = document.querySelector("#selectBook2");
+        const selectBook3 = document.querySelector("#selectBook3");
+        const buy = document.querySelector("#submit");
+        
+        selectBook1.addEventListener("click", () => {
+            book.value = "Learning JavaScript: JavaScript Essentials for Modern Application Development";
+        });
+        selectBook2.addEventListener("click", () => {
+            book.value = "You Don't Know JS: Scope & Closures";
+        });
+        selectBook3.addEventListener("click", () => {
+            book.value = "JavaScript and JQuery: Interactive Front-End Web Development";
+        });
+        buy.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (buyForm.checkValidity() === false) return;
+            let message = `${name.value}, thanks for the order!<br><br>Book "${book.value}" will be delivered on ${deliveryDate.value} to ${deliveryAddress.value}.`;
+            result.innerHTML = message;
+            buyForm.reset();
+        });
+        
+    </script>
+</body>
+</html>

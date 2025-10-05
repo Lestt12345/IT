@@ -1,0 +1,50 @@
+body {
+    background-color: #FBF2EB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0px;
+}
+
+.container {
+    width: 600px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+img {
+    width: 100%;
+    max-width: 600px;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.handleLeft {
+    user-select: none;
+    position: absolute;
+    background: white;
+    padding: 5px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.handleRight {
+    user-select: none;
+    position: absolute;
+    background: white;
+    padding: 5px;
+    border-radius: 50%;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}

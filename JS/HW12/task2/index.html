@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="traficLight">
+      <div id="red" class="light"></div>
+      <div id="yellow" class="light"></div>
+      <div id="green" class="light"></div>
+    </div>
+    <script>
+      red = document.querySelector("#red");
+      yellow = document.querySelector("#yellow");
+      green = document.querySelector("#green");
+      red.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
+      yellow.style.backgroundColor = "rgba(255, 255, 0, 0.25)";
+      green.style.backgroundColor = "rgba(0, 255, 0, 0.2)";
+      startProcess();
+      function startProcess() {
+        red.style.backgroundColor = "red";
+        yellow.style.backgroundColor = "rgba(255, 255, 0, 0.25)";
+        green.style.backgroundColor = "rgba(0, 255, 0, 0.2)";
+        setTimeout(() => {
+          red.style.backgroundColor = "red";
+          yellow.style.backgroundColor = "yellow";
+          green.style.backgroundColor = "rgba(0, 255, 0, 0.2)";
+          setTimeout(() => {
+            red.style.backgroundColor = "rgba(255, 0, 0, 0.3)";
+            yellow.style.backgroundColor = "rgba(255, 255, 0, 0.25)";
+            green.style.backgroundColor = "green";
+            setTimeout(() => {
+              startProcess();
+            }, 3000);
+          }, 3000);
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>
+

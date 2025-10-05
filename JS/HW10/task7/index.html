@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <ol>
+      <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem, ut.</li>
+      <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum excepturi ut dicta doloribus, vel dolorum id? Nisi a sunt quia.</li>
+      <li>Lorem ipsum dolor sit amet.</li>
+      <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur quasi autem quisquam maxime numquam ex!</li>
+      <li>Lorem, ipsum dolor sit amet consectetur adipisicing.</li>
+      <li>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta earum asperiores non distinctio.</li>
+      <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero ratione sunt quod architecto? Fuga molestias, consequuntur voluptatem sapiente tenetur animi!</li>
+    </ol>
+    <script>
+      items = document.querySelectorAll("li");
+      for (let i = 0; i < items.length; i++) {
+        items[i].addEventListener("click", (e) => {
+          if (e.ctrlKey) {
+            items[i].style.backgroundColor = "#FFA984";
+          }
+          else if (e.shiftKey) {
+            items.forEach(item => {
+              item.style.backgroundColor = "";
+            });
+            for (let j = 0; j <= i; j++) {
+              items[j].style.backgroundColor = "#FFA984";
+            }
+          }
+          else {
+            items.forEach(item => {
+              item.style.backgroundColor = "";
+            });
+            items[i].style.backgroundColor = "#FFA984";
+          }
+        })
+      }
+    </script>
+  </body>
+</html>
+
+

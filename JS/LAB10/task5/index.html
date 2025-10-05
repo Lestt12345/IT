@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <input type="text" id="country"/>
+    <ul id="hints"></ul>
+    <script>
+      const countries = ["Ukraine", "Poland", "russia", "Belarus", "Lithuania", "Latvia", "Estonia", "Finland", "Sweden", "Denmark", "Norway"];
+      const countryInput = document.getElementById("country");
+      const hintsList = document.getElementById("hints");
+
+      countryInput.addEventListener("input", (e) => {
+        const inputValue = e.target.value;
+        const filteredCountries = countries.filter(country => country.toLowerCase().startsWith(inputValue.toLowerCase()));
+        const hintsHtml = filteredCountries.slice(0, 10).map(country => `<li>${country}</li>`).join("");
+        hintsList.innerHTML = hintsHtml;
+        hintsList.addEventListener("click", (e) => {
+          if (e.target.tagName === "LI") {
+            countryInput.value = e.target.textContent;
+            hintsList.innerHTML = "";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+

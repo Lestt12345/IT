@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+  </head>
+  <body>
+    <script>
+      //1
+      /*function func1(number1, number2) {
+        if (number1 < number2) return number1;
+        return number2;
+      }
+      document.write(func1(+prompt("Enter first number: "), +prompt("Enter second number: ")));*/
+
+      //2
+      /*function func2(number, degree) {
+        return number ** degree;
+      }
+      document.write(func2(+prompt("Enter number: "), +prompt("Enter degree: ")));*/
+
+      //3
+      /*function func3(number1, number2, operator) {
+        switch (operator) {
+          case "+":
+            return number1 + number2;
+          case "-":
+            return number1 - number2;
+          case "*":
+            return number1 * number2;
+          case "/":
+            return number2 !== 0 ? number1 / number2 : "Error: Division by zero";
+          default:
+            return "Invalid operator";
+        }
+      }
+      document.write(func3(+prompt("Enter first number: "), +prompt("Enter second number: "), prompt("Enter operator: ")));*/
+
+      //4
+      /*function func4(number) {
+        if (number <= 1) return false;
+        for (let i = 2; i < Math.sqrt(number) + 1; i++) {
+          if (number % i === 0) return false;
+        }
+        return true;
+      }
+      document.write(func4(+prompt("Enter number: ")));*/
+
+      //5
+      /*function func5(number) {
+        for (let i = 1; i < 11; i++) {
+          document.write(`${number} * ${i} = ${number * i}<br>`);
+        }
+      }
+      for (let i = 2; i < 10; i++) {
+        document.write(`Table for ${i}:<br>`);
+        func5(i);
+      }*/
+
+      //6
+      /*function func6(a, b) {
+        return a - b * Math.floor(a / b);
+      }
+      document.write(func6(+prompt("Enter first number: "), +prompt("Enter second number: ")));*/
+
+      //7
+      /*function func7(...numbers) {
+        let sum = 0;
+        for (let num of numbers) {
+          sum += num;
+        }
+        return sum;
+      }
+      document.write(func7(+prompt("Enter first number: "), +prompt("Enter second number: "), +prompt("Enter third number: "), +prompt("Enter fourth number: "), +prompt("Enter fifth number: ")));*/
+
+      //8
+      /*function func8(...numbers) {
+        let max = numbers[0];
+        for (let num of numbers) {
+          if (num > max) max = num;
+        }
+        return max;
+      }
+      document.write(func8(+prompt("Enter first number: "), +prompt("Enter second number: "), +prompt("Enter third number: "), +prompt("Enter fourth number: "), +prompt("Enter fifth number: ")));*/
+
+      //9
+      /*function func9(start, end, isEven) {
+        for (let i = start; i < end + 1; i++) {
+          if ((i % 2 === 0) === isEven) {
+            document.write(`${i}<br>`);
+          }
+        }
+      }
+      func9(+prompt("Enter start: "), +prompt("Enter end: "), confirm("Even numbers? (OK - even, Cancel - odd)"));*/
+
+      //10
+      /*function isLeap(year) {
+        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+      }
+
+      function func10(day, month, year) {
+        const days_in_month = [31, isLeap(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        day++;
+        if (day > daysInMonth[month - 1]) {
+          day = 1;
+          month++;
+          if (month > 12) {
+            month = 1;
+            year++;
+          }
+        }
+        return `${day}.${month}.${year}`;
+      }
+      document.write(func10(+prompt("Enter day: "), +prompt("Enter month: "), +prompt("Enter year: ")));*/
+
+    </script>
+  </body>
+</html>
+ 

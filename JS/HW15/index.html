@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h2>CURRENT WEATHER</h2>
+        <form>
+            <input id="city" type="text" placeholder="Search">
+            <button type="submit" title="_">
+                <img type="submit" src="https://static.vecteezy.com/system/resources/previews/009/652/218/large_2x/magnifying-glass-icon-isolated-on-white-background-search-illustration-vector.jpg" alt="">
+            </button>
+        </form>
+    </header>
+
+    <div class="container">
+        <div class="cityDate">
+            <h2 class="h2Blue" id="cityName"></h2>
+            <h2 class="h2Blue" id="date"></h2>
+        </div>
+
+        <div class="cityDate">
+            <img src="img/empty.png" alt="" id="weatherTypeToday">
+            <p id="tempToday" class="bigTemp"></p>
+            <div class="minMaxWind">
+                <div class="minMaxWindColumn">
+                    <p class="minMaxWindText">Min temperature</p>
+                    <p class="minMaxWindText">Max temperature</p>
+                    <p class="minMaxWindText">Wind speed (km/h)</p>
+                </div>
+                <div class="minMaxWindColumn">
+                    <p class="minMaxWindText" id="minTemp"></p>
+                    <p class="minMaxWindText" id="maxTemp"></p>
+                    <p class="minMaxWindText" id="windSpeed"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="h2Blue">Hourly</h2>
+        <div class="hourly">
+            <div class="hourlyBlock">
+                <h2 id="CurrentDay"></h2>
+                <img src="img/empty.png" alt="">
+                <p>Forecast</p>
+                <p>Temp(°C)</p>
+                <p>Wind (km/h)</p>
+            </div>
+            <div class="hourlyBlocks">
+                <div id="weatherAt6" class="hourlyBlock">
+                    <h2>6:00</h2>
+                    <img src="img/empty.png" alt="">
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                <div id="weatherAt9" class="hourlyBlock">
+                    <h2>9:00</h2>
+                    <img src="img/empty.png" alt="">
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                <div id="weatherAt12" class="hourlyBlock">
+                    <h2>12:00</h2>
+                    <img src="img/empty.png" alt="">
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                <div id="weatherAt15" class="hourlyBlock">
+                    <h2>15:00</h2>
+                    <img src="img/empty.png" alt="">
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                <div id="weatherAt18" class="hourlyBlock">
+                    <h2>18:00</h2>
+                    <img src="img/empty.png" alt="">
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                <div id="weatherAt21" class="hourlyBlock">
+                    <h2>21:00</h2>
+                    <img src="img/empty.png" alt="">
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        apiid = "7fe0ee0565e56cf7591d09a9042ac0ff";
+
+        const searchForm = document.querySelector("form");
+
+        const cityName = document.querySelector("#cityName");
+        const date = document.querySelector("#date");
+        const weatherTypeToday = document.querySelector("#weatherTypeToday");
+        const tempToday = document.querySelector("#tempToday");
+        const minTemp = document.querySelector("#minTemp");
+        const maxTemp = document.querySelector("#maxTemp");
+        const windSpeed = document.querySelector("#windSpeed");
+
+        const CurrentDay = document.querySelector("#CurrentDay");
+        const weatherAt6 = document.querySelector("#weatherAt6");
+        const weatherAt9 = document.querySelector("#weatherAt9");
+        const weatherAt12 = document.querySelector("#weatherAt12");
+        const weatherAt15 = document.querySelector("#weatherAt15");
+        const weatherAt18 = document.querySelector("#weatherAt18");
+        const weatherAt21 = document.querySelector("#weatherAt21");
+
+        function findImgByWeatherId(id) {
+            if (id >= 200 && id <= 232) {
+                return "img/weatherTypes/thunderstorm.png";
+            }
+            else if (id >= 300 && id <= 321) {
+                return "img/weatherTypes/drizzle.png";
+            }
+            else if (id >= 500 && id <= 531) {
+                return "img/weatherTypes/rain.png";
+            }
+            else if (id >= 600 && id <= 622) {
+                return "img/weatherTypes/snow.png";
+            }
+            else if (id >= 701 && id <= 781) {
+                return "img/weatherTypes/fog.png";
+            }
+            else if (id == 800) {
+                return "img/weatherTypes/sunny.png";
+            }
+            else if (id >= 801 && id <= 804) {
+                return "img/weatherTypes/cloudy.png";
+            }
+            else {
+                return "img/weatherTypes/unknown.png";
+            }
+        }
+
+        searchForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const city = document.querySelector("#city").value;
+            let lat = 0;
+            let lon = 0;
+
+            const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiid}`;
+            let requestCoords;
+            if (window.XMLHttpRequest) {
+                requestCoords = new XMLHttpRequest();
+            }
+            else {
+                requestCoords = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            requestCoords.open("GET", geoUrl);
+            requestCoords.responseType = "json";
+            requestCoords.send();
+            requestCoords.onload = () => {
+                const response = requestCoords.response;
+                if (requestCoords.status == 200) {
+                    if (response.length > 0) {
+                        cityName.innerHTML = response[0].name;
+                        lat = response[0].lat;
+                        lon = response[0].lon;
+                        const weatherDailyUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiid}&units=metric`;
+                        let weatherRequest;
+                        if (window.XMLHttpRequest) {
+                            weatherRequest = new XMLHttpRequest();
+                        }
+                        else {
+                            weatherRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        weatherRequest.open("GET", weatherDailyUrl);
+                        weatherRequest.responseType = "json";
+                        weatherRequest.send();
+                        weatherRequest.onload = () => {
+                            if (weatherRequest.status == 200) {
+                                const response = weatherRequest.response;
+                                date.innerHTML = new Date(response.dt * 1000).toLocaleDateString();
+                                weatherTypeToday.src = findImgByWeatherId(response.weather[0].id);
+                                weatherTypeToday.alt = response.weather[0].description;
+                                tempToday.innerHTML = Math.round(response.main.temp) + "°C";
+                                minTemp.innerHTML = Math.round(response.main.temp_min) + "°C";
+                                maxTemp.innerHTML = Math.round(response.main.temp_max) + "°C";
+                                windSpeed.innerHTML = Math.round(response.wind.speed * 3.6);                      
+                            }
+                            else {
+                                alert("Error: " + weatherRequest.status);
+                            }
+                        }
+
+                        const weatherHourlyUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiid}`;
+                        let weatherHourlyRequest;
+                        if (window.XMLHttpRequest) {
+                            weatherHourlyRequest = new XMLHttpRequest();
+                        }
+                        else {
+                            weatherHourlyRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        weatherHourlyRequest.open("GET", weatherHourlyUrl);
+                        weatherHourlyRequest.responseType = "json";
+                        weatherHourlyRequest.send();
+                        weatherHourlyRequest.onload = () => {
+                            if (weatherHourlyRequest.status == 200) {
+                                const response = weatherHourlyRequest.response;
+                                const timezoneOffset = response.city.timezone;
+                                const wantedHours = [6, 9, 12, 15, 18, 21];
+
+                                const filtered = response.list.filter(item => {
+                                    const localDate = new Date((item.dt + timezoneOffset) * 1000);
+                                    const hour = localDate.getHours();
+                                    return wantedHours.includes(hour);
+                                });
+
+                                if (filtered.length > 0) {
+                                    const localDate = new Date((filtered[0].dt + timezoneOffset) * 1000);
+                                    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                                    CurrentDay.innerHTML = dayNames[localDate.getDay()];
+                                }
+
+                                const blocks = [weatherAt6, weatherAt9, weatherAt12, weatherAt15, weatherAt18, weatherAt21];
+
+                                filtered.forEach((item, index) => {
+                                    const block = blocks[index];
+                                    block.querySelector("img").src = findImgByWeatherId(item.weather[0].id);
+                                    block.querySelectorAll("p")[0].innerHTML = item.weather[0].description;
+                                    block.querySelectorAll("p")[1].innerHTML = Math.round(item.main.temp) + "°C";
+                                    block.querySelectorAll("p")[2].innerHTML = Math.round(item.wind.speed * 3.6) + " km/h";
+                                });
+                            }
+                            else {
+                                alert("Error: " + weatherHourlyRequest.status);
+                            }
+                        }
+                    }
+                }
+                else {
+                    alert("Error: " + requestCoords.status);
+                }
+            };
+        });
+    </script>
+</body>
+</html>

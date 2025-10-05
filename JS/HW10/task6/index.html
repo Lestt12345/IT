@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <ul id="list">
+      <li><a href="index.html">index.html</a></li>
+      <li><a href="https://google.com">https://google.com</a></li>
+      <li><a href="https://itstep.org">http://itstep.org</a></li>
+      <li><a href="https://mustat.itstep.org">http://mustat.itstep.org</a></li>
+      <li><a href="/images/cat.jpg">/images/cat.jpg</a></li>
+      <li><a href="/local/path">/local/path</a></li>
+    </ul>
+    <script>
+      const links = document.querySelectorAll("a");
+      for (let i = 0; i < links.length; i++) {
+        const link = links[i];
+        if (link.href.startsWith("https://")) {
+          link.style.textDecoration = 'underline dotted';
+        }
+      }
+    </script>
+  </body>
+</html>
+

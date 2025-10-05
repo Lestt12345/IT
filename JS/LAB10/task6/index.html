@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <p id="label"></p>
+      <div class="pad">
+        <button style="grid-area: b1" class="button">1</button>
+        <button style="grid-area: b2" class="button">2</button>
+        <button style="grid-area: b3" class="button">3</button>
+        <button style="grid-area: b4" class="button">4</button>
+        <button style="grid-area: b5" class="button">5</button>
+        <button style="grid-area: b6" class="button">6</button>
+        <button style="grid-area: b7" class="button">7</button>
+        <button style="grid-area: b8" class="button">8</button>
+        <button style="grid-area: b9" class="button">9</button>
+        <button style="grid-area: b0" class="button">0</button>
+        <button style="grid-area: bAdd" class="button">+</button>
+        <button style="grid-area: bSub" class="button">-</button>
+        <button style="grid-area: bMul" class="button">*</button>
+        <button style="grid-area: bDiv" class="button">/</button>
+        <button style="grid-area: bEq" class="button">=</button>
+      </div>
+    </div>
+    <script>
+      const buttons = document.querySelectorAll(".button");
+      const label = document.getElementById("label");
+      let expression = "";
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const buttonText = e.target.textContent;
+          if (buttonText === "=") {
+            try {
+              const result = eval(expression);
+              label.textContent += " = " + result;
+              expression = "";
+            } catch (error) {
+              label.textContent += " = error";
+              expression = "";
+            }
+          }
+          else {
+            expression += buttonText == "+" || buttonText == "-" || buttonText == "*" || buttonText == "/" ? " " + buttonText + " " : buttonText;
+            label.textContent = expression;
+          }
+          
+        });
+      });
+    </script>
+  </body>
+</html>
+

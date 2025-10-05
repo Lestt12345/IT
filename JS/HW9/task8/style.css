@@ -1,0 +1,36 @@
+body {
+    background-color: #FBF2EB;
+}
+
+.resizable {
+  width: 200px;
+  height: 150px;
+  position: absolute;
+  border: 1px solid #8A8A8A;
+  overflow: hidden;
+}
+
+.resizable p {
+  margin: 5px;
+}
+
+.resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  cursor: se-resize;
+  margin: 0px 1px 1px 0px;
+}
+
+.resize-handle::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 15px solid #8A8A8A;
+  border-left: 15px solid transparent;
+}

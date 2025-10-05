@@ -1,0 +1,37 @@
+.bar {
+    margin-left: 35%;
+    width: 500px;
+    height: 100px;
+    border: solid;
+    border-width: 15px;
+    border-color: orange;
+}
+.process {
+    background-color: orange;
+    width: 100px;
+    height: 100px;
+    animation: myAnim 3s linear infinite;
+    }
+    @keyframes myAnim {
+        from {
+            margin-left: 0px;
+        }
+        to {
+            margin-left: 400px;
+        }
+    }
+.heart {
+    display: inline-block;
+    filter: grayscale(100%);
+    scale: 0.2;
+    margin-left: 35%;
+    transition-property: filter, color, scale;
+    transition-duration: 1s, 1s;
+    transition-timing-function: ease, linear;
+    transition-delay: Os;
+}
+.heart:hover{
+    filter: grayscale(0%);
+    scale: 1;
+    color: #ffff00;
+}

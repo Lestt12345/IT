@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="date">Date:</label>
+        <input type="date" id="date">
+        <br>
+        <input type="submit" value="Check">
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+        const date = document.querySelector("#date");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const today = new Date();
+            if (Date.parse(date.value) > today) {
+                date.style.boxShadow = "none";
+            } else {
+                date.style.boxShadow = "red 0px 0px 5px";
+            }
+        });
+    </script>
+</body>
+</html>

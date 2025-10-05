@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="messages"></div>
+    <form>
+        <h4>Add new message:</h4>
+        <div>
+            <label for="your_name">Your name:</label>
+            <input type="text" id="your_name" name="your_name" required>
+        </div>
+        <div>
+            <label for="your_text">Your text:</label>
+            <textarea name="your_text" id="your_text"></textarea>
+        </div>
+        <input type="submit" value="Add">
+    </form>
+    <script>
+        const form = document.querySelector("form");
+        const messages = document.querySelector("#messages");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const yourName = document.querySelector("#your_name").value;
+            const yourText = document.querySelector("#your_text").value;
+            const message = document.createElement("div");
+            message.className = "message";
+            message.innerHTML = `
+                <div> 
+                    <h4 id="name">${yourName}</h4>
+                    <h5 id="date">${new Date().toLocaleString()}</h5> 
+                </div>
+                <p id="text">${yourText}</p>
+            `;
+            messages.appendChild(message);
+            form.reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="questions">
+        <h3 style="width: 100%;">All questions:</h3>
+      </div>
+      <form>
+        <h3>Add new question:</h3>
+        <div class="labelInput">
+          <label for="question">Question:</label>
+          <div><input type="text" id="question" name="question" required></div>
+        </div>
+        <br>
+        <div class="labelInput">
+          <label for="answer">Correct answer:</label>
+          <div><input type="text" id="answer" name="answer" required></div>
+        </div>
+        <br>
+        <div class="labelInput">
+          <label for="answerWrong">Wrong answer:</label>
+          <div><input type="text" id="answerWrong" name="answerWrong"></div>
+        </div>
+        <br>
+        <input type="submit" value="Add">
+      </form>
+    </div>
+    <script>
+      const questions = document.querySelector(".questions");
+      const form = document.querySelector("form");
+      const question = document.querySelector("#question");
+      const answer = document.querySelector("#answer");
+      const answerWrong = document.querySelector("#answerWrong");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const questionValue = question.value;
+        const answerValue = answer.value;
+        const answerWrongValue = answerWrong.value;
+        const questionElement = document.createElement("div");
+        questionElement.innerHTML = `
+          <p style="text-decoration: underline; padding: 0px 5px; margin: 0px">${questionValue}</p>
+          <p style="padding: 0px 5px; margin: 0px">Correct answer: ${answerValue}</p>
+          <p style="padding: 0px 5px; margin: 0px">Wrong answer: ${answerWrongValue}</p>
+          <br>
+        `;
+        questions.appendChild(questionElement);
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,52 @@
+body {
+  background-color: #FBF2EB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.pad {
+  border: solid 1px gray;
+  display: grid;
+  grid-template-areas: 
+  "b7 b8 b9 bAdd"
+  "b4 b5 b6 bSub"
+  "b1 b2 b3 bMul"
+  "b0 bEq bEq bDiv";
+}
+
+.container {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  border: solid 1px rgb(175, 175, 175);
+}
+
+.button:last-child {
+  width: 100px;
+  height: 50px;
+  font-size: 30px;
+}
+
+p {
+  text-align: right;
+  width: 180px;
+  height: 48px;
+  font-size: 30px;
+  padding: 5px 10px;
+  background: white;
+  border: solid 2px rgb(175, 175, 175);
+  margin: 0px 0px 15px 0px;
+}

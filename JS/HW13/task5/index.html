@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="options">
+        <div style="padding-left: 15px;">
+            <label for="group">Group:</label>
+            <select id="group"><option value=""></option></select>
+            <label for="lesson">Lesson:</label>
+            <select id="lesson"></select>
+            <input type="submit" value="Select">
+        </div>
+        <hr>
+    </form>
+    <form id="lessonInfo">
+        <div class="lessonInfo">
+            <label for="topic">Topic:</label>
+            <input style="width: 100%;" type="text" id="topic">
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Is present</td>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <input id="lessonInfoSaveBtn" type="submit" value="Save">
+    </form>
+    <script>
+        groups = 
+        [
+            [  /* group 1 */
+                { /* lesson 1 */
+                    topic: "",
+                    students: [ /* students */
+                        { name: "Student 1", isPresent: false},
+                        { name: "Student 2", isPresent: false},
+                        { name: "Student 3", isPresent: false}
+                    ]
+                },
+                { /* lesson 2 */
+                    topic: "",
+                    students: [ /* students */
+                        { name: "Student 1", isPresent: false},
+                        { name: "Student 2", isPresent: false},
+                        { name: "Student 3", isPresent: false}
+                    ]
+                },
+                { /* lesson 3 */
+                    topic: "",
+                    students: [ /* students */
+                        { name: "Student 1", isPresent: false},
+                        { name: "Student 2", isPresent: false},
+                        { name: "Student 3", isPresent: false}
+                    ]
+                }
+            ],
+            [  /* group 2 */
+                { /* lesson 1 */
+                    topic: "",
+                    students: [ /* students */
+                        { name: "Student 1", isPresent: false},
+                        { name: "Student 2", isPresent: false},
+                        { name: "Student 3", isPresent: false}
+                    ]
+                },
+                { /* lesson 2 */
+                    topic: "",
+                    students: [ /* students */
+                        { name: "Student 1", isPresent: false},
+                        { name: "Student 2", isPresent: false},
+                        { name: "Student 3", isPresent: false}
+                    ]
+                },
+                { /* lesson 3 */
+                    topic: "",
+                    students: [ /* students */
+                        { name: "Student 1", isPresent: false},
+                        { name: "Student 2", isPresent: false},
+                        { name: "Student 3", isPresent: false}
+                    ]
+                }
+            ]
+        ]
+
+        const optionsForm = document.getElementById("options");
+        const lessonInfoForm = document.getElementById("lessonInfo");
+        const groupSelect = document.getElementById("group");
+        const lessonSelect = document.getElementById("lesson");
+        const topicInput = document.getElementById("topic");
+        const lessonInfoSaveBtn = document.getElementById("lessonInfoSaveBtn");
+
+        topicInput.disabled = true;
+        lessonInfoSaveBtn.disabled = true;
+        lessonInfoSaveBtn.style.cursor = "auto";
+
+        groups.forEach((group, groupIndex) => {
+            const groupOption = document.createElement("option");
+            groupOption.value = groupIndex;
+            groupOption.textContent = `Group ${groupIndex + 1}`;
+            groupSelect.appendChild(groupOption);
+        });
+
+        groupSelect.addEventListener("change", () => {
+            const selectedGroup = groups[groupSelect.value];
+            lessonSelect.innerHTML = "";
+            selectedGroup.forEach((lesson, lessonIndex) => {
+                const lessonOption = document.createElement("option");
+                lessonOption.value = lessonIndex;
+                lessonOption.textContent = `Lesson ${lessonIndex + 1}`;
+                lessonSelect.appendChild(lessonOption);
+            });
+        });
+
+        optionsForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const selectedGroup = groups[groupSelect.value];
+            const selectedLesson = selectedGroup[lessonSelect.value];
+            topicInput.value = selectedLesson.topic;
+            const tbody = lessonInfoForm.querySelector("tbody");
+            tbody.innerHTML = "";
+            selectedLesson.students.forEach((student) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${student.name}</td>
+                    <td><input type="checkbox" ${student.isPresent ? "checked" : ""}></td>
+                `;
+                tbody.appendChild(tr);
+            });
+            topicInput.disabled = false;
+            lessonInfoSaveBtn.disabled = false;
+            lessonInfoSaveBtn.style.cursor = "pointer";
+        })
+
+        lessonInfoForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const selectedGroup = groups[groupSelect.value];
+            const selectedLesson = selectedGroup[lessonSelect.value];
+            selectedLesson.topic = topicInput.value;
+            const tbody = lessonInfoForm.querySelector("tbody");
+            selectedLesson.students = [];
+            tbody.querySelectorAll("tr").forEach((tr) => {
+                const name = tr.querySelector("td").textContent;
+                const isPresent = tr.querySelector("input").checked;
+                selectedLesson.students.push({ name, isPresent });
+            });
+            tbody.innerHTML = "";
+            topicInput.value = "";
+            topicInput.disabled = true;
+            lessonInfoSaveBtn.disabled = true;
+            lessonInfoSaveBtn.style.cursor = "auto";
+        })
+    </script>
+</body>
+</html>

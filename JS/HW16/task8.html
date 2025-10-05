@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+        <br>
+        <label for="comment">Comment:</label>
+        <textarea id="comment"></textarea>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+
+        const cookies = document.cookie.split("; ");
+        for (const cookie of cookies) {
+            const [name, value] = cookie.split("=");
+            if (name === "name") {
+                document.querySelector("#name").value = value;
+            }
+        }
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const name = document.querySelector("#name");
+            const comment = document.querySelector("#comment");
+            if (name.value && comment.value) {
+                document.cookie = `name=${name.value}; expires=${new Date(Date.now() + 1000 * 60 * 60 * 1).toUTCString()}; path=/`;
+            }
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>

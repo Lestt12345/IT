@@ -1,0 +1,111 @@
+@media (max-width: 1000px) {
+    body {
+        min-width: 1000px;
+    }
+}
+@media (min-width: 1001px) and (max-width: 3000px) {
+    body {
+        min-width: 3000px;
+    }
+}
+.cont {
+    min-width: 640px;
+}
+.block {
+    margin: 0.2%;
+    float: left;
+    min-width: 320px;
+    width: 280px;
+    height: 190px;
+    padding: 20px;
+    border: 2px dotted #D1D1D5;
+    scale: 0.9;
+}
+.ico {
+    font-size: 40px;
+    color: #D1D1D5;
+    font-family: 'Calibri';
+}
+.mast♠️ {
+    font-size: 35px;
+    color: #D1D1D5;
+}
+.mast♠️::after {
+    color: #D1D1D5;
+    font-size: 20px;
+    content: "Lorem, ipsum dolor.";
+}
+.mast♠️::before {
+    border: 1px solid #D1D1D5;
+    text-align: center;
+    font-size: 30px;
+    padding: 5px;
+    margin-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    content: "♠️"
+}
+.mast♣️ {
+    font-size: 35px;
+    color: #D1D1D5;
+}
+.mast♣️::after {
+    color: #D1D1D5;
+    font-size: 20px;
+    content: "Lorem, ipsum dolor.";
+}
+.mast♣️::before {
+    border: 1px solid #D1D1D5;
+    text-align: center;
+    font-size: 30px;
+    padding: 5px;
+    margin-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    content: "♣️"
+}
+.mast♥️ {
+    font-size: 35px;
+    color: #D1D1D5;
+}
+.mast♥️::after {
+    color: #D1D1D5;
+    font-size: 20px;
+    content: "Lorem, ipsum dolor.";
+}
+.mast♥️::before {
+    border: 1px solid #D1D1D5;
+    text-align: center;
+    font-size: 30px;
+    padding: 5px;
+    margin-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    content: "♥️"
+}
+.mast♦️ {
+    font-size: 35px;
+    color: #D1D1D5;
+}
+.mast♦️::after {
+    color: #D1D1D5;
+    font-size: 20px;
+    content: "Lorem, ipsum dolor.";
+}
+.mast♦️::before {
+    border: 1px solid #D1D1D5;
+    text-align: center;
+    font-size: 30px;
+    padding: 5px;
+    margin-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    content: "♦️"
+}
+.content {
+    margin-top: 10px;
+    font-size: 20px;
+}
+.br {
+    height: 500px;
+}

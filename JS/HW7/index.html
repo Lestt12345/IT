@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+  </head>
+  <body>
+    <script>
+      //1
+      /*let array = [];
+
+      for (let i = 0; i < 10; i++) {
+        array[i] = (Math.floor(Math.random() * 101));
+      }
+
+      function printArray(arr) {
+        document.write(arr.join(', ') + '<br>');
+      }
+
+      function printEvenElements(arr) {
+        document.write(arr.filter(num => num % 2 === 0).join(', ') + '<br>');
+      }
+
+      function sumArray(arr) {
+        let arr_sum = 0;
+        for (let num of arr) {
+          arr_sum += num;
+        }
+        return arr_sum;
+      }
+
+      function maxArray(arr) {
+        return Math.max(...arr);
+      }
+
+      function addElement(arr, index, element) {
+        arr[index] = element;
+      }
+
+      function removeElement(arr, index) {
+        arr.splice(index, 1);
+      }
+
+      document.write('Initial Array: ');
+      printArray(array);
+
+      document.write('Even Elements: ');
+      printEvenElements(array);
+
+      document.write(`Sum of Elements: ${sumArray(array)}<br>`);
+      document.write(`Max Element: ${maxArray(array)}<br>`);
+
+      addElement(array, 5, 200);
+      document.write('After Adding Element (200 at index 5): ');
+      printArray(array);
+
+      removeElement(array, 3);
+      document.write('After Removing Element (index 3): ');
+      printArray(array);*/
+
+      //2
+      /*let array1 = [];
+      let array2 = [];
+      for (let i = 0; i < 10; i++) {
+        array1[i] = Math.floor(Math.random() * 101);
+      }
+      for (let i = 0; i < 5; i++) {
+        array2[i] = Math.floor(Math.random() * 101);
+      }
+
+      function printArray(arr) {
+        document.write(arr.join(', ') + '<br>');
+      }
+
+      function mergeUnique(arr1, arr2) {
+        return Array.from(new Set([...arr1, ...arr2]));
+      }
+
+      function intersectArrays(arr1, arr2) {
+        let arr_result = [];
+        for (let num of arr1) {
+          if (arr2.includes(num)) {
+            arr_result.push(num);
+          }
+        }
+        arr_result = Array.from(new Set(arr_result));
+        return arr_result;
+      }
+
+      function differenceArrays(arr1, arr2) {
+        let arr_result = [];
+        for (let num of arr1) {
+          if (!arr2.includes(num)) {
+            arr_result.push(num);
+          }
+        }
+        return arr_result;
+      }
+
+      document.write('Array 1: ');
+      printArray(array1);
+
+      document.write('Array 2: ');
+      printArray(array2);
+
+      document.write('Merged Unique Array: ');
+      printArray(mergeUnique(array1, array2));
+
+      document.write('Intersection of Arrays: ');
+      printArray(intersectArrays(array1, array2));
+
+      document.write('Difference (Array 1 - Array 2): ');
+      printArray(differenceArrays(array1, array2));*/
+
+      //3
+      /*let fruits = ['Banana', 'Apple', 'Orange', 'Mango', 'Pineapple'];
+
+      fruits.sort((a, b) => a.localeCompare(b));
+
+      function printFruitsList(arr) {
+        document.write('<ul>');
+        for (let fruit of arr) {
+          document.write(`<li>${fruit}</li>`);
+        }
+        document.write('</ul>');
+      }
+
+      function findFruitIndex(arr, fruitName) {
+        return arr.findIndex(fruit => fruit.toLowerCase() === fruitName.toLowerCase());
+      }
+
+      document.write('Sorted Fruits List:<br>');
+      printFruitsList(fruits);
+
+      let searchFruit = 'Mango';
+      document.write(`Index of "${searchFruit}": ${findFruitIndex(fruits, searchFruit)}<br>`);
+
+      searchFruit = 'Grape';
+      document.write(`Index of "${searchFruit}": ${findFruitIndex(fruits, searchFruit)}<br>`);*/
+    </script>
+  </body>
+</html>

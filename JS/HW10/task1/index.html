@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="bar" id="bar">
+      <div class="handle" id="handle"></div>
+    </div>
+    <script>
+      const resizer = document.getElementById("resizer");
+      const handle = document.getElementById("handle");
+      let isResizing = false;
+      let startY;
+
+      handle.addEventListener('mousedown', (e) => {
+        isResizing = true;
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        const mouseX = e.clientX;
+        const width = Math.min(Math.max(mouseX - bar.offsetLeft, 0), bar.offsetWidth - 15);
+        handle.style.left = `${width - 10}px`;
+      });
+
+      document.addEventListener('mouseup', () => {
+        isResizing = false;
+      });
+    </script>
+  </body>
+</html>
+

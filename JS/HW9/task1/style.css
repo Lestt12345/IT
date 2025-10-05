@@ -1,0 +1,25 @@
+body {
+    background-color: #FBF2EB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container input {
+    width: 97%;
+    font-size: 28px;
+    margin: 7px 0px;
+    padding: 1px 7px;
+}

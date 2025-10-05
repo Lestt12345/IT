@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="subscribe">Subscribe</label>
+        <input type="checkbox" id="subscribe">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+        const subscribe = document.querySelector("#subscribe");
+
+        const cookies = document.cookie.split("; ");
+        for (const cookie of cookies) {
+            const [name, value] = cookie.split("=");
+            if (name === "subscribe") {
+                if (value === "true") {
+                    document.write("<p>You are subscribed</p>");
+                    form.style.display = "none";
+                }
+            }
+        }
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            document.cookie = `subscribe=${subscribe.checked};expires=${new Date(Date.now() + 1 * 60 * 60 * 1000)};path=/`;
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>

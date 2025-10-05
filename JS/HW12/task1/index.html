@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <form>
+      <label for="numberInput">Вгадайте число</label>
+      <input type="number" id="numberInput">
+      <p id="result">*</p>
+      <input type="submit" id="submit" value="Спробувати">
+    </form>
+    <script>
+      input = document.querySelector("#numberInput");
+      result = document.querySelector("#result");
+      form = document.querySelector("form");
+      randomNumber = Math.floor(Math.random() * 20) + 1;
+      
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (input.value > randomNumber) {
+          result.textContent = "Загадане менше";
+          result.style.color = "red";
+        } else if (input.value < randomNumber) {
+          result.textContent = "Загадане більше";
+          result.style.color = "red";
+        } else {
+          result.textContent = "Вітаю! Ви вгадали!";
+          result.style.color = "green";
+          randomNumber = Math.floor(Math.random() * 20) + 1;
+          input.value = "";
+        }
+        setTimeout(() => {
+          result.innerText = "*";
+          result.style.color = "black";
+        }, 3000);
+      })
+    </script>
+  </body>
+</html>
+

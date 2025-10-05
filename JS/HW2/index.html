@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INDEX</title>
+  </head>
+  <body>
+    <script>
+      //1
+      /*age = +prompt(`Your age?`)
+      let category = ''
+      if (age >= 0 && age <= 12) category = 'Child'
+      else if (age > 12 && age <= 18) category = 'Teenager'
+      else if (age > 18 && age <= 60) category = 'Adult'
+      else if (age > 60) category = 'Senior'
+      alert(`You are a ${category}`)*/
+
+      //2
+      /*digit = prompt(`Enter a digit 0-9:`)
+      let symbol = ''
+      switch(digit) {
+        case '1': symbol = '!'; break;
+        case '2': symbol = '@'; break;
+        case '3': symbol = '#'; break;
+        case '4': symbol = '$'; break;
+        case '5': symbol = '%'; break;
+        case '6': symbol = '^'; break;
+        case '7': symbol = '&'; break;
+        case '8': symbol = '*'; break;
+        case '9': symbol = '('; break;
+        case '0': symbol = ')'; break;
+        default: symbol = 'Invalid digit'
+      }
+      alert(`Symbol: ${symbol}`)*/
+
+      //3
+      /*num = prompt(`Enter three-digit number:`)
+      let a = (num / 100).toFixed(0)
+      let b = Math.floor((num % 100) / 10)
+      let c = num % 10
+      let has_equal = (a === b) || (b === c) || (a === c)
+      alert(has_equal ? 'Has equal digits' : 'No equal digits')*/
+
+      //4
+      /*year = +prompt(`Enter a year:`)
+      let is_leap = (year % 400 === 0) || ((year % 4 === 0) && (year % 100 !== 0))
+      alert(is_leap ? 'Leap year' : 'Not a leap year')*/
+
+      //5
+      /*num = prompt(`Enter a five-digit number:`)
+      alert(num === num.split('').reverse().join('') ? 'Palindrome' : 'Not a palindrome')*/
+
+      //6
+      /*usd_amount = +prompt(`Amount in USD:`)
+      currency = prompt(`Convert to (EUR, UAN, AZN):`).toUpperCase()
+      let rate = 0
+      switch(currency) {
+        case 'EUR': rate = 0.93; break;
+        case 'UAN': rate = 39.9; break;
+        case 'AZN': rate = 1.7; break;
+        default: alert('Unknown currency'); rate = 0;
+      }
+      if (rate > 0) alert(`Converted amount: ${(usd_amount * rate).toFixed(2)}`)*/
+
+      //7 Скидка по сумме покупки (if)
+      /*purchase_sum = +prompt(`Enter purchase amount:`)
+      let discount = 0
+      if (purchase_sum >= 500) discount = 0.07
+      else if (purchase_sum >= 300) discount = 0.05
+      else if (purchase_sum >= 200) discount = 0.03
+      let total = purchase_sum - (purchase_sum * discount)
+      alert(`Total to pay: ${total.toFixed(2)} (discount: ${discount * 100}%)`)*/
+
+      //8
+      /*circle_length = +prompt(`Circle length:`)
+      square_perimeter = +prompt(`Square perimeter:`)
+      let circle_diameter = circle_length / Math.PI
+      let square_side = square_perimeter / 4
+      alert(circle_diameter <= square_side ? 'Circle fits in square' : 'Circle does not fit')*/
+
+      //9
+      /*
+      score = 0
+      question_1 = prompt("Question 1: 1 2 3") // 2
+      score += (question_1 === '2') ? 2 : 0
+      question_2 = prompt("Question 2: 1 2 3") // 3
+      score += (question_2 === '3') ? 2 : 0
+      question_3 = prompt("Question 3: 1 2 3") // 1
+      score += (question_3 === '1') ? 2 : 0
+      alert(`Your score: ${score} points`)
+      */
+
+      //10
+      /*
+      day = +prompt('Day:')
+      month = +prompt('Month:')
+      year = +prompt('Year:')
+
+      is_leap = (year % 400 === 0) || ((year % 4 === 0) && (year % 100 !== 0))
+
+      days_in_month = 31
+      switch (month) {
+        case 2: days_in_month = is_leap ? 29 : 28; break;
+        case 4: case 6: case 9: case 11: days_in_month = 30; break;
+      }
+
+      day++
+      if (day > days_in_month) {
+        day = 1
+        month++
+        if (month > 12) {
+          month = 1
+          year++
+        }
+      }
+
+      alert(`Next date: ${day}.${month}`)
+      */
+      </script>
+  </body>
+</html>
+ 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="enterDate">Enter date:</label>
+        <input type="date" id="enterDate">
+        <br>
+        <label for="leaveDate">Leave date:</label>
+        <input type="date" id="leaveDate">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        const form = document.querySelector("form");
+        const enterDate = document.querySelector("#enterDate");
+        const leaveDate = document.querySelector("#leaveDate");
+        const submitBtn = document.querySelector("input[type='submit']");
+
+        enterDate.addEventListener("change", () => {
+            if (leaveDate.value && Date.parse(leaveDate.value) < Date.parse(enterDate.value)) {
+                submitBtn.disabled = true;
+            } else {
+                submitBtn.disabled = false;
+            }
+        });
+
+        leaveDate.addEventListener("change", () => {
+            if (enterDate.value && Date.parse(leaveDate.value) < Date.parse(enterDate.value)) {
+                submitBtn.disabled = true;
+            } else {
+                submitBtn.disabled = false;
+            }
+        });
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            form.reset();
+        });
+    </script>
+</body>
+</html>
