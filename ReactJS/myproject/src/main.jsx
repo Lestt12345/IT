@@ -1,29 +1,24 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import ReactDOM from 'react-dom/client'
-import { Routes, Route, Link, BrowserRouter } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import './index.css'
 import ChoiceTask from './ChoiceTask.jsx'
-import Count from './Count.jsx'
-import ThemeChange from './ThemeChange.jsx'
-import DispHideBlock from './DispHideBlock.jsx'
-import ReactionForMood from './ReactionForMood.jsx'
-import LikeDislike from './LikeDislike.jsx'
-import TempMsg from './TempMsg.jsx'
-import ProgressBar from './ProgressBar.jsx'
+import UserCard from './UserCard.jsx'
+import CounterButton from './CounterButton.jsx'
+import FormWithHoversFocuses from './FormWithHoversFocuses.jsx'
+import ResponsiveMessage from './ResponsiveMessage.jsx'
+import InteractiveCard from './InteractiveCard.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<ChoiceTask />} />
-        <Route path='/count' element={<Count />} />
-        <Route path='/theme' element={<ThemeChange />} />
-        <Route path='/dispHideBlock' element={<DispHideBlock />} />
-        <Route path='/reactionForMood' element={<ReactionForMood />} />
-        <Route path='/likeDislike' element={<LikeDislike />} />
-        <Route path='/tempMsg' element={<TempMsg />} />
-        <Route path='/progressBar' element={<ProgressBar />} />
+        <Route path="/usercard" element={<UserCard />} />
+        <Route path="/counterbutton" element={<CounterButton />} />
+        <Route path="/formwithhoversfocuses" element={<FormWithHoversFocuses />} />
+        <Route path="/responsive" element={<ResponsiveMessage />} />
+        <Route path="/interactivecard" element={<InteractiveCard />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
