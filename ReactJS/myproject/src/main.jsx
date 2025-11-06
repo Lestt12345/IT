@@ -1,34 +1,29 @@
-import { StrictMode } from 'react';
+import { StrictMode, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
-import ChoiceTask from './ChoiceTask.jsx';
-import Task1 from './task1/App.jsx';
-import Task2 from './task2/App.jsx';
-import Task3 from './task3/App.jsx';
+import App from './App.jsx';
+const Products = lazy(() => import('./pages/Products.jsx'));
+const ProductDetail = lazy(() => import('./pages/ProductDetail.jsx'));
+const About = lazy(() => import('./pages/About.jsx'));
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<ChoiceTask />} />
-        <Route path="/task1/*" element={<Task1 />} />
-        <Route path="/task2/*" element={<Task2 />} />
-        <Route path="/task3/*" element={<Task3 />} />
-      </Routes>
+      <Suspense fallback={
+        <div className='w-screen h-screen flex items-center justify-center top-0 left-0'>
+          <div className='w-[200px] h-[200px] border-2 border-gray-300 rounded-xl flex items-center justify-center bg-slate-100 animate-pulse'>
+            <h1 className='text-2xl font-bold text-gray-500'>Loading...</h1>
+          </div>
+        </div>
+      }>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   </StrictMode>
 );
-
-const handleKeyDown = (event) => {
-  if (event.altKey && event.key.toLowerCase() === 'q') {
-    event.preventDefault();
-    window.location.href = "/";
-  }
-};
-document.addEventListener("keydown", handleKeyDown);
-if (import.meta.hot) {
-  import.meta.hot.dispose(() => {
-    document.removeEventListener("keydown", handleKeyDown);
-  });
-}
