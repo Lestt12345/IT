@@ -40,18 +40,16 @@ function ProductDetail() {
         }
     }, [categories]);
 
-    useEffect(() => {
-        if (product && product.photo) {
-            console.log(product.photo);
-        }
-    }, [product]);
-
     return (
         <>
             <Header />
             <div className="w-full flex flex-col gap-2 justify-center items-center" style={{ height: `calc(100vh - ${headerHeight}px)` }}>
                 {loading ? (
-                        <p className="text-gray-600 font-bold text-lg">Loading...</p>
+                        <div className='w-screen h-screen flex items-center justify-center top-0 left-0'>
+                            <div className='w-[200px] h-[200px] border-2 border-gray-300 rounded-xl flex items-center justify-center bg-slate-100 animate-pulse'>
+                                <h1 className='text-2xl font-bold text-gray-500'>Loading...</h1>
+                            </div>
+                        </div>
                     ) : product ? (
                         <div className='w-full flex flex-col justify-center items-center gap-5'>
                             <div className='sm:w-[500px] w-full flex justify-center items-center bg-slate-600 rounded-xl relative'>
