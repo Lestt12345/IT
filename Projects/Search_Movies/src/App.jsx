@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import useFetch from './hooks/useFetch';
 import MovieCard from './components/MovieCard';
 import { useCurrentTranslateOption } from './contexts/CurrentTranslateOption';
@@ -6,20 +6,28 @@ import { useTheme } from './contexts/Theme';
 import { IoCloseSharp } from 'react-icons/io5';
 import ThemeSwitch from './components/ThemeSwitch';
 import LanguageSwitch from './components/LanguageSwitch';
+import { FaLeftLong } from "react-icons/fa6";
+import { FaRightLong } from "react-icons/fa6";
+import { FaSearch } from "react-icons/fa";
+import { FaAnglesUp } from "react-icons/fa6";
 
-const API_URL = '/api'; // Vite proxy к TMDB
+const API_KEY = 'a28aac2ad517c600c3253936d9943ead';
+const API_URL = 'https://api.themoviedb.org/3';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
+  const [disabledPrevPageBtn, setDisabledPrevPageBtn] = useState(true);
+  const [disabledNextPageBtn, setDisabledNextPageBtn] = useState(false);
+  const [isScrollToTopButtonVisible, setIsScrollToTopButtonVisible] = useState(false);
   const { state, dispatchState } = useCurrentTranslateOption();
   const { theme, dispatchTheme } = useTheme();
 
   const { data, loading, error } = useFetch(
     query
-      ? `${API_URL}/search/movie?query=${encodeURIComponent(query)}&api_key=a28aac2ad517c600c3253936d9943ead`
-      : `${API_URL}/movie/popular?language=${state === "en" ? "en-US" : "uk-UA"}&page=${page}&api_key=a28aac2ad517c600c3253936d9943ead`,
+      ? `${API_URL}/search/movie?query=${encodeURIComponent(query)}&api_key=${API_KEY}`
+      : `${API_URL}/movie/popular?language=${state === "en" ? "en-US" : "uk-UA"}&page=${page}&api_key=${API_KEY}`,
     useMemo(() => ({
       method: 'GET',
       headers: {
@@ -43,22 +51,61 @@ function App() {
     setQuery("");
     setPage(1);
   };
+
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    else {
+      setDisabledPrevPageBtn(true);
+    }
+  };
+
+  const handleNextPage = () => {
+    setDisabledPrevPageBtn(false);
+    setPage(page + 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (page === 500) {
+      setDisabledNextPageBtn(true);
+    }
+  };
     
   const results = useMemo(() => data?.results || [], [data]);
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrollToTopButtonVisible(window.scrollY > 170);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <div className='absolute top-2 right-2 flex gap-2 justify-center items-center'>
+      <div className='fixed top-2 right-2 flex gap-2 justify-center items-center z-30'>
         <ThemeSwitch theme={theme} dispatchTheme={dispatchTheme} />
         <LanguageSwitch theme={theme} state={state} dispatchState={dispatchState} />
       </div>
+      {isScrollToTopButtonVisible && (
+        <div onClick={handleScrollToTop} className={`sm:text-lg text-[16px] cursor-pointer p-1 fixed bottom-3 right-3 flex flex-col text-xl gap-1 justify-center items-center ${theme === "dark" ? "text-white" : "text-black"}`}>
+          <p><FaAnglesUp /></p>
+          <button className={`p-2 rounded-full ${theme === "dark" ? "bg-blue-600" : "bg-blue-300"}`}><FaSearch /></button>
+        </div>
+      )}
       <div className={`min-h-screen ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"} py-8 px-4 transition-colors duration-200`}>
         <div className="max-w-7xl mx-auto">
             <h1 className={`text-4xl font-bold text-center sm:pt-0 pt-2 mb-8 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
             {state === "en" ? "Movie Search" : "Пошук фільмів"}
             </h1>
 
-            <form onSubmit={handleSubmit} className="mb-8 max-w-2xl mx-auto">
+            <form onSubmit={handleSubmit} className="mb-8 max-w-2xl mx-auto z-20">
             <div className="flex gap-2 relative">
                 <div className="relative w-full">
                     <input
@@ -106,11 +153,22 @@ function App() {
             )}
 
             {results.length > 0 ? (
-            <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 transition-colors duration-200 gap-6 ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"}`}>
-                {results.map((movie) => (
-                    <MovieCard key={movie.id} movie={movie} state={state} theme={theme} />
-                ))}
-            </div>
+              <>
+                <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 transition-colors duration-200 gap-6 ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"}`}>
+                    {results.map((movie) => (
+                        <MovieCard key={movie.id} movie={movie} state={state} theme={theme} />
+                    ))}
+                </div>
+                <div className='flex gap-2 justify-center items-center mt-5'>
+                  <button onClick={handlePrevPage} disabled={disabledPrevPageBtn} className={`${} ${disabledPrevPageBtn ? "opacity-50 cursor-not-allowed" : ""} ${theme === "dark" ? "bg-blue-800" : "bg-blue-300"} ${theme === "dark" ? "text-white" : "text-gray-700"} px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors`}>
+                    <FaLeftLong size={20} />
+                  </button>
+                  <p className="text-gray-400 text-lg">{page}</p>
+                  <button onClick={handleNextPage} disabled={disabledNextPageBtn} className={`${disabledNextPageBtn ? "opacity-50 cursor-not-allowed" : ""} ${theme === "dark" ? "bg-blue-800" : "bg-blue-300"} ${theme === "dark" ? "text-white" : "text-gray-700"} px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors`}>
+                    <FaRightLong size={20} />
+                  </button>
+                </div>
+              </>
             ) : (
             !loading &&
             !error &&

@@ -1,0 +1,53 @@
+@media (min-width: 1400px) {
+    header {
+        width: 1296px;
+    }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+    header {
+        width: 1116px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    header {
+        width: 936px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    header {
+        width: 696px;
+    }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+    header {
+        width: 100%;
+    }
+}
+@media (max-width: 575px) {
+    header {
+        width: 100%;
+    }
+}
+
+@keyframes fill-bounce {
+  0%   { transform: scaleX(0); }
+  60%  { transform: scaleX(1); }
+  85%  { transform: scaleX(0.90); }
+  90%  { transform: scaleX(0.95); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes fill-bounce-nav {
+  0%   { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+.fill-bounce {
+  transform-origin: left;
+  animation: fill-bounce 0.8s forwards;
+}
+
+.fill-bounce-nav {
+  transform-origin: left;
+  animation: fill-bounce-nav 0.3s forwards;
+}

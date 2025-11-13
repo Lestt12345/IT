@@ -2,6 +2,8 @@ import { useState, Fragment, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+const API_KEY = 'a28aac2ad517c600c3253936d9943ead';
+const API_URL = 'https://api.themoviedb.org/3';
 
 function MovieCard({ movie, state, theme }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +27,7 @@ function MovieCard({ movie, state, theme }) {
     if (movie.overview && movie.overview.trim().length > 0) return;
 
     try {
-      const res = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}?language=en-US&api_key=a28aac2ad517c600c3253936d9943ead`);
+      const res = await fetch(`${API_URL}/movie/${movie.id}?language=en-US&api_key=${API_KEY}`);
       const data = await res.json();
 
       if (!movie.overview && state === "ua") {
@@ -75,7 +77,7 @@ function MovieCard({ movie, state, theme }) {
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-50" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
