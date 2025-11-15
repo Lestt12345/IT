@@ -1,0 +1,26 @@
+﻿@page "/Task5"
+@model WebApplication2.Pages.Task5Model
+@{
+	ViewData["Title"] = "Contact";
+}
+
+<form method="post" class="d-flex flex-column w-25 gap-1">
+    <label>
+        Name:
+        <input asp-for="CF.Name" class="form-control" />
+    </label>
+    <label>
+        Email:
+        <input asp-for="CF.Email" class="form-control" />
+    </label>
+    <label>
+        Message:
+        <input asp-for="CF.Message" class="form-control" />
+    </label>
+    <input type="submit" value="Submit" class="btn btn-primary mt-2" />
+</form>
+
+@if (!string.IsNullOrEmpty(Model.CF?.Name))
+{
+    <p class="mt-2 text-lg">Дякуємо, @Model.CF.Name! Ваше повідомлення надіслано.</p>
+}

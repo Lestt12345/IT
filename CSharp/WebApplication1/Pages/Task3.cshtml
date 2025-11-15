@@ -1,0 +1,13 @@
+﻿@page "/Task3"
+@model WebApplication2.Pages.Task3Model
+@{
+	ViewData["Title"] = "TemperatureConverter";
+}
+
+<form method="post" class="flex-row gap-0">
+	<input class="m-0 p-0 w-auto apearence-none" type="number" name="tempOnCelsius" onchange="this.form.submit()" value="@Model.OnCelsius" />
+	<span>°C</span>
+	<span class="mx-1">=</span>
+	<span>@Model.OnFarenheit</span>
+	<span>°F</span>
+</form>

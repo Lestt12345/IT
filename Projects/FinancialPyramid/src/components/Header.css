@@ -20,7 +20,7 @@
 }
 @media (min-width: 576px) and (max-width: 767px) {
     header {
-        width: 100%;
+        width: 516px;
     }
 }
 @media (max-width: 575px) {
@@ -29,7 +29,7 @@
     }
 }
 
-@keyframes fill-bounce {
+@keyframes fill-bounce-header {
   0%   { transform: scaleX(0); }
   60%  { transform: scaleX(1); }
   85%  { transform: scaleX(0.90); }
