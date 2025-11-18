@@ -5,20 +5,15 @@ namespace WebApplication2.Pages
 {
     public class Task4Model : PageModel
     {
-        private static readonly string[] Quotes =
-        {
-            "Секрет успіху — це почати.",
-            "Вчитися ніколи не пізно.",
-            "Кожна помилка — це крок до перемоги.",
-            "Сьогодні — найкращий день, щоб почати.",
-            "Мрій масштабно, працюй наполегливо."
-        };
+        public int Id { get; set; }
+        public string Color { get; set; }
+        public int Page { get; set; }
 
-        public string RandomQuote { get; private set; }
-
-        public void OnGet()
+        public void OnGet(int id, string color, int page_)
         {
-            RandomQuote = Quotes[new Random().Next(Quotes.Length)];
+            Id = id;
+            Color = color;
+            Page = page_;
         }
     }
 }

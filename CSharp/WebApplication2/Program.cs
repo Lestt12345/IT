@@ -25,7 +25,7 @@ app.MapRazorPages();
 
 app.MapFallback(context =>
 {
-    context.Response.Redirect("/Task1");
+    context.Response.Redirect("/Task1?message=Hello");
     return Task.CompletedTask;
 });
 

@@ -3,6 +3,27 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --primary_color: 1f1f1f;
+    --Primary_color: #04091b;
+    --secondary_color: linear-gradient(to right, #f6851b, #fea82e);
+    --text_color: #181818;
+    --secondary_text_color: #11d1c1;
+    --bg-color: #e1e1e1;
+    --bg-secondary-color: #f6f6f6;
+    --secondary-bg-color: #ececec;
+    --primary-text-color: #000;
+    --secondary-text-color: #000000b3;
+    --box-shadow-value: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    --secondary_box-shadow-value: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    --box-color: #ffff;
+    --secondary_box-color: #fbfbfb;
+    --secondary_inner_box-color: #fff;
+    --secondary-text: #232738;
+    --base-variant: #d4d4d4;
+    --head_bgcolor: #dddd;
+}
+
 html {
-    font-family: 'Aeonik TRIAL', sans-serif;
+    font-family: degular-variable, sans-serif;
 }

@@ -1,7 +1,9 @@
-﻿@page "/Task4"
+﻿@page "/Task4/{id}"
 @model WebApplication2.Pages.Task4Model
 @{
-	ViewData["Title"] = "Quotes";
+	ViewData["Title"] = "Product";
 }
 
-<h3>@Model.RandomQuote</h3>
+<h3>ID: @Model.Id</h3>
+<h3>Color: @Model.Color</h3>
+<h3>Page: @Model.Page</h3>

@@ -5,11 +5,12 @@ namespace WebApplication2.Pages
 {
     public class Task1Model : PageModel
     {
-        public DateTime CurrentDateTime { get; set; }
+        public string Message { get; set; }
 
-        public void OnGet()
+        public void OnGet(string message)
         {
-            CurrentDateTime = DateTime.Now;
+            Message = message;
         }
+
     }
 }

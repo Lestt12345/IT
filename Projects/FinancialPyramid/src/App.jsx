@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/Header'
 import useWindowWidth from './hooks/useWindowWidth'
@@ -11,6 +11,9 @@ import banner_pic2 from './assets/banner_pic2.png'
 import fix_arrow from './assets/fix_arrow.png'
 import { FaChevronDown } from "react-icons/fa";
 import './styles/scrollbar.css'
+import plan_icon from './assets/plan_icon.png'
+import plan_icon1 from './assets/plan_icon1.png'
+import plan_icon2 from './assets/plan_icon2.png'
 
 function BounceButtonBanner({text, startTextColor, endTextColor, componentBefore}) {
   const [hovered, setHovered] = useState(false);
@@ -49,13 +52,13 @@ function BounceButton({text, startTextColor, endTextColor, componentBefore, isKi
       onMouseLeave={() => setHovered(false)}
     >
       <span
-        className={`relative transition-colors duration-200 ease-in-out gap-2 flex items-center px-[23px] py-[8px] overflow-hidden border ${isKick ? 'border-2 border-t-[#B1BEFF] border-b-[#9EE7FF] border-x-gradient' : ''} rounded-md bg-gradient-to-r ${isKick ? 'from-transparent to-transparent' : 'from-[#12C5FF] to-[#4565FF]'}`}
+        className={`relative transition-colors duration-200 ease-in-out gap-2 flex items-center px-[23px] py-[8px] overflow-hidden border ${!isKick ? 'border-2 border-t-[#B1BEFF] border-b-[#9EE7FF] border-x-gradient' : ''} rounded-md bg-gradient-to-r ${!isKick ? 'from-transparent to-transparent' : 'from-[#12C5FF] to-[#4565FF]'}`}
         style={{ color: hovered ? endTextColor : startTextColor }}
       >
         <span className="gap-1 flex items-center relative z-10">{componentBefore}
         {text}</span>
         <span
-            className={`absolute inset-0 scale-x-0 bg-gradient-to-r ${isKick ? 'from-[#10C5FF] to-[#4564FF]' : 'from-[#FFDC77] to-[#FFB95E]'}`}
+            className={`absolute inset-0 scale-x-0 bg-gradient-to-r ${!isKick ? 'from-[#10C5FF] to-[#4564FF] ml-[2px]' : 'from-[#FFDC77] to-[#FFB95E]'}`}
             style={{
             transformOrigin: "left",
             animation: hovered ? (isKick ? "fill-bounce-kick 0.8s forwards" : "fill-bounce 0.5s forwards") : "none",
@@ -68,6 +71,146 @@ function BounceButton({text, startTextColor, endTextColor, componentBefore, isKi
 
 function App() {
   const windowWidth = useWindowWidth();
+  const [isLogined, setIsLogined] = useState(localStorage.getItem('isLogined') || false);
+  const [selectedPlan, setSelectedPlan] = useState('STARTER');
+  const [investmentAmount, setInvestmentAmount] = useState('');
+
+  const switchPlansInfo = (plan) => {
+    if (plan !== "none" && document.getElementById(`planInfo-${plan}`).style.maxHeight > "0px") {
+      document.getElementById(`planInfo-${plan}`).style.maxHeight = "0px";
+      return;
+    }
+    const starterInfo = document.getElementById(`planInfo-STARTER`);
+    const premiumInfo = document.getElementById(`planInfo-PREMIUM`);
+    const exclusiveInfo = document.getElementById(`planInfo-EXCLUSIVE`);
+    const vipInfo = document.getElementById(`planInfo-VIP`);
+    
+    // Add smooth transition for all plan info elements
+    [starterInfo, premiumInfo, exclusiveInfo, vipInfo].forEach(element => {
+      element.style.transition = "max-height 0.3s ease-in-out";
+      element.style.overflow = "hidden";
+      element.style.maxHeight = "0px";
+    });
+
+    switch (plan) {
+      case "STARTER":
+        starterInfo.style.maxHeight = starterInfo.scrollHeight + "px";
+        break;
+      case "PREMIUM":
+        premiumInfo.style.maxHeight = premiumInfo.scrollHeight + "px";
+        break;
+      case "EXCLUSIVE":
+        exclusiveInfo.style.maxHeight = exclusiveInfo.scrollHeight + "px";
+        break;
+      case "VIP":
+        vipInfo.style.maxHeight = vipInfo.scrollHeight + "px";
+        break;
+      case "none":
+        break;
+    }
+  }
+
+  const dailyProfitCalc = (plan, amount) => {
+    switch (plan) {
+      case "STARTER":
+        if (amount < 10) {
+          return "Min: $10";
+        }
+        else if (amount > 699) {
+          return "Max: $699";
+        }
+        else {
+          return (amount * 0.1).toFixed(2);
+        }
+        break;
+      case "PREMIUM":
+        if (amount < 700) {
+          return "Min: $700";
+        }
+        else if (amount > 1999) {
+          return "Max: $1999";
+        }
+        else {
+          return (amount * 0.17).toFixed(2);
+        }
+        break;
+      case "EXCLUSIVE":
+        if (amount < 2000) {
+          return "Min: $2000";
+        }
+        else if (amount > 4999) {
+          return "Max: $4999";
+        }
+        else {
+          return (amount * 3).toFixed(2);
+        }
+        break;
+      case "VIP":
+        if (amount < 5000) {
+          return "Min: $5000";
+        }
+        else if (amount > 100000) {
+          return "Max: $100000";
+        }
+        else {
+          return (amount * 4.5).toFixed(2);
+        }
+        break;
+    }
+  }
+
+  const totalProfitCalc = (plan, amount) => {
+    switch (plan) {
+      case "STARTER":
+        if (amount < 10) {
+          return "Min: $10";
+        }
+        else if (amount > 699) {
+          return "Max: $699";
+        }
+        else {
+          return (amount * 1.2).toFixed(2);
+        }
+        break;
+      case "PREMIUM":
+        if (amount < 700) {
+          return "Min: $700";
+        }
+        else if (amount > 1999) {
+          return "Max: $1999";
+        }
+        else {
+          return (amount * 1.7).toFixed(2);
+        }
+        break;
+      case "EXCLUSIVE":
+        if (amount < 2000) {
+          return "Min: $2000";
+        }
+        else if (amount > 4999) {
+          return "Max: $4999";
+        }
+        else {
+          return (amount * 3).toFixed(2);
+        }
+        break;
+      case "VIP":
+        if (amount < 5000) {
+          return "Min: $5000";
+        }
+        else if (amount > 100000) {
+          return "Max: $100000";
+        }
+        else {
+          return (amount * 4.5).toFixed(2);
+        }
+        break;
+    }
+  }
+  
+  useEffect(() => {
+    switchPlansInfo("none");
+  }, []);
 
   return (
     <>
@@ -90,20 +233,192 @@ function App() {
           <img src={banner_pic2} alt="" className="ban_pic2" />
           <img src={banner_pic1} alt="" className="ban_pic1" />
         </div>
-        <div id="plan" className="contentWidth h-[100vh] pt-[50px] pb-[20px]">
-          <div className="heading">
-            <div className='head'>
-              <h5 className={`flex items-center ${windowWidth < 992 ? 'justify-center' : ''}`}><img src={head_img1} alt="" /><span className="text-black text-[16px]">COMPANY PLANS</span></h5>
-              <h2 className='leading-[1.2]'>Investment Offers</h2>
+      </div>
+      <div className='w-full flex justify-center items-center bg-[#F8FAFE]'>
+        <div id="plan" className="contentWidth pt-[50px] pb-[20px]">
+          <div className={`${windowWidth < 768 ? 'px-7' : ''}`}>
+            <div className='heading'>
+              <div className='head'>
+                <h2 className='leading-[1.2]'>Our Trading Packages</h2>
+                <h5 className={`flex items-center`}><img src={head_img1} alt="" /><span className="text-black text-[16px] mt-[1px]">PRICING PLAN</span></h5>
+              </div>
+              <div className="head">
+                {isLogined ? null : (
+                    <>
+                      <p>You can sit back and relax while BTCSmartMine AI does the work to mine Dogecoin for you</p>
+                      <BounceButton text="Create Account" startTextColor="white" endTextColor="white" isKick={true} />
+                    </>
+                )}
+              </div>
             </div>
-            <div className="head">
-              <p>You can sit back and relax while BTCSmartMine AI does the work to mine Dogecoin for you</p>
-              <BounceButton text="Create Account" startTextColor="white" endTextColor="white" isKick={false} />
+            <div className="flex flex-col justify-center w-full">
+              <div className="accordion-item w-full">
+                <h2 className="accordion-header w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
+                  <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("STARTER")}>
+                    <div className="plan_item">
+                      <div className="plan_right">
+                        <img src={plan_icon} alt="plan_icon" className="plan_icon img-fluid" />
+                        <h4>STARTER</h4>
+                        <h2><b>10%</b> <span> daily for 12 days </span></h2>
+                      </div>
+                      <div className="plan_left">
+                        <i className="ri-money-dollar-circle-line"></i>
+                        <h3>minimum-Deopsit <span>$ 10-699</span> </h3>
+                        <BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} />
+                      </div>
+                    </div>
+                  </div>
+                </h2>
+                <div id="planInfo-STARTER" className="accordion-collapse">
+                  <div className="accordion-body">
+                    <div className="plan_body_top">
+                      <div className="right_text">
+                        <h3 className='pr-5'><i className="ri-line-chart-fill"></i>Total Interest <span>100%</span></h3>
+                        <h3 className='pr-5'><i className="ri-wallet-3-line"></i> <span>Monday to Sunday </span></h3>  
+                      </div>  
+                      <div className="left_text">
+                        <h3><i className="fa-solid fa-check-double"></i> Easy Withdraw  </h3>
+                        <h3><i className="fa-solid fa-check-double"></i> High Profit </h3>  
+                        <h3><i className="fa-solid fa-check-double"></i> 24/7 Customer Support</h3>  
+                      </div>
+                    </div> 
+                  </div>
+                  <hr />     
+                </div>
+              </div>
+              <div className="accordion-item w-full">
+                <h2 className="accordion-header w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
+                  <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("PREMIUM")}>
+                    <div className="plan_item">
+                      <div className="plan_right">
+                        <img src={plan_icon} alt="plan_icon" className="plan_icon img-fluid" />
+                        <h4>PREMIUM</h4>
+                        <h2><b>17%</b> <span> daily for 10 days </span></h2>
+                      </div>
+                      <div className="plan_left">
+                        <i className="ri-money-dollar-circle-line"></i>
+                        <h3>minimum-Deopsit <span>$ 700-1999</span> </h3>
+                        <BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} />
+                      </div>
+                    </div>
+                  </div>
+                </h2>
+                <div id="planInfo-PREMIUM" className="accordion-collapse">
+                  <div className="accordion-body">
+                    <div className="plan_body_top">
+                      <div className="right_text">
+                        <h3 className='pr-5'><i className="ri-line-chart-fill"></i>Total Interest <span>100%</span></h3>
+                        <h3 className='pr-5'><i className="ri-wallet-3-line"></i> <span>Monday to Sunday </span></h3>  
+                      </div>  
+                      <div className="left_text">
+                        <h3><i className="fa-solid fa-check-double"></i> Easy Withdraw  </h3>
+                        <h3><i className="fa-solid fa-check-double"></i> High Profit </h3>  
+                        <h3><i className="fa-solid fa-check-double"></i> 24/7 Customer Support</h3>  
+                      </div>
+                    </div> 
+                  </div>
+                  <hr />     
+                </div>
+              </div>
+              <div className="accordion-item w-full">
+                <h2 className="accordion-header w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
+                  <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("EXCLUSIVE")}>
+                    <div className="plan_item">
+                      <div className="plan_right">
+                        <img src={plan_icon} alt="plan_icon" className="plan_icon img-fluid" />
+                        <h4>EXCLUSIVE</h4>
+                        <h2><b>300%</b> <span> daily for 10 days </span></h2>
+                      </div>
+                      <div className="plan_left">
+                        <i className="ri-money-dollar-circle-line"></i>
+                        <h3>minimum-Deopsit <span>$ 2000-4999</span> </h3>
+                        <BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} />
+                      </div>
+                    </div>
+                  </div>
+                </h2>
+                <div id="planInfo-EXCLUSIVE" className="accordion-collapse">
+                  <div className="accordion-body">
+                    <div className="plan_body_top">
+                      <div className="right_text">
+                        <h3 className='pr-5'><i className="ri-line-chart-fill"></i>Total Interest <span>100%</span></h3>
+                        <h3 className='pr-5'><i className="ri-wallet-3-line"></i> <span>Monday to Sunday </span></h3>  
+                      </div>  
+                      <div className="left_text">
+                        <h3><i className="fa-solid fa-check-double"></i> Easy Withdraw  </h3>
+                        <h3><i className="fa-solid fa-check-double"></i> High Profit </h3>  
+                        <h3><i className="fa-solid fa-check-double"></i> 24/7 Customer Support</h3>  
+                      </div>
+                    </div> 
+                  </div>
+                  <hr />     
+                </div>
+              </div>
+              <div className="accordion-item w-full">
+                <h2 className="accordion-header w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
+                  <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("VIP")}>
+                    <div className="plan_item">
+                      <div className="plan_right">
+                        <img src={plan_icon} alt="plan_icon" className="plan_icon img-fluid" />
+                        <h4>VIP</h4>
+                        <h2 className='gap-2'><b>450%</b> <span> daily for 10 days </span></h2>
+                      </div>
+                      <div className="plan_left">
+                        <i className="ri-money-dollar-circle-line"></i>
+                        <h3>minimum-Deopsit <span>$ 5000-100000</span> </h3>
+                        <BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} />
+                      </div>
+                    </div>
+                  </div>
+                </h2>
+                <div id="planInfo-VIP" className="accordion-collapse">
+                  <div className="accordion-body">
+                    <div className="plan_body_top">
+                      <div className="right_text">
+                        <h3 className='pr-5'><i className="ri-line-chart-fill"></i>Total Interest <span>100%</span></h3>
+                        <h3 className='pr-5'><i className="ri-wallet-3-line"></i> <span>Monday to Sunday </span></h3>  
+                      </div>  
+                      <div className="left_text">
+                        <h3><i className="fa-solid fa-check-double"></i> Easy Withdraw  </h3>
+                        <h3><i className="fa-solid fa-check-double"></i> High Profit </h3>  
+                        <h3><i className="fa-solid fa-check-double"></i> 24/7 Customer Support</h3>  
+                      </div>
+                    </div> 
+                  </div>
+                  <hr />     
+                </div>
+              </div>
+              <div className="plan_boby_bottom">
+                <div className="right_text">
+                  <h4>You can calculate the return on your investment</h4>
+                  <div className="cal_group">
+                    <h5>Select your Plan
+                      <select id="selectCalcPlan" className="inpts1" value={selectedPlan} onChange={(e) => setSelectedPlan(e.target.value)}>
+                        <option value="STARTER"> Starter Plan </option>
+                        <option value="PREMIUM"> Premium Plan </option>
+                        <option value="EXCLUSIVE"> Exclusive Plan </option>
+                        <option value="VIP"> Vip Plan </option>
+                      </select></h5>
+                      <h5>Enter Your Amount 
+                      <input type="number" className="inpts1" placeholder={`${selectedPlan === "STARTER" ? "$10" :
+                          selectedPlan === "PREMIUM" ? "$700" :
+                          selectedPlan === "EXCLUSIVE" ? "$2000" :
+                          selectedPlan === "VIP" ? "$5000" :
+                          ""}`} value={investmentAmount} onChange={(e) => setInvestmentAmount(e.target.value)} /> 
+                    </h5> 
+                  </div>
+                </div>
+                <div className="left_text">
+                  <h4 className={`${windowWidth < 1200 ? "text-start" : "text-end"}`}>With this amount of investment you will receive:</h4>
+                  <h5> <div className={`flex w-full justify-end items-center ${windowWidth < 992 ? "justify-center" : "justify-end"}`}><img src={plan_icon1} className="plan_icon1 me-2 w-[14px] h-[16px]" /> Daily Profit</div> <span id="profitDaily">{dailyProfitCalc(selectedPlan, investmentAmount)}</span> </h5>
+                  <h5> <div className={`flex w-full justify-end items-center ${windowWidth < 992 ? "justify-center" : "justify-end"}`}><img src={plan_icon2} className="plan_icon1 me-2 w-[14px] h-[16px]" /> Total Profit</div> <span id="profitTotal">{totalProfitCalc(selectedPlan, investmentAmount)}</span> </h5>
+                </div>
+              </div>
+              <div className={`w-full calc-btn items-center`}><BounceButton text="Get Started" startTextColor="white" endTextColor="white" isKick={true} /></div>
             </div>
           </div>
         </div>
       </div>
-      
     </>
   )
 }
