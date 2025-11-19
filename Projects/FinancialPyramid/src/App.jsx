@@ -14,6 +14,7 @@ import './styles/scrollbar.css'
 import plan_icon from './assets/plan_icon.png'
 import plan_icon1 from './assets/plan_icon1.png'
 import plan_icon2 from './assets/plan_icon2.png'
+import vector_icon from './assets/vector_icon.png'
 
 function BounceButtonBanner({text, startTextColor, endTextColor, componentBefore}) {
   const [hovered, setHovered] = useState(false);
@@ -253,7 +254,7 @@ function App() {
             </div>
             <div className="flex flex-col justify-center w-full">
               <div className="accordion-item w-full">
-                <h2 className="accordion-header w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
+                <h2 className="accordion-header cursor-pointer w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
                   <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("STARTER")}>
                     <div className="plan_item">
                       <div className="plan_right">
@@ -287,7 +288,7 @@ function App() {
                 </div>
               </div>
               <div className="accordion-item w-full">
-                <h2 className="accordion-header w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
+                <h2 className="accordion-header cursor-pointer w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
                   <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("PREMIUM")}>
                     <div className="plan_item">
                       <div className="plan_right">
@@ -321,7 +322,7 @@ function App() {
                 </div>
               </div>
               <div className="accordion-item w-full">
-                <h2 className="accordion-header w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
+                <h2 className="accordion-header cursor-pointer w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
                   <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("EXCLUSIVE")}>
                     <div className="plan_item">
                       <div className="plan_right">
@@ -355,7 +356,7 @@ function App() {
                 </div>
               </div>
               <div className="accordion-item w-full">
-                <h2 className="accordion-header w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
+                <h2 className="accordion-header cursor-pointer w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
                   <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("VIP")}>
                     <div className="plan_item">
                       <div className="plan_right">
@@ -398,12 +399,13 @@ function App() {
                         <option value="PREMIUM"> Premium Plan </option>
                         <option value="EXCLUSIVE"> Exclusive Plan </option>
                         <option value="VIP"> Vip Plan </option>
-                      </select></h5>
-                      <h5>Enter Your Amount 
+                      </select>
+                    </h5>
+                    <h5>Enter Your Amount 
                       <input type="number" className="inpts1" placeholder={`${selectedPlan === "STARTER" ? "$10" :
-                          selectedPlan === "PREMIUM" ? "$700" :
-                          selectedPlan === "EXCLUSIVE" ? "$2000" :
-                          selectedPlan === "VIP" ? "$5000" :
+                        selectedPlan === "PREMIUM" ? "$700" :
+                        selectedPlan === "EXCLUSIVE" ? "$2000" :
+                        selectedPlan === "VIP" ? "$5000" :
                           ""}`} value={investmentAmount} onChange={(e) => setInvestmentAmount(e.target.value)} /> 
                     </h5> 
                   </div>
@@ -419,6 +421,84 @@ function App() {
           </div>
         </div>
       </div>
+      <section className="video_section" style={{fontFamily: "degular-variable, sans-serif"}}>
+        <div className="container_ relative">
+
+          <div className="line_part">
+            <svg width="5px" height="500px" className="svg_line">
+              <path d="M3,2 L3,398" className="dotted-line"></path>
+            </svg>
+
+            <svg width="100px" height="100px" className="svg_line_hori">
+              <path d="M0,100 L200,100" className="dotted-line"></path>
+            </svg>
+          </div>
+
+          <div className="live_widget_part">
+            <div className="tradingview-widget-container w-full h-[106px]">
+
+              <iframe
+                htmlScrolling="no"
+                allowTransparency="true"
+                frameBorder="0"
+                title="ticker tape TradingView widget"
+                lang="en"
+                className="select-none box-border block h-[74px] w-full"
+                src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22description%22%3A%22BTC%22%2C%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%7D%2C%7B%22description%22%3A%22ETH%22%2C%22proName%22%3A%22BITSTAMP%3AETHUSD%22%7D%2C%7B%22description%22%3A%22USDT%22%2C%22proName%22%3A%22CRYPTOCAP%3AUSDT%22%7D%2C%7B%22description%22%3A%22MSFT%22%2C%22proName%22%3A%22NASDAQ%3AMSFT%22%7D%2C%7B%22description%22%3A%22APPL%22%2C%22proName%22%3A%22NASDAQ%3AAAPL%22%7D%2C%7B%22description%22%3A%22TSLA%22%2C%22proName%22%3A%22NASDAQ%3ATSLA%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22isTransparent%22%3Afalse%2C%22displayMode%22%3A%22compact%22%2C%22colorTheme%22%3A%22light%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A106%2C%22utm_source%22%3A%22bitbullpro.net%22%2C%22utm_medium%22%3A%22widget_new%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22bitbullpro.net%2F%3Fref%3Dupayhyip%22%7D"
+              ></iframe>
+
+              <div className="tradingview-widget-copyright text-center text-sm leading-8">
+                <a
+                  href="https://www.tradingview.com/?utm_source=bitbullpro.net&utm_medium=widget_new&utm_campaign=ticker-tape"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="no-underline text-gray-400"
+                >
+                  <span className="blue-text"></span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="content_section">
+            <div className="head_">
+              <h3 className="font-semibold">The Team of Traders Work For You</h3>
+            </div>
+
+            <h2 className="fade_text">what Who</h2>
+
+            <div className="text_part">
+              <p style={{fontFamily: "degular-variable, sans-serif"}}>
+                Our "Traders at Your Service" philosophy means you're working with a dedicated team to help you achieve your
+                trading, investing, or financial goals. Our team of dedicated traders is dedicated to enhancing your wealth
+                through smart strategies and careful planning. We work tirelessly to ensure your financial success, allowing you
+                to focus on achieving your dreams.
+              </p>
+            </div>
+          </div>
+
+          <div className="banner_video">
+            <iframe
+              width="1060"
+              height="360"
+              src="https://www.youtube.com/embed/rR5VAqF-s4c?si=BEVC9QLaOCzjDqsl"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          <img
+            src={vector_icon}
+            alt="vector_icon"
+            className="vector_icon max-w-full h-auto"
+          />
+
+        </div>
+      </section>
     </>
   )
 }
