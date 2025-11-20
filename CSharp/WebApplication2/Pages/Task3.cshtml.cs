@@ -10,7 +10,7 @@ namespace WebApplication2.Pages
         [EmailAddress]
         public string Email { get; set; }
 
-        public void OnGet()
+        public void OnGet() //asd
         {
         }
 
