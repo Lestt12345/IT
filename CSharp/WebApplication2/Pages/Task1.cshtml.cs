@@ -37,8 +37,9 @@ namespace WebApplication2.Pages
             {
                 return Page();
             }
-            TempData["seccess"] = "Registration complete!";
-            return RedirectToPage("/Seccess");
+
+            TempData["Success"] = "Registration complete!";
+            return RedirectToPage("/Success");
         }
     }
 }

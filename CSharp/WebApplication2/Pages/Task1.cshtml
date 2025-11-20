@@ -1,7 +1,53 @@
 ﻿@page "/Task1"
 @model WebApplication2.Pages.Task1Model
 @{
-    ViewData["Title"] = "Hello";
+    ViewData["Title"] = "Register";
 }
 
-<h3>@Model.Message</h3>
+<form method="post" style="width: 270px;" class="d-flex flex-column justify-content-center gap-2">
+	<div class="d-flex flex-column">
+		<div class="w-100 d-flex justify-content-between">
+			<label asp-for="Name">Name:</label>
+			<input asp-for="Name" />
+		</div>
+		<span class="text-danger" asp-validation-for="Name"></span>
+	</div>
+
+	<div class="d-flex flex-column">
+		<div class="w-100 d-flex justify-content-between">
+			<label asp-for="Email">Email:</label>
+			<input asp-for="Email"/>
+		</div>
+		<span class="text-danger" asp-validation-for="Email"></span>
+	</div>
+
+	<div class="d-flex flex-column">
+		<div class="w-100 d-flex justify-content-between">
+			<label asp-for="Password">Password:</label>
+			<input type="password" asp-for="Password" />
+		</div>
+		<span class="text-danger" asp-validation-for="Password"></span>
+	</div>
+
+	<div class="d-flex flex-column">
+		<div class="w-100 d-flex justify-content-between">
+			<label asp-for="ConfirmPassword">Confirm Password:</label>
+			<input type="password" asp-for="ConfirmPassword" />
+		</div>
+		<span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+	</div>
+
+	<div class="d-flex flex-column">
+		<div class="w-100 d-flex justify-content-between">
+			<label asp-for="Age">Age:</label>
+			<input asp-for="Age" />
+		</div>
+		<span class="text-danger" asp-validation-for="Age"></span>
+	</div>
+
+	<span asp-validation-summary="All"></span>
+
+	<input type="submit" value="Register" />
+</form>
+
+<partial class="text-danger" name="_ValidationScriptsPartial" />

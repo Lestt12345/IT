@@ -1,11 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication2.Pages
 {
     public class Task3Model : PageModel
     {
         [BindProperty]
-        public string Name { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
+
+        public void OnGet()
+        {
+        }
+
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            TempData["Success"] = "Subscribed!";
+            return RedirectToPage("/Success");
+        }
     }
 }

@@ -15,6 +15,18 @@ import plan_icon from './assets/plan_icon.png'
 import plan_icon1 from './assets/plan_icon1.png'
 import plan_icon2 from './assets/plan_icon2.png'
 import vector_icon from './assets/vector_icon.png'
+import refer_video_img from './assets/refer_video_img.jpg'
+import ref_levels from './assets/ref_levels.png'
+import ref_vector_img from './assets/ref_vector_img.png'
+import stat_img1 from './assets/stat_img1.png'
+import stat_img2 from './assets/stat_img2.png'
+import stat_img3 from './assets/stat_img3.png'
+import stat_img4 from './assets/stat_img4.png'
+import secu_icon1 from './assets/secu_icon1.png'
+import secu_icon2 from './assets/secu_icon2.png'
+import secu_icon3 from './assets/secu_icon3.png'
+import { useRef } from 'react';
+
 
 function BounceButtonBanner({text, startTextColor, endTextColor, componentBefore}) {
   const [hovered, setHovered] = useState(false);
@@ -75,6 +87,14 @@ function App() {
   const [isLogined, setIsLogined] = useState(localStorage.getItem('isLogined') || false);
   const [selectedPlan, setSelectedPlan] = useState('STARTER');
   const [investmentAmount, setInvestmentAmount] = useState('');
+  const [totalAccounts, setTotalAccounts] = useState(365011);
+  const [runningDays, setRunningDays] = useState(640);
+  const [totalDeposit, setTotalDeposit] = useState(193687920);
+  const [totalWithdrawl, setTotalWithdrawl] = useState(885657107);
+  const totalAccountsRef = useRef(null);
+  const runningDaysRef = useRef(null);
+  const totalDepositRef = useRef(null);
+  const totalWithdrawlRef = useRef(null);
 
   const switchPlansInfo = (plan) => {
     if (plan !== "none" && document.getElementById(`planInfo-${plan}`).style.maxHeight > "0px") {
@@ -211,7 +231,44 @@ function App() {
   
   useEffect(() => {
     switchPlansInfo("none");
+    
+    const target = document.getElementById('counter');
+    if (!target) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          animateCounter(totalAccountsRef, totalAccounts);
+          animateCounter(runningDaysRef, runningDays);
+          animateCounter(totalDepositRef, totalDeposit);
+          animateCounter(totalWithdrawlRef, totalWithdrawl);
+          observer.unobserve(target);
+        }
+      },
+      {
+        root: null,
+        threshold: 0.25
+      }
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
   }, []);
+
+  function animateCounter(ref, target, duration = 3000) {
+    if (!ref.current) return;
+
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      const value = Math.floor(progress * target);
+
+      ref.current.innerText = value;
+
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
 
   return (
     <>
@@ -227,16 +284,95 @@ function App() {
               <button className="banner_link">[Sign Up] Start Mining Doge Coin Now</button>
               <p className="h-[35px]"></p>
               <BounceButtonBanner text="Sign Up" startTextColor="white" endTextColor="white" componentBefore={<FaUser />} isKick={true} />
-              {windowWidth >= 992 ? <div className="col-lg-6"><img src={banner_img} alt="" className="banner_image" /></div> : null}
+              {windowWidth >= 992 ? <div className="col-lg-6_"><img src={banner_img} alt="" className="banner_image" /></div> : null}
             </div>
-            <div onClick={() => window.scrollTo({ top: document.getElementById('plan').offsetTop, behavior: 'smooth' })} className="w-full flex justify-center pt-3 align-center relative cursor-pointer"><img className="fa-chevron-down-img" src={fix_arrow} alt="" /><span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 ${windowWidth < 992 ? '-translate-y-3' : '-translate-y-4'}`}><FaChevronDown /></span></div>
+            <div onClick={() => window.scrollTo({ top: document.getElementById('team').offsetTop, behavior: 'smooth' })} className="w-full flex justify-center pt-3 align-center relative cursor-pointer"><img className="fa-chevron-down-img" src={fix_arrow} alt="" /><span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 ${windowWidth < 992 ? '-translate-y-3' : '-translate-y-4'}`}><FaChevronDown /></span></div>
           </div>
           <img src={banner_pic2} alt="" className="ban_pic2" />
           <img src={banner_pic1} alt="" className="ban_pic1" />
         </div>
       </div>
+      <div id='team'></div>
+      <section className="video_section" style={{fontFamily: "degular-variable, sans-serif"}}>
+        <div className="container_ relative">
+
+          <div className="line_part">
+            <svg width="5px" height="500px" className="svg_line">
+              <path d="M3,2 L3,398" className="dotted-line"></path>
+            </svg>
+
+            <svg width="100px" height="100px" className="svg_line_hori">
+              <path d="M0,100 L200,100" className="dotted-line"></path>
+            </svg>
+          </div>
+
+          <div className="live_widget_part">
+            <div className="tradingview-widget-container w-full h-[106px]">
+
+              <iframe
+                htmlScrolling="no"
+                allowTransparency="true"
+                frameBorder="0"
+                title="ticker tape TradingView widget"
+                lang="en"
+                className="select-none box-border block h-[74px] w-full"
+                src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22description%22%3A%22BTC%22%2C%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%7D%2C%7B%22description%22%3A%22ETH%22%2C%22proName%22%3A%22BITSTAMP%3AETHUSD%22%7D%2C%7B%22description%22%3A%22USDT%22%2C%22proName%22%3A%22CRYPTOCAP%3AUSDT%22%7D%2C%7B%22description%22%3A%22MSFT%22%2C%22proName%22%3A%22NASDAQ%3AMSFT%22%7D%2C%7B%22description%22%3A%22APPL%22%2C%22proName%22%3A%22NASDAQ%3AAAPL%22%7D%2C%7B%22description%22%3A%22TSLA%22%2C%22proName%22%3A%22NASDAQ%3ATSLA%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22isTransparent%22%3Afalse%2C%22displayMode%22%3A%22compact%22%2C%22colorTheme%22%3A%22light%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A106%2C%22utm_source%22%3A%22bitbullpro.net%22%2C%22utm_medium%22%3A%22widget_new%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22bitbullpro.net%2F%3Fref%3Dupayhyip%22%7D"
+              ></iframe>
+
+              <div className="tradingview-widget-copyright text-center text-sm leading-8">
+                <a
+                  href="https://www.tradingview.com/?utm_source=bitbullpro.net&utm_medium=widget_new&utm_campaign=ticker-tape"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="no-underline text-gray-400"
+                >
+                  <span className="blue-text"></span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="content_section">
+            <div className="head_">
+              <h3 className="font-semibold">The Team of Traders Work For You</h3>
+            </div>
+
+            <h2 className="fade_text">what Who</h2>
+
+            <div className="text_part">
+              <p style={{fontFamily: "degular-variable, sans-serif"}}>
+                Our "Traders at Your Service" philosophy means you're working with a dedicated team to help you achieve your
+                trading, investing, or financial goals. Our team of dedicated traders is dedicated to enhancing your wealth
+                through smart strategies and careful planning. We work tirelessly to ensure your financial success, allowing you
+                to focus on achieving your dreams.
+              </p>
+            </div>
+          </div>
+
+          <div className="banner_video">
+            <iframe
+              width="1060"
+              height="360"
+              src="https://www.youtube.com/embed/rR5VAqF-s4c?si=BEVC9QLaOCzjDqsl"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          <img
+            src={vector_icon}
+            alt="vector_icon"
+            className="vector_icon max-w-full h-auto"
+          />
+
+        </div>
+      </section>
       <div className='w-full flex justify-center items-center bg-[#F8FAFE]'>
-        <div id="plan" className="contentWidth pt-[50px] pb-[20px]">
+        <div className="contentWidth pt-[50px] pb-[20px]">
           <div className={`${windowWidth < 768 ? 'px-7' : ''}`}>
             <div className='heading'>
               <div className='head'>
@@ -421,82 +557,126 @@ function App() {
           </div>
         </div>
       </div>
-      <section className="video_section" style={{fontFamily: "degular-variable, sans-serif"}}>
-        <div className="container_ relative">
-
-          <div className="line_part">
-            <svg width="5px" height="500px" className="svg_line">
-              <path d="M3,2 L3,398" className="dotted-line"></path>
-            </svg>
-
-            <svg width="100px" height="100px" className="svg_line_hori">
-              <path d="M0,100 L200,100" className="dotted-line"></path>
-            </svg>
-          </div>
-
-          <div className="live_widget_part">
-            <div className="tradingview-widget-container w-full h-[106px]">
-
-              <iframe
-                htmlScrolling="no"
-                allowTransparency="true"
-                frameBorder="0"
-                title="ticker tape TradingView widget"
-                lang="en"
-                className="select-none box-border block h-[74px] w-full"
-                src="https://www.tradingview-widget.com/embed-widget/ticker-tape/?locale=en#%7B%22symbols%22%3A%5B%7B%22description%22%3A%22BTC%22%2C%22proName%22%3A%22BITSTAMP%3ABTCUSD%22%7D%2C%7B%22description%22%3A%22ETH%22%2C%22proName%22%3A%22BITSTAMP%3AETHUSD%22%7D%2C%7B%22description%22%3A%22USDT%22%2C%22proName%22%3A%22CRYPTOCAP%3AUSDT%22%7D%2C%7B%22description%22%3A%22MSFT%22%2C%22proName%22%3A%22NASDAQ%3AMSFT%22%7D%2C%7B%22description%22%3A%22APPL%22%2C%22proName%22%3A%22NASDAQ%3AAAPL%22%7D%2C%7B%22description%22%3A%22TSLA%22%2C%22proName%22%3A%22NASDAQ%3ATSLA%22%7D%5D%2C%22showSymbolLogo%22%3Atrue%2C%22isTransparent%22%3Afalse%2C%22displayMode%22%3A%22compact%22%2C%22colorTheme%22%3A%22light%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A106%2C%22utm_source%22%3A%22bitbullpro.net%22%2C%22utm_medium%22%3A%22widget_new%22%2C%22utm_campaign%22%3A%22ticker-tape%22%2C%22page-uri%22%3A%22bitbullpro.net%2F%3Fref%3Dupayhyip%22%7D"
-              ></iframe>
-
-              <div className="tradingview-widget-copyright text-center text-sm leading-8">
-                <a
-                  href="https://www.tradingview.com/?utm_source=bitbullpro.net&utm_medium=widget_new&utm_campaign=ticker-tape"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="no-underline text-gray-400"
-                >
-                  <span className="blue-text"></span>
-                </a>
+      <section className="referal_section">
+        <div className={`container_ flex justify-between ${windowWidth < 992 ? "flex-col" : "flex-row"}`}>
+            <div className="col-lg-6">
+                <div className="head_">
+                    <h2>Our offer for<span> investors:</span></h2>
+                </div>
+                <div className="referal_content_group">
+                    <div className="content">
+                        <p className="high_text">Our mines are located in North America, South Asia, Canada, and Australia. The following is an video introduction to our mine farm.</p>
+                        <p>We have developed mining contracts suitable for different groups of people. From now, you don’t have to buy expensive mining equipment and pay electricity bills, and don’t need professional knowledge of cryptocurrency mining.</p>
+                    </div>
+                    <div className="content flex flex-col justify-between">
+                        <p>After checked our mining contract, you can decide what mining contract you are interested in for purchase and so as to easily start earning.</p>
+                        <div className={`${windowWidth <= 576 ? 'w-full flex justify-center mt-5' : 'w-auto'}`}><BounceButton text="Purchase Plan" startTextColor="white" endTextColor="white" isKick={true} /></div>
+                    </div>
+                </div>
+                <div className="referal_video">
+                    <img src={refer_video_img} alt="refer_video_img" className="refer_video_img img-fluid" />
+                    <a href="#" className="hvr-bounce-out">  <i className="ri-play-fill"></i>  </a>
+                </div>
+            </div>
+            <div className="col-lg-6 ref_part" style={{ position: 'relative' }}>
+              <div className="head_">
+                  <h2 className="fade_text">Referrals</h2>
+                  <h2>Our Trading Packages Pricing Plan</h2>
               </div>
-
+              <div className="ref_levels">
+                    <img src={ref_levels} className="ref_level" />
+                    <ul>
+                        <li>
+                            <h3>Level1</h3>
+                            <h2>6%</h2>
+                        </li>
+                        <li></li>
+                        <li>
+                            <h3>Level2</h3>
+                            <h2>2%</h2>
+                        </li>
+                        <li></li>
+                        <li>
+                            <h3>Level3</h3>
+                            <h2>1%</h2>
+                        </li>
+                    </ul>
+              </div>
+              <div className="content">
+                <p className="mb-3">We values everyone who has joined our team and is our representative, your trust and decissions are very important to us.</p>
+            
+                <p>Teamwork generates millions of dollars, which many times increases profits and bonuses under our 3-level referral program.</p>
+              </div>
+                <div className="top_but">
+                    <BounceButton text="Partners" startTextColor="black" endTextColor="white" isKick={false} />
+                </div>
+                <img src={ref_vector_img} alt="ref_vector_img" className="ref_vector_img img-fluid" />
             </div>
-          </div>
-
-          <div className="content_section">
+        </div>
+      </section>
+      <section className="stat_section">
+        <div className="container_" style={{ position: 'relative' }}>
             <div className="head_">
-              <h3 className="font-semibold">The Team of Traders Work For You</h3>
+              <h2 className="fade_text"> Statistics</h2>
+              <h2>Our <span>Statistics</span></h2>
             </div>
-
-            <h2 className="fade_text">what Who</h2>
-
-            <div className="text_part">
-              <p style={{fontFamily: "degular-variable, sans-serif"}}>
-                Our "Traders at Your Service" philosophy means you're working with a dedicated team to help you achieve your
-                trading, investing, or financial goals. Our team of dedicated traders is dedicated to enhancing your wealth
-                through smart strategies and careful planning. We work tirelessly to ensure your financial success, allowing you
-                to focus on achieving your dreams.
-              </p>
+            <div className="stat_group" id="counter">      
+              <div className="stat_item">
+                <img src={stat_img1} alt="stat_img1" className="stat_img1 img-fluid" />
+                <h3>Total Accounts <span className="counter-value" ref={totalAccountsRef}>0</span></h3>
+              </div>
+                      
+              <div className="stat_item">
+                <img src={stat_img2} alt="stat_img2" className="stat_img1 img-fluid" />
+                <h3>Running Days <span className="counter-value" ref={runningDaysRef}>0</span></h3>
+              </div>
+                          
+              <div className="stat_item">
+                <img src={stat_img3} alt="stat_img3" className="stat_img1 img-fluid" />
+                <h3>Total Desposit <span className="counter-value" ref={totalDepositRef}>0</span></h3>
+              </div>
+                          
+              <div className="stat_item">
+                <img src={stat_img4} alt="stat_img4" className="stat_img1 img-fluid" />
+                <h3>Total Withdrawal <span className="counter-value" ref={totalWithdrawlRef}>0</span></h3>
+              </div>
+            </div>
+        </div>
+    </section>
+    <section className="Security_section">
+      <div className="container_">
+          <div className="head_">
+            <h2>Personal <span>Security</span></h2>
+          </div>
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="head_">
+                <p>All personal data you provide to the company is stored in strict confidentiality and is protected by the law on the protection of personal data. All your personal data may be used by the company solely to optimize the work of BITBULL PRO with the investor and improve the quality of the services provided.</p>
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <div className="head_">
+                <p>We do not share your personal data with third parties under any circumstances, keeping the details of your personal data and financial transactions secret from third parties. All data that is collected and/or may be collected by the company is carefully protected from potential acquisition by third parties.</p>
+              </div>
             </div>
           </div>
-
-          <div className="banner_video">
-            <iframe
-              width="1060"
-              height="360"
-              src="https://www.youtube.com/embed/rR5VAqF-s4c?si=BEVC9QLaOCzjDqsl"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+          <div className="security_group">
+            <div className="secu_item">
+              <img src={secu_icon1} alt="secu_icon1" className="secu_icon1 img-fluid" /> 
+              <h3>Confidential data</h3>
+              <p>BITBULL PRO stores your personal data and does not transfer it to third parties. An exception may be the cases where an official request was received from law enforcement agencies under the current legislation. You always have the right to request the deletion of your account with your personal data.</p>
+            </div>
+            <div className="secu_item">
+              <img src={secu_icon2} alt="secu_icon2" className="secu_icon1 img-fluid" /> 
+              <h3>Non-disclosure agreement</h3>
+              <p>Using the BITBULLPRO.NET website, you agree to non-disclosure of all protected and confidential data, compliance with the company's copyright on the posted materials and content posted on the website.</p>
+            </div>
+            <div className="secu_item">
+              <img src={secu_icon3} alt="secu_icon3" className="secu_icon1 img-fluid" /> 
+              <h3>Electronic consent</h3>
+              <p>After registering on the BITBULLPRO.NET website, you agree to our Terms and Conditions. If you are not satisfied with the Terms and Conditions of BITBULL PRO, stop using our services and finish working with the website.</p>
+            </div>
           </div>
-
-          <img
-            src={vector_icon}
-            alt="vector_icon"
-            className="vector_icon max-w-full h-auto"
-          />
-
         </div>
       </section>
     </>
