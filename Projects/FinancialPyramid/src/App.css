@@ -470,6 +470,8 @@ img, svg {
 }
 
 iframe {
+    width: 100%;
+    height: 100%;
     border: 0;
 }
 
@@ -560,6 +562,8 @@ body p {
 }
 
 .video_section .banner_video iframe {
+    width: 100%;
+    height: 100%;
     border: 4px solid rgb(215, 220, 226);
     border-radius: 10px;
 }
@@ -831,6 +835,53 @@ body p {
     display: inline;
 }
 
+.certifi_secction {
+    padding: 50px 0px 90px;
+    background: #f6fafe;
+}
+
+.certifi_secction .bold_text {
+    color: var(--primary_color);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 20px 0px 30px;
+}
+
+.cert_info h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1f1f1f;
+    margin: 0px 0px 30px;
+    line-height: 25px;
+}
+
+.cert_info h3 span {
+    display: block;
+    background: linear-gradient(to right, #f6851b, #fea82e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 500;
+}
+
+.cert_info p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #181818;
+    margin: 0px 0px 20px;
+}
+
+.cert_info p span {
+    display: block;
+    color: #1f1f1f;
+    font-weight: 500;
+}
+
+.cert_group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
 @media (max-width: 992px) {
     .calc-btn {
         margin-top: 20px;
@@ -972,6 +1023,20 @@ body p {
     .stat_group::before {
         width: 100vw;
     }
+    .cert_img {
+        text-align: center;
+    }
+    .cert_img a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .cert_group {
+        margin: 30px 0px 0px;
+    }
+    .head_ h2 {
+        text-align: center;
+    }
 }
 
 @media (max-width: 767px) {
@@ -1091,7 +1156,7 @@ body p {
     }
     .video_section .banner_video {
         height: 333px !important;
-        width: 333px !important;
+        width: 100%;
     }
     .vector_icon {
         max-width: 35px;
@@ -1180,6 +1245,22 @@ body p {
     }
     .stat_group::before {
         width: 100vw;
+    }
+    .cert_info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .cert_info h3 {
+        text-align: center;
+    }
+    .cert_info p {
+        margin: 0px 17px 20px;
+        text-align: center;
+    }
+    .cert_group {
+        grid-template-columns: 1fr;
     }
 }
 

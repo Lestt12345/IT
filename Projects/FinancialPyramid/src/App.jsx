@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Header from './components/Header'
+import Header from './components/Header/Header'
 import useWindowWidth from './hooks/useWindowWidth'
 import { FaUser } from "react-icons/fa";
 import head_img from './assets/head_img.png'
@@ -26,6 +26,13 @@ import secu_icon1 from './assets/secu_icon1.png'
 import secu_icon2 from './assets/secu_icon2.png'
 import secu_icon3 from './assets/secu_icon3.png'
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import cert_icon from './assets/cert_icon.png'
+import cert_img from './assets/cert_img.png'
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import ScrollUpBtn from './components/ScrollUpBtn/ScrollUpBtn'
+import useSmoothScroll from './hooks/useSmoothScroll'
 
 
 function BounceButtonBanner({text, startTextColor, endTextColor, componentBefore}) {
@@ -55,7 +62,7 @@ function BounceButtonBanner({text, startTextColor, endTextColor, componentBefore
   );
 }
 
-function BounceButton({text, startTextColor, endTextColor, componentBefore, isKick}) {
+function BounceButton({text, startTextColor, endTextColor, componentBefore, componentAfter, isKick}) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -68,8 +75,11 @@ function BounceButton({text, startTextColor, endTextColor, componentBefore, isKi
         className={`relative transition-colors duration-200 ease-in-out gap-2 flex items-center px-[23px] py-[8px] overflow-hidden border ${!isKick ? 'border-2 border-t-[#B1BEFF] border-b-[#9EE7FF] border-x-gradient' : ''} rounded-md bg-gradient-to-r ${!isKick ? 'from-transparent to-transparent' : 'from-[#12C5FF] to-[#4565FF]'}`}
         style={{ color: hovered ? endTextColor : startTextColor }}
       >
-        <span className="gap-1 flex items-center relative z-10">{componentBefore}
-        {text}</span>
+        <span className="gap-1 flex items-center relative z-10">
+          {componentBefore}
+          {text}
+          {componentAfter}
+        </span>
         <span
             className={`absolute inset-0 scale-x-0 bg-gradient-to-r ${!isKick ? 'from-[#10C5FF] to-[#4564FF] ml-[2px]' : 'from-[#FFDC77] to-[#FFB95E]'}`}
             style={{
@@ -84,6 +94,7 @@ function BounceButton({text, startTextColor, endTextColor, componentBefore, isKi
 
 function App() {
   const windowWidth = useWindowWidth();
+  const { scrollTo } = useSmoothScroll(0.7, 0.1);
   const [isLogined, setIsLogined] = useState(localStorage.getItem('isLogined') || false);
   const [selectedPlan, setSelectedPlan] = useState('STARTER');
   const [investmentAmount, setInvestmentAmount] = useState('');
@@ -95,6 +106,53 @@ function App() {
   const runningDaysRef = useRef(null);
   const totalDepositRef = useRef(null);
   const totalWithdrawlRef = useRef(null);
+  
+  useEffect(() => {
+    switchPlansInfo("none");
+
+    Fancybox.bind("[data-fancybox='gallery']", {});
+    
+    const target = document.getElementById('counter');
+    if (!target) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          animateCounter(totalAccountsRef, totalAccounts);
+          animateCounter(runningDaysRef, runningDays);
+          animateCounter(totalDepositRef, totalDeposit);
+          animateCounter(totalWithdrawlRef, totalWithdrawl);
+          observer.unobserve(target);
+        }
+      },
+      {
+        root: null,
+        threshold: 0.25
+      }
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
+
+  function animateCounter(ref, target, duration = 3000) {
+    if (!ref.current) return;
+
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      const value = Math.floor(progress * target);
+
+      ref.current.innerText = value;
+
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  const scrollToTopHandler = () => {
+    scrollTo(0);
+  };
 
   const switchPlansInfo = (plan) => {
     if (plan !== "none" && document.getElementById(`planInfo-${plan}`).style.maxHeight > "0px") {
@@ -228,47 +286,6 @@ function App() {
         break;
     }
   }
-  
-  useEffect(() => {
-    switchPlansInfo("none");
-    
-    const target = document.getElementById('counter');
-    if (!target) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          animateCounter(totalAccountsRef, totalAccounts);
-          animateCounter(runningDaysRef, runningDays);
-          animateCounter(totalDepositRef, totalDeposit);
-          animateCounter(totalWithdrawlRef, totalWithdrawl);
-          observer.unobserve(target);
-        }
-      },
-      {
-        root: null,
-        threshold: 0.25
-      }
-    );
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, []);
-
-  function animateCounter(ref, target, duration = 3000) {
-    if (!ref.current) return;
-
-    const startTime = performance.now();
-
-    function update(currentTime) {
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      const value = Math.floor(progress * target);
-
-      ref.current.innerText = value;
-
-      if (progress < 1) requestAnimationFrame(update);
-    }
-
-    requestAnimationFrame(update);
-  }
 
   return (
     <>
@@ -286,7 +303,7 @@ function App() {
               <BounceButtonBanner text="Sign Up" startTextColor="white" endTextColor="white" componentBefore={<FaUser />} isKick={true} />
               {windowWidth >= 992 ? <div className="col-lg-6_"><img src={banner_img} alt="" className="banner_image" /></div> : null}
             </div>
-            <div onClick={() => window.scrollTo({ top: document.getElementById('team').offsetTop, behavior: 'smooth' })} className="w-full flex justify-center pt-3 align-center relative cursor-pointer"><img className="fa-chevron-down-img" src={fix_arrow} alt="" /><span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 ${windowWidth < 992 ? '-translate-y-3' : '-translate-y-4'}`}><FaChevronDown /></span></div>
+            <div onClick={() => scrollTo(document.getElementById('team').offsetTop)} className="w-full flex justify-center pt-3 align-center relative cursor-pointer"><img className="fa-chevron-down-img" src={fix_arrow} alt="" /><span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 ${windowWidth < 992 ? '-translate-y-3' : '-translate-y-4'}`}><FaChevronDown /></span></div>
           </div>
           <img src={banner_pic2} alt="" className="ban_pic2" />
           <img src={banner_pic1} alt="" className="ban_pic1" />
@@ -679,6 +696,40 @@ function App() {
           </div>
         </div>
       </section>
+      <section className="certifi_secction">
+        <div className="container_">
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="head_">
+                <h2>Company security principles</h2>
+                <p>All web services and data exchange take place over channels protected by the SSL protocol (https). Wallets are stored using PGP encryption. No one has direct access to client funds, and regular financial and security audits ensure that funds are always safe and fully accounted for.</p>
+                <p className="bold_text">All our personnel is trained in security issues and required to comply with the company's security policy.</p>
+                <div className={windowWidth < 992 ? "w-full flex justify-center mt-[-10px]" : ""}>
+                  <BounceButton text="Security" startTextColor="white" endTextColor="white" isKick={true} componentBefore={<i className="ri-shield-line"></i>} />
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6 cert_group">
+              <div className="cert_img">
+                <a href={cert_img} data-fancybox="gallery">
+                <img
+                  src={cert_img}
+                  alt="cert_img"
+                  className="certi_img img-fluid"
+                />
+              </a>
+              </div>
+              <div className="cert_info">
+                <h3> Private company<span> Incorporation</span> </h3>
+                <p><span>16407835</span> Company Number </p>
+                <p>Company Location: <span>139 Junction Road, London, England, N19 5PX</span> </p>
+                <a href="https://find-and-update.company-information.service.gov.uk/company/16407835" target="_blank" className="but1 hvr-rectangle-out"><BounceButton text="Check Company" startTextColor="black" endTextColor="white" isKick={false} componentAfter={<img src={cert_icon} alt="cert_icon" className="cert_icon img-fluid" />} /></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <ScrollUpBtn handler={scrollToTopHandler} />
     </>
   )
 }

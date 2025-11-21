@@ -1,11 +1,11 @@
 import './Header.css'
 import { Link } from 'react-router-dom';
-import useWindowWidth from '../hooks/useWindowWidth';
+import useWindowWidth from '../../hooks/useWindowWidth';
 import { useState } from 'react';
 import { FaUser } from "react-icons/fa";
 import { FaRightFromBracket } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
-import logo from '../assets/headd.png'
+import logo from '../../assets/headd.png'
 
 function BounceButton({text, startTextColor, endTextColor, componentBefore}) {
   const [hovered, setHovered] = useState(false);
