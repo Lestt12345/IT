@@ -66,6 +66,7 @@
     padding: 14px 22px 14px 12px;
     font-size: 17px;
     font-weight: 500;
+    overflow: hidden;
 }
 
 .ban_pic2 {
@@ -1155,7 +1156,7 @@ body p {
         text-align: center;
     }
     .video_section .banner_video {
-        height: 333px !important;
+        height: 100%;
         width: 100%;
     }
     .vector_icon {

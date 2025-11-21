@@ -94,7 +94,8 @@ function BounceButton({text, startTextColor, endTextColor, componentBefore, comp
 
 function App() {
   const windowWidth = useWindowWidth();
-  const { scrollTo } = useSmoothScroll(0.7, 0.1);
+  const scrollHook = windowWidth > 576 ? useSmoothScroll(0.85, 0.15) : null;
+  const scrollTo = scrollHook?.scrollTo;
   const [isLogined, setIsLogined] = useState(localStorage.getItem('isLogined') || false);
   const [selectedPlan, setSelectedPlan] = useState('STARTER');
   const [investmentAmount, setInvestmentAmount] = useState('');
@@ -109,6 +110,10 @@ function App() {
   
   useEffect(() => {
     switchPlansInfo("none");
+
+    document.addEventListener('resize', () => {
+      windowWidth > 576 ? enable() : disable();
+    });
 
     Fancybox.bind("[data-fancybox='gallery']", {});
     
@@ -130,7 +135,9 @@ function App() {
       }
     );
     observer.observe(target);
-    return () => observer.disconnect();
+    return () => observer.disconnect(), document.removeEventListener('resize', () => {
+      windowWidth > 576 ? enable() : disable();
+    });
   }, []);
 
   function animateCounter(ref, target, duration = 3000) {
@@ -151,7 +158,7 @@ function App() {
   }
 
   const scrollToTopHandler = () => {
-    scrollTo(0);
+    windowWidth > 576 ? scrollTo(0) : window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const switchPlansInfo = (plan) => {
@@ -303,7 +310,7 @@ function App() {
               <BounceButtonBanner text="Sign Up" startTextColor="white" endTextColor="white" componentBefore={<FaUser />} isKick={true} />
               {windowWidth >= 992 ? <div className="col-lg-6_"><img src={banner_img} alt="" className="banner_image" /></div> : null}
             </div>
-            <div onClick={() => scrollTo(document.getElementById('team').offsetTop)} className="w-full flex justify-center pt-3 align-center relative cursor-pointer"><img className="fa-chevron-down-img" src={fix_arrow} alt="" /><span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 ${windowWidth < 992 ? '-translate-y-3' : '-translate-y-4'}`}><FaChevronDown /></span></div>
+            <div onClick={() => windowWidth > 576 ? scrollTo(document.getElementById('team').offsetTop) : window.scrollTo({ top: document.getElementById('team').offsetTop, behavior: 'smooth' })} className="w-full flex justify-center pt-3 align-center relative cursor-pointer"><img className="fa-chevron-down-img" src={fix_arrow} alt="" /><span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 ${windowWidth < 992 ? '-translate-y-3' : '-translate-y-4'}`}><FaChevronDown /></span></div>
           </div>
           <img src={banner_pic2} alt="" className="ban_pic2" />
           <img src={banner_pic1} alt="" className="ban_pic1" />
