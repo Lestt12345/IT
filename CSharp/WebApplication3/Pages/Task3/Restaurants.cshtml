@@ -1,0 +1,30 @@
+﻿@page "/Restaurants"
+@model Pages.Task3.RestaurantsModel
+@{
+	ViewData["Title"] = "Restaurants";
+}
+
+<h1>Restaurants</h1>
+
+<form method="get">
+    <input type="text" name="searchString" value="@Model.CurrentFilter" placeholder="Search by name" class="border p-2 rounded" />
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Search</button>
+</form>
+
+@foreach (var restaurant in Model.Restaurants)
+{
+    <div class="p-4 my-4 bg-white rounded shadow">
+        <h2 class="text-xl font-bold">@restaurant.Name</h2>
+        <p>@restaurant.Address</p>
+        <h3 class="mt-2 font-semibold">Dishes:</h3>
+        <ul>
+            @foreach (var dish in restaurant.Dishes.OrderBy(d => d.Price))
+            {
+                <li>
+                    @dish.Title - @dish.Price.ToString("C")
+                    (@string.Join(", ", dish.DishCategories.Select(dc => dc.Category.Name)))
+                </li>
+            }
+        </ul>
+    </div>
+}

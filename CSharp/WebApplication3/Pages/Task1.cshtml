@@ -1,0 +1,62 @@
+﻿@page "/Task1"
+@model Pages.Task1
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1 class="text-3xl font-bold mb-4">Orders</h1>
+
+<form method="get" class="mb-6 flex gap-2">
+    <input type="text" name="searchString" value="@Model.CurrentFilter"
+           class="border-2 border-gray-300 p-2 rounded flex-1 focus:ring-2 focus:ring-blue-500"
+           placeholder="Search by customer..." />
+    <button type="submit"
+            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
+        Search
+    </button>
+</form>
+
+<table class="min-w-full border border-gray-300">
+    <thead>
+        <tr class="bg-gray-100">
+            <th class="border px-4 py-2 text-left">Order ID</th>
+            <th class="border px-4 py-2 text-left">Date</th>
+            <th class="border px-4 py-2 text-left">Customer</th>
+            <th class="border px-4 py-2 text-left">Products</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr class="hover:bg-gray-50">
+                <td class="border px-4 py-2">@order.Id</td>
+                <td class="border px-4 py-2">@order.OrderDate.ToShortDateString()</td>
+                <td class="border px-4 py-2">@order.CustomerName</td>
+                <td class="border px-4 py-2">
+                    @foreach (var op in order.OrderProducts)
+                    {
+                        <div class="mb-1">@op.Product.Title (@op.Quantity)</div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="mt-6 flex justify-between items-center">
+    @if (Model.CurrentPage > 1)
+    {
+        <a asp-page="/Task1" asp-route-pageNumber="@(Model.CurrentPage - 1)"
+           class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition duration-200">
+            Prev
+        </a>
+    }
+    <span class="font-medium">Page @Model.CurrentPage</span>
+    @if (Model.Orders.Count == 5)
+    {
+        <a asp-page="/Task1" asp-route-pageNumber="@(Model.CurrentPage + 1)"
+           class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition duration-200">
+            Next
+        </a>
+    }
+</div>

@@ -1,0 +1,37 @@
+﻿@page "/Dishes"
+@model Pages.Task3.DishesModel
+
+@{
+    ViewData["Title"] = "Dishes";
+}
+
+<h1>Dishes</h1>
+
+<form method="get">
+    <input type="text" name="category" value="@Model.CurrentCategory" placeholder="Filter by category" class="border p-2 rounded" />
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">Filter</button>
+</form>
+
+<table class="table-auto w-full mt-4 border-collapse border">
+    <thead>
+        <tr class="bg-gray-200">
+            <th class="border px-2 py-1">Title</th>
+            <th class="border px-2 py-1">Price</th>
+            <th class="border px-2 py-1">Restaurant</th>
+            <th class="border px-2 py-1">Categories</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dish in Model.Dishes)
+        {
+            <tr>
+                <td class="border px-2 py-1">@dish.Title</td>
+                <td class="border px-2 py-1">@dish.Price.ToString("C")</td>
+                <td class="border px-2 py-1">@dish.Restaurant.Name</td>
+                <td class="border px-2 py-1">
+                    @string.Join(", ", dish.DishCategories.Select(dc => dc.Category.Name))
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

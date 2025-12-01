@@ -1,0 +1,206 @@
+.support_bg {
+    padding: 50px 0px;
+}
+.support_bg .head p span {
+    background: linear-gradient(to right, #f6851b, #fea82e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 18px;
+    font-weight: 500;
+}
+.support_bg ul, .support_bg li {
+    list-style-type: none;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+.conatct_text li {
+    display: inline-block;
+    width: 49%;
+}
+.contact_item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text_color);
+}
+.contact_item h3 i {
+    color: #08b9b6;
+    margin-right: 13px;
+}
+.fa-solid, .fas {
+    font-weight: 900;
+}
+.fa-classic, .fa-regular, .fa-solid, .far, .fas {
+    font-family: "Font Awesome 6 Free";
+}
+.fa, .fa-brands, .fa-classic, .fa-regular, .fa-sharp-solid, .fa-solid, .fab, .far, .fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+}
+.contact_item h3 span {
+    display: block;
+    background: linear-gradient(to right, #f6851b, #fea82e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 500;
+    margin: 5px 0px 0px;
+}
+.fa-at:before {
+    content: "\40";
+}
+.fa-location-dot:before, .fa-map-marker-alt:before {
+    content: "\f3c5";
+}
+.faq_box {
+    background: url(../../assets/con_faq.png);
+    background-size: 100% 100%;
+    padding: 35px;
+    border-radius: 10px;
+    margin: 18px 0px 0px;
+}
+.faq_box h3 {
+    font-size: 18px;
+    font-weight: 500;
+    background: linear-gradient(to right, #f6851b, #fea82e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0px 0px 10px;
+}
+.faq_box p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #181818;
+}
+.faq_box .but4 {
+    display: block;
+    max-width: 130px;
+    width: 100%;
+    padding: 7px;
+    background: linear-gradient(to right, #00a6ad, #11d1c1);
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff !important;
+    text-align: center;
+    border-radius: 5px;
+    margin: 20px 0px 0px;
+}
+.support_bg .form1 h3 {
+    font-size: 25px;
+    font-weight: 500;
+    font-family: var(--Primary_font);
+    line-height: 33px;
+    color: #04091b;
+    text-transform: capitalize;
+}
+.support_bg .form1 p {
+    font-size: 14px;
+    font-weight: 300;
+    font-family: var(--secondary_font);
+    color: #181818;
+}
+.form_item {
+    position: relative;
+}
+.form_item {
+    margin: 15px 0px !important;
+}
+.support_bg .inpts {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0px 0px;
+    background: transparent;
+    border: 1px solid #ff8f3c61;
+    outline: none;
+    border-radius: 5px;
+    color: #dddd !important;
+    font-size: 14px;
+    font-weight: 400;
+}
+.form_item input {
+    width: 100%;
+    padding: 12px;
+    padding-left: 8px;
+    font-size: 16px;
+    border: 1px solid #11d0c0;
+    border-radius: 4px;
+    background-color: transparent;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+textarea {
+    resize: vertical;
+}
+.form_but {
+    margin: 20px 0px 0px;
+}
+.support_bg .sbmt {
+    max-width: 150px;
+    width: 100%;
+    margin: unset;
+    display: block;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(to right, #00a6ad, #11d1c1);
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: inset 0px 0px 0px 0px #fff;
+}
+.message_text {
+    color: #000000b3 !important;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: var(--secondary_font);
+    margin: 20px 0px 0px;
+    display: block;
+}
+
+.support_bg .form1 {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 30px 50px;
+    border-radius: 10px;
+    background: #fff;
+}
+
+/* --- ВСЕ @media ВНИЗУ --- */
+
+@media (max-width: 767px) {
+    .contact_item h3 {
+        margin: 20px 0px;
+        text-align: center;
+        font-size: 14px;
+    }
+}
+@media (max-width: 767px) {
+    .faq_box {
+        text-align: center;
+    }
+}
+@media (max-width: 767px) {
+    .faq_box .but4 {
+        margin: 20px auto 0px;
+    }
+}
+@media (max-width: 576px) {
+    .support_bg .form1 {
+        padding: 50px 20px;
+    }
+}
+@media (max-width: 991px) {
+    .support_bg .form1 {
+        margin: 40px 0px 0px;
+    }
+}
+@media (max-width: 576px) {
+    .form_item {
+        margin: 0px 0px;
+    }
+}

@@ -1,0 +1,25 @@
+﻿@page "/Participants/Details/{id:int}"
+@{
+	ViewData["Title"] = "Details";
+	Layout = "_Layout";
+}
+@model Pages.Task2.DetailsModel
+
+<h1>Participant Details</h1>
+
+<h3>@Model.Participant.FullName (@Model.Participant.Email)</h3>
+
+<h4>Registered Events</h4>
+@if (Model.Participant.EventParticipants.Any())
+{
+    <ul class="list-disc ml-6">
+        @foreach (var ep in Model.Participant.EventParticipants)
+        {
+            <li>@ep.Event.Title — @ep.Event.Date.ToShortDateString()</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No events registered.</p>
+}

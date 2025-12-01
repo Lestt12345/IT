@@ -1,0 +1,35 @@
+.banner_section1 {
+    background: url(../../assets/banner_bg1.jpg);
+    background-size: 100% 100%;
+    padding: 0px 0px 50px;
+}
+.font_ {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+.banner1 {
+    padding: 85px 0px;
+}
+
+.banner1 .head_ {
+    position: relative;
+    z-index: 1;
+}
+
+.banner1 .head_ .fade_text {
+    font-size: 125px;
+    top: -69px;
+}
+.banner1 h2 {
+    text-align: center;
+}
+@media (max-width: 576px) {
+    .banner1 .head_ .fade_text {
+        font-size: 79px;
+        top: -40px;
+    }
+}
+@media (max-width: 576px) {
+    .banner1 {
+        padding: 60px 0px;
+    }
+}

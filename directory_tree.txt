@@ -1,0 +1,126 @@
+Дерево директорий для: C:/IT/Projects/FinancialPyramid
+
+|-- .gitignore
+|-- .vercel
+    |-- project.json
+    |-- README.txt
+|-- dist
+    |-- assets
+        |-- banner_bg-iKywG3yL.jpg
+        |-- banner_bg1-sdb9oFoS.jpg
+        |-- banner_img-DciaWpMd.png
+        |-- banner_img1-CzLlHdZb.png
+        |-- banner_pic1-CCl4tEbR.png
+        |-- banner_pic2-CcLhKyg-.png
+        |-- Bitcoin-8GwmRxro.png
+        |-- cert_img-BsGjywei.png
+        |-- Dash-56hn8gti.png
+        |-- Dogecoin-C4lJk_Ye.png
+        |-- EPayCore-BMZ23S9L.png
+        |-- Etherium-CPw3UJ39.png
+        |-- index-BbMg2FrC.js
+        |-- index-C_1sW3oM.css
+        |-- Litecoin-D6RYhSrc.png
+        |-- logo-BCA54NfU.png
+        |-- logosm-BCgMqntm.png
+        |-- refer_video_img-DIm2wond.jpg
+        |-- ref_levels-DRfCTMV6.png
+        |-- ref_vector_img-cL651zka.png
+        |-- Ripple-BQy0lHIX.png
+        |-- secu_icon3-Cv5t-8Ei.png
+        |-- signup-fmq-1eXj.png
+        |-- stat_bg-BIEf4CKi.jpg
+        |-- Stellar-DKM3mkFZ.png
+        |-- Tether-CReU4EO1.png
+        |-- trans_vector_img-AyBKuF__.png
+        |-- Tron-B-V5uawJ.png
+        |-- vector_icon-BP3piauW.png
+        |-- video_bg-hd-q6J70.jpg
+    |-- index.html
+    |-- vercel.json
+|-- eslint.config.js
+|-- index.html
+|-- node_modules
+    ...
+|-- package-lock.json
+|-- package.json
+|-- postcss.config.js
+|-- README.md
+|-- src
+    |-- App.css
+    |-- App.jsx
+    |-- assets
+        |-- banner_bg.jpg
+        |-- banner_bg1.jpg
+        |-- banner_img.png
+        |-- banner_img1.png
+        |-- banner_pic1.png
+        |-- banner_pic2.png
+        |-- Bitcoin.png
+        |-- cert_icon.png
+        |-- cert_img.png
+        |-- Dash.png
+        |-- Dogecoin.png
+        |-- EPayCore.png
+        |-- Etherium.png
+        |-- fix_arrow.png
+        |-- headd.png
+        |-- head_img.png
+        |-- head_img1.png
+        |-- Litecoin.png
+        |-- logo.png
+        |-- logosm.png
+        |-- plan_icon.png
+        |-- plan_icon1.png
+        |-- plan_icon2.png
+        |-- refer_video_img.jpg
+        |-- ref_levels.png
+        |-- ref_vector_img.png
+        |-- Ripple.png
+        |-- secu_icon1.png
+        |-- secu_icon2.png
+        |-- secu_icon3.png
+        |-- signup.png
+        |-- stat_bg.jpg
+        |-- stat_img1.png
+        |-- stat_img2.png
+        |-- stat_img3.png
+        |-- stat_img4.png
+        |-- Stellar.png
+        |-- Tether.png
+        |-- trans_vector_img.png
+        |-- Tron.png
+        |-- vector_icon.png
+        |-- video_bg.jpg
+    |-- components
+        |-- Footer
+            |-- Footer.css
+            |-- Footer.jsx
+        |-- Header
+            |-- Header.css
+            |-- Header.jsx
+        |-- PaymentCarousel
+            |-- PaymentCarousel.jsx
+        |-- ScrollUpBtn
+            |-- ScrollUpBtn.css
+            |-- ScrollUpBtn.jsx
+    |-- hooks
+        |-- useSmoothScroll.js
+        |-- useWindowWidth.js
+    |-- index.css
+    |-- main.jsx
+    |-- pages
+        |-- ForgotPassword
+            |-- ForgotPassword.css
+            |-- ForgotPassword.jsx
+        |-- Joke.jsx
+        |-- Login
+            |-- Login.css
+            |-- Login.jsx
+        |-- SignUp
+            |-- SignUp.css
+            |-- SignUp.jsx
+    |-- styles
+        |-- scrollbar.css
+|-- tailwind.config.js
+|-- vite.config.js

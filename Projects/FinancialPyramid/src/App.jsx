@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 import useWindowWidth from './hooks/useWindowWidth'
-import { FaUser } from "react-icons/fa";
 import head_img from './assets/head_img.png'
 import head_img1 from './assets/head_img1.png'
-import banner_img from './assets/banner_img.png'
 import banner_pic1 from './assets/banner_pic1.png'
 import banner_pic2 from './assets/banner_pic2.png'
 import fix_arrow from './assets/fix_arrow.png'
@@ -16,8 +15,6 @@ import plan_icon1 from './assets/plan_icon1.png'
 import plan_icon2 from './assets/plan_icon2.png'
 import vector_icon from './assets/vector_icon.png'
 import refer_video_img from './assets/refer_video_img.jpg'
-import ref_levels from './assets/ref_levels.png'
-import ref_vector_img from './assets/ref_vector_img.png'
 import stat_img1 from './assets/stat_img1.png'
 import stat_img2 from './assets/stat_img2.png'
 import stat_img3 from './assets/stat_img3.png'
@@ -33,7 +30,22 @@ import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import ScrollUpBtn from './components/ScrollUpBtn/ScrollUpBtn'
 import useSmoothScroll from './hooks/useSmoothScroll'
-
+import Bitcoin from './assets/Bitcoin.png'
+import Dash from './assets/Dash.png'
+import Dogecoin from './assets/Dogecoin.png'
+import EPayCore from './assets/EPayCore.png'
+import Etherium from './assets/Etherium.png'
+import Litecoin from './assets/Litecoin.png'
+import Ripple from './assets/Ripple.png'
+import Stellar from './assets/Stellar.png'
+import Tether from './assets/Tether.png'
+import Tron from './assets/Tron.png'
+import trans_vector_img from './assets/trans_vector_img.png'
+import PaymentCarousel from './components/PaymentCarousel/PaymentCarousel'
+import instantValueImg from './assets/instantValue.png'
+import noLimitsImg from './assets/noLimits.jpg'
+import _30daysCreditingImg from './assets/30dayCrediting.jpg'
+import { FaCheck } from "react-icons/fa6";
 
 function BounceButtonBanner({text, startTextColor, endTextColor, componentBefore}) {
   const [hovered, setHovered] = useState(false);
@@ -92,11 +104,32 @@ function BounceButton({text, startTextColor, endTextColor, componentBefore, comp
   );
 }
 
+function PaymentIcon({ paymentMethod }) {
+  const iconMap = {
+    "Bitcoin": Bitcoin,
+    "Dash": Dash,
+    "Dogecoin": Dogecoin,
+    "EPayCore": EPayCore,
+    "Etherium": Etherium,
+    "Litecoin": Litecoin,
+    "Ripple": Ripple,
+    "Stellar": Stellar,
+    "Tether": Tether,
+    "Tron": Tron
+  };
+
+  const iconSrc = iconMap[paymentMethod];
+  return iconSrc ? (
+    <img src={iconSrc} className="pay_img img-fluid" alt={paymentMethod} />
+  ) : null;
+}
+
 function App() {
   const windowWidth = useWindowWidth();
-  const scrollHook = windowWidth > 576 ? useSmoothScroll(0.85, 0.15) : null;
-  const scrollTo = scrollHook?.scrollTo;
-  const [isLogined, setIsLogined] = useState(localStorage.getItem('isLogined') || false);
+  //const scrollHook = windowWidth > 576 ? useSmoothScroll(0.8, 0.2) : null;
+  //const scrollTo = scrollHook?.scrollTo;
+  const [ username, setUsername ] = useState(localStorage.getItem('Username') || '');
+  const [password, setPassword ] = useState(localStorage.getItem('Password') || '');
   const [selectedPlan, setSelectedPlan] = useState('STARTER');
   const [investmentAmount, setInvestmentAmount] = useState('');
   const [totalAccounts, setTotalAccounts] = useState(365011);
@@ -107,15 +140,79 @@ function App() {
   const runningDaysRef = useRef(null);
   const totalDepositRef = useRef(null);
   const totalWithdrawlRef = useRef(null);
+  const [lastestDeposit, setLastestDeposit] = useState([]);
+  const [lastestWithdrawal, setLastestWithdrawal] = useState([]);
+  const [isLastestDeposit, setIsLastestDeposit] = useState(true);
   
   useEffect(() => {
     switchPlansInfo("none");
 
-    document.addEventListener('resize', () => {
-      windowWidth > 576 ? enable() : disable();
-    });
-
     Fancybox.bind("[data-fancybox='gallery']", {});
+    
+    setLastestDeposit([
+      {
+        Name: "John Doe",
+        Amount: "10.1",
+        Date: "Nov-22-2025 06:15:13 AM",
+        Payment: "Bitcoin",
+      },
+      {
+        Name: "Jane Smith",
+        Amount: "15.78",
+        Date: "Oct-15-2025 10:30:15 PM",
+        Payment: "Etherium",
+      },
+      {
+        Name: "Alice Johnson",
+        Amount: "5.25",
+        Date: "Sep-01-2025 02:45:30 AM",
+        Payment: "Tether",
+      },
+      {
+        Name: "Bob Johnson",
+        Amount: "3.14",
+        Date: "Aug-15-2025 09:15:30 PM",
+        Payment: "Dogecoin",
+      },
+      {
+        Name: "Mike Johnson",
+        Amount: "19.99",
+        Date: "Jul-01-2025 05:30:15 PM",
+        Payment: "Stellar",
+      }
+    ]);
+    setLastestWithdrawal([
+      {
+        Name: "CryptoWolf",
+        Amount: "7.84",
+        Date: "Nov-22-2025 07:42:11 AM",
+        Payment: "Bitcoin",
+      },
+      {
+        Name: "LunaTrader",
+        Amount: "12.55",
+        Date: "Nov-21-2025 11:09:23 PM",
+        Payment: "Etherium",
+      },
+      {
+        Name: "ShadowMint",
+        Amount: "4.32",
+        Date: "Nov-21-2025 04:57:45 PM",
+        Payment: "Tether",
+      },
+      {
+        Name: "OceanBreeze",
+        Amount: "9.10",
+        Date: "Nov-20-2025 08:14:29 AM",
+        Payment: "Litecoin",
+      },
+      {
+        Name: "PixelNova",
+        Amount: "22.88",
+        Date: "Nov-19-2025 01:37:55 PM",
+        Payment: "Dogecoin",
+      }
+    ]);
     
     const target = document.getElementById('counter');
     if (!target) return;
@@ -158,7 +255,8 @@ function App() {
   }
 
   const scrollToTopHandler = () => {
-    windowWidth > 576 ? scrollTo(0) : window.scrollTo({ top: 0, behavior: 'smooth' });
+    //windowWidth > 576 ? scrollTo(0) : window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   };
 
   const switchPlansInfo = (plan) => {
@@ -301,41 +399,38 @@ function App() {
           <div className="contentWidth z-[2] relative overflow-hidden">
             <Header />
             <div className="banner-text mt-16">
-              <h5 className={`flex items-center ${windowWidth < 992 ? 'justify-center' : ''}`}><img src={head_img} alt="" /><span className="text-white text-sm ml-[-5px]">WELCOME TO BitBullMining</span></h5>
-              <h1 className="text-white font-bold text-[45px] leading-[1.2]">Powerful AI Mining Solutions Skyrocketing Earnings in</h1>
-              <p className="text-white text-sm mt-2 leading-[2]">BitBullMining, established in 2022, is dedicated to delivering world-class cloud mining solutions. The company is officially registered in the United Kingdom under registration With a strong emphasis on technological innovation, transparency, and reliability, we have achieved rapid global expansion.</p>
-              <p className="underline_">----------</p>
-              <button className="banner_link">[Sign Up] Start Mining Doge Coin Now</button>
-              <p className="h-[35px]"></p>
-              <BounceButtonBanner text="Sign Up" startTextColor="white" endTextColor="white" componentBefore={<FaUser />} isKick={true} />
-              {windowWidth >= 992 ? <div className="col-lg-6_"><img src={banner_img} alt="" className="banner_image" /></div> : null}
+              <h5 className={`flex items-center ${windowWidth < 992 ? 'justify-center' : ''}`}><img src={head_img} alt="" /><span className="text-white text-sm ml-[-5px] mb-[-2px]">WELCOME TO Groundfloor Holding</span></h5>
+              <h1 className="text-white font-bold text-[45px] leading-[1.2]">Passive Income Backed by Real Estate</h1>
+              <p className="text-white text-sm mt-2 leading-[2]">Alternative investing shouldn't be reserved for the wealthy. With GFL Holdings, anyone can invest in short-term real estate loans that deliver steady returns without buying property or managing tenants.</p>
+              <p className="text-white text-sm mt-2 leading-[2]">It’s a simple, hands-off way to grow your money outside the stock market.</p>
+              {/* {windowWidth >= 992 ? <div className="col-lg-6_"><img src={logosm} alt="" className="banner_image" /></div> : null} */}
             </div>
-            <div onClick={() => windowWidth > 576 ? scrollTo(document.getElementById('team').offsetTop) : window.scrollTo({ top: document.getElementById('team').offsetTop, behavior: 'smooth' })} className="w-full flex justify-center pt-3 align-center relative cursor-pointer"><img className="fa-chevron-down-img" src={fix_arrow} alt="" /><span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 ${windowWidth < 992 ? '-translate-y-3' : '-translate-y-4'}`}><FaChevronDown /></span></div>
+            <div onClick={() => /*windowWidth > 576 ? scrollTo(document.getElementById('team').offsetTop) : */window.scrollTo({ top: document.getElementById('team').offsetTop, behavior: 'smooth' })} className="w-full flex justify-center pt-3 align-center relative cursor-pointer"><img className="fa-chevron-down-img" src={fix_arrow} alt="" /><span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 ${windowWidth < 992 ? '-translate-y-3' : '-translate-y-4'}`}><FaChevronDown /></span></div>
           </div>
-          <img src={banner_pic2} alt="" className="ban_pic2" />
-          <img src={banner_pic1} alt="" className="ban_pic1" />
+          {/* <img src={banner_pic2} alt="" className="ban_pic2" />
+          <img src={banner_pic1} alt="" className="ban_pic1" /> */}
         </div>
       </div>
       <div id='team'></div>
       <section className="video_section" style={{fontFamily: "degular-variable, sans-serif"}}>
-        <div className="container_ relative">
+        <div className="container_ relative flex flex-col justify-center items-center">
 
-          <div className="line_part">
-            <svg width="5px" height="500px" className="svg_line">
-              <path d="M3,2 L3,398" className="dotted-line"></path>
+          {/* <div className="line_part">
+            <svg width="5px" height="600px" className="svg_line">
+              <path d="M3,2 L3,420" className="dotted-line"></path>
             </svg>
 
             <svg width="100px" height="100px" className="svg_line_hori">
               <path d="M0,100 L200,100" className="dotted-line"></path>
             </svg>
-          </div>
+          </div> */}
 
-          <div className="live_widget_part">
+          <div className="live_widget_part w-full">
             <div className="tradingview-widget-container w-full h-[106px]">
 
               <iframe
-                htmlScrolling="no"
-                allowTransparency="true"
+                htmlscrolling="no"
+                allowtransparency="true"
                 frameBorder="0"
                 title="ticker tape TradingView widget"
                 lang="en"
@@ -357,57 +452,77 @@ function App() {
             </div>
           </div>
 
-          <div className="content_section">
-            <div className="head_">
-              <h3 className="font-semibold">The Team of Traders Work For You</h3>
+          <div className={`w-full flex justify-between items-center ${windowWidth < 992 ? 'flex-col' : 'gap-10'}`}>
+            <div className="content_section">
+              <div className="head_">
+                <h3 className="font-semibold">How Real Estate Debt Investing Works</h3>
+              </div>
+
+              <h2 className="fade_text">what Who</h2>
+
+              <div className="text_part">
+                <p style={{fontFamily: "degular-variable, sans-serif"}}>
+                  GFL Holdings lets you start investing with as little as $10.
+                  <br /><br />
+                  You can choose from a variety of real estate-based investment products or opt for an automated, diversified portfolio. As borrowers repay their loans, you earn interest. When projects are completed, you can withdraw your funds or reinvest in new opportunities.
+                </p>
+              </div>
             </div>
 
-            <h2 className="fade_text">what Who</h2>
-
-            <div className="text_part">
-              <p style={{fontFamily: "degular-variable, sans-serif"}}>
-                Our "Traders at Your Service" philosophy means you're working with a dedicated team to help you achieve your
-                trading, investing, or financial goals. Our team of dedicated traders is dedicated to enhancing your wealth
-                through smart strategies and careful planning. We work tirelessly to ensure your financial success, allowing you
-                to focus on achieving your dreams.
-              </p>
+            <div className="banner_video pt-6">
+              <iframe
+                width="1060"
+                height="360"
+                src="https://www.youtube.com/embed/rR5VAqF-s4c?si=BEVC9QLaOCzjDqsl"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
 
-          <div className="banner_video">
-            <iframe
-              width="1060"
-              height="360"
-              src="https://www.youtube.com/embed/rR5VAqF-s4c?si=BEVC9QLaOCzjDqsl"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
-          </div>
-
-          <img
+          {/* <img
             src={vector_icon}
             alt="vector_icon"
             className="vector_icon max-w-full h-auto"
-          />
+          /> */}
 
         </div>
       </section>
+      <div className="w-full trans_bg">
+        <ol className={`container_ list-none p-0 w-full flex justify-between flex-wrap gap-5 text-3xl`}>
+          <li className={`p-3 ${windowWidth < 768 ? 'mx-5 w-full' : 'w-[300px]'} secu_item_bg rounded-md relative flex flex-col justify-center h-[100px]`}>
+            <p className='text-xl'><b>Fund Renovations</b></p>
+            <p className='text-lg'>Invest in real estate products with low minimums.</p>
+            <span className='absolute top-1 right-1 text-[14px] text-white bg-[#63a6ff] h-[25px] w-[25px] flex items-center justify-center rounded-lg font-bold'>#1</span>
+          </li>
+          <li className={`p-3 ${windowWidth < 768 ? 'mx-5 w-full' : 'w-[300px]'} secu_item_bg rounded-md relative flex flex-col justify-center h-[100px]`}>
+            <p className='text-xl'><b>Earn Interest</b></p>
+            <p className='text-lg'>Grow your investments with interest.</p>
+            <span className='absolute top-1 right-1 text-[14px] text-white bg-[#63a6ff] h-[25px] w-[25px] flex items-center justify-center rounded-lg font-bold'>#2</span>
+          </li>
+          <li className={`p-3 ${windowWidth < 768 ? 'mx-5 w-full' : 'w-[300px]'} secu_item_bg rounded-md relative flex flex-col justify-center h-[100px]`}>
+            <p className='text-xl'><b>Get Repaid</b></p>
+            <p className='text-lg'>Repaid loans return money to you.</p>
+            <span className='absolute top-1 right-1 text-[14px] text-white bg-[#63a6ff] h-[25px] w-[25px] flex items-center justify-center rounded-lg font-bold'>#3</span>
+          </li>
+        </ol>
+      </div>
       <div className='w-full flex justify-center items-center bg-[#F8FAFE]'>
         <div className="contentWidth pt-[50px] pb-[20px]">
           <div className={`${windowWidth < 768 ? 'px-7' : ''}`}>
             <div className='heading'>
               <div className='head'>
-                <h2 className='leading-[1.2]'>Our Trading Packages</h2>
+                <h2 className='leading-[1.2]'>Grow Your Portfolio with GFL Holdings</h2>
                 <h5 className={`flex items-center`}><img src={head_img1} alt="" /><span className="text-black text-[16px] mt-[1px]">PRICING PLAN</span></h5>
               </div>
               <div className="head">
-                {isLogined ? null : (
+                {username.length > 0 && password.length > 0 ? null : (
                     <>
-                      <p>You can sit back and relax while BTCSmartMine AI does the work to mine Dogecoin for you</p>
-                      <BounceButton text="Create Account" startTextColor="white" endTextColor="white" isKick={true} />
+                      <p>Real estate investing used to be reserved for big banks and the wealthy. We’ve opened the door with four ways to grow your money:</p>
+                      <Link to={username.length > 0 && password.length > 0 ? "/signup" : "/signup"}><BounceButton text={username.length > 0 && password.length > 0 ? "Account" : "Create Account"} startTextColor="white" endTextColor="white" isKick={true} /></Link>
                     </>
                 )}
               </div>
@@ -415,7 +530,7 @@ function App() {
             <div className="flex flex-col justify-center w-full">
               <div className="accordion-item w-full">
                 <h2 className="accordion-header cursor-pointer w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
-                  <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("STARTER")}>
+                  <div className="accordion-button collapsed w-full">
                     <div className="plan_item">
                       <div className="plan_right">
                         <img src={plan_icon} alt="plan_icon" className="plan_icon img-fluid" />
@@ -425,7 +540,7 @@ function App() {
                       <div className="plan_left">
                         <i className="ri-money-dollar-circle-line"></i>
                         <h3>minimum-Deopsit <span>$ 10-699</span> </h3>
-                        <BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} />
+                        <div onClick={() => switchPlansInfo("STARTER")}><BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} /></div>
                       </div>
                     </div>
                   </div>
@@ -449,7 +564,7 @@ function App() {
               </div>
               <div className="accordion-item w-full">
                 <h2 className="accordion-header cursor-pointer w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
-                  <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("PREMIUM")}>
+                  <div className="accordion-button collapsed w-full">
                     <div className="plan_item">
                       <div className="plan_right">
                         <img src={plan_icon} alt="plan_icon" className="plan_icon img-fluid" />
@@ -459,7 +574,7 @@ function App() {
                       <div className="plan_left">
                         <i className="ri-money-dollar-circle-line"></i>
                         <h3>minimum-Deopsit <span>$ 700-1999</span> </h3>
-                        <BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} />
+                        <div onClick={() => switchPlansInfo("PREMIUM")}><BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} /></div>
                       </div>
                     </div>
                   </div>
@@ -483,17 +598,17 @@ function App() {
               </div>
               <div className="accordion-item w-full">
                 <h2 className="accordion-header cursor-pointer w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
-                  <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("EXCLUSIVE")}>
+                  <div className="accordion-button collapsed w-full">
                     <div className="plan_item">
                       <div className="plan_right">
-                        <img src={plan_icon} alt="plan_icon" className="plan_icon img-fluid" />
+                        <img src={plan_icon} className="plan_icon img-fluid" />
                         <h4>EXCLUSIVE</h4>
                         <h2><b>300%</b> <span> daily for 10 days </span></h2>
                       </div>
                       <div className="plan_left">
                         <i className="ri-money-dollar-circle-line"></i>
                         <h3>minimum-Deopsit <span>$ 2000-4999</span> </h3>
-                        <BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} />
+                        <div onClick={() => switchPlansInfo("EXCLUSIVE")}><BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} /></div>
                       </div>
                     </div>
                   </div>
@@ -517,7 +632,7 @@ function App() {
               </div>
               <div className="accordion-item w-full">
                 <h2 className="accordion-header cursor-pointer w-full bg-[#F4FAFC] border-[#95DFE1] border-[1px] rounded-md p-3">
-                  <div className="accordion-button collapsed w-full" onClick={() => switchPlansInfo("VIP")}>
+                  <div className="accordion-button collapsed w-full">
                     <div className="plan_item">
                       <div className="plan_right">
                         <img src={plan_icon} alt="plan_icon" className="plan_icon img-fluid" />
@@ -527,7 +642,7 @@ function App() {
                       <div className="plan_left">
                         <i className="ri-money-dollar-circle-line"></i>
                         <h3>minimum-Deopsit <span>$ 5000-100000</span> </h3>
-                        <BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} />
+                        <div onClick={() => switchPlansInfo("VIP")}><BounceButton text="Details" startTextColor="black" endTextColor="white" isKick={false} /></div>
                       </div>
                     </div>
                   </div>
@@ -581,63 +696,104 @@ function App() {
           </div>
         </div>
       </div>
-      <section className="referal_section">
-        <div className={`container_ flex justify-between ${windowWidth < 992 ? "flex-col" : "flex-row"}`}>
-            <div className="col-lg-6">
-                <div className="head_">
-                    <h2>Our offer for<span> investors:</span></h2>
-                </div>
-                <div className="referal_content_group">
-                    <div className="content">
-                        <p className="high_text">Our mines are located in North America, South Asia, Canada, and Australia. The following is an video introduction to our mine farm.</p>
-                        <p>We have developed mining contracts suitable for different groups of people. From now, you don’t have to buy expensive mining equipment and pay electricity bills, and don’t need professional knowledge of cryptocurrency mining.</p>
-                    </div>
-                    <div className="content flex flex-col justify-between">
-                        <p>After checked our mining contract, you can decide what mining contract you are interested in for purchase and so as to easily start earning.</p>
-                        <div className={`${windowWidth <= 576 ? 'w-full flex justify-center mt-5' : 'w-auto'}`}><BounceButton text="Purchase Plan" startTextColor="white" endTextColor="white" isKick={true} /></div>
-                    </div>
-                </div>
-                <div className="referal_video">
-                    <img src={refer_video_img} alt="refer_video_img" className="refer_video_img img-fluid" />
-                    <a href="#" className="hvr-bounce-out">  <i className="ri-play-fill"></i>  </a>
-                </div>
+      <section className="referal_section bg-[#F4F4F4]">
+        <div className={`container_ flex justify-between ${windowWidth < 992 ? "flex-col gap-10" : "flex-row"}`}>
+            <div className="col-lg-6 flex flex-col justify-center" style={{ minHeight: 'fit-content' }}>
+              <h2 className="text-3xl font-bold mb-6 text-gray-800">High-Yield Real Estate Investing</h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Discover a smarter, more reliable way to grow your wealth through short-term, high-yield real-estate loans backed by real properties. Start with as little as $10 and earn passive income without the guesswork.
+              </p>
+              
+              <h3 className="text-2xl font-semibold mb-4 text-gray-800">Why Investors Choose Us</h3>
+              <ul className="space-y-3 mb-8 pl-3">
+                <li className="flex items-center">
+                  <span className="text-[#6A5CA4] mr-2 text-2xl"><FaCheck /></span>
+                  <span>Earn weekly payouts as loans are repaid</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-[#6A5CA4] mr-2 text-2xl"><FaCheck /></span>
+                  <span>We handle the investing — you enjoy the returns</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-[#6A5CA4] mr-2 text-2xl"><FaCheck /></span>
+                  <span>Build long-term wealth passively: set it and forget it</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-[#6A5CA4] mr-2 text-2xl"><FaCheck /></span>
+                  <span>Proven positive returns every quarter for 10+ years</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-[#6A5CA4] mr-2 text-2xl"><FaCheck /></span>
+                  <span>Trusted by over 250,000 investors</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-[#6A5CA4] mr-2 text-2xl"><FaCheck /></span>
+                  <span>More than $2.2 billion invested through our platform</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="text-[#6A5CA4] mr-2 text-2xl"><FaCheck /></span>
+                  <span>Recognized by leading financial publications</span>
+                </li>
+              </ul>
+
+              <div className="bg-[#444444] p-6 rounded-lg">
+                <h3 className="text-xl font-semibold mb-3 text-white">Proven Trust & Results</h3>
+                <p className="text-white">
+                  We've delivered strong, consistent performance year after year — and more people discover the results every day.
+                </p>
+              </div>
+
+              <div className="referal_video">
+                  <img src={refer_video_img} alt="refer_video_img" className="refer_video_img img-fluid" />
+                  <a href="#" className="hvr-bounce-out">  <i className="ri-play-fill"></i>  </a>
+              </div>
             </div>
-            <div className="col-lg-6 ref_part" style={{ position: 'relative' }}>
-              <div className="head_">
-                  <h2 className="fade_text">Referrals</h2>
-                  <h2>Our Trading Packages Pricing Plan</h2>
-              </div>
-              <div className="ref_levels">
-                    <img src={ref_levels} className="ref_level" />
-                    <ul>
-                        <li>
-                            <h3>Level1</h3>
-                            <h2>6%</h2>
-                        </li>
-                        <li></li>
-                        <li>
-                            <h3>Level2</h3>
-                            <h2>2%</h2>
-                        </li>
-                        <li></li>
-                        <li>
-                            <h3>Level3</h3>
-                            <h2>1%</h2>
-                        </li>
-                    </ul>
-              </div>
-              <div className="content">
-                <p className="mb-3">We values everyone who has joined our team and is our representative, your trust and decissions are very important to us.</p>
-            
-                <p>Teamwork generates millions of dollars, which many times increases profits and bonuses under our 3-level referral program.</p>
-              </div>
-                <div className="top_but">
-                    <BounceButton text="Partners" startTextColor="black" endTextColor="white" isKick={false} />
+            <div className="col-lg-6" id="instantValueCol">
+              <div className="flex">
+                <div className='w-1/2 exp-item'>
+                  <h2>1</h2>
+                  <h3>Instant Value</h3>
+                  <p>Your friend gets a 100% boost on their first real estate loan investment. You get $50 to grow your portfolio. Both win immediately.</p>
                 </div>
-                <img src={ref_vector_img} alt="ref_vector_img" className="ref_vector_img img-fluid" />
+                <div className='w-1/2'>
+                  <img className='h-full object-cover' src={instantValueImg} alt="" />
+                </div>
+              </div>
+              <div className="flex">
+                <div className='w-1/2'>
+                  <img className='h-full object-cover' src={noLimitsImg} alt="" />
+                </div>
+                <div className='w-1/2'>
+                  <div className='w-full h-1/2 exp-item'>
+                    <h2>2</h2>
+                    <h3>No Limits</h3>
+                    <p>Refer as many friends as you want. There's no cap on how much you can earn or how many people you can introduce to real estate loan investing.</p>
+                  </div>
+                  <div className='w-full h-1/2 exp-item'>
+                    <h2>3</h2>
+                    <h3>Track Everything</h3>
+                    <p>See your referrals, pending rewards, and earnings all in one dashboard. Total transparency from invitation to payout.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex">
+                <div className='w-1/2 exp-item'>
+                  <h2>4</h2>
+                  <h3>30-Day Crediting</h3>
+                  <p>Both rewards are automatically credited within 30 days after your friend's qualifying investment. No forms to fill out. No hoops to jump through.</p>
+                </div>
+                <div className='w-1/2'>
+                  <img className='h-full object-cover' src={_30daysCreditingImg} alt="" />
+                </div>
+              </div>
             </div>
         </div>
       </section>
+      <div className="w-full bg-[#f6f6f6]">
+        <div className='container_ flex justify-center items-center'>
+          <h1 className='text-3xl font-bold p-6 text-gray-800'>A Real Estate Portfolio Built for Stability</h1>
+        </div>
+      </div>
       <section className="stat_section">
         <div className="container_" style={{ position: 'relative' }}>
             <div className="head_">
@@ -688,17 +844,17 @@ function App() {
             <div className="secu_item">
               <img src={secu_icon1} alt="secu_icon1" className="secu_icon1 img-fluid" /> 
               <h3>Confidential data</h3>
-              <p>BITBULL PRO stores your personal data and does not transfer it to third parties. An exception may be the cases where an official request was received from law enforcement agencies under the current legislation. You always have the right to request the deletion of your account with your personal data.</p>
+              <p><b>GFL Holding</b> stores your personal data and does not transfer it to third parties. An exception may be the cases where an official request was received from law enforcement agencies under the current legislation. You always have the right to request the deletion of your account with your personal data.</p>
             </div>
             <div className="secu_item">
               <img src={secu_icon2} alt="secu_icon2" className="secu_icon1 img-fluid" /> 
               <h3>Non-disclosure agreement</h3>
-              <p>Using the BITBULLPRO.NET website, you agree to non-disclosure of all protected and confidential data, compliance with the company's copyright on the posted materials and content posted on the website.</p>
+              <p>Using the <b>GFLHolding.com</b> website, you agree to non-disclosure of all protected and confidential data, compliance with the company's copyright on the posted materials and content posted on the website.</p>
             </div>
             <div className="secu_item">
               <img src={secu_icon3} alt="secu_icon3" className="secu_icon1 img-fluid" /> 
               <h3>Electronic consent</h3>
-              <p>After registering on the BITBULLPRO.NET website, you agree to our Terms and Conditions. If you are not satisfied with the Terms and Conditions of BITBULL PRO, stop using our services and finish working with the website.</p>
+              <p>After registering on the <b>GFLHolding.com</b> website, you agree to our Terms and Conditions. If you are not satisfied with the Terms and Conditions of <b>GFL Holding</b>, stop using our services and finish working with the website.</p>
             </div>
           </div>
         </div>
@@ -736,6 +892,79 @@ function App() {
           </div>
         </div>
       </section>
+      <section className="trans_bg">
+        <div className="container_">
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="tab-content">
+                <div className="tab-pane fade active show">
+                  <div className="table_group overflow-x-hidden">
+                    <h2>{isLastestDeposit ? "Lastest Deposit" : "Lastest Withdrawal"}</h2>
+                    <ul className="tab_body flex justify-between items-center min-w-[290px]">
+                      <li><h3>Name</h3></li>
+                      <li><h3>Amount</h3></li>
+                      <li><h3>Date &amp; Time</h3></li>
+                      <li><h3>Payment</h3></li>
+                    </ul>
+                    {isLastestDeposit
+                      ? lastestDeposit.map((item, index) => (
+                          <ul key={index} className="tab_body flex justify-between items-center min-w-[320px]">
+                            <li><h5 className="text-ellipsis overflow-hidden whitespace-nowrap min-w-[73px]">{item.Name}</h5></li>
+                            <li><h5>${(Number(item.Amount) || 0).toFixed(2)}</h5></li>
+                            <li className="min-w-[100px]"><h5>{item.Date}</h5></li>
+                            <li><h5 className="flex justify-center"><PaymentIcon paymentMethod={item.Payment} /></h5></li>
+                          </ul>
+                        ))
+                      : lastestWithdrawal.map((item, index) => (
+                          <ul key={index} className="tab_body flex justify-between items-center min-w-[320px]">
+                            <li><h5 className="text-ellipsis overflow-hidden whitespace-nowrap min-w-[73px]">{item.Name}</h5></li>
+                            <li><h5>${(Number(item.Amount) || 0).toFixed(2)}</h5></li>
+                            <li className="min-w-[100px]"><h5>{item.Date}</h5></li>
+                            <li><h5 className="flex justify-center"><PaymentIcon paymentMethod={item.Payment} /></h5></li>
+                          </ul>
+                        ))
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <div className="head_" style={{ position: "relative", zIndex: 1 }}>
+                {/* <img src={trans_vector_img} className="trans_vector_img img-fluid" alt="trans_vector_img" /> */}
+                <h2 className="fade_text pt-10">Transaction</h2>
+              </div>
+              <div className="trans_head">
+                <h2>Latest Transaction</h2>
+                <p>
+                  Stay updated with the latest transactions processed in real-time.
+                  Our team ensures every trade is executed securely and efficiently for your benefit.
+                </p>
+              </div>
+              <nav>
+                <div className="nav nav-tabs">
+                  <button onClick={() => setIsLastestDeposit(true)} className={`nav-link ${isLastestDeposit ? "activeNavLink" : ""}`}>LASTEST DEPOSIT</button>
+                  <button onClick={() => setIsLastestDeposit(false)} className={`nav-link ${isLastestDeposit ? "" : "activeNavLink"}`}>LASTEST WITHDRAWAL</button>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="pay_section">
+        <div className="container_">
+          <div className="payments">
+            <div className="head_">
+              <h2 className='whitespace-nowrap'>
+                We <span style={{ display: "inline" }}>Accepts</span>
+              </h2>
+            </div>
+
+            <div className="payment_group"><PaymentCarousel /></div>
+          </div>
+        </div>
+      </section>
+      <Footer />
+
       <ScrollUpBtn handler={scrollToTopHandler} />
     </>
   )

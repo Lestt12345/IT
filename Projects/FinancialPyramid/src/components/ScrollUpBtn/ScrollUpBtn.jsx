@@ -30,7 +30,7 @@ export default function ScrollUpBtn( {handler} ) {
   }, []);
 
   return (
-    <div className="progress-wrap active-progress" onClick={handler} style={{ display: window.scrollY > 734 ? 'block' : 'none' }}>
+    <div className="progress-wrap active-progress" onClick={handler} style={{ display: window.scrollY > 493 ? 'block' : 'none' }}>
       <svg
         className="progress-circle svg-content"
         width="100%"

@@ -1,0 +1,111 @@
+.foot_text {
+    text-align: center;
+    line-height: 30px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.footer_group {
+    margin: 40px 0px 0px;
+    position: relative;
+}
+
+.foot_item h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #1f1f1f;
+    padding: 0px 0px 15px;
+    background: #fff;
+    width: fit-content;
+    padding: 0px 20px 15px;
+}
+
+.foot_item a {
+    font-size: 14px;
+    font-weight: 400;
+    color: #181818;
+    line-height: 25px;
+    display: block;
+    margin: 0px 22px;
+}
+
+.copy_text {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text_color);
+    margin: 35px 0px 20px;
+}
+
+.foot_logo {
+    width: 40px;
+}
+
+.footer_group::before {
+    content: "";
+    position: absolute;
+    border-bottom: 1px dashed var(--text_color);
+    width: 100%;
+    top: 11px;
+    z-index: -1;
+}
+
+.footer_section {
+    padding: 50px 0px 0px;
+}
+
+@media (max-width: 576px) {
+    .foot_text {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 22px;
+        margin: 15px 0px;
+    }
+    .footer_group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .foot_item {
+        margin: 0px 0px 30px;
+    }
+    .foot_item h3 {
+        padding: 0px 3px 5px;
+        text-align: center;
+        width: 100%;
+    }
+    .foot_item a {
+        font-size: 14px;
+        margin: 0px 0px;
+        text-align: center;
+    }
+    .copy_text {
+        margin: 13px 0px 20px;
+    }
+    .footer_section {
+        padding: 0px 0px 35px;
+        background-size: cover;
+    }
+}
+
+@media (max-width: 991px) {
+    .foot_logo {
+        text-align: center;
+    }
+    .row:first-child {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 700px) {
+    .footer_group::before {
+        display: none;
+    }
+}
+
+@keyframes fill-bounce-footer {
+  0%   { transform: scaleX(0); }
+  60%  { transform: scaleX(1); }
+  85%  { transform: scaleX(0.90); }
+  90%  { transform: scaleX(0.95); }
+  100% { transform: scaleX(1.1); }
+}

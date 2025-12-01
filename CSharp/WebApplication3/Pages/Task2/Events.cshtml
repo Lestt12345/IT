@@ -1,0 +1,41 @@
+﻿@page "/Events"
+@model Pages.Task2.EventsModel
+@{
+	ViewData["Title"] = "Events";
+
+}
+
+<h1>Events</h1>
+
+<form method="get" class="mb-4">
+    <input type="text" name="searchString" value="@Model.CurrentFilter" placeholder="Search by title or location"
+           class="border-2 border-gray-300 rounded py-1 px-2" />
+    <button type="submit" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-700">Search</button>
+</form>
+
+<table class="min-w-full bg-white shadow rounded">
+    <thead>
+        <tr>
+            <th class="border px-4 py-2">Title</th>
+            <th class="border px-4 py-2">Date</th>
+            <th class="border px-4 py-2">Location</th>
+            <th class="border px-4 py-2">Participants</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var e in Model.Events)
+    {
+        <tr>
+            <td class="border px-4 py-2">@e.Title</td>
+            <td class="border px-4 py-2">@e.Date.ToShortDateString()</td>
+            <td class="border px-4 py-2">@e.Location</td>
+            <td class="border px-4 py-2">
+                @foreach (var ep in e.EventParticipants)
+                {
+                        <div><a href="/Participants/Details/@ep.Participant.Id">@ep.Participant.FullName</a></div>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

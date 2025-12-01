@@ -1,11 +1,12 @@
 import './Header.css'
 import { Link } from 'react-router-dom';
 import useWindowWidth from '../../hooks/useWindowWidth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaUser } from "react-icons/fa";
 import { FaRightFromBracket } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
-import logo from '../../assets/headd.png'
+import logo from '../../assets/logo.png'
+import {useLocation} from 'react-router-dom'
 
 function BounceButton({text, startTextColor, endTextColor, componentBefore}) {
   const [hovered, setHovered] = useState(false);
@@ -45,7 +46,7 @@ function BounceButtonNav({text}) {
       onMouseLeave={() => setHovered(false)}
     >
       <span
-        className={`relative transition-colors duration-200 ease-in-out gap-2 flex items-center text-white ${isMobile ? 'py-[8px] text-sm' : 'py-[8px] px-[13px]'}`}
+        className={`relative transition-colors duration-200 ease-in-out gap-2 flex items-center ${useLocation().pathname === '/' ? 'text-white' : ''} ${isMobile ? 'py-[8px] text-sm' : 'py-[8px] px-[13px]'}`}
       >
         <span className="gap-1 flex items-center relative z-10">{text}</span>
         <span
@@ -62,8 +63,14 @@ function BounceButtonNav({text}) {
 
 function Header() {
     const windowWidth = useWindowWidth();
-    const [isLogined, setIsLogined] = useState(localStorage.getItem('isLogined') || false);
+    const [ username, setUsername ] = useState(localStorage.getItem('Username') || '');
+    const [password, setPassword ] = useState(localStorage.getItem('Password') || '');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const logOutHandler = () => {
+        localStorage.removeItem('Username');
+        localStorage.removeItem('Password');
+    }
 
     return (
         <header className="pt-[22px]">
@@ -71,23 +78,23 @@ function Header() {
             <div className="w-full flex items-start justify-between p-3">
                 <Link to="/"><img src={logo} alt="logo" style={{width: '150px'}} /></Link>
                 <nav className="flex items-center">
-                    <Link to="#"><BounceButtonNav text="Home" /></Link>
-                    <Link to="#"><BounceButtonNav text="About" /></Link>
-                    <Link to="#"><BounceButtonNav text="Bonus" /></Link>
-                    <Link to="#"><BounceButtonNav text="Faq" /></Link>
+                    <Link to="/"><BounceButtonNav text="Home" /></Link>
+                    <Link to="#"><BounceButtonNav text="About Us" /></Link>
+                    <Link to="#"><BounceButtonNav text="Bounty" /></Link>
                     <Link to="#"><BounceButtonNav text="How to Start" /></Link>
-                    <Link to="#"><BounceButtonNav text="Terms" /></Link>
-                    <Link to="#"><BounceButtonNav text="Contact" /></Link>
-                    {isLogined ? (
-                        <div className="flex items-center bg-[#24A3FF] rounded-lg px-[14px] py-[8px] gap-3">
+                    <Link to="#"><BounceButtonNav text="Faq" /></Link>
+                    <Link to="/terms"><BounceButtonNav text="Terms" /></Link>
+                    <Link to="/contacts"><BounceButtonNav text="Contacts" /></Link>
+                    {username.length > 0 && password.length > 0 ? (
+                        <div className="flex items-center bg-[#24A3FF] rounded-lg px-[14px] py-[8px] gap-3 ml-2">
                             <Link to="#"><BounceButton text="Account" startTextColor="black" endTextColor="white" componentBefore={<FaUser />} /></Link>
                             <Link className="text-white gap-2 flex items-center hover:text-black" to="#"><FaRightFromBracket /> Log out</Link>
                             
                         </div>
                     ) : (
-                        <div className="flex items-center bg-[#24A3FF] rounded-lg px-[14px] py-[8px] gap-3">
-                            <Link to="#"><BounceButton text="Sign up" startTextColor="black" endTextColor="white" componentBefore={<FaUser />} /></Link>
-                            <Link className="text-white gap-1 flex items-center hover:text-black" to="#"><FaRightFromBracket /> Log in</Link>
+                        <div className="flex items-center bg-[#24A3FF] rounded-lg px-[14px] py-[8px] gap-3 ml-2">
+                            <Link to="/signup"><BounceButton text="Sign up" startTextColor="black" endTextColor="white" componentBefore={<FaUser />} /></Link>
+                            <Link className="text-white gap-1 flex items-center hover:text-black" to="/login"><FaRightFromBracket /> Log in</Link>
                             
                         </div>
                     )}
@@ -103,22 +110,22 @@ function Header() {
                     className={`overflow-hidden transition-[max-height,opacity,transform] duration-500 ease-out transform origin-top ${isMobileMenuOpen ? 'max-h-[500px] opacity-100 scale-y-100' : 'max-h-0 opacity-0 scale-y-0'}`}
                     >
                     <nav className="flex flex-col items-center w-full">
-                        <Link to="#"><BounceButtonNav text="Home" /></Link>
-                        <Link to="#"><BounceButtonNav text="About" /></Link>
-                        <Link to="#"><BounceButtonNav text="Bonus" /></Link>
-                        <Link to="#"><BounceButtonNav text="Faq" /></Link>
+                        <Link to="/"><BounceButtonNav text="Home" /></Link>
+                        <Link to="#"><BounceButtonNav text="About Us" /></Link>
+                        <Link to="#"><BounceButtonNav text="Bounty" /></Link>
                         <Link to="#"><BounceButtonNav text="How to Start" /></Link>
-                        <Link to="#"><BounceButtonNav text="Terms" /></Link>
-                        <Link to="#"><BounceButtonNav text="Contact" /></Link>
+                        <Link to="#"><BounceButtonNav text="Faq" /></Link>
+                        <Link to="/terms"><BounceButtonNav text="Terms" /></Link>
+                        <Link to="/contacts"><BounceButtonNav text="Contacts" /></Link>
 
-                        {isLogined ? (
+                        {username.length > 0 && password.length > 0 ? (
                         <div className="flex w-full justify-between items-center bg-[#24A3FF] rounded-lg px-[14px] py-[8px] gap-3 mt-2">
-                            <Link to="#"><BounceButton text="Account" startTextColor="black" endTextColor="white" componentBefore={<FaUser />} /></Link>
-                            <Link className="text-white gap-2 flex items-center hover:text-black" to="#"><FaRightFromBracket /> Log out</Link>
+                            <Link to="/signup"><BounceButton text="Account" startTextColor="black" endTextColor="white" componentBefore={<FaUser />} /></Link>
+                            <div onClick={logOutHandler} className="text-white gap-2 flex items-center hover:text-black"><FaRightFromBracket /> Log out</div>
                         </div>
                         ) : (
                         <div className="flex w-full justify-between items-center bg-[#24A3FF] rounded-lg px-[14px] py-[8px] gap-3 mt-2">
-                            <Link to="#"><BounceButton text="Sign up" startTextColor="black" endTextColor="white" componentBefore={<FaUser />} /></Link>
+                            <Link to="/signup"><BounceButton text="Sign up" startTextColor="black" endTextColor="white" componentBefore={<FaUser />} /></Link>
                             <Link className="text-white gap-1 flex items-center hover:text-black" to="#"><FaRightFromBracket className="text-white " /> Log in</Link>
                         </div>
                         )}
