@@ -1,0 +1,16 @@
+﻿<h2 class="text-2xl font-bold">Task 4</h2>
+
+<form method="post" class="space-y-3">
+    <p></p>
+    <input name="a" type="number" class="border p-2 w-[150px]" />
+    <p></p>
+    <input name="b" type="number" class="border p-2 w-[150px]" />
+    <p></p>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded">Calculate</button>
+</form>
+
+@if (ViewBag.Sum != null)
+{
+    <p>Sum: @ViewBag.Sum</p>
+    <p>Division: @ViewBag.Div</p>
+}

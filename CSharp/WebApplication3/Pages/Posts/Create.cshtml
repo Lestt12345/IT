@@ -1,0 +1,10 @@
+﻿@model Post
+
+<h2>Create Post</h2>
+
+<form asp-action="Create" method="post">
+    <input asp-for="title" placeholder="Title" /><br />
+    <textarea asp-for="content" placeholder="Content"></textarea><br />
+    <input asp-for="author" placeholder="Author" /><br />
+    <button type="submit">Save</button>
+</form>

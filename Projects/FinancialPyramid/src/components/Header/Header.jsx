@@ -79,10 +79,10 @@ function Header() {
                 <Link to="/"><img src={logo} alt="logo" style={{width: '150px'}} /></Link>
                 <nav className="flex items-center">
                     <Link to="/"><BounceButtonNav text="Home" /></Link>
-                    <Link to="#"><BounceButtonNav text="About Us" /></Link>
-                    <Link to="#"><BounceButtonNav text="Bounty" /></Link>
-                    <Link to="#"><BounceButtonNav text="How to Start" /></Link>
-                    <Link to="#"><BounceButtonNav text="Faq" /></Link>
+                    <Link to="#"><BounceButtonNav text="About Us X" /></Link>
+                    <Link to="/bounty"><BounceButtonNav text="Bounty" /></Link>
+                    <Link to="#"><BounceButtonNav text="How to Start X" /></Link>
+                    <Link to="/faq"><BounceButtonNav text="Faq" /></Link>
                     <Link to="/terms"><BounceButtonNav text="Terms" /></Link>
                     <Link to="/contacts"><BounceButtonNav text="Contacts" /></Link>
                     {username.length > 0 && password.length > 0 ? (
@@ -111,10 +111,10 @@ function Header() {
                     >
                     <nav className="flex flex-col items-center w-full">
                         <Link to="/"><BounceButtonNav text="Home" /></Link>
-                        <Link to="#"><BounceButtonNav text="About Us" /></Link>
-                        <Link to="#"><BounceButtonNav text="Bounty" /></Link>
-                        <Link to="#"><BounceButtonNav text="How to Start" /></Link>
-                        <Link to="#"><BounceButtonNav text="Faq" /></Link>
+                        <Link to="#"><BounceButtonNav text="About Us X" /></Link>
+                        <Link to="/bounty"><BounceButtonNav text="Bounty" /></Link>
+                        <Link to="#"><BounceButtonNav text="How to Start X" /></Link>
+                        <Link to="/faq"><BounceButtonNav text="Faq" /></Link>
                         <Link to="/terms"><BounceButtonNav text="Terms" /></Link>
                         <Link to="/contacts"><BounceButtonNav text="Contacts" /></Link>
 

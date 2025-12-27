@@ -8,6 +8,8 @@ import Login from './pages/Login/Login.jsx'
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword.jsx'
 import Contacts from './pages/Contacts/Contacts'
 import Terms from './pages/Terms/Terms'
+import Faq from './pages/Faq/Faq'
+import Bounty from './pages/Bounty/Bounty'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,6 +21,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/forgot_password" element={<ForgotPassword />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/faq" element={<Faq/>} />
+        <Route path="/bounty" element={<Bounty/>} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

@@ -1,0 +1,16 @@
+﻿@model List<Post>
+
+<h2>Posts</h2>
+
+<a asp-action="Create">Create new post</a>
+
+<ul>
+    @foreach (var post in Model)
+    {
+        <li>
+            <a asp-action="Details" asp-route-id="@post.id">
+                @post.title
+            </a>
+        </li>
+    }
+</ul>
